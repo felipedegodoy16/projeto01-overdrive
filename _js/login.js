@@ -1,3 +1,4 @@
+// Verificar onde ocorreu um click para o campo de usuário
 document.addEventListener("mouseup", function(event) {
     var obj_user = document.getElementById('user_field')
     var input_user = document.getElementById('user_login').value
@@ -9,14 +10,17 @@ document.addEventListener("mouseup", function(event) {
     }
 })
 
+// Verificar onde ocorreu um click para o campo de usuário
 document.addEventListener("mouseup", function(event) {
     var obj_password = document.getElementById("password_field")
     var input_password = document.getElementById('password_login').value
     var password = document.getElementsByTagName('label')[1]
+    var icon_password = document.getElementById('password_login')
     
     if (!obj_password.contains(event.target) && input_password == '' && password.classList.contains('transition_text')) {
         password.classList.remove('transition_text')
         password.classList.add('back_text')
+        icon_password.setAttribute('type', 'password')
 
         var obj_icon = document.getElementById('icon_password')
         obj_icon.classList.add('icon-lock2')
@@ -25,6 +29,7 @@ document.addEventListener("mouseup", function(event) {
     }
 })
 
+// Função para fazer a transição da escrita
 function transition_text(e) {
     var obj_clicked = e.parentNode.children[0]
     if(obj_clicked.classList.contains('back_text')){
@@ -36,15 +41,17 @@ function transition_text(e) {
     
 }
 
-function show_password(){
+// Função para mostrar e esconder senha
+function show_password(e){
     var password = document.getElementById('password_login')
-    if(password.getAttribute('type') == 'text'){
-        password.setAttribute('type', 'password')
-    } else {
+    if(password.getAttribute('type') == 'password' && e.classList.contains('icon-eye')){
         password.setAttribute('type', 'text')
+    } else {
+        password.setAttribute('type', 'password')
     }
 }
 
+// Função para alterar o icon do campo de senha
 function change_icon(){
     var obj_icon = document.getElementById('icon_password')
     obj_icon.classList.remove('icon-lock2')
