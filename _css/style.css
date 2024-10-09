@@ -27,15 +27,15 @@ html {
 body {
     width: 100%;
     height: 100%;
-    /* background: url('../_images/background_urban.jpg') no-repeat 50% 50%;
+    background: url('../_images/fundo.jpeg') no-repeat 50% 50%;
+    background-size: cover;
     backdrop-filter: blur(5px);
-    object-fit: cover; */
 }
 
 main#main_login {
     width: 100%;
     height: 100%;
-    /* background-color: rgba(255, 255, 255, .9); */
+    background-color: rgba(255, 255, 255, .89);
 }
 
 h1#title_login {
@@ -46,7 +46,6 @@ h1#title_login {
 
 div#form_login {
     box-shadow: 0 6px 26px 0 var(--red-dark);
-    background-color: rgba(255, 255, 255, .9);
     position: relative;
     width: 35dvw;
     height: 70dvh;
@@ -98,10 +97,11 @@ form#form input {
     background-color: transparent;
     border: none;
     border-bottom: 3px solid var(--red-light);
+    outline: 0;
 }
 
-form#form input:focus-visible {
-    border: none !important;
+form#form input::-ms-reveal, form#form input::-ms-clear {
+    display: none;
 }
 
 i.icons {
