@@ -140,7 +140,7 @@ img.img_logo {
     position: absolute;
     width: 30dvw;
     transform: rotate(-15deg);
-    animation: rodaroda 25s linear infinite;
+    animation: rodaroda 20s linear infinite;
 }
 
 @keyframes rodaroda {
