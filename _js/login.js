@@ -1,33 +1,42 @@
-// Verificar onde ocorreu um click para o campo de usuário
-document.addEventListener("mouseup", function(event) {
-    var obj_user = document.getElementById('user_field')
-    var input_user = document.getElementById('user_login').value
-    var user = document.getElementsByTagName('label')[0]
-
-    if (!obj_user.contains(event.target) && input_user == '' && user.classList.contains('transition_text')) {
-        user.classList.remove('transition_text')
-        user.classList.add('back_text')
-    }
-})
+// Verificar se a página já foi carregada completamente
+if (document.readyState == "loading") {
+    document.addEventListener("DOMContentLoaded", ready)
+} else {
+    ready()
+}
 
 // Verificar onde ocorreu um click para o campo de usuário
-document.addEventListener("mouseup", function(event) {
-    var obj_password = document.getElementById("password_field")
-    var input_password = document.getElementById('password_login').value
-    var password = document.getElementsByTagName('label')[1]
-    var icon_password = document.getElementById('password_login')
+function ready() {
+    document.addEventListener("mouseup", function(event) {
+        var obj_user = document.getElementById('user_field')
+        var input_user = document.getElementById('user_login').value
+        var user = document.getElementsByTagName('label')[0]
     
-    if (!obj_password.contains(event.target) && input_password == '' && password.classList.contains('transition_text')) {
-        password.classList.remove('transition_text')
-        password.classList.add('back_text')
-        icon_password.setAttribute('type', 'password')
-
-        var obj_icon = document.getElementById('icon_password')
-        obj_icon.classList.add('icon-lock2')
-        obj_icon.classList.remove('icon-eye')
-        obj_icon.classList.remove('eye-password')
-    }
-})
+        if (!obj_user.contains(event.target) && input_user == '' && user.classList.contains('transition_text')) {
+            user.classList.remove('transition_text')
+            user.classList.add('back_text')
+        }
+    })
+    
+    // Verificar onde ocorreu um click para o campo de usuário
+    document.addEventListener("mouseup", function(event) {
+        var obj_password = document.getElementById("password_field")
+        var input_password = document.getElementById('password_login').value
+        var password = document.getElementsByTagName('label')[1]
+        var icon_password = document.getElementById('password_login')
+        
+        if (!obj_password.contains(event.target) && input_password == '' && password.classList.contains('transition_text')) {
+            password.classList.remove('transition_text')
+            password.classList.add('back_text')
+            icon_password.setAttribute('type', 'password')
+    
+            var obj_icon = document.getElementById('icon_password')
+            obj_icon.classList.add('icon-lock2')
+            obj_icon.classList.remove('icon-eye')
+            obj_icon.classList.remove('eye-password')
+        }
+    })
+}
 
 // Função para fazer a transição da escrita
 function transition_text(e) {

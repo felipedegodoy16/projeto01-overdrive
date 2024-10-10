@@ -14,10 +14,13 @@
     <!-- Link para icons -->
     <link href="_css/icomoon.css"rel="stylesheet">
 
+    <!-- Link icons flaticon -->
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+
     <title>Login - Overdrive</title>
   </head>
   <script src="_js/login.js"></script>
-  <body>
+  <body id="full_content_login">
     <main id="main_login" class="center">
         <div id="form_login" class="center">
             <h1 id="title_login">LOGIN</h1>
@@ -26,8 +29,8 @@
                     <label for="user_login">Usuário</label>
                     <input id="user_login" type="text" onclick="transition_text(event.target)">
                     <div style="z-index: 1002; height: 0">
-                        <i class="icon-user icons"></i>
-                     </div>
+                      <i class="icon-user icons"></i>
+                    </div>
                 </div>
                 <div id="password_field" style="margin-top: 0;">
                     <label for="password_login">Senha</label>
@@ -39,8 +42,17 @@
                 <div class="center">
                     <input id="btn_login" type="button" value="Entrar">
                 </div>
+                <!-- <div class="center">
+                  <details id="details_login" style="width: 25dvw; font-size: clamp(12px, 4dvw, 28);">
+                    <summary id="summary_login">Usuários para teste</summary>
+                    <div class="center" style="flex-direction: column;">
+                      <p>Admin: XXXXXXXXXXX - Senha: 1234</p>
+                      <p>Usuário: XXXXXXXXXXX - Senha: 1234</p>
+                    </div>
+                  </details>
+                </div> -->
             </form>
-            <img class="img_logo" src="_images/overdrive_logo.png" alt="">
+            <img id="img_logo" src="_images/overdrive_logo.png" alt="">
         </div>
     </main>
 
