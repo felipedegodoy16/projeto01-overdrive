@@ -5,7 +5,7 @@ if (document.readyState == "loading") {
 }
 
 function ready() {
-    var items_menu = document.getElementsByTagName('li')
+    var items_menu = document.getElementsByClassName('li_navbar')
     for(let i = 0; i < items_menu.length; i++){
         items_menu[i].addEventListener("click", alter_active)
     }
