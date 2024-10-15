@@ -146,7 +146,7 @@
       </div>
     </main>
 
-    <aside id="aside_index" class="col-sm-2 col-3">
+    <aside id="aside_index" class="col-6 col-sm-4 col-md-3 col-lg-2">
       <div id="filtro" class="center">
         <h1>Filtros</h1>
         <i class="fi fi-rr-bars-filter icon_filtro"></i>
@@ -165,7 +165,7 @@
 
     </footer>
 
-    <a href="#" id="btn_filtros" class="center" onclick="call_filters()"><i id="filter_symbol" class="fi fi-rr-bars-filter center"></i></a>
+    <p id="btn_filtros" class="center" onclick="call_filters()"><i id="filter_symbol" class="fi fi-rr-bars-filter center"></i></p>
     <a href="#" id="btn_adicionar" class="center"><i id="add_symbol" class="fi fi-rr-plus center"></i></a>
 
     <!-- JavaScript (Opcional) -->
