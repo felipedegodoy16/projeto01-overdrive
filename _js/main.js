@@ -35,3 +35,20 @@ function ready() {
         })
     }
 }
+
+function call_filters() {
+    var obj_aside = document.getElementById('aside_index')
+    var obj_filter = document.getElementById('filter_symbol')
+
+    if(obj_filter.classList.contains('fi-rr-bars-filter')){
+        obj_aside.style.transition = 'transform .3s ease-in-out'
+        obj_aside.style.transform = 'translateX(0)'
+        obj_filter.classList.remove('fi-rr-bars-filter')
+        obj_filter.classList.add('fi-rr-x')
+    } else {
+        obj_aside.style.transform = 'translateX(-100%)'
+        obj_filter.classList.add('fi-rr-bars-filter')
+        obj_filter.classList.remove('fi-rr-x')
+    }
+    
+}

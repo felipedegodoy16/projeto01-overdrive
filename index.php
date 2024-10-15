@@ -1,3 +1,10 @@
+<?php 
+  $_SESSION['logged'] = true ?? false;
+  if(!$_SESSION['logged']) {
+    header('Location: login.php');
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -35,8 +42,8 @@
       <a href="#">LOGOUT</a>
     </nav>
 
-    <main id="main_index" class="col-sm-10 col-9 center" style="justify-content: space-evenly;">
-      <div class="col-sm-4 col-md-3 center card_user">
+    <main id="main_index" class="col-12 center" style="justify-content: space-evenly;">
+      <div class="col-sm-4 col-md-2 center card_user">
         <img class="img_user_emp" src="_images/fundo.jpeg" alt="Imagem do Usuário ou Empresa">
         <div class="card_user_body">
           <p>ID</p>
@@ -53,7 +60,7 @@
         </div>
       </div>
 
-      <div class="col-sm-4 col-md-3 center card_user">
+      <div class="col-sm-4 col-md-2 center card_user">
         <img class="img_user_emp" src="_images/fundo.jpeg" alt="Imagem do Usuário ou Empresa">
         <div class="card_user_body">
           <p>ID</p>
@@ -70,7 +77,7 @@
         </div>
       </div>
 
-      <div class="col-sm-4 col-md-3 center card_user">
+      <div class="col-sm-4 col-md-2 center card_user">
         <img class="img_user_emp" src="_images/fundo.jpeg" alt="Imagem do Usuário ou Empresa">
         <div class="card_user_body">
           <p>ID</p>
@@ -87,7 +94,7 @@
         </div>
       </div>
 
-      <div class="col-sm-4 col-md-3 center card_user">
+      <div class="col-sm-4 col-md-2 center card_user">
         <img class="img_user_emp" src="_images/fundo.jpeg" alt="Imagem do Usuário ou Empresa">
         <div class="card_user_body">
           <p>ID</p>
@@ -104,7 +111,24 @@
         </div>
       </div>
 
-      <div class="col-sm-4 col-md-3 center card_user">
+      <div class="col-sm-4 col-md-2 center card_user">
+        <img class="img_user_emp" src="_images/fundo.jpeg" alt="Imagem do Usuário ou Empresa">
+        <div class="card_user_body">
+          <p>ID</p>
+          <p>Nome</p>
+          <p>CPF</p>
+          <p>CNH</p>
+          <p>Telefone</p>
+          <details style="margin-bottom: 1em;">
+            <summary>Endereço</summary>
+          </details>
+          <p>Carro</p>
+          <p>Empresa</p>
+          <p>Data de Cadastro</p>
+        </div>
+      </div>
+
+      <div class="col-sm-4 col-md-2 center card_user">
         <img class="img_user_emp" src="_images/fundo.jpeg" alt="Imagem do Usuário ou Empresa">
         <div class="card_user_body">
           <p>ID</p>
@@ -141,6 +165,7 @@
 
     </footer>
 
+    <a href="#" id="btn_filtros" class="center" onclick="call_filters()"><i id="filter_symbol" class="fi fi-rr-bars-filter center"></i></a>
     <a href="#" id="btn_adicionar" class="center"><i id="add_symbol" class="fi fi-rr-plus center"></i></a>
 
     <!-- JavaScript (Opcional) -->

@@ -21,7 +21,7 @@ nav#navbar {
     width: 100%;
     position: fixed;
     box-shadow: 0px .5px 10px var(--red-dark);
-    z-index: 1001;
+    z-index: 1003;
     background-color: #fff;
 }
 
@@ -146,6 +146,9 @@ aside#aside_index {
     flex-direction: column;
     align-items: center;
     border-right: 1px solid var(--red-dark);
+    background: #FFF;
+    transform: translateX(-100%);
+    z-index: 1002;
 }
 
 aside#aside_index div {
@@ -203,9 +206,9 @@ aside#aside_index ul li:hover {
     color: var(--red-dark) !important;
 }
 
-/* Btn adicionar */
+/* Btn adicionar e Btn filtros */
 
-a#btn_adicionar {
+a#btn_adicionar, a#btn_filtros {
     border-radius: 50%;
     width: 70px;
     height: 70px;
@@ -218,13 +221,17 @@ a#btn_adicionar {
     transition: all .3s ease-in-out;
 }
 
-a#btn_adicionar:hover {
+a#btn_filtros {
+    left: .7em;
+}
+
+a#btn_adicionar:hover, a#btn_filtros:hover {
     background-color: var(--red-light);
     text-decoration: none;
     transform: scale(1.1);
 }
 
-i#add_symbol {
+i#add_symbol, i#filter_symbol {
     font-size: 25px;
     font-weight: 900;
 }
