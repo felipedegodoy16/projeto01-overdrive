@@ -35,7 +35,7 @@
       <a href="#">LOGOUT</a>
     </nav>
 
-    <main id="main_index" class="col-sm-10 col-9 center">
+    <main id="main_index" class="col-sm-10 col-9 center" style="justify-content: space-evenly;">
       <div class="col-sm-4 col-md-3 center card_user">
         <img class="img_user_emp" src="_images/fundo.jpeg" alt="Imagem do Usuário ou Empresa">
         <div class="card_user_body">
@@ -123,7 +123,7 @@
     </main>
 
     <aside id="aside_index" class="col-sm-2 col-3">
-      <div class="center">
+      <div id="filtro" class="center">
         <h1>Filtros</h1>
         <i class="fi fi-rr-bars-filter icon_filtro"></i>
       </div>
