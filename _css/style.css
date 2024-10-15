@@ -93,7 +93,8 @@ main#main_index {
 }
 
 div.card_user {
-    margin: 4em 1em;
+    background-color: #FFF;
+    margin: 4em 1px;
     box-shadow: 0 4px 10px var(--red-dark);
     border-radius: 30px;
     position: relative;
@@ -110,13 +111,13 @@ div.card_user {
 }
 
 @keyframes transition_card {
-    0% { transform: scale(1); box-shadow: 0 4px 10px var(--red-dark); }
-    100% { transform: scale(1.1); box-shadow: 0 8px 18px var(--red-dark); }
+    0% { transform: scale(1); box-shadow: 0 4px 10px var(--red-dark); z-index: 1000; }
+    100% { transform: scale(1.1); box-shadow: 0 8px 18px var(--red-dark); z-index: 1001; }
 }
 
 @keyframes back_card {
-    0% { transform: scale(1.1); box-shadow: 0 8px 18px var(--red-dark); }
-    100% { transform: scale(1); box-shadow: 0 4px 10px var(--red-dark); }
+    0% { transform: scale(1.1); box-shadow: 0 8px 18px var(--red-dark); z-index: 1001; }
+    100% { transform: scale(1); box-shadow: 0 4px 10px var(--red-dark); z-index: 1000; }
 }
 
 img.img_user_emp {
