@@ -25,14 +25,14 @@ nav#navbar {
     background-color: #fff;
 }
 
-nav#navbar ul {
+nav#navbar ul, ul#lst_footer {
     list-style: none;
     text-transform: uppercase;
     padding: 0;
     margin: 1em 0;
 }
 
-nav#navbar li {
+nav#navbar li, ul#lst_footer li {
     position: relative;
     display: inline-block;
     padding: 5px 15px;
@@ -41,11 +41,11 @@ nav#navbar li {
     cursor: pointer;
 }
 
-nav#navbar li:hover {
+nav#navbar li:hover, ul#lst_footer li:hover {
     color: var(--red-light);
 }
 
-nav#navbar li:after {
+nav#navbar li:after, ul#lst_footer li:after {
     content: "";
     position: absolute;
     height: 3px;
@@ -56,8 +56,12 @@ nav#navbar li:after {
     transition: .5s;
 }
 
-nav#navbar li:hover:after {
+nav#navbar li:hover:after  {
     width: 100%;
+}
+
+ul#lst_footer li:hover:after  {
+    width: 50%;
 }
 
 nav#navbar li.active:after {
@@ -94,7 +98,7 @@ main#main_index {
 
 div.card_user {
     background-color: #FFF;
-    margin: 4em 1px;
+    margin: 4.5em 0;
     box-shadow: 0 4px 10px var(--red-dark);
     border-radius: 30px;
     position: relative;
@@ -205,6 +209,58 @@ aside#aside_index ul li:hover {
 .active_filtro:hover {
     border-bottom: 3px solid var(--red-dark) !important;
     color: var(--red-dark) !important;
+}
+
+/* Footer da Index */
+
+footer#footer_index {
+    padding-top: 2em;
+    background-color: rgba(223, 223, 223, 0.2);
+    color: var(--red-dark);
+}
+
+.div_footer {
+    padding: 1em 3em;
+}
+
+.div_footer p {
+    text-align: justify;
+}
+
+div#infos {
+    border-right: 3px solid var(--red-dark);
+    border-left: 3px solid var(--red-dark);
+}
+
+div#icons_footer {
+    padding-top: 1em;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+a.a_icons {
+    text-decoration: none;
+    color: var(--red-dark);
+    transition: all .3s ease-in-out;
+}
+
+a.a_icons:hover {
+    color: var(--red-light);
+    transform: scale(1.1);
+}
+
+i.icons_rs {
+    font-size: 20pt;
+    cursor: pointer;
+    margin-right: 1em;
+}
+
+.footer_name {
+    margin-top: 2em;
+    border-top: 1px solid var(--red-dark);
+    padding: 1em 0;
 }
 
 /* Btn adicionar e Btn filtros */
@@ -367,7 +423,7 @@ img#img_logo {
 
 /* Media Queries */
 
-@media screen and (max-width: 1024px){
+@media screen and (max-width: 991px){
     div#form_login {
         width: 60dvw;
     }
@@ -383,6 +439,13 @@ img#img_logo {
 
     img#img_logo {
         width: 40dvw;
+    }
+
+    div#infos {
+        border-right: none;
+        border-left: none;
+        border-top: 3px solid var(--red-dark);
+        border-bottom: 3px solid var(--red-dark);
     }
 }
 

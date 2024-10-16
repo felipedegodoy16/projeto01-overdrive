@@ -23,6 +23,10 @@
 
     <!-- Link icons flaticon -->
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-brands/css/uicons-brands.css'>
+
+    <!-- Link para Favicon -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
     <title>Overdrive - Consultas</title>
   </head>
@@ -42,106 +46,118 @@
       <a href="#">LOGOUT</a>
     </nav>
 
-    <main id="main_index" class="col-12 center" style="justify-content: space-evenly;">
-      <div class="col-sm-4 col-md-2 center card_user">
-        <img class="img_user_emp" src="_images/fundo.jpeg" alt="Imagem do Usuário ou Empresa">
-        <div class="card_user_body">
-          <p>ID</p>
-          <p>Nome</p>
-          <p>CPF</p>
-          <p>CNH</p>
-          <p>Telefone</p>
-          <details style="margin-bottom: 1em;">
-            <summary>Endereço</summary>
-          </details>
-          <p>Carro</p>
-          <p>Empresa</p>
-          <p>Data de Cadastro</p>
+    <main id="main_index" class="col-12 center">
+      <div class="col-10 col-sm-6 col-md-4 col-lg-3">
+        <div class="center card_user">
+          <img class="img_user_emp" src="_images/fundo.jpeg" alt="Imagem do Usuário ou Empresa">
+          <div class="card_user_body">
+            <p>ID</p>
+            <p>Nome</p>
+            <p>CPF</p>
+            <p>CNH</p>
+            <p>Telefone</p>
+            <details style="margin-bottom: 1em;">
+              <summary>Endereço</summary>
+            </details>
+            <p>Carro</p>
+            <p>Empresa</p>
+            <p>Data de Cadastro</p>
+          </div>
         </div>
       </div>
 
-      <div class="col-sm-4 col-md-2 center card_user">
-        <img class="img_user_emp" src="_images/fundo.jpeg" alt="Imagem do Usuário ou Empresa">
-        <div class="card_user_body">
-          <p>ID</p>
-          <p>Nome</p>
-          <p>CPF</p>
-          <p>CNH</p>
-          <p>Telefone</p>
-          <details style="margin-bottom: 1em;">
-            <summary>Endereço</summary>
-          </details>
-          <p>Carro</p>
-          <p>Empresa</p>
-          <p>Data de Cadastro</p>
+      <div class="col-10 col-sm-6 col-md-4 col-lg-3">
+        <div class="center card_user">
+          <img class="img_user_emp" src="_images/fundo.jpeg" alt="Imagem do Usuário ou Empresa">
+          <div class="card_user_body">
+            <p>ID</p>
+            <p>Nome</p>
+            <p>CPF</p>
+            <p>CNH</p>
+            <p>Telefone</p>
+            <details style="margin-bottom: 1em;">
+              <summary>Endereço</summary>
+            </details>
+            <p>Carro</p>
+            <p>Empresa</p>
+            <p>Data de Cadastro</p>
+          </div>
         </div>
       </div>
 
-      <div class="col-sm-4 col-md-2 center card_user">
-        <img class="img_user_emp" src="_images/fundo.jpeg" alt="Imagem do Usuário ou Empresa">
-        <div class="card_user_body">
-          <p>ID</p>
-          <p>Nome</p>
-          <p>CPF</p>
-          <p>CNH</p>
-          <p>Telefone</p>
-          <details style="margin-bottom: 1em;">
-            <summary>Endereço</summary>
-          </details>
-          <p>Carro</p>
-          <p>Empresa</p>
-          <p>Data de Cadastro</p>
+      <div class="col-10 col-sm-6 col-md-4 col-lg-3">
+        <div class="center card_user">
+          <img class="img_user_emp" src="_images/fundo.jpeg" alt="Imagem do Usuário ou Empresa">
+          <div class="card_user_body">
+            <p>ID</p>
+            <p>Nome</p>
+            <p>CPF</p>
+            <p>CNH</p>
+            <p>Telefone</p>
+            <details style="margin-bottom: 1em;">
+              <summary>Endereço</summary>
+            </details>
+            <p>Carro</p>
+            <p>Empresa</p>
+            <p>Data de Cadastro</p>
+          </div>
         </div>
       </div>
 
-      <div class="col-sm-4 col-md-2 center card_user">
-        <img class="img_user_emp" src="_images/fundo.jpeg" alt="Imagem do Usuário ou Empresa">
-        <div class="card_user_body">
-          <p>ID</p>
-          <p>Nome</p>
-          <p>CPF</p>
-          <p>CNH</p>
-          <p>Telefone</p>
-          <details style="margin-bottom: 1em;">
-            <summary>Endereço</summary>
-          </details>
-          <p>Carro</p>
-          <p>Empresa</p>
-          <p>Data de Cadastro</p>
+      <div class="col-10 col-sm-6 col-md-4 col-lg-3">
+        <div class="center card_user">
+          <img class="img_user_emp" src="_images/fundo.jpeg" alt="Imagem do Usuário ou Empresa">
+          <div class="card_user_body">
+            <p>ID</p>
+            <p>Nome</p>
+            <p>CPF</p>
+            <p>CNH</p>
+            <p>Telefone</p>
+            <details style="margin-bottom: 1em;">
+              <summary>Endereço</summary>
+            </details>
+            <p>Carro</p>
+            <p>Empresa</p>
+            <p>Data de Cadastro</p>
+          </div>
         </div>
       </div>
 
-      <div class="col-sm-4 col-md-2 center card_user">
-        <img class="img_user_emp" src="_images/fundo.jpeg" alt="Imagem do Usuário ou Empresa">
-        <div class="card_user_body">
-          <p>ID</p>
-          <p>Nome</p>
-          <p>CPF</p>
-          <p>CNH</p>
-          <p>Telefone</p>
-          <details style="margin-bottom: 1em;">
-            <summary>Endereço</summary>
-          </details>
-          <p>Carro</p>
-          <p>Empresa</p>
-          <p>Data de Cadastro</p>
+      <div class="col-10 col-sm-6 col-md-4 col-lg-3">
+        <div class="center card_user">
+          <img class="img_user_emp" src="_images/fundo.jpeg" alt="Imagem do Usuário ou Empresa">
+          <div class="card_user_body">
+            <p>ID</p>
+            <p>Nome</p>
+            <p>CPF</p>
+            <p>CNH</p>
+            <p>Telefone</p>
+            <details style="margin-bottom: 1em;">
+              <summary>Endereço</summary>
+            </details>
+            <p>Carro</p>
+            <p>Empresa</p>
+            <p>Data de Cadastro</p>
+          </div>
         </div>
       </div>
 
-      <div class="col-sm-4 col-md-2 center card_user">
-        <img class="img_user_emp" src="_images/fundo.jpeg" alt="Imagem do Usuário ou Empresa">
-        <div class="card_user_body">
-          <p>ID</p>
-          <p>Nome</p>
-          <p>CPF</p>
-          <p>CNH</p>
-          <p>Telefone</p>
-          <details style="margin-bottom: 1em;">
-            <summary>Endereço</summary>
-          </details>
-          <p>Carro</p>
-          <p>Empresa</p>
-          <p>Data de Cadastro</p>
+      <div class="col-10 col-sm-6 col-md-4 col-lg-3">
+        <div class="center card_user">
+          <img class="img_user_emp" src="_images/fundo.jpeg" alt="Imagem do Usuário ou Empresa">
+          <div class="card_user_body">
+            <p>ID</p>
+            <p>Nome</p>
+            <p>CPF</p>
+            <p>CNH</p>
+            <p>Telefone</p>
+            <details style="margin-bottom: 1em;">
+              <summary>Endereço</summary>
+            </details>
+            <p>Carro</p>
+            <p>Empresa</p>
+            <p>Data de Cadastro</p>
+          </div>
         </div>
       </div>
     </main>
@@ -161,8 +177,31 @@
       </ul>
     </aside>
 
-    <footer>
-
+    <footer id="footer_index" class="col-12 center" style="flex-wrap: wrap; align-items: start;">
+      <div class="col-12 col-lg-3 div_footer">
+        <h3>Navegar</h3>
+        <ul id="lst_footer">
+          <li style="display: block;">Todos</li>
+          <li style="display: block;">Funcionários</li>
+          <li style="display: block;">Empresas</li>
+        </ul>
+      </div>
+      <div id="infos" class="col-12 col-lg-6 div_footer">
+        <h3>Informações</h3>
+        <p>Este é um site voltado a mostrar um sistema de cadastro de empresas e funcionários utilizando da Linguagem de Marcação HTML5, Lignuagem de Estilização CSS3, Linguagens de Programação JavaScript e PHP e para manipulação do Banco de Dados a Linguagem MySQL.</p>
+      </div>
+      <div class="col-12 col-lg-3 div_footer">
+        <h3>Contato</h3>
+        <div id="icons_footer">
+          <a href="#" class="a_icons"><i class="fi fi-brands-instagram icons_rs"></i></a>
+          <a href="#" class="a_icons"><i class="fi fi-brands-whatsapp icons_rs"></i></a>
+          <a href="#" class="a_icons"><i class="fi fi-brands-facebook icons_rs"></i></a>
+          <a href="#" class="a_icons"><i class="fi fi-brands-github icons_rs"></i></a>
+        </div>
+      </div>
+      <div class="col-10 center footer_name">
+        <p style="margin-bottom: 0;">&copy; Felipe Godoy | 2024</p>
+      </div>
     </footer>
 
     <p id="btn_filtros" class="center" onclick="callFilters()"><i id="filter_symbol" class="fi fi-rr-bars-filter center"></i></p>
