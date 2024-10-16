@@ -1,8 +1,8 @@
 <?php 
-  $_SESSION['logged'] = true ?? false;
-  if($_SESSION['logged']) {
-    header('Location: index.php');
-  }
+  // $_SESSION['logged'] = true ?? false;
+  // if($_SESSION['logged']) {
+  //   header('Location: index.php');
+  // }
 ?>
 
 <!DOCTYPE html>

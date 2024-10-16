@@ -5,7 +5,19 @@ if (document.readyState == "loading") {
 }
 
 function ready() {
+    // document.addEventListener("mouseup", function(event) {
+    //     var obj_filter = document.getElementById('aside_index')
+    //     var icon_filter = document.getElementById('filter_symbol')
+    
+    //     if (!obj_filter.contains(event.target)) {
+    //         obj_filter.style.transform = 'translateX(-100%)'
+    //         icon_filter.classList.add('fi-rr-bars-filter')
+    //         icon_filter.classList.remove('fi-rr-x')
+    //     }
+    // })
+
     var cards = document.getElementsByClassName('card_user')
+    var main = document.getElementsByTagName('main')[0]
     for(let i = 0; i < cards.length; i++){
         cards[i].addEventListener("mouseenter", () => {
             if(cards[i].classList.contains('back_card')){
@@ -36,7 +48,7 @@ function ready() {
     }
 }
 
-function call_filters() {
+function callFilters() {
     var obj_aside = document.getElementById('aside_index')
     var obj_filter = document.getElementById('filter_symbol')
 
@@ -46,7 +58,7 @@ function call_filters() {
         obj_filter.classList.remove('fi-rr-bars-filter')
         obj_filter.classList.add('fi-rr-x')
     } else {
-        obj_aside.style.transform = 'translateX(-100%)'
+        obj_aside.style.transform = 'translateX(-110%)'
         obj_filter.classList.add('fi-rr-bars-filter')
         obj_filter.classList.remove('fi-rr-x')
     }

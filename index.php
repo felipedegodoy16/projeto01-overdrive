@@ -165,7 +165,7 @@
 
     </footer>
 
-    <p id="btn_filtros" class="center" onclick="call_filters()"><i id="filter_symbol" class="fi fi-rr-bars-filter center"></i></p>
+    <p id="btn_filtros" class="center" onclick="callFilters()"><i id="filter_symbol" class="fi fi-rr-bars-filter center"></i></p>
     <a href="#" id="btn_adicionar" class="center"><i id="add_symbol" class="fi fi-rr-plus center"></i></a>
 
     <!-- JavaScript (Opcional) -->
