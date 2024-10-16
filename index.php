@@ -26,7 +26,7 @@
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-brands/css/uicons-brands.css'>
 
     <!-- Link para Favicon -->
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="_images/favicon_io/favicon.ico" type="image/x-icon">
 
     <title>Overdrive - Consultas</title>
   </head>
@@ -193,10 +193,10 @@
       <div class="col-12 col-lg-3 div_footer">
         <h3>Contato</h3>
         <div id="icons_footer">
-          <a href="#" class="a_icons"><i class="fi fi-brands-instagram icons_rs"></i></a>
-          <a href="#" class="a_icons"><i class="fi fi-brands-whatsapp icons_rs"></i></a>
-          <a href="#" class="a_icons"><i class="fi fi-brands-facebook icons_rs"></i></a>
-          <a href="#" class="a_icons"><i class="fi fi-brands-github icons_rs"></i></a>
+          <a href="#" target="_blank" class="a_icons"><i class="fi fi-brands-instagram icons_rs"></i></a>
+          <a href="#" target="_blank" class="a_icons"><i class="fi fi-brands-whatsapp icons_rs"></i></a>
+          <a href="#" target="_blank" class="a_icons"><i class="fi fi-brands-facebook icons_rs"></i></a>
+          <a href="https://github.com/felipedegodoy16" target="_blank" class="a_icons"><i class="fi fi-brands-github icons_rs"></i></a>
         </div>
       </div>
       <div class="col-10 center footer_name">

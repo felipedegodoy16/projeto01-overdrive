@@ -24,6 +24,9 @@
     <!-- Link icons flaticon -->
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
 
+    <!-- Link para Favicon -->
+    <link rel="shortcut icon" href="_images/favicon_io/favicon.ico" type="image/x-icon">
+
     <title>Login - Overdrive</title>
   </head>
   <script src="_js/login.js"></script>
