@@ -62,5 +62,4 @@ function callFilters() {
         obj_filter.classList.add('fi-rr-bars-filter')
         obj_filter.classList.remove('fi-rr-x')
     }
-    
 }

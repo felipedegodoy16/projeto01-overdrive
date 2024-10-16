@@ -18,6 +18,7 @@
 /* Navbar */
 
 nav#navbar {
+    padding: 0 4em;
     width: 100%;
     position: fixed;
     box-shadow: 0px .5px 10px var(--red-dark);
@@ -71,6 +72,26 @@ nav#navbar li.active:after {
 
 nav#navbar li.active:hover {
     color: var(--red-dark);
+}
+
+nav#navbar a#btn_logout {
+    margin-left: 10px;
+    text-decoration: none;
+    background-color: var(--red-dark);
+    padding: .6em 1em;
+    color: #FFF;
+    border-radius: 30px;
+    transition: all .3s ease-in-out;
+}
+
+nav#navbar a#btn_logout:hover {
+    background-color: var(--red-light);
+    transform: scale(1.1);
+    box-shadow: 1px 3px 5px var(--red-dark);
+}
+
+i.icon_menu {
+    display: none;
 }
 
 /* Body do site */
@@ -447,9 +468,57 @@ img#img_logo {
         border-top: 3px solid var(--red-dark);
         border-bottom: 3px solid var(--red-dark);
     }
+
+    div#menu_hamburguer {
+        transform: translateX(0);
+    }
+}
+
+@media screen and (max-width: 768px){
+    /* Navbar hamburguer */
+
+    nav#navbar {
+        padding: 0 2em;
+    }
+
+    div#menu_hamburguer {
+        background-color: #FFF;
+        top: 5em;
+        right: 0;
+        flex-direction: column;
+        justify-content: start;
+        box-shadow: -1px 24px 8px var(--red-dark);
+        transform: translateX(200%);
+        position: fixed;
+        height: 100dvh;
+    }
+
+    i.icon_menu {
+        color: var(--red-dark);
+        cursor: pointer;
+        font-size: 20pt;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    nav#navbar ul {
+        padding: 0 2em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    nav#navbar li {
+        display: block;
+        margin: 10px 0;
+    }
 }
 
 @media screen and (max-width: 758px){
+    /* Login */
+
     div#form_login {
         width: 90dvw;
         height: 60dvh;

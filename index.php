@@ -37,13 +37,23 @@
 
   <body>
     <nav id="navbar" class="center" style="justify-content: space-between;">
-      <img src="_images/overdrive_logo.png" alt="" width="100px" height="auto">
-      <ul>
-        <li class="active li_navbar">Todos</li>
-        <li class="li_navbar">Funcionários</li>
-        <li class="li_navbar">Empresas</li>
-      </ul>
-      <a href="#">LOGOUT</a>
+      <img src="_images/overdrive_logo.png" alt="Logo na Navbar" width="100px" height="auto" style="padding: .7em;">
+      <i id="menu_icon" class="fi fi-rr-menu-burger icon_menu" onclick="callMenu(event.target)"></i>
+      <div id="menu_hamburguer" class="center">
+        <ul>
+          <li class="active li_navbar">Todos</li>
+          <li class="li_navbar">Funcionários</li>
+          <li class="li_navbar">Empresas</li>
+        </ul>
+        <a id="btn_logout" href="?logout=1">SAIR</a>
+        <?php
+          // if(isset($_GET['logout']) && $_GET['logout'] == 1){
+          //   $_SESSION = array();
+          //   session_destroy();
+          //   header('Location: login.php');
+          // }
+        ?>
+      </div>
     </nav>
 
     <main id="main_index" class="col-12 center">
