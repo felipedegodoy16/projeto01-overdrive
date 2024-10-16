@@ -27,7 +27,7 @@
     <!-- Link para Favicon -->
     <link rel="shortcut icon" href="_images/favicon_io/favicon.ico" type="image/x-icon">
 
-    <title>Login - Overdrive</title>
+    <title>Overdrive - Login</title>
   </head>
   <script src="_js/login.js"></script>
   <body id="full_content_login">
