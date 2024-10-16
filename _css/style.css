@@ -188,7 +188,7 @@ aside#aside_index div {
 aside#aside_index div h1 {
     text-transform: uppercase;
     text-align: center;
-    font-size: clamp(10pt, 2dvw, 20pt);
+    font-size: clamp(12pt, 2dvw, 20pt);
     margin-right: .7em;
 }
 

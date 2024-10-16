@@ -9,7 +9,7 @@ class ConexaoDAO {
 
     public static function getConexao() {
         if(!isset(self::$instance)) {
-            $db_name = 'teste';
+            $db_name = 'overdrive';
             $db_host = '127.0.0.1';
             $db_user = 'root';
             $db_password = '';

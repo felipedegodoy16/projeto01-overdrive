@@ -1,8 +1,12 @@
 <?php 
+  require_once '_files/logout.php';
+
   $_SESSION['logged'] = true ?? false;
   if(!$_SESSION['logged']) {
     header('Location: login.php');
   }
+
+  $_SESSION['cargo'] = 'A';
 ?>
 
 <!DOCTYPE html>
@@ -46,13 +50,6 @@
           <li class="li_navbar">Empresas</li>
         </ul>
         <a id="btn_logout" href="?logout=1">SAIR</a>
-        <?php
-          // if(isset($_GET['logout']) && $_GET['logout'] == 1){
-          //   $_SESSION = array();
-          //   session_destroy();
-          //   header('Location: login.php');
-          // }
-        ?>
       </div>
     </nav>
 
@@ -215,7 +212,11 @@
     </footer>
 
     <p id="btn_filtros" class="center" onclick="callFilters()"><i id="filter_symbol" class="fi fi-rr-bars-filter center"></i></p>
-    <a href="#" id="btn_adicionar" class="center"><i id="add_symbol" class="fi fi-rr-plus center"></i></a>
+    <?php 
+      if($_SESSION['cargo'] === 'A') {
+        echo '<a href="#" id="btn_adicionar" class="center"><i id="add_symbol" class="fi fi-rr-plus center"></i></a>';
+      }
+    ?>
 
     <!-- JavaScript (Opcional) -->
     <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
