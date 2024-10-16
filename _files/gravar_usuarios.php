@@ -9,6 +9,12 @@ $usuario->setCnh($_POST['cnh']);
 $usuario->setTelefone($_POST['telefone']);
 $usuario->setCarro($_POST['carro']);
 $usuario->setCargo('C');
+$usuario->setCep($_POST['cep']);
+$usuario->setRua($_POST['rua']);
+$usuario->setCidade($_POST['cidade']);
+$usuario->setEstado($_POST['estado']);
+$usuario->setBairro($_POST['bairro']);
+$usuario->setNumero($_POST['numero']);
 
 function validaCPF($cpf) {
     // Extrai somente os números
