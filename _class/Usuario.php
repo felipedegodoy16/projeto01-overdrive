@@ -3,7 +3,7 @@ require_once 'Endereco.php';
 
 class Usuario extends Endereco {
     // Atributos
-    private string $nome, $cnh, $telefone, $carro, $cargo;
+    private string $nome, $cnh, $telefone, $carro, $cargo, $senha;
     private int $cpf;
 
     // Método construtor
@@ -40,6 +40,10 @@ class Usuario extends Endereco {
         return $this->cargo;
     }
 
+    public function getSenha(){
+        return $this->senha;
+    }
+
     public function setNome($nome){
         $this->nome = $nome;
     }
@@ -62,5 +66,9 @@ class Usuario extends Endereco {
 
     public function setCargo($cargo){
         $this->cargo = $cargo;
+    }
+
+    public function setSenha($senha){
+        $this->senha = $senha;
     }
 }

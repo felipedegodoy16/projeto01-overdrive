@@ -11,6 +11,27 @@ abstract class Endereco {
         
     }
 
+    // Método para verificação de endereço
+    public function verificaEndereco(){
+        $sql = "SELECT id FROM enderecos WHERE
+        cep = " . $this->getCep() . " AND
+        numero = " . $this->getNumero() . " AND
+        rua = " . $this->getRua() . " AND
+        cidade = " . $this->getCidade() . " AND
+        estado = " . $this->getEstado() . " AND
+        bairro = " . $this->getBairro();
+
+        $stmt = ConexaoDAO::getConexao()->prepare($sql);
+        $dado = $stmt->execute() or die(print_r($stmt->errorInfo(), true));
+
+        if(count($dado) != 0){
+            print_r($dado);
+            // return $dado;
+        }
+
+        return -1;
+    }
+
     // Getters e Setters
     public function getCep(){
         return $this->cep;

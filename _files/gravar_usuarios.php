@@ -15,6 +15,7 @@ $usuario->setCidade($_POST['cidade']);
 $usuario->setEstado($_POST['estado']);
 $usuario->setBairro($_POST['bairro']);
 $usuario->setNumero($_POST['numero']);
+$usuario->setSenha($_POST['senha']);
 
 function validaCPF($cpf) {
     // Extrai somente os números
