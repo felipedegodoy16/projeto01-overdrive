@@ -1,7 +1,7 @@
 <?php 
 require_once 'ConexaoDAO.php';
 
-abstract class Endereco {
+class Endereco {
     // Atributos
     private int $cep, $numero;
     private string $rua, $cidade, $estado, $bairro;

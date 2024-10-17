@@ -23,17 +23,19 @@
 
     <!-- Link icons flaticon -->
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-brands/css/uicons-brands.css'>
 
     <!-- Link para Favicon -->
     <link rel="shortcut icon" href="_images/favicon_io/favicon.ico" type="image/x-icon">
 
     <title>Overdrive - Login</title>
   </head>
-  <script src="_js/login.js"></script>
+  
   <body id="full_content_login">
     <main id="main_login" class="center">
       <div id="form_login" class="center">
         <h1 id="title_login">LOGIN</h1>
+        <img id="img_logo" src="_images/overdrive_logo.png" alt="">
         <form id="form" action="login.php" method="post">
           <div id="user_field" style="margin-bottom: 0;">
             <label for="user_login">Usuário</label>
@@ -62,9 +64,11 @@
             </details>
           </div> -->
         </form>
-        <img id="img_logo" src="_images/overdrive_logo.png" alt="">
       </div>
     </main>
+
+    <!-- Meus scripts JS -->
+    <script src="_js/login.js"></script>
 
     <!-- JavaScript (Opcional) -->
     <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->

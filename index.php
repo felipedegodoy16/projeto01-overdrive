@@ -35,10 +35,6 @@
     <title>Overdrive - Consultas</title>
   </head>
 
-  <!-- Meus scrips JS -->
-  <script src="_js/navbar.js"></script>
-  <script src="_js/main.js"></script>
-
   <body>
     <nav id="navbar" class="center" style="justify-content: space-between;">
       <img src="_images/overdrive_logo.png" alt="Logo na Navbar" width="100px" height="auto" style="padding: .7em;">
@@ -217,6 +213,10 @@
         echo '<a href="#" id="btn_adicionar" class="center"><i id="add_symbol" class="fi fi-rr-plus center"></i></a>';
       }
     ?>
+
+    <!-- Meus scrips JS -->
+    <script src="_js/navbar.js"></script>
+    <script src="_js/main.js"></script>
 
     <!-- JavaScript (Opcional) -->
     <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->

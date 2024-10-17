@@ -41,183 +41,90 @@
     <title>Overdrive - Cadastro</title>
   </head>
 
-  <!-- Meus scrips JS -->
-  <script src="_js/navbar.js"></script>
-  <script src="_js/main.js"></script>
-
-  <body>
-    <nav id="navbar" class="center" style="justify-content: space-between;">
-      <img src="_images/overdrive_logo.png" alt="Logo na Navbar" width="100px" height="auto" style="padding: .7em;">
-      <i id="menu_icon" class="fi fi-rr-menu-burger icon_menu" onclick="callMenu(event.target)"></i>
-      <div id="menu_hamburguer" class="center">
-        <ul>
-          <li class="active li_navbar">Todos</li>
-          <li class="li_navbar">Funcionários</li>
-          <li class="li_navbar">Empresas</li>
-        </ul>
-        <a id="btn_logout" href="?logout=1">SAIR</a>
+  <body id="full_content_cadastro" class="center">
+    <main id="main_cadastro" class="col-10 center">
+      <div id="call_empresa" class="col-4 center">
+        <h1>Mudar Formulário de Empresas</h1>
+        <i id="seta_cadastro" class="fi fi-rr-arrow-small-right center"></i>
       </div>
-    </nav>
+      <div id="cadastro_user" class="col-8 center">
+        <h1>Cadastrar Usuário</h1>
+        <form id="form_cadastro" action="" method="post">
+            <div id="user_data">
+                <p>
+                    <label for="id_nome">Nome</label>
+                    <input type="text" name="nome" id="id_nome" maxlength="255" placeholder="Digite o Nome" required>
+                </p>
+                <p>
+                    <label for="id_cpf">CPF</label>
+                    <input type="text" name="cpf" id="id_cpf" maxlength="14" placeholder="Digite o CPF" required>
+                </p>
+                <p>
+                    <label for="id_cnh">CNH</label>
+                    <input type="text" name="cnh" id="id_cnh" maxlength="9" placeholder="Digite a CNH" required>
+                </p>
+                <p id="p_telefone">
+                    <label for="id_telefone">Telefone</label>
+                    <input type="text" name="telefone" id="id_telefone" maxlength="15" placeholder="Digite o Telefone" required> 
+                </p>
+                <p>
+                    <label for="id_carro">Carro</label>
+                    <input type="text" name="carro" id="id_carro" placeholder="Digite o Carro" required>
+                </p>
+                <p>
+                    <label for="id_password">Senha</label>
+                    <input type="password" name="password" id="id_password" placeholder="Digite a Senha" min="8" required>
+                    <small>Mínimo 8 caracteres</small>
+                </p>
+                <p>
+                    <label for="id_empresa">Empresa</label>
+                    <input type="text" name="empresa" id="id_empresa" list="empresas" placeholder="Digite a Empresa" required>
+                    <datalist id="empresas">
+                        <option value="Rio de Janeiro"></option>
+                        <option value="Noova Iguaçu"></option>
+                        <option value="Niterói"></option>
+                        <option value="Inativo"></option>
+                    </datalist>
+                </p>
+            </div>
 
-    <main id="main_index" class="col-12 center">
-      <div class="col-10 col-sm-6 col-md-4 col-lg-3">
-        <div class="center card_user">
-          <img class="img_user_emp" src="_images/fundo.jpeg" alt="Imagem do Usuário ou Empresa">
-          <div class="card_user_body">
-            <p>ID</p>
-            <p>Nome</p>
-            <p>CPF</p>
-            <p>CNH</p>
-            <p>Telefone</p>
-            <details style="margin-bottom: 1em;">
-              <summary>Endereço</summary>
-            </details>
-            <p>Carro</p>
-            <p>Empresa</p>
-            <p>Data de Cadastro</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-10 col-sm-6 col-md-4 col-lg-3">
-        <div class="center card_user">
-          <img class="img_user_emp" src="_images/fundo.jpeg" alt="Imagem do Usuário ou Empresa">
-          <div class="card_user_body">
-            <p>ID</p>
-            <p>Nome</p>
-            <p>CPF</p>
-            <p>CNH</p>
-            <p>Telefone</p>
-            <details style="margin-bottom: 1em;">
-              <summary>Endereço</summary>
-            </details>
-            <p>Carro</p>
-            <p>Empresa</p>
-            <p>Data de Cadastro</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-10 col-sm-6 col-md-4 col-lg-3">
-        <div class="center card_user">
-          <img class="img_user_emp" src="_images/fundo.jpeg" alt="Imagem do Usuário ou Empresa">
-          <div class="card_user_body">
-            <p>ID</p>
-            <p>Nome</p>
-            <p>CPF</p>
-            <p>CNH</p>
-            <p>Telefone</p>
-            <details style="margin-bottom: 1em;">
-              <summary>Endereço</summary>
-            </details>
-            <p>Carro</p>
-            <p>Empresa</p>
-            <p>Data de Cadastro</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-10 col-sm-6 col-md-4 col-lg-3">
-        <div class="center card_user">
-          <img class="img_user_emp" src="_images/fundo.jpeg" alt="Imagem do Usuário ou Empresa">
-          <div class="card_user_body">
-            <p>ID</p>
-            <p>Nome</p>
-            <p>CPF</p>
-            <p>CNH</p>
-            <p>Telefone</p>
-            <details style="margin-bottom: 1em;">
-              <summary>Endereço</summary>
-            </details>
-            <p>Carro</p>
-            <p>Empresa</p>
-            <p>Data de Cadastro</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-10 col-sm-6 col-md-4 col-lg-3">
-        <div class="center card_user">
-          <img class="img_user_emp" src="_images/fundo.jpeg" alt="Imagem do Usuário ou Empresa">
-          <div class="card_user_body">
-            <p>ID</p>
-            <p>Nome</p>
-            <p>CPF</p>
-            <p>CNH</p>
-            <p>Telefone</p>
-            <details style="margin-bottom: 1em;">
-              <summary>Endereço</summary>
-            </details>
-            <p>Carro</p>
-            <p>Empresa</p>
-            <p>Data de Cadastro</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-10 col-sm-6 col-md-4 col-lg-3">
-        <div class="center card_user">
-          <img class="img_user_emp" src="_images/fundo.jpeg" alt="Imagem do Usuário ou Empresa">
-          <div class="card_user_body">
-            <p>ID</p>
-            <p>Nome</p>
-            <p>CPF</p>
-            <p>CNH</p>
-            <p>Telefone</p>
-            <details style="margin-bottom: 1em;">
-              <summary>Endereço</summary>
-            </details>
-            <p>Carro</p>
-            <p>Empresa</p>
-            <p>Data de Cadastro</p>
-          </div>
-        </div>
+            <div id="address_data">
+                <p>
+                    <label for="">CEP</label>
+                    <input type="text" name="cep" id="id_cep" maxlength="9" placeholder="Digite o CEP" required>
+                </p>
+                <p>
+                    <label for="id_rua">Rua</label>
+                    <input type="text" name="rua" id="id_rua" placeholder="Digite a Rua" required>
+                </p>
+                <p>
+                    <label for="id_bairro">Bairro</label>
+                    <input type="text" name="bairro" id="id_bairro" placeholder="Digite o Bairro" required>
+                </p>
+                <p>
+                    <label for="id_numero">Numero</label>
+                    <input type="text" name="numero" id="id_numero" min="0" placeholder="Digite o Número" required> 
+                </p>
+                <p>
+                    <label for="id_cidade">Cidade</label>
+                    <input type="text" name="cidade" id="id_cidade" placeholder="Digite a Cidade" required>
+                </p>
+                <p>
+                    <label for="id_estado">Estado (UF)</label>
+                    <input type="text" name="estado" id="id_estado" maxlength="2" placeholder="Exemplo: SP, RJ..." required>
+                </p>
+            </div>
+            <p id="p_btn_cadastrar" class="center">
+                <input type="submit" id="btn_cadastrar" value="Cadastrar">
+            </p>
+        </form>
       </div>
     </main>
 
-    <aside id="aside_index" class="col-6 col-sm-4 col-md-3 col-lg-2">
-      <div id="filtro" class="center">
-        <h1>Filtros</h1>
-        <i class="fi fi-rr-bars-filter icon_filtro"></i>
-      </div>
-      <ul id="lst_filtros">
-        <li class="#">Pesquisar</li>
-        <li class="active_filtro li_filtros">Categoria</li>
-        <li class="li_filtros">A - Z</li>
-        <li class="li_filtros">Z - A</li>
-        <li class="li_filtros">Gênero</li>
-        <li class="li_filtros">Empresa</li>
-      </ul>
-    </aside>
-
-    <footer id="footer_index" class="col-12 center" style="flex-wrap: wrap; align-items: start;">
-      <div class="col-12 col-lg-3 div_footer">
-        <h3>Navegar</h3>
-        <ul id="lst_footer">
-          <li style="display: block;">Todos</li>
-          <li style="display: block;">Funcionários</li>
-          <li style="display: block;">Empresas</li>
-        </ul>
-      </div>
-      <div id="infos" class="col-12 col-lg-6 div_footer">
-        <h3>Informações</h3>
-        <p>Este é um site voltado a mostrar um sistema de cadastro de empresas e funcionários utilizando da Linguagem de Marcação HTML5, Lignuagem de Estilização CSS3, Linguagens de Programação JavaScript e PHP e para manipulação do Banco de Dados a Linguagem MySQL.</p>
-      </div>
-      <div class="col-12 col-lg-3 div_footer">
-        <h3>Contato</h3>
-        <div id="icons_footer">
-          <a href="#" target="_blank" class="a_icons"><i class="fi fi-brands-instagram icons_rs"></i></a>
-          <a href="#" target="_blank" class="a_icons"><i class="fi fi-brands-whatsapp icons_rs"></i></a>
-          <a href="#" target="_blank" class="a_icons"><i class="fi fi-brands-facebook icons_rs"></i></a>
-          <a href="https://github.com/felipedegodoy16" target="_blank" class="a_icons"><i class="fi fi-brands-github icons_rs"></i></a>
-        </div>
-      </div>
-      <div class="col-10 center footer_name">
-        <p style="margin-bottom: 0;">&copy; Felipe Godoy | 2024</p>
-      </div>
-    </footer>
-
-    <p id="btn_filtros" class="center" onclick="callFilters()"><i id="filter_symbol" class="fi fi-rr-bars-filter center"></i></p>
+    <!-- Meus scrips JS -->
+    <script src="_js/main.js"></script>
+    <script src="_js/cep.js"></script>
+    <script src="_js/cadastro.js"></script>
 
     <!-- JavaScript (Opcional) -->
     <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
