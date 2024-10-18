@@ -54,7 +54,7 @@ class Endereco {
             $stmt->execute() or die(print_r($stmt->errorInfo(), true));
         }
 
-        return $id;
+        return $id[0];
     }
 
     // Getters e Setters

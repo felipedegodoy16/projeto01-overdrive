@@ -11,7 +11,9 @@ $endereco->setNumero($_POST['numero']);
 $endereco->setCidade($_POST['cidade']);
 $endereco->setEstado($_POST['estado']);
 
-$endereco->inserirEndereco();
+$idEnd = $endereco->inserirEndereco();
+
+var_dump($idEnd);
 
 // $usuario = new Usuario();
 
