@@ -5,17 +5,6 @@ if (document.readyState == "loading") {
 }
 
 function ready() {
-    // document.addEventListener("mouseup", function(event) {
-    //     var obj_filter = document.getElementById('aside_index')
-    //     var icon_filter = document.getElementById('filter_symbol')
-    
-    //     if (!obj_filter.contains(event.target)) {
-    //         obj_filter.style.transform = 'translateX(-100%)'
-    //         icon_filter.classList.add('fi-rr-bars-filter')
-    //         icon_filter.classList.remove('fi-rr-x')
-    //     }
-    // })
-
     var cards = document.getElementsByClassName('card_user')
     var main = document.getElementsByTagName('main')[0]
     for(let i = 0; i < cards.length; i++){

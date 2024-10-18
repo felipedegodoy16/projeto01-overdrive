@@ -2,16 +2,13 @@
   $_SESSION['cargo'] = 'A';
 
   $_SESSION['logged'] = true ?? false;
+
   if(!$_SESSION['logged']) {
     header('Location: login.php');
   }
 
   if($_SESSION['cargo'] === 'C') {
-    if($_SESSION['logged']) {
-        header('Location: index.php');
-    } else {
-        header('Location: login.php');
-    }
+    header('Location: index.php');
   }
 ?>
 
@@ -43,14 +40,75 @@
 
   <body id="full_content_cadastro" class="center">
     <main id="main_cadastro" class="col-10 center">
-      <div id="call_empresa" class="col-4 center">
-        <h1>Mudar Formulário de Empresas</h1>
-        <i id="seta_cadastro" class="fi fi-rr-arrow-small-right center"></i>
+      <div id="seta_index">
+        <a href="index.php"><i id="back_index" class="fi fi-rr-arrow-small-left center"></i></a>
       </div>
-      <div id="cadastro_user" class="col-8 center">
+      <div id="cadastro_emp" class="cadastro col-12 col-md-8 center">
+        <h1>Cadastrar Empresa</h1>
+        <form class="form_cadastro" action="" method="post">
+            <div class="column_left">
+                <p>
+                    <label for="id_nome_emp">Nome</label>
+                    <input type="text" name="nome_emp" id="id_nome_emp" maxlength="255" placeholder="Digite o Nome" required>
+                </p>
+                <p>
+                    <label for="id_fantasia_emp">Nome Fantasia</label>
+                    <input type="text" name="fantasia_emp" id="id_fantasia_emp" maxlength="255" placeholder="Digite o Nome Fantasia" required>
+                </p>
+                <p>
+                    <label for="id_cnpj_emp">CNPJ</label>
+                    <input type="text" name="cnpj_emp" id="id_cnpj_emp" maxlength="18" placeholder="Digite o CNPJ" required>
+                </p>
+                <p id="p_telefone_emp">
+                    <label for="id_telefone_emp">Telefone</label>
+                    <input type="text" name="telefone_emp" id="id_telefone_emp" maxlength="15" placeholder="Digite o Telefone" required> 
+                </p>
+                <p>
+                    <label for="id_responsavel_emp">Reponsável</label>
+                    <input type="text" name="responsavel_emp" id="id_responsavel_emp" placeholder="Digite o Responsável" required>
+                </p>
+            </div>
+
+            <div class="address_data">
+                <p>
+                    <label for="id_cep_emp">CEP</label>
+                    <input type="text" name="cep_emp" id="id_cep_emp" maxlength="9" placeholder="Digite o CEP" required>
+                </p>
+                <p>
+                    <label for="id_rua_emp">Rua</label>
+                    <input type="text" name="rua_emp" id="id_rua_emp" placeholder="Digite a Rua" required>
+                </p>
+                <p>
+                    <label for="id_bairro_emp">Bairro</label>
+                    <input type="text" name="bairro_emp" id="id_bairro_emp" placeholder="Digite o Bairro" required>
+                </p>
+                <p>
+                    <label for="id_numero_emp">Numero</label>
+                    <input type="text" name="numero_emp" id="id_numero_emp" min="0" placeholder="Digite o Número" required> 
+                </p>
+                <p>
+                    <label for="id_cidade_emp">Cidade</label>
+                    <input type="text" name="cidade_emp" id="id_cidade_emp" placeholder="Digite a Cidade" required>
+                </p>
+                <p>
+                    <label for="id_estado_emp">Estado (UF)</label>
+                    <input type="text" name="estado_emp" id="id_estado_emp" maxlength="2" placeholder="Exemplo: SP, RJ..." required>
+                </p>
+            </div>
+            <p class="center p_btn_cadastrar" style="flex-direction: row;">
+                <button onclick="changeForm()">Trocar Formulário</button>
+                <input type="submit" class="btn_form" value="Cadastrar">
+            </p>
+        </form>
+      </div>
+      <div id="call_another_form" class="col-12 col-md-4 center">
+        <h1 id="text_change_form">Mudar para Formulário de Empresas</h1>
+        <i id="seta_cadastro" class="fi fi-rr-arrow-small-right center" onclick="changeForm()"></i>
+      </div>
+      <div id="cadastro_user" class="cadastro col-12 col-md-8 center">
         <h1>Cadastrar Usuário</h1>
-        <form id="form_cadastro" action="" method="post">
-            <div id="user_data">
+        <form class="form_cadastro" action="" method="post">
+            <div class="column_left">
                 <p>
                     <label for="id_nome">Nome</label>
                     <input type="text" name="nome" id="id_nome" maxlength="255" placeholder="Digite o Nome" required>
@@ -88,9 +146,9 @@
                 </p>
             </div>
 
-            <div id="address_data">
+            <div class="address_data">
                 <p>
-                    <label for="">CEP</label>
+                    <label for="id_cep">CEP</label>
                     <input type="text" name="cep" id="id_cep" maxlength="9" placeholder="Digite o CEP" required>
                 </p>
                 <p>
@@ -114,15 +172,15 @@
                     <input type="text" name="estado" id="id_estado" maxlength="2" placeholder="Exemplo: SP, RJ..." required>
                 </p>
             </div>
-            <p id="p_btn_cadastrar" class="center">
-                <input type="submit" id="btn_cadastrar" value="Cadastrar">
+            <p class="center p_btn_cadastrar" style="flex-direction: row;">
+                <button onclick="changeForm()">Trocar Formulário</button>
+                <input type="submit" class="btn_form" value="Cadastrar">
             </p>
         </form>
       </div>
     </main>
 
     <!-- Meus scrips JS -->
-    <script src="_js/main.js"></script>
     <script src="_js/cep.js"></script>
     <script src="_js/cadastro.js"></script>
 

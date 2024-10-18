@@ -52,7 +52,7 @@
     <main id="main_index" class="col-12 center">
       <div class="col-10 col-sm-6 col-md-4 col-lg-3">
         <div class="center card_user">
-          <img class="img_user_emp" src="_images/fundo.jpeg" alt="Imagem do Usuário ou Empresa">
+          <img class="img_user_emp" src="_images/back_cadastro.jpg" alt="Imagem do Usuário ou Empresa">
           <div class="card_user_body">
             <p>ID</p>
             <p>Nome</p>
@@ -71,7 +71,7 @@
 
       <div class="col-10 col-sm-6 col-md-4 col-lg-3">
         <div class="center card_user">
-          <img class="img_user_emp" src="_images/fundo.jpeg" alt="Imagem do Usuário ou Empresa">
+          <img class="img_user_emp" src="_images/back_cadastro.jpg" alt="Imagem do Usuário ou Empresa">
           <div class="card_user_body">
             <p>ID</p>
             <p>Nome</p>
@@ -90,7 +90,7 @@
 
       <div class="col-10 col-sm-6 col-md-4 col-lg-3">
         <div class="center card_user">
-          <img class="img_user_emp" src="_images/fundo.jpeg" alt="Imagem do Usuário ou Empresa">
+          <img class="img_user_emp" src="_images/back_cadastro.jpg" alt="Imagem do Usuário ou Empresa">
           <div class="card_user_body">
             <p>ID</p>
             <p>Nome</p>
@@ -109,7 +109,7 @@
 
       <div class="col-10 col-sm-6 col-md-4 col-lg-3">
         <div class="center card_user">
-          <img class="img_user_emp" src="_images/fundo.jpeg" alt="Imagem do Usuário ou Empresa">
+          <img class="img_user_emp" src="_images/back_cadastro.jpg" alt="Imagem do Usuário ou Empresa">
           <div class="card_user_body">
             <p>ID</p>
             <p>Nome</p>
@@ -128,7 +128,7 @@
 
       <div class="col-10 col-sm-6 col-md-4 col-lg-3">
         <div class="center card_user">
-          <img class="img_user_emp" src="_images/fundo.jpeg" alt="Imagem do Usuário ou Empresa">
+          <img class="img_user_emp" src="_images/back_cadastro.jpg" alt="Imagem do Usuário ou Empresa">
           <div class="card_user_body">
             <p>ID</p>
             <p>Nome</p>
@@ -147,7 +147,7 @@
 
       <div class="col-10 col-sm-6 col-md-4 col-lg-3">
         <div class="center card_user">
-          <img class="img_user_emp" src="_images/fundo.jpeg" alt="Imagem do Usuário ou Empresa">
+          <img class="img_user_emp" src="_images/back_cadastro.jpg" alt="Imagem do Usuário ou Empresa">
           <div class="card_user_body">
             <p>ID</p>
             <p>Nome</p>
@@ -210,7 +210,7 @@
     <p id="btn_filtros" class="center" onclick="callFilters()"><i id="filter_symbol" class="fi fi-rr-bars-filter center"></i></p>
     <?php 
       if($_SESSION['cargo'] === 'A') {
-        echo '<a href="#" id="btn_adicionar" class="center"><i id="add_symbol" class="fi fi-rr-plus center"></i></a>';
+        echo '<a href="cadastro.php" id="btn_adicionar" class="center"><i id="add_symbol" class="fi fi-rr-plus center"></i></a>';
       }
     ?>
 
