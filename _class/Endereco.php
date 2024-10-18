@@ -30,16 +30,16 @@ class Endereco {
         }
 
         if(count($dado) != 0){
-            print_r($dado);
-            return $dado;
+            return $dado[0]['id'];
         }
 
         return -1;
     }
 
+    // Método para inserção do endereço no Banco
     public function inserirEndereco(){
         $id = $this->verificaEndereco();
-
+        
         if($id == -1){
             $sql = "INSERT INTO enderecos VALUES
             (DEFAULT, 
@@ -52,9 +52,11 @@ class Endereco {
 
             $stmt = ConexaoDAO::getConexao()->prepare($sql);
             $stmt->execute() or die(print_r($stmt->errorInfo(), true));
+
+            $id = $this->verificaEndereco();
         }
 
-        return $id[0];
+        return $id;
     }
 
     // Getters e Setters

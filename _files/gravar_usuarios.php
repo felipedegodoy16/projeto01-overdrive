@@ -4,7 +4,7 @@ require_once '../_class/Endereco.php';
 
 $endereco = new Endereco();
 
-$endereco->setCep($_POST['cep']);
+$endereco->setCep(preg_replace( '/[^0-9]/is', '', $_POST['cep']));
 $endereco->setRua($_POST['rua']);
 $endereco->setBairro($_POST['bairro']);
 $endereco->setNumero($_POST['numero']);
@@ -12,8 +12,6 @@ $endereco->setCidade($_POST['cidade']);
 $endereco->setEstado($_POST['estado']);
 
 $idEnd = $endereco->inserirEndereco();
-
-var_dump($idEnd);
 
 // $usuario = new Usuario();
 
@@ -24,7 +22,7 @@ var_dump($idEnd);
 // $usuario->setCarro($_POST['carro']);
 // $usuario->setCargo('C');
 // $usuario->setSenha($_POST['password']);
-// $usuario->setEmpresa($_POST['empresa']);
+// // $usuario->setEmpresa($_POST['empresa']);
 
 // function validaCPF($cpf) {
 //     // Extrai somente os números

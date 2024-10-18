@@ -1,20 +1,18 @@
 <?php 
 require_once 'Endereco.php';
-// require_once 'Empresa.php';
 
 class Usuario {
     // Atributos
-    private string $nome, $cnh, $telefone, $carro, $cargo, $senha;
+    private string $nome, $cnh, $telefone, $carro, $cargo, $empresa, $senha;
     private int $cpf;
     private Endereco $endereco;
-    // private Empresa $empresa;
 
     // Método construtor
     public function __construct(){
         
     }
 
-    public function inserir(){
+    public function inserirUsuario(){
 
     }
 
@@ -51,9 +49,9 @@ class Usuario {
         return $this->endereco;
     }
 
-    // public function getEmpresa(){
-    //     return $this->empresa;
-    // }
+    public function getEmpresa(){
+        return $this->empresa;
+    }
 
     public function setNome($nome){
         $this->nome = $nome;
@@ -87,7 +85,7 @@ class Usuario {
         $this->endereco = $endereco;
     }
 
-    // public function setEmpresa($empresa){
-    //     $this->empresa = $empresa;
-    // }
+    public function setEmpresa($empresa){
+        $this->empresa = $empresa;
+    }
 }
