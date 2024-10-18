@@ -22,9 +22,6 @@
     <!-- Link meu CSS -->
     <link rel="stylesheet" href="_css/style.css">
 
-    <!-- Link para icons -->
-    <link href="_css/icomoon.css"rel="stylesheet">
-
     <!-- Link icons flaticon -->
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-brands/css/uicons-brands.css'>

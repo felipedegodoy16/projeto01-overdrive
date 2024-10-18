@@ -25,9 +25,6 @@
     <!-- Link meu CSS -->
     <link rel="stylesheet" href="_css/style.css">
 
-    <!-- Link para icons -->
-    <link href="_css/icomoon.css"rel="stylesheet">
-
     <!-- Link icons flaticon -->
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-brands/css/uicons-brands.css'>
@@ -129,10 +126,11 @@
                     <label for="id_carro">Carro</label>
                     <input type="text" name="carro" id="id_carro" placeholder="Digite o Carro" required>
                 </p>
-                <p>
+                <p style="position: relative;">
                     <label for="id_password">Senha</label>
                     <input type="password" name="password" id="id_password" placeholder="Digite a Senha" min="8" required>
                     <small>Mínimo 8 caracteres</small>
+                    <i id="eye_cadastro" class="fi fi-rr-eye icon-eye"></i>
                 </p>
                 <p>
                     <label for="id_empresa">Empresa</label>

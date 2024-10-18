@@ -393,8 +393,9 @@ form input::-ms-reveal, form input::-ms-clear {
 }
 
 i.icons {
+    font-size: 15pt;
     float: right;
-    transform: translateY(-33px);
+    transform: translateY(-38px);
     transition: color .2s ease-in;
     color: var(--red-light);
 }
@@ -573,6 +574,19 @@ form.form_cadastro p {
     display: flex;
     flex-direction: column;
     margin: 5px 0;
+}
+
+.icon-eye {
+    padding: 0 2px;
+    position: absolute;
+    transform: translateY(30px);
+    cursor: pointer;
+    right: 0;
+    background-color: #FFF;
+}
+
+.icon-eye:hover {
+    color: var(--red-light);
 }
 
 p.p_btn_cadastrar {

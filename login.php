@@ -18,12 +18,10 @@
     <!-- Link meu CSS -->
     <link rel="stylesheet" href="_css/style.css">
 
-    <!-- Link para icons -->
-    <link href="_css/icomoon.css"rel="stylesheet">
-
     <!-- Link icons flaticon -->
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-brands/css/uicons-brands.css'>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
 
     <!-- Link para Favicon -->
     <link rel="shortcut icon" href="_images/favicon_io/favicon.ico" type="image/x-icon">
@@ -41,14 +39,14 @@
             <label for="user_login">Usuário</label>
             <input id="user_login" type="text" oninput="transition_text(event.target)" onclick="transition_text(event.target)" required>
             <div style="z-index: 1002; height: 0">
-              <i class="icon-user icons"></i>
+              <i class="fi fi-rr-circle-user icons"></i>
             </div>
           </div>
           <div id="password_field" style="margin-top: 0;">
             <label for="password_login">Senha</label>
             <input id="password_login" type="password" oninput="transition_text(event.target), change_icon()" onclick="transition_text(event.target), change_icon()" required>
             <div style="z-index: 1002;">
-              <i id="icon_password" class="icon-lock2 icons" onclick="show_password(event.target)"></i>
+              <i id="icon_password" class="fi fi-rr-lock icons" onclick="show_password(event.target)"></i>
             </div>
           </div>
           <div class="center">

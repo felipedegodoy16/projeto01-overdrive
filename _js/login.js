@@ -31,8 +31,8 @@ function ready() {
             icon_password.setAttribute('type', 'password')
     
             var obj_icon = document.getElementById('icon_password')
-            obj_icon.classList.add('icon-lock2')
-            obj_icon.classList.remove('icon-eye')
+            obj_icon.classList.add('fi-rr-lock')
+            obj_icon.classList.remove('fi-rr-eye')
             obj_icon.classList.remove('eye-password')
         }
     })
@@ -53,17 +53,21 @@ function transition_text(e) {
 // Função para mostrar e esconder senha
 function show_password(e){
     var password = document.getElementById('password_login')
-    if(password.getAttribute('type') == 'password' && e.classList.contains('icon-eye')){
+    if(password.getAttribute('type') == 'password' && e.classList.contains('fi-rr-eye')){
         password.setAttribute('type', 'text')
+        e.classList.add('fi-rr-eye-crossed')
+        e.classList.remove('fi-rr-eye')
     } else {
         password.setAttribute('type', 'password')
+        e.classList.remove('fi-rr-eye-crossed')
+        e.classList.add('fi-rr-eye')
     }
 }
 
 // Função para alterar o icon do campo de senha
 function change_icon(){
     var obj_icon = document.getElementById('icon_password')
-    obj_icon.classList.remove('icon-lock2')
-    obj_icon.classList.add('icon-eye')
+    obj_icon.classList.remove('fi-rr-lock')
+    obj_icon.classList.add('fi-rr-eye')
     obj_icon.classList.add('eye-password')
 }

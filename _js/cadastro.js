@@ -34,6 +34,9 @@ function ready() {
         prevenirCaracteres(e)
     })
 
+    const magicEye = document.getElementById('eye_cadastro')
+    magicEye.addEventListener("click", revealPassword)
+
     // Funções Empresa
     const inputCnpj = document.querySelector('input[name=cnpj_emp]')
     inputCnpj.addEventListener("keypress", cnpjComplete)
@@ -90,6 +93,20 @@ function telefoneComplete(e) {
         input.value += ') '
     } else if(inputLength === 10) {
         input.value += '-'
+    }
+}
+
+function revealPassword() {
+    const inputPassword = document.getElementById('id_password')
+    const iconEye = document.getElementById('eye_cadastro')
+    if(inputPassword.type === 'text') {
+        inputPassword.type = 'password'
+        iconEye.classList.remove('fi-rr-eye-crossed')
+        iconEye.classList.add('fi-rr-eye')
+    } else {
+        inputPassword.type = 'text'
+        iconEye.classList.add('fi-rr-eye-crossed')
+        iconEye.classList.remove('fi-rr-eye')
     }
 }
 
