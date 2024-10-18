@@ -3,8 +3,8 @@ require_once 'ConexaoDAO.php';
 
 class Endereco {
     // Atributos
-    private int $cep, $numero;
-    private string $rua, $cidade, $estado, $bairro;
+    private int $numero;
+    private string $rua, $cidade, $estado, $bairro, $cep;
 
     // Método construtor
     public function __construct(){
@@ -12,24 +12,49 @@ class Endereco {
     }
 
     // Método para verificação de endereço
-    public function verificaEndereco(){
+    public function verificaEndereco() {
         $sql = "SELECT id FROM enderecos WHERE
-        cep = " . $this->getCep() . " AND
+        cep = '" . $this->getCep() . "' AND
         numero = " . $this->getNumero() . " AND
-        rua = " . $this->getRua() . " AND
-        cidade = " . $this->getCidade() . " AND
-        estado = " . $this->getEstado() . " AND
-        bairro = " . $this->getBairro();
+        rua = '" . $this->getRua() . "' AND
+        cidade = '" . $this->getCidade() . "' AND
+        estado = '" . $this->getEstado() . "' AND
+        bairro = '" . $this->getBairro() . "';";
 
         $stmt = ConexaoDAO::getConexao()->prepare($sql);
-        $dado = $stmt->execute() or die(print_r($stmt->errorInfo(), true));
+        $stmt->execute() or die(print_r($stmt->errorInfo(), true));
+        $dado = $stmt->fetchAll();
+
+        foreach($dado as $d){
+            $d['id'];
+        }
 
         if(count($dado) != 0){
             print_r($dado);
-            // return $dado;
+            return $dado;
         }
 
         return -1;
+    }
+
+    public function inserirEndereco(){
+        $id = $this->verificaEndereco();
+
+        if($id == -1){
+            $sql = "INSERT INTO enderecos VALUES
+            (DEFAULT, 
+            '" . $this->getCep() . "', 
+            " . $this->getNumero() . ", 
+            '" . $this->getRua() . "',
+            '" . $this->getCidade() . "', 
+            '" . $this->getEstado() . "',
+            '" . $this->getBairro() . "');";
+
+            $stmt = ConexaoDAO::getConexao()->prepare($sql);
+            $stmt->execute() or die(print_r($stmt->errorInfo(), true));
+        }
+
+        return $id;
     }
 
     // Getters e Setters

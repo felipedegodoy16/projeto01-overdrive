@@ -104,7 +104,7 @@
       </div>
       <div id="cadastro_user" class="cadastro col-12 col-md-8 center">
         <h1>Cadastrar Usuário</h1>
-        <form class="form_cadastro" action="" method="post">
+        <form class="form_cadastro" action="_files/gravar_usuarios.php" method="post">
             <div class="column_left">
                 <p>
                     <label for="id_nome">Nome</label>
@@ -159,7 +159,7 @@
                 </p>
                 <p>
                     <label for="id_numero">Numero</label>
-                    <input type="text" name="numero" id="id_numero" min="0" placeholder="Digite o Número" required> 
+                    <input type="text" name="numero" id="id_numero" placeholder="Digite o Número" required> 
                 </p>
                 <p>
                     <label for="id_cidade">Cidade</label>

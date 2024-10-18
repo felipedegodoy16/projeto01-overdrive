@@ -55,6 +55,11 @@ function ready() {
             input_telefone_emp.value = ''
         }
     })
+
+    const inputNumeroEmp = document.querySelector('input[name=numero_emp]')
+    inputNumeroEmp.addEventListener("keypress", (e) => {
+        prevenirCaracteres(e)
+    })
 }
 
 // Funções Usuário

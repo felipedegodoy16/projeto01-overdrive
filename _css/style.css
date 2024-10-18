@@ -326,7 +326,7 @@ main#main_login {
 
 h1#title_login {
     font-size: clamp(28px, 4dvw, 44px);
-    color: var(--red-light);
+    color: var(--red-dark);
     font-weight: 600;
 }
 
@@ -352,7 +352,7 @@ form#form div {
 
 #password_field label, #user_field label {
     font-size: clamp(16px, 4dvw, 20px);
-    color: var(--red-light);
+    color: var(--red-dark);
     transform: translateY(30px);
 }
 
@@ -381,10 +381,10 @@ form#form div {
 form#form input {
     width: 25dvw;
     z-index: 1001;
-    color: var(--red-light);
+    color: var(--red-dark);
     background-color: transparent;
     border: none;
-    border-bottom: 3px solid var(--red-light);
+    border-bottom: 3px solid var(--red-dark);
     outline: 0;
 }
 
@@ -397,7 +397,7 @@ i.icons {
     float: right;
     transform: translateY(-38px);
     transition: color .2s ease-in;
-    color: var(--red-light);
+    color: var(--red-dark);
 }
 
 i.eye-password {
@@ -405,7 +405,7 @@ i.eye-password {
 }
 
 i.eye-password:hover {
-    color: var(--red-dark);
+    color: var(--red-light);
 }
 
 input#btn_login {
