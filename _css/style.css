@@ -583,6 +583,7 @@ form.form_cadastro p {
     cursor: pointer;
     right: 0;
     background-color: #FFF;
+    display: flex;
 }
 
 .icon-eye:hover {

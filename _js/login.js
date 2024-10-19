@@ -31,8 +31,12 @@ function ready() {
             icon_password.setAttribute('type', 'password')
     
             var obj_icon = document.getElementById('icon_password')
+            if(obj_icon.classList.contains('fi-rr-eye')) {
+                obj_icon.classList.remove('fi-rr-eye')
+            } else {
+                obj_icon.classList.remove('fi-rr-eye-crossed')
+            }
             obj_icon.classList.add('fi-rr-lock')
-            obj_icon.classList.remove('fi-rr-eye')
             obj_icon.classList.remove('eye-password')
         }
     })
@@ -67,7 +71,11 @@ function show_password(e){
 // Função para alterar o icon do campo de senha
 function change_icon(){
     var obj_icon = document.getElementById('icon_password')
-    obj_icon.classList.remove('fi-rr-lock')
+    if(obj_icon.classList.contains('fi-rr-eye-crossed')){
+        obj_icon.classList.remove('fi-rr-eye-crossed')
+    } else {
+        obj_icon.classList.remove('fi-rr-lock')
+    }
     obj_icon.classList.add('fi-rr-eye')
     obj_icon.classList.add('eye-password')
 }

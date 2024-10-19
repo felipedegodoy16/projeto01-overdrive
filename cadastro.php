@@ -112,15 +112,16 @@
                 </p>
                 <p>
                     <label for="id_cpf">CPF</label>
-                    <input type="text" name="cpf" id="id_cpf" maxlength="14" placeholder="Digite o CPF" required>
+                    <input type="text" name="cpf" id="id_cpf" min="14" maxlength="14" placeholder="Digite o CPF" required>
+                    <small id="cpfTeste"></small>
                 </p>
                 <p>
                     <label for="id_cnh">CNH</label>
-                    <input type="text" name="cnh" id="id_cnh" maxlength="9" placeholder="Digite a CNH" required>
+                    <input type="text" name="cnh" id="id_cnh" min="9" maxlength="9" placeholder="Digite a CNH" required>
                 </p>
                 <p id="p_telefone">
                     <label for="id_telefone">Telefone</label>
-                    <input type="text" name="telefone" id="id_telefone" maxlength="15" placeholder="Digite o Telefone" required> 
+                    <input type="text" name="telefone" id="id_telefone"min="15" maxlength="15" placeholder="Digite o Telefone" required> 
                 </p>
                 <p>
                     <label for="id_carro">Carro</label>

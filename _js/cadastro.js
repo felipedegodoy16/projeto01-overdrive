@@ -8,6 +8,24 @@ function ready() {
     // Funções Usuário
     const inputCpf = document.querySelector('input[name=cpf]')
     inputCpf.addEventListener("keypress", cpfComplete)
+    inputCpf.addEventListener("input", () => {
+        const cpf = document.querySelector('input[name=cpf]').value[0]
+        alert(cpf)
+        const cpfAlert = document.getElementById('cpfTeste')
+        cpf.replace('.', '').replace('.', '').replace('-', '')
+
+        if(cpf.length === 14){
+            cpfTestado = validaCPF(cpf)
+
+            if(cpfTestado){
+                cpfAlert.innerText = 'CPF válido'
+            } else {
+                cpfAlert.innerText = 'CPF inválido'
+            }
+        } else {
+            cpfAlert.innerText = ''
+        }
+    })
 
     const inputCep = document.querySelector('input[name=cep]')
     inputCep.addEventListener("keypress", cepComplete)
@@ -73,6 +91,33 @@ function cpfComplete(e) {
     } else if(inputLength === 11){
         input.value += '-'
     }
+}
+
+function validaCPF(cpf) {
+
+    // Verifica se foi informado todos os digitos corretamente
+    if (cpf.length != 11) {
+        return false
+    }
+
+    // Verifica se foi informada uma sequência de digitos repetidos. Ex: 111.111.111-11
+    var regex = /([0-9]{2,3})\1/g
+    if (regex.test(cpf)) {
+        return false
+    }
+
+    // Faz o calculo para validar o CPF
+    for (var i = 9; i < 11; i++) {
+        var k = 0;
+        for (var j = 0; j < i; j++) {
+            k += cpf[j] * ((i + 1) - j);
+        }
+        k = ((10 * k) % 11) % 10;
+        if (cpf[j] != k) {
+            return false;
+        }
+    }
+    return true;
 }
 
 function cepComplete(e) {

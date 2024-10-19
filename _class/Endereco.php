@@ -3,8 +3,8 @@ require_once 'ConexaoDAO.php';
 
 class Endereco {
     // Atributos
-    private int $numero;
-    private string $rua, $cidade, $estado, $bairro, $cep;
+    private int $numero, $cep;
+    private string $rua, $cidade, $estado, $bairro;
 
     // Método construtor
     public function __construct(){
@@ -13,24 +13,38 @@ class Endereco {
 
     // Método para verificação de endereço
     public function verificaEndereco() {
-        $sql = "SELECT id FROM enderecos WHERE
-        cep = '" . $this->getCep() . "' AND
-        numero = " . $this->getNumero() . " AND
-        rua = '" . $this->getRua() . "' AND
-        cidade = '" . $this->getCidade() . "' AND
-        estado = '" . $this->getEstado() . "' AND
-        bairro = '" . $this->getBairro() . "';";
+        $sql = "SELECT * FROM enderecos WHERE
+        cep = :cep AND numero = :numero AND
+        rua = :rua AND cidade = :cidade AND
+        estado = :estado AND bairro = :bairro;";
 
+        // Executando a query no banco
         $stmt = ConexaoDAO::getConexao()->prepare($sql);
+        $stmt->bindValue(":cep", $this->cep, PDO::PARAM_INT);
+        $stmt->bindValue(":numero", $this->numero, PDO::PARAM_INT);
+        $stmt->bindValue(":rua", $this->rua, PDO::PARAM_STR);
+        $stmt->bindValue(":cidade", $this->cidade, PDO::PARAM_STR);
+        $stmt->bindValue(":estado", $this->estado, PDO::PARAM_STR);
+        $stmt->bindValue(":bairro", $this->bairro, PDO::PARAM_STR);
+
         $stmt->execute() or die(print_r($stmt->errorInfo(), true));
         $dado = $stmt->fetchAll();
-
+        
         foreach($dado as $d){
             $d['id'];
+            $d['cep'];
+            $d['numero'];
+            $d['rua'];
+            $d['cidade'];
+            $d['estado'];
+            $d['bairro'];
         }
 
         if(count($dado) != 0){
-            return $dado[0]['id'];
+            // echo "<pre>";
+            // print_r($dado[0]);
+            // echo "</pre>";
+            return $dado[0];
         }
 
         return -1;
@@ -38,25 +52,24 @@ class Endereco {
 
     // Método para inserção do endereço no Banco
     public function inserirEndereco(){
-        $id = $this->verificaEndereco();
+        $dadoVerificado = $this->verificaEndereco();
         
-        if($id == -1){
+        if($dadoVerificado == -1){
             $sql = "INSERT INTO enderecos VALUES
-            (DEFAULT, 
-            '" . $this->getCep() . "', 
-            " . $this->getNumero() . ", 
-            '" . $this->getRua() . "',
-            '" . $this->getCidade() . "', 
-            '" . $this->getEstado() . "',
-            '" . $this->getBairro() . "');";
+            (DEFAULT, :cep, :numero, :rua, :cidade, :estado, :bairro);";
 
             $stmt = ConexaoDAO::getConexao()->prepare($sql);
+
+            // Substituindo os valores pelos valores de entrada do formulário
+            $stmt->bindValue(":cep", $this->cep, PDO::PARAM_INT);
+            $stmt->bindValue(":numero", $this->numero, PDO::PARAM_INT);
+            $stmt->bindValue(":rua", $this->rua, PDO::PARAM_STR);
+            $stmt->bindValue(":cidade", $this->cidade, PDO::PARAM_STR);
+            $stmt->bindValue(":estado", $this->estado, PDO::PARAM_STR);
+            $stmt->bindValue(":bairro", $this->bairro, PDO::PARAM_STR);
+
             $stmt->execute() or die(print_r($stmt->errorInfo(), true));
-
-            $id = $this->verificaEndereco();
         }
-
-        return $id;
     }
 
     // Getters e Setters

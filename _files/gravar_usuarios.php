@@ -2,6 +2,7 @@
 require_once '../_class/Usuario.php';
 require_once '../_class/Endereco.php';
 
+// Criando o objeto endereço com as informações passadas
 $endereco = new Endereco();
 
 $endereco->setCep(preg_replace( '/[^0-9]/is', '', $_POST['cep']));
@@ -11,18 +12,25 @@ $endereco->setNumero($_POST['numero']);
 $endereco->setCidade($_POST['cidade']);
 $endereco->setEstado($_POST['estado']);
 
-$idEnd = $endereco->inserirEndereco();
+// Inserindo o endereço no banco ou pegando um endereço já existente
+$endereco->inserirEndereco();
 
-// $usuario = new Usuario();
+// echo "<pre>";
+// var_dump($endereco);
+// echo "</pre>";
 
-// $usuario->setNome($_POST['nome']);
-// $usuario->setCpf($_POST['cpf']);
-// $usuario->setCnh($_POST['cnh']);
-// $usuario->setTelefone($_POST['telefone']);
-// $usuario->setCarro($_POST['carro']);
-// $usuario->setCargo('C');
-// $usuario->setSenha($_POST['password']);
-// // $usuario->setEmpresa($_POST['empresa']);
+// Criando o objeto usuário com as informações passadas
+$usuario = new Usuario();
+
+$usuario->setNome($_POST['nome']);
+$usuario->setCpf($_POST['cpf']);
+$usuario->setCnh($_POST['cnh']);
+$usuario->setTelefone($_POST['telefone']);
+$usuario->setCarro($_POST['carro']);
+$usuario->setCargo('C');
+$usuario->setSenha($_POST['password']);
+$usuario->setEndereco($endereco);
+$usuario->setEmpresa($_POST['empresa']);
 
 // function validaCPF($cpf) {
 //     // Extrai somente os números
