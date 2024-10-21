@@ -173,7 +173,7 @@
             </div>
             <p class="center p_btn_cadastrar" style="flex-direction: row;">
                 <button onclick="changeForm()">Trocar Formulário</button>
-                <input type="submit" class="btn_form" value="Cadastrar">
+                <input id="btn_cadastrar_user" type="submit" class="btn_form" value="Cadastrar">
             </p>
         </form>
       </div>

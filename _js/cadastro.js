@@ -9,21 +9,22 @@ function ready() {
     const inputCpf = document.querySelector('input[name=cpf]')
     inputCpf.addEventListener("keypress", cpfComplete)
     inputCpf.addEventListener("input", () => {
-        const cpf = document.querySelector('input[name=cpf]').value[0]
-        alert(cpf)
+        const strCpf = document.querySelector('input[name=cpf]').value
         const cpfAlert = document.getElementById('cpfTeste')
-        cpf.replace('.', '').replace('.', '').replace('-', '')
+        const btnCadastrar = document.getElementById('btn_cadastrar_user')
+        cpf = strCpf.replace('.', '').replace('.', '').replace('-', '')
 
-        if(cpf.length === 14){
+        if(cpf.length === 11){
             cpfTestado = validaCPF(cpf)
-
             if(cpfTestado){
                 cpfAlert.innerText = 'CPF válido'
-            } else {
-                cpfAlert.innerText = 'CPF inválido'
+                cpfAlert.style.color = '#0c6800'
+                btnCadastrar.setAttribute('type', 'submit')
             }
         } else {
-            cpfAlert.innerText = ''
+            cpfAlert.innerText = 'CPF inválido'
+            cpfAlert.style.color = 'var(--red-dark)'
+            btnCadastrar.setAttribute('type', 'button')
         }
     })
 

@@ -534,7 +534,7 @@ i#seta_cadastro:hover {
 div.cadastro {
     flex-direction: column;
     padding: 2em 0;
-    background-color: #FFF;
+    background-color: #ffffff;
     border-top-right-radius: 40px;
     border-bottom-right-radius: 40px;
 }
@@ -588,6 +588,10 @@ form.form_cadastro p {
 
 .icon-eye:hover {
     color: var(--red-light);
+}
+
+small#cpfTeste {
+    font-size: 10pt;
 }
 
 p.p_btn_cadastrar {
