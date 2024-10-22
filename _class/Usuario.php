@@ -108,6 +108,57 @@ class Usuario {
         }
     }
 
+    public function listarUsuarios(){
+        try {
+
+            // Query
+            $sql = "SELECT * FROM usuarios u INNER JOIN enderecos e ON u.id_endereco = e.id;";
+
+            // Conectando ao banco
+            $stmt = ConexaoDAO::getConexao()->prepare($sql);
+
+            // Executando a query no banco e recebendo os dados
+            $stmt->execute() or die(print_r($stmt->errorInfo(), true));
+            $dados = $stmt->fetchAll();
+
+            if(count($dados) > 0){
+
+                foreach($dados as $d){
+
+                    $users[] = array(
+                        'id' => $d['id'],
+                        'nome' => $d['nome'],
+                        'carro' => $d['carro'],
+                        'cargo' => $d['cargo'],
+                        'empresa' => $d['empresa'],
+                        'telefone' => $d['telefone'],
+                        'cpf' => $d['cpf'],
+                        'cnh' => $d['cnh'],
+                        'cep' => $d['cep'],
+                        'numero' => $d['numero'],
+                        'rua' => $d['rua'],
+                        'cidade' => $d['cidade'],
+                        'estado' => $d['estado'],
+                        'bairro' => $d['bairro']
+                    );
+
+                }
+
+            } else {
+
+                $users = array();
+
+            }
+
+            return $users;
+
+        } catch(Exception $e) {
+
+            echo "Exceção $e";
+
+        }
+    }
+
     // Getters e Setters
     public function getId(){
         return $this->id;
