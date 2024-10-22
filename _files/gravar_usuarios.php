@@ -15,7 +15,7 @@ $usuario->setCnh(preg_replace( '/[^0-9]/is', '', $_POST['cnh']));
 $verificaDados = $usuario->verificaDados();
 
 if($verificaDados === -1) {
-    // Criando o objeto endereço com as informações passadas
+    // Instanciado o objeto endereço com as informações passadas
     $endereco = new Endereco();
 
     $endereco->setCep(preg_replace( '/[^0-9]/is', '', $_POST['cep']));

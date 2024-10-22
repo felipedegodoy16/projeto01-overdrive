@@ -1,10 +1,15 @@
 <?php 
-  require_once '_files/logout.php';
+
+  session_start();
 
   $_SESSION['logged'] = $_SESSION['logged'] ?? false;
+
   if(!$_SESSION['logged']) {
     header('Location: login.php');
   }
+
+  require_once '_files/logout.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -204,7 +209,7 @@
 
     <p id="btn_filtros" class="center" onclick="callFilters()"><i id="filter_symbol" class="fi fi-rr-bars-filter center"></i></p>
     <?php 
-      if($_SESSION['cargo'] == 'A') {
+      if($_SESSION['cargo'] === 'A') {
         echo '<a href="cadastro.php" id="btn_adicionar" class="center"><i id="add_symbol" class="fi fi-rr-plus center"></i></a>';
       }
     ?>

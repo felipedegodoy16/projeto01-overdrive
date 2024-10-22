@@ -102,8 +102,6 @@ class Usuario {
                 </script>";
             }
 
-            return $usuario;
-
         } catch(Exception $e) {
 
             echo "Exceção $e";

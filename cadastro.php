@@ -1,7 +1,8 @@
 <?php 
-  $_SESSION['cargo'] = 'A';
 
-  $_SESSION['logged'] = true ?? false;
+  session_start();
+
+  $_SESSION['logged'] = $_SESSION['logged'] ?? false;
 
   if(!$_SESSION['logged']) {
     header('Location: login.php');
