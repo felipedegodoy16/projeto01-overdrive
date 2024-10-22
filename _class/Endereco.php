@@ -35,7 +35,7 @@ class Endereco {
             $dado = $stmt->fetchAll();
             
             foreach($dado as $d){
-                $d['id'];
+                $d['id_end'];
                 $d['cep'];
                 $d['numero'];
                 $d['rua'];

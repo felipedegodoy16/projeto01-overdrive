@@ -7,6 +7,7 @@ class ConexaoDAO {
         
     }
 
+    // Método para estabelecer a conexão com o banco
     public static function getConexao() {
         if(!isset(self::$instance)) {
             $db_name = 'overdrive';
@@ -20,5 +21,14 @@ class ConexaoDAO {
             self::$instance->setAttribute(PDO::ATTR_ORACLE_NULLS, PDO::NULL_EMPTY_STRING);
         }
         return self::$instance;
+    }
+
+    // Getters e Setters
+    public function getInstance(){
+        return $this->instance;
+    }
+
+    public function setInstance($instance){
+        $this->instance = $instance;
     }
 }

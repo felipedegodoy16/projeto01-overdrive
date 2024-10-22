@@ -112,7 +112,7 @@ class Usuario {
         try {
 
             // Query
-            $sql = "SELECT * FROM usuarios u INNER JOIN enderecos e ON u.id_endereco = e.id;";
+            $sql = "SELECT * FROM usuarios u INNER JOIN enderecos e ON u.id_endereco = e.id_end;";
 
             // Conectando ao banco
             $stmt = ConexaoDAO::getConexao()->prepare($sql);
@@ -126,7 +126,7 @@ class Usuario {
                 foreach($dados as $d){
 
                     $users[] = array(
-                        'id' => $d['id'],
+                        'id' => $d['id_user'],
                         'nome' => $d['nome'],
                         'carro' => $d['carro'],
                         'cargo' => $d['cargo'],
@@ -144,13 +144,11 @@ class Usuario {
 
                 }
 
-            } else {
-
-                $users = array();
+                return $users;
 
             }
 
-            return $users;
+            return -1;
 
         } catch(Exception $e) {
 

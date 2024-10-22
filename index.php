@@ -50,45 +50,15 @@
     </nav>
 
     <main id="main_index" class="col-12 center">
-      <div class="col-10 col-sm-6 col-md-4 col-lg-3">
-        <div class="center card_user">
-          <img class="img_user_emp" src="_images/back_cadastro.jpg" alt="Imagem do Usuário ou Empresa">
-          <div class="card_user_body">
-            <p>ID</p>
-            <p>Nome</p>
-            <p>CPF</p>
-            <p>CNH</p>
-            <p>Telefone</p>
-            <details style="margin-bottom: 1em;">
-              <summary>Endereço</summary>
-            </details>
-            <p>Carro</p>
-            <p>Empresa</p>
-            <p>Data de Cadastro</p>
-          </div>
-        </div>
+      <div id="section_users" class="col-12 center">
+
       </div>
 
-      <div class="col-10 col-sm-6 col-md-4 col-lg-3">
-        <div class="center card_user">
-          <img class="img_user_emp" src="_images/back_cadastro.jpg" alt="Imagem do Usuário ou Empresa">
-          <div class="card_user_body">
-            <p>ID</p>
-            <p>Nome</p>
-            <p>CPF</p>
-            <p>CNH</p>
-            <p>Telefone</p>
-            <details style="margin-bottom: 1em;">
-              <summary>Endereço</summary>
-            </details>
-            <p>Carro</p>
-            <p>Empresa</p>
-            <p>Data de Cadastro</p>
-          </div>
-        </div>
+      <div id="section_emps">
+        
       </div>
 
-      <div class="col-10 col-sm-6 col-md-4 col-lg-3">
+      <!-- <div class="col-10 col-sm-6 col-md-4 col-lg-3">
         <div class="center card_user">
           <img class="img_user_emp" src="_images/back_cadastro.jpg" alt="Imagem do Usuário ou Empresa">
           <div class="card_user_body">
@@ -105,64 +75,7 @@
             <p>Data de Cadastro</p>
           </div>
         </div>
-      </div>
-
-      <div class="col-10 col-sm-6 col-md-4 col-lg-3">
-        <div class="center card_user">
-          <img class="img_user_emp" src="_images/back_cadastro.jpg" alt="Imagem do Usuário ou Empresa">
-          <div class="card_user_body">
-            <p>ID</p>
-            <p>Nome</p>
-            <p>CPF</p>
-            <p>CNH</p>
-            <p>Telefone</p>
-            <details style="margin-bottom: 1em;">
-              <summary>Endereço</summary>
-            </details>
-            <p>Carro</p>
-            <p>Empresa</p>
-            <p>Data de Cadastro</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-10 col-sm-6 col-md-4 col-lg-3">
-        <div class="center card_user">
-          <img class="img_user_emp" src="_images/back_cadastro.jpg" alt="Imagem do Usuário ou Empresa">
-          <div class="card_user_body">
-            <p>ID</p>
-            <p>Nome</p>
-            <p>CPF</p>
-            <p>CNH</p>
-            <p>Telefone</p>
-            <details style="margin-bottom: 1em;">
-              <summary>Endereço</summary>
-            </details>
-            <p>Carro</p>
-            <p>Empresa</p>
-            <p>Data de Cadastro</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-10 col-sm-6 col-md-4 col-lg-3">
-        <div class="center card_user">
-          <img class="img_user_emp" src="_images/back_cadastro.jpg" alt="Imagem do Usuário ou Empresa">
-          <div class="card_user_body">
-            <p>ID</p>
-            <p>Nome</p>
-            <p>CPF</p>
-            <p>CNH</p>
-            <p>Telefone</p>
-            <details style="margin-bottom: 1em;">
-              <summary>Endereço</summary>
-            </details>
-            <p>Carro</p>
-            <p>Empresa</p>
-            <p>Data de Cadastro</p>
-          </div>
-        </div>
-      </div>
+      </div> -->
     </main>
 
     <aside id="aside_index" class="col-6 col-sm-4 col-md-3 col-lg-2">
@@ -217,6 +130,7 @@
     <!-- Meus scrips JS -->
     <script src="_js/navbar.js"></script>
     <script src="_js/main.js"></script>
+    <script src="_js/requestDados.js"></script>
 
     <!-- JavaScript (Opcional) -->
     <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
