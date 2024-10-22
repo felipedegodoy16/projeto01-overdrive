@@ -7,8 +7,8 @@ class Endereco {
     private string $rua, $cidade, $estado, $bairro;
 
     // Método construtor
-    public function __construct($id = false){
-        $this->id = $id;
+    public function __construct(){
+        
     }
 
     // Método para verificação de endereço
@@ -45,10 +45,7 @@ class Endereco {
             }
 
             // Verificando existência do endereço no banco
-            if(count($dado) != 0){
-                // echo "<pre>";
-                // print_r($dado[0]);
-                // echo "</pre>";
+            if(count($dado) > 0){
                 $this->setId($d['id']);
                 return $dado[0];
             }

@@ -27,9 +27,7 @@ class Usuario {
             $stmt->execute() or die(print_r($stmt->errorInfo(), true));
             $dado = $stmt->fetchAll();
 
-            // var_dump($dado);
-
-            if(count($dado) != 0){
+            if(count($dado) > 0){
                 return 1;
             }
 
