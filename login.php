@@ -1,8 +1,9 @@
 <?php 
-  // $_SESSION['logged'] = true ?? false;
-  // if($_SESSION['logged']) {
-  //   header('Location: index.php');
-  // }
+
+  $_SESSION['logged'] = $_SESSION['logged'] ?? false;
+  if($_SESSION['logged']) {
+    header('Location: index.php');
+  }
 ?>
 
 <!DOCTYPE html>
@@ -34,17 +35,17 @@
       <div id="form_login" class="center">
         <h1 id="title_login">LOGIN</h1>
         <img id="img_logo" src="_images/overdrive_logo.png" alt="">
-        <form id="form" action="login.php" method="post">
+        <form id="form" action="_files/acessar.php" method="post">
           <div id="user_field" style="margin-bottom: 0;">
-            <label for="user_login">Usuário</label>
-            <input id="user_login" type="text" oninput="transition_text(event.target)" onclick="transition_text(event.target)" required>
+            <label for="user_login">CPF</label>
+            <input id="user_login" name="user_input" type="text" oninput="transition_text(event.target)" onclick="transition_text(event.target)" minlength="14" maxlength="14" required>
             <div style="z-index: 1002; height: 0">
               <i class="fi fi-rr-circle-user icons"></i>
             </div>
           </div>
           <div id="password_field" style="margin-top: 0;">
             <label for="password_login">Senha</label>
-            <input id="password_login" type="password" oninput="transition_text(event.target), change_icon()" onclick="transition_text(event.target), change_icon()" required>
+            <input id="password_login" name="password_input" type="password" oninput="transition_text(event.target), change_icon()" onclick="transition_text(event.target), change_icon()" minlength="8" required>
             <div style="z-index: 1002;">
               <i id="icon_password" class="fi fi-rr-lock icons" onclick="show_password(event.target)"></i>
             </div>

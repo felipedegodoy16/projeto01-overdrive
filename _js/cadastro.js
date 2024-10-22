@@ -7,7 +7,6 @@ if (document.readyState == "loading") {
 function ready() {
     // Funções Usuário
     const inputCpf = document.querySelector('input[name=cpf]')
-    inputCpf.addEventListener("keypress", cpfComplete)
     inputCpf.addEventListener("input", () => {
         const strCpf = document.querySelector('input[name=cpf]').value
         const cpfAlert = document.getElementById('cpfTeste')
@@ -28,12 +27,6 @@ function ready() {
         }
     })
 
-    const inputCep = document.querySelector('input[name=cep]')
-    inputCep.addEventListener("keypress", cepComplete)
-
-    const inputTelefone = document.querySelector('input[name=telefone]')
-    inputTelefone.addEventListener("keypress", telefoneComplete)
-
     document.addEventListener("mouseup", function(event) {
         var obj_telefone = document.getElementById('p_telefone')
         var input_telefone = document.querySelector('input[name=telefone]')
@@ -43,29 +36,10 @@ function ready() {
         }
     })
 
-    const inputCnh = document.querySelector('input[name=cnh]')
-    inputCnh.addEventListener("keypress", (e) => {
-        prevenirCaracteres(e)
-    })
-
-    const inputNumero = document.querySelector('input[name=numero]')
-    inputNumero.addEventListener("keypress", (e) => {
-        prevenirCaracteres(e)
-    })
-
     const magicEye = document.getElementById('eye_cadastro')
     magicEye.addEventListener("click", revealPassword)
 
     // Funções Empresa
-    const inputCnpj = document.querySelector('input[name=cnpj_emp]')
-    inputCnpj.addEventListener("keypress", cnpjComplete)
-    
-    const inputCepEmp = document.querySelector('input[name=cep_emp]')
-    inputCepEmp.addEventListener("keypress", cepCompleteEmp)
-
-    const inputTelefoneEmp = document.querySelector('input[name=telefone_emp]')
-    inputTelefoneEmp.addEventListener("keypress", telefoneCompleteEmp)
-
     document.addEventListener("mouseup", function(event) {
         var obj_telefone_emp = document.getElementById('p_telefone_emp')
         var input_telefone_emp = document.querySelector('input[name=telefone_emp]')
@@ -74,26 +48,9 @@ function ready() {
             input_telefone_emp.value = ''
         }
     })
-
-    const inputNumeroEmp = document.querySelector('input[name=numero_emp]')
-    inputNumeroEmp.addEventListener("keypress", (e) => {
-        prevenirCaracteres(e)
-    })
 }
 
-// Funções Usuário
-function cpfComplete(e) {
-    prevenirCaracteres(e)
-
-    const input = document.querySelector('input[name=cpf]')
-    let inputLength = input.value.length
-    if(inputLength === 3 || inputLength === 7){
-        input.value += '.'
-    } else if(inputLength === 11){
-        input.value += '-'
-    }
-}
-
+// Função para validação do CPF
 function validaCPF(cpf) {
 
     // Verifica se foi informado todos os digitos corretamente
@@ -121,32 +78,7 @@ function validaCPF(cpf) {
     return true;
 }
 
-function cepComplete(e) {
-    prevenirCaracteres(e)
-
-    const input = document.querySelector('input[name=cep]')
-    let inputLength = input.value.length
-    if(inputLength === 5){
-        input.value += '-'
-    }
-}
-
-function telefoneComplete(e) {
-    prevenirCaracteres(e)
-
-    const input = document.querySelector('input[name=telefone]')
-    let inputLength = input.value.length
-    if(inputLength === 0){
-        input.value = '(' + input.value
-    }
-
-    if(inputLength === 3){
-        input.value += ') '
-    } else if(inputLength === 10) {
-        input.value += '-'
-    }
-}
-
+// Função para alternar senha entre visível e invisível
 function revealPassword() {
     const inputPassword = document.getElementById('id_password')
     const iconEye = document.getElementById('eye_cadastro')
@@ -161,58 +93,7 @@ function revealPassword() {
     }
 }
 
-///////////////////////////////////////////////
-
-// Função para prevenir caracteres
-function prevenirCaracteres(e) {
-    if(e.keyCode <= 47 || e.keyCode >= 58){
-        e.preventDefault()
-    }
-}
-
-///////////////////////////////////////////////
-
-// Funções Empresa
-function cnpjComplete(e) {
-    prevenirCaracteres(e)
-
-    const input = document.querySelector('input[name=cnpj_emp]')
-    let inputLength = input.value.length
-    if(inputLength === 2 || inputLength === 6){
-        input.value += '.'
-    } else if(inputLength === 10){
-        input.value += '/'
-    } else if(inputLength === 15){
-        input.value += '-'
-    }
-}
-
-function cepCompleteEmp(e) {
-    prevenirCaracteres(e)
-
-    const input = document.querySelector('input[name=cep_emp]')
-    let inputLength = input.value.length
-    if(inputLength === 5){
-        input.value += '-'
-    }
-}
-
-function telefoneCompleteEmp(e) {
-    prevenirCaracteres(e)
-
-    const input = document.querySelector('input[name=telefone_emp]')
-    let inputLength = input.value.length
-    if(inputLength === 0){
-        input.value = '(' + input.value
-    }
-
-    if(inputLength === 3){
-        input.value += ') '
-    } else if(inputLength === 10) {
-        input.value += '-'
-    }
-}
-
+// Função para alterar entre Formulário de Usuários e Formulário de Empresas
 function changeForm() {
     var obj_user = document.getElementById('cadastro_user')
     var obj_emp = document.getElementById('cadastro_emp')
@@ -243,5 +124,23 @@ function changeForm() {
         obj_seta_cadastro.classList.add('fi-rr-arrow-small-left')
         obj_seta_cadastro.classList.remove('fi-rr-arrow-small-right')
         h1_text.innerText = 'Mudar para Formulário de Usuários'
+    }
+}
+
+//Função de Busca CNPJ da Empresa
+function buscaCnpj() {
+    
+}
+
+function preencheCampos(json) {
+    if(json.localidade != undefined){
+        document.querySelector('input[name=nome_emp]').value = json.nome
+        document.querySelector('input[name=fantasia_emp]').value = json.fantasia
+        document.querySelector('input[name=cep_emp]').value = json.cep
+        document.querySelector('input[name=rua_emp]').value = json.logradouro
+        document.querySelector('input[name=bairro_emp]').value = json.bairro
+        document.querySelector('input[name=numero_emp]').value = json.numero
+        document.querySelector('input[name=cidade_emp]').value = json.municipio
+        document.querySelector('input[name=estado_emp]').value = json.uf
     }
 }
