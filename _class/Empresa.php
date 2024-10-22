@@ -27,6 +27,7 @@ class Empresa {
             $stmt->execute() or die(print_r($stmt->errorInfo(), true));
             $dados = $stmt->fetchAll();
 
+            // Testando se houve retorno do banco
             if(count($dados) > 0){
                 return 1;
             }
@@ -37,6 +38,33 @@ class Empresa {
 
             echo "Exceção $e";
 
+        }
+    }
+
+    // Método para inserção da empresa no banco
+    public function inserirEmpresa(){
+        try {
+
+            // Query SQL
+            $sql = "INSERT INTO empresas VALUES 
+            (DEFAULT, :nome, :fantasia, :cnpj, :telefone, :responsavel, :id_endereco);";
+
+            // Conectando o banco e preparando a query
+            $stmt = ConexaoDAO::getConexao()->prepare($sql);
+            $stmt->bindValue(":nome", $this->nome, PDO::PARAM_STR);
+            $stmt->bindValue(":fantasia", $this->fantasia, PDO::PARAM_STR);
+            $stmt->bindValue(":cnpj", $this->cnpj, PDO::PARAM_INT);
+            $stmt->bindValue(":telefone", $this->telefone, PDO::PARAM_INT);
+            $stmt->bindValue(":responsavel", $this->responsavel, PDO::PARAM_STR);
+            $stmt->bindValue(":id_endereco", $this->endereco->getId(), PDO::PARAM_INT);
+
+            // Executando a query no banco
+            $stmt->execute() or die(print_r($stmt->errorInfo(), true));
+
+        } catch(Exception $e) {
+            
+            echo "Exceção $e";
+        
         }
     }
 

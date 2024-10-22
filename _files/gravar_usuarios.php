@@ -15,6 +15,7 @@ $usuario->setCnh(preg_replace( '/[^0-9]/is', '', $_POST['cnh']));
 $verificaDados = $usuario->verificaDados();
 
 if($verificaDados === -1) {
+
     // Instanciado o objeto endereço com as informações passadas
     $endereco = new Endereco();
 
@@ -39,9 +40,12 @@ if($verificaDados === -1) {
 
     // inserindo usuário no banco
     $usuario->inserirUsuario();
+
 } else {
+
     echo "<script>
         alert('O CPF ou a CNH digitados já foram registrados no Banco')
         history.back()
     </script>";
+    
 }

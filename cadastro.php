@@ -43,8 +43,12 @@
       </div>
       <div id="cadastro_emp" class="cadastro col-12 col-md-8 center">
         <h1>Cadastrar Empresa</h1>
-        <form class="form_cadastro" action="" method="post">
+        <form class="form_cadastro" action="_files/gravar_empresas.php" method="post">
             <div class="column_left">
+                <p>
+                    <label for="id_cnpj_emp">CNPJ</label>
+                    <input type="text" data-mask="00.000.000/0000-00" name="cnpj_emp" id="id_cnpj_emp" minlength="18" maxlength="18" placeholder="Digite o CNPJ" oninput="buscaCnpj(this.value)" required>
+                </p>
                 <p>
                     <label for="id_nome_emp">Razão Social</label>
                     <input type="text" name="nome_emp" id="id_nome_emp" maxlength="255" placeholder="Digite a Razão Social" required>
@@ -52,10 +56,6 @@
                 <p>
                     <label for="id_fantasia_emp">Fantasia</label>
                     <input type="text" name="fantasia_emp" id="id_fantasia_emp" maxlength="255" placeholder="Digite o Nome Fantasia" required>
-                </p>
-                <p>
-                    <label for="id_cnpj_emp">CNPJ</label>
-                    <input type="text" data-mask="00.000.000/0000-00" name="cnpj_emp" id="id_cnpj_emp" minlength="18" maxlength="18" placeholder="Digite o CNPJ" oninput="buscaCnpj(this.value)" required>
                 </p>
                 <p id="p_telefone_emp">
                     <label for="id_telefone_emp">Telefone</label>
@@ -71,6 +71,7 @@
                 <p>
                     <label for="id_cep_emp">CEP</label>
                     <input type="text" data-mask="00000-000" name="cep_emp" id="id_cep_emp" minlength="9" maxlength="9" placeholder="Digite o CEP" required>
+                    <small id="cepTesteEmp"></small>
                 </p>
                 <p>
                     <label for="id_rua_emp">Rua</label>
@@ -95,7 +96,7 @@
             </div>
             <p class="center p_btn_cadastrar" style="flex-direction: row;">
                 <button onclick="changeForm()">Trocar Formulário</button>
-                <input type="submit" class="btn_form" value="Cadastrar">
+                <input type="submit" class="btn_form" id="btn_cadastrar_emp" value="Cadastrar">
             </p>
         </form>
       </div>
@@ -150,6 +151,7 @@
                 <p>
                     <label for="id_cep">CEP</label>
                     <input type="text" data-mask="00000-000" name="cep" id="id_cep" minlength="9" maxlength="9" placeholder="Digite o CEP" required>
+                    <small id="cepTesteUser"></small>
                 </p>
                 <p>
                     <label for="id_rua">Rua</label>

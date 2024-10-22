@@ -590,7 +590,7 @@ form.form_cadastro p {
     color: var(--red-light);
 }
 
-small#cpfTeste {
+small#cpfTeste, small#cepTesteUser, small#cepTesteEmp {
     font-size: 10pt;
 }
 

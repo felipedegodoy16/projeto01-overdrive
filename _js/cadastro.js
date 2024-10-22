@@ -132,15 +132,15 @@ function buscaCnpj() {
     
 }
 
-function preencheCampos(json) {
-    if(json.localidade != undefined){
-        document.querySelector('input[name=nome_emp]').value = json.nome
-        document.querySelector('input[name=fantasia_emp]').value = json.fantasia
-        document.querySelector('input[name=cep_emp]').value = json.cep
-        document.querySelector('input[name=rua_emp]').value = json.logradouro
-        document.querySelector('input[name=bairro_emp]').value = json.bairro
-        document.querySelector('input[name=numero_emp]').value = json.numero
-        document.querySelector('input[name=cidade_emp]').value = json.municipio
-        document.querySelector('input[name=estado_emp]').value = json.uf
-    }
-}
+// function preencheCampos(json) {
+//     if(json.localidade != undefined){
+//         document.querySelector('input[name=nome_emp]').value = json.nome
+//         document.querySelector('input[name=fantasia_emp]').value = json.fantasia
+//         document.querySelector('input[name=cep_emp]').value = json.cep
+//         document.querySelector('input[name=rua_emp]').value = json.logradouro
+//         document.querySelector('input[name=bairro_emp]').value = json.bairro
+//         document.querySelector('input[name=numero_emp]').value = json.numero
+//         document.querySelector('input[name=cidade_emp]').value = json.municipio
+//         document.querySelector('input[name=estado_emp]').value = json.uf
+//     }
+// }

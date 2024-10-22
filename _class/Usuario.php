@@ -47,7 +47,7 @@ class Usuario {
             $sql = "INSERT INTO usuarios VALUES 
             (DEFAULT, :nome, :cpf, :cnh, :telefone, :carro, :cargo, :empresa, :senha, :id_endereco);";
 
-            // Executando a query no banco
+            // Conectando o banco e preparando a query
             $stmt = ConexaoDAO::getConexao()->prepare($sql);
             $stmt->bindValue(":nome", $this->nome, PDO::PARAM_STR);
             $stmt->bindValue(":cpf", $this->cpf, PDO::PARAM_INT);
@@ -59,6 +59,7 @@ class Usuario {
             $stmt->bindValue(":senha", $this->senha, PDO::PARAM_STR);
             $stmt->bindValue(":id_endereco", $this->endereco->getId(), PDO::PARAM_INT);
 
+            // Executando a query no banco
             $stmt->execute() or die(print_r($stmt->errorInfo(), true));
 
         } catch(Exception $e) {

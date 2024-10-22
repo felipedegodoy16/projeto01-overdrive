@@ -18,6 +18,9 @@ function ready(){
 function buscaCep() {
     let inputCep = document.querySelector('input[name=cep]')
     let cep = inputCep.value.replace('-', '').replace(".", "")
+    const cep_teste = document.getElementById('cepTesteUser')
+    const btnCadastrar = document.getElementById('btn_cadastrar_user')
+
     if(cep.length == 8) {
         let url = 'http://viacep.com.br/ws/' + cep + '/json'
         let xhr = new XMLHttpRequest()
@@ -30,6 +33,9 @@ function buscaCep() {
         }
         xhr.send();
     } else {
+        cep_teste.innerText = 'CEP inválido'
+        cep_teste.style.color = 'var(--red-dark)'
+        btnCadastrar.setAttribute('type', 'button')
         document.querySelector('input[name=rua]').value = ''
         document.querySelector('input[name=bairro]').value = ''
         document.querySelector('input[name=cidade]').value = ''
@@ -38,11 +44,21 @@ function buscaCep() {
 }
 
 function preencheCampos(json) {
-    if(json.localidade != undefined){
+    const cep_teste = document.getElementById('cepTesteUser')
+    const btnCadastrar = document.getElementById('btn_cadastrar_user')
+
+    if(json.localidade !== undefined){
+        cep_teste.innerText = 'CEP válido'
+        cep_teste.style.color = '#0c6800'
+        btnCadastrar.setAttribute('type', 'submit')
         document.querySelector('input[name=rua]').value = json.logradouro
         document.querySelector('input[name=bairro]').value = json.bairro
         document.querySelector('input[name=cidade]').value = json.localidade
         document.querySelector('input[name=estado]').value = json.uf
+    } else {
+        cep_teste.innerText = 'CEP inválido'
+        cep_teste.style.color = 'var(--red-dark)'
+        btnCadastrar.setAttribute('type', 'button')
     }
 }
 
@@ -52,6 +68,9 @@ function preencheCampos(json) {
 function buscaCepEmp() {
     let inputCep = document.querySelector('input[name=cep_emp]')
     let cep = inputCep.value.replace('-', '').replace(".", "")
+    const cep_teste = document.getElementById('cepTesteEmp')
+    const btnCadastrar = document.getElementById('btn_cadastrar_emp')
+
     if(cep.length == 8) {
         let url = 'http://viacep.com.br/ws/' + cep + '/json'
         let xhr = new XMLHttpRequest()
@@ -64,6 +83,9 @@ function buscaCepEmp() {
         }
         xhr.send();
     } else {
+        cep_teste.innerText = 'CEP inválido'
+        cep_teste.style.color = 'var(--red-dark)'
+        btnCadastrar.setAttribute('type', 'button')
         document.querySelector('input[name=rua_emp]').value = ''
         document.querySelector('input[name=bairro_emp]').value = ''
         document.querySelector('input[name=cidade_emp]').value = ''
@@ -72,10 +94,20 @@ function buscaCepEmp() {
 }
 
 function preencheCamposEmp(json) {
-    if(json.localidade != undefined){
+    const cep_teste = document.getElementById('cepTesteEmp')
+    const btnCadastrar = document.getElementById('btn_cadastrar_emp')
+
+    if(json.localidade !== undefined){
+        cep_teste.innerText = 'CEP válido'
+        cep_teste.style.color = '#0c6800'
+        btnCadastrar.setAttribute('type', 'submit')
         document.querySelector('input[name=rua_emp]').value = json.logradouro
         document.querySelector('input[name=bairro_emp]').value = json.bairro
         document.querySelector('input[name=cidade_emp]').value = json.localidade
         document.querySelector('input[name=estado_emp]').value = json.uf
+    } else {
+        cep_teste.innerText = 'CEP inválido'
+        cep_teste.style.color = 'var(--red-dark)'
+        btnCadastrar.setAttribute('type', 'button')
     }
 }
