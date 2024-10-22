@@ -129,18 +129,64 @@ function changeForm() {
 
 //Função de Busca CNPJ da Empresa
 function buscaCnpj() {
-    
+
+    const cnpjTeste = document.getElementById('cnpjTeste')
+    const btnCadastrar = document.getElementById('btn_cadastrar_emp')
+    let inputCnpj = document.querySelector('input[name=cnpj_emp]')
+    let cnpj = inputCnpj.value.replace(/[^0-9]/g, '')
+
+    if(cnpj.length === 14){
+
+        let url = 'https://receitaws.com.br/v1/cnpj/' + cnpj
+        const xhr = new XMLHttpRequest();
+
+        xhr.open('GET', url);
+        xhr.setRequestHeader('Accept', 'application/json');
+
+        xhr.addEventListener('readystatechange', function () {
+            if (this.readyState === this.DONE) {
+                preencheCamposCnpj(JSON.parse(xhr.responseText))
+            }
+        });
+
+        xhr.send();
+
+    } else {
+        
+        cnpjTeste.innerText = 'CNPJ inválido'
+        cnpjTeste.style.color = 'var(--red-dark)'
+        btnCadastrar.setAttribute('type', 'button')
+
+    }
 }
 
-// function preencheCampos(json) {
-//     if(json.localidade != undefined){
-//         document.querySelector('input[name=nome_emp]').value = json.nome
-//         document.querySelector('input[name=fantasia_emp]').value = json.fantasia
-//         document.querySelector('input[name=cep_emp]').value = json.cep
-//         document.querySelector('input[name=rua_emp]').value = json.logradouro
-//         document.querySelector('input[name=bairro_emp]').value = json.bairro
-//         document.querySelector('input[name=numero_emp]').value = json.numero
-//         document.querySelector('input[name=cidade_emp]').value = json.municipio
-//         document.querySelector('input[name=estado_emp]').value = json.uf
-//     }
-// }
+function preencheCamposCnpj(json) {
+    const cnpjTeste = document.getElementById('cnpjTeste')
+    const btnCadastrar = document.getElementById('btn_cadastrar_emp')
+    const cep_teste = document.getElementById('cepTesteEmp')
+
+    if(json.nome != undefined){
+
+        cnpjTeste.innerText = 'CNPJ válido'
+        cnpjTeste.style.color = '#0c6800'
+        btnCadastrar.setAttribute('type', 'submit')
+        cep_teste.innerText = 'CEP válido'
+        cep_teste.style.color = '#0c6800'
+
+        document.querySelector('input[name=nome_emp]').value = json.nome
+        document.querySelector('input[name=fantasia_emp]').value = json.fantasia
+        document.querySelector('input[name=cep_emp]').value = json.cep.replace('.', '')
+        document.querySelector('input[name=rua_emp]').value = json.logradouro
+        document.querySelector('input[name=bairro_emp]').value = json.bairro
+        document.querySelector('input[name=numero_emp]').value = json.numero
+        document.querySelector('input[name=cidade_emp]').value = json.municipio
+        document.querySelector('input[name=estado_emp]').value = json.uf
+
+    } else {
+
+        cnpjTeste.innerText = 'CNPJ inválido'
+        cnpjTeste.style.color = 'var(--red-dark)'
+        btnCadastrar.setAttribute('type', 'button')
+
+    }
+}

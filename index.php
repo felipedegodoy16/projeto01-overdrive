@@ -191,7 +191,7 @@
       </div>
       <div id="infos" class="col-12 col-lg-6 div_footer">
         <h3>Informações</h3>
-        <p>Este é um site voltado a mostrar um sistema de cadastro de empresas e funcionários utilizando da Linguagem de Marcação HTML5, Lignuagem de Estilização CSS3, Linguagens de Programação JavaScript e PHP e para manipulação do Banco de Dados a Linguagem MySQL.</p>
+        <p>Este é um site voltado a mostrar um sistema de cadastro de empresas e funcionários utilizando a Linguagem de Marcação HTML5, a Lignuagem de Estilização CSS3, as Linguagens de Programação JavaScript e PHP e para manipulação do Banco de Dados a Linguagem MySQL.</p>
       </div>
       <div class="col-12 col-lg-3 div_footer">
         <h3>Contato</h3>

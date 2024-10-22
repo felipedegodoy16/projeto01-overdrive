@@ -453,6 +453,10 @@ body#full_content_cadastro {
     background-color: var(--red-dark);
 }
 
+body#full_content_cadastro input {
+    text-transform: uppercase;
+}
+
 main#main_cadastro {
     position: relative;
     color: var(--red-dark);
@@ -590,7 +594,7 @@ form.form_cadastro p {
     color: var(--red-light);
 }
 
-small#cpfTeste, small#cepTesteUser, small#cepTesteEmp {
+small#cpfTeste, small#cepTesteUser, small#cepTesteEmp, small#cnpjTeste {
     font-size: 10pt;
 }
 

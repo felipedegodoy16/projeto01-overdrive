@@ -17,7 +17,7 @@ function ready(){
 //Função de Busca CEP para Usuário
 function buscaCep() {
     let inputCep = document.querySelector('input[name=cep]')
-    let cep = inputCep.value.replace('-', '').replace(".", "")
+    let cep = inputCep.value.replace(/[^0-9]/g, '')
     const cep_teste = document.getElementById('cepTesteUser')
     const btnCadastrar = document.getElementById('btn_cadastrar_user')
 
@@ -67,7 +67,7 @@ function preencheCampos(json) {
 //Função de Busca CEP para Empresa
 function buscaCepEmp() {
     let inputCep = document.querySelector('input[name=cep_emp]')
-    let cep = inputCep.value.replace('-', '').replace(".", "")
+    let cep = inputCep.value.replace(/[^0-9]/g, '')
     const cep_teste = document.getElementById('cepTesteEmp')
     const btnCadastrar = document.getElementById('btn_cadastrar_emp')
 
