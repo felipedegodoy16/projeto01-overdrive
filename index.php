@@ -41,24 +41,31 @@
       <i id="menu_icon" class="fi fi-rr-menu-burger icon_menu" onclick="callMenu(event.target)"></i>
       <div id="menu_hamburguer" class="center">
         <ul>
-          <li class="active li_navbar">Todos</li>
-          <li class="li_navbar">Funcionários</li>
-          <li class="li_navbar">Empresas</li>
+          <li class="active li_navbar" onclick="both()">Todos</li>
+          <li class="li_navbar" onclick="onlyFuncs()">Funcionários</li>
+          <li class="li_navbar" onclick="onlyEmps()">Empresas</li>
         </ul>
         <a id="btn_logout" href="?logout=1">SAIR</a>
       </div>
     </nav>
 
     <main id="main_index" class="col-12 center">
-      <div id="section_users" class="col-12 center">
-
+      <div id="section_users" class="col-12 center transition_section">
+        <div class="title_sections center col-12">
+          <div class="col-md-4 line"></div>
+          <h1 class="col-12 col-md-4 h1_sections">Funcionários</h1>
+          <div class="col-md-4 line"></div>
+        </div>
       </div>
 
-      <div id="section_emps">
-        
-      </div>
+      <div id="section_emps" class="col-12 center transition_section">
+        <div class="title_sections center col-12">
+          <div class="col-md-4 line"></div>
+          <h1 class="col-12 col-md-4 h1_sections">Empresas</h1>
+          <div class="col-md-4 line"></div>
+        </div>
 
-      <div class="col-10 col-sm-6 col-md-4 col-lg-3">
+        <div class="col-10 col-sm-6 col-md-4 col-lg-3">
           <div class="center card_user">
             <img class="img_user_emp" src="_images/back_cadastro.jpg" alt="Imagem do Usuário ou Empresa">
             <div class="card_user_body">
@@ -81,6 +88,31 @@
             </div>
           </div>
         </div>
+        <div class="col-10 col-sm-6 col-md-4 col-lg-3">
+          <div class="center card_user">
+            <img class="img_user_emp" src="_images/back_cadastro.jpg" alt="Imagem do Usuário ou Empresa">
+            <div class="card_user_body">
+              <header>
+                <p style="position: absolute; padding: 0; left: 1em; top: 1em;">#${usuario.id}</p>
+              </header>
+              <p style="margin-top: 4.5em;">Nome: ${usuario.nome}</p>
+              <p>CPF: ${usuario.cpf}</p>
+              <p>CNH: ${usuario.cnh}</p>
+              <p>Telefone: ${usuario.telefone}</p>
+              <details style="margin-bottom: .4em;">
+                <summary>Endereço</summary>
+                <p style="margin: .4em 0;">${usuario.cep}</p>
+                <p>${usuario.rua}, ${usuario.numero}, ${usuario.bairro}</p>
+                <p>${usuario.cidade} - ${usuario.estado}</p>
+              </details>
+              <p>${usuario.carro}</p>
+              <p>${usuario.empresa}</p>
+              ${tag}
+            </div>
+          </div>
+        </div>
+
+      </div>
     </main>
 
     <aside id="aside_index" class="col-6 col-sm-4 col-md-3 col-lg-2">

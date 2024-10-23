@@ -13,7 +13,7 @@ if($verificarCnpj === -1){
     // Instanciado o objeto endereço com as informações passadas
     $endereco = new Endereco();
 
-    $endereco->setCep(preg_replace( '/[^0-9]/is', '', $_POST['cep_emp']));
+    $endereco->setCep($_POST['cep_emp']);
     $endereco->setRua($_POST['rua_emp']);
     $endereco->setBairro($_POST['bairro_emp']);
     $endereco->setNumero($_POST['numero_emp']);
@@ -26,7 +26,7 @@ if($verificarCnpj === -1){
     // Finalizando a instanciação do objeto empresa
     $empresa->setNome($_POST['nome_emp']);
     $empresa->setFantasia($_POST['fantasia_emp']);
-    $empresa->setTelefone(preg_replace( '/[^0-9]/is', '', $_POST['telefone_emp']));
+    $empresa->setTelefone($_POST['telefone_emp']);
     $empresa->setResponsavel($_POST['responsavel_emp']);
     $empresa->setEndereco($endereco);
     if(isset($_FILES['foto_emp']['name']) && $_FILES['foto_emp']['error'] == 0){

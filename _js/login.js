@@ -40,9 +40,6 @@ function ready() {
             obj_icon.classList.remove('eye-password')
         }
     })
-
-    const inputUser = document.querySelector('input[name=user_input]')
-    inputUser.addEventListener("keypress", cpfComplete)
 }
 
 // Função para fazer a transição da escrita
@@ -81,24 +78,4 @@ function change_icon(){
     }
     obj_icon.classList.add('fi-rr-eye')
     obj_icon.classList.add('eye-password')
-}
-
-// Máscara de CPF
-function cpfComplete(e) {
-    prevenirCaracteres(e)
-
-    const input = document.querySelector('input[name=user_input]')
-    let inputLength = input.value.length
-    if(inputLength === 3 || inputLength === 7){
-        input.value += '.'
-    } else if(inputLength === 11){
-        input.value += '-'
-    }
-}
-
-// Função para prevenir caracteres
-function prevenirCaracteres(e) {
-    if(e.keyCode <= 47 || e.keyCode >= 58){
-        e.preventDefault()
-    }
 }

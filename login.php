@@ -40,7 +40,7 @@
         <form id="form" action="_files/acessar.php" method="post">
           <div id="user_field" style="margin-bottom: 0;">
             <label for="user_login">CPF</label>
-            <input id="user_login" name="user_input" type="text" oninput="transition_text(event.target)" onclick="transition_text(event.target)" minlength="14" maxlength="14" required>
+            <input id="user_login" data-mask="000.000.000-00" name="user_input" type="text" oninput="transition_text(event.target)" onclick="transition_text(event.target)" minlength="14" maxlength="14" required>
             <div style="z-index: 1002; height: 0">
               <i class="fi fi-rr-circle-user icons"></i>
             </div>
@@ -73,6 +73,8 @@
 
     <!-- JavaScript (Opcional) -->
     <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>

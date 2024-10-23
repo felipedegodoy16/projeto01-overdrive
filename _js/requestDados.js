@@ -30,7 +30,7 @@ function responseJson(json){
     let tag = ''
 
     if(json.sessao === 'A') {
-      tag = '<p class="center" style="margin-bottom: 2em;"><i class="fi fi-rr-trash icons_cards center icon_trash" onclick="removeDado()"></i><i class="fi fi-rr-edit icons_cards center icon_edit"></i></p>'
+      tag = '<p class="center"><i class="fi fi-rr-trash icons_cards center icon_trash" onclick="removeDado()"></i><i class="fi fi-rr-edit icons_cards center icon_edit"></i></p>'
     }
 
 
@@ -48,7 +48,7 @@ function responseJson(json){
         <div class="col-10 col-sm-6 col-md-4 col-lg-3">
           <div class="center card_user">
             <img class="img_user_emp" src="_images/uploads/${foto}" alt="Imagem do Usuário ou Empresa">
-            <div class="card_user_body">
+            <div class="card_user_body" style="padding-bottom: 2em;">
               <header>
                 <p style="position: absolute; padding: 0; left: 1em; top: 1em;">#${usuario.id}</p>
               </header>

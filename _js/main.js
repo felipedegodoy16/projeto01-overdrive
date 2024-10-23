@@ -47,3 +47,42 @@ function callFilters() {
     }
 
 }
+
+function both(){
+    var obj_visible_funcs = document.getElementById('section_users')
+    var obj_visible_emps = document.getElementById('section_emps')
+
+    obj_visible_funcs.style.display = 'flex'
+    obj_visible_funcs.classList.add('transition_section')
+    obj_visible_funcs.classList.remove('back_section')
+
+    obj_visible_emps.style.display = 'flex'
+    obj_visible_emps.classList.add('transition_section')
+    obj_visible_emps.classList.remove('back_section')
+}
+
+function onlyFuncs(){
+    var obj_visible = document.getElementById('section_users')
+    var obj_hidden = document.getElementById('section_emps')
+
+    obj_visible.style.display = 'flex'
+    obj_visible.classList.add('transition_section')
+    obj_visible.classList.remove('back_section')
+    obj_visible.style.opacity = 1
+
+    obj_hidden.classList.remove('transition_section')
+    obj_hidden.classList.add('back_section')
+}
+
+function onlyEmps(){
+    var obj_visible = document.getElementById('section_emps')
+    var obj_hidden = document.getElementById('section_users')
+
+    obj_visible.style.display = 'flex'
+    obj_visible.classList.add('transition_section')
+    obj_visible.classList.remove('back_section')
+    obj_visible.style.opacity = 1
+
+    obj_hidden.classList.remove('transition_section')
+    obj_hidden.classList.add('back_section')
+}

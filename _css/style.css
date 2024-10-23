@@ -113,12 +113,53 @@ body#full_content_login {
 /* Main da página Index */
 
 main#main_index {
-    margin-top: 12em;
+    margin-top: 9em;
     flex-wrap: wrap;
 }
 
-div#section_users {
+div#section_users, div#section_emps {
     flex-wrap: wrap;
+}
+
+.transition_section {
+    animation: transition_section .5s linear;
+}
+
+.back_section {
+    animation: back_section .3s linear forwards;
+}
+
+@keyframes transition_section {
+    0% { opacity: 0; }
+    25% { opacity: .25; }
+    50% { opacity: .5; }
+    75% { opacity: .75; }
+    100% { opacity: 1; }
+}
+
+@keyframes back_section {
+    0% { opacity: 1; }
+    25% { opacity: .75; }
+    50% { opacity: .5; }
+    75% { opacity: .25; }
+    100% { opacity: 0; display: none; }
+}
+
+div.title_sections {
+    margin-bottom: 4em;
+}
+
+h1.h1_sections {
+    font-size: clamp(12pt, 2dvw, 24pt);
+    text-transform: uppercase;
+    color: var(--red-dark);
+    text-align: center;
+}
+
+.line {
+    height: 3px;
+    border-radius: 100px;
+    background-color: var(--red-dark);
 }
 
 div.card_user {
@@ -739,6 +780,15 @@ p button {
 }
 
 @media screen and (max-width: 768px){
+    .line {
+        display: none;
+    }
+
+    h1.h1_sections {
+        border-bottom: 3px solid var(--red-dark);
+        padding-bottom: 1em;
+    }
+
     /* Navbar hamburguer */
 
     nav#navbar {
