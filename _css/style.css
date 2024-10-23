@@ -117,12 +117,54 @@ main#main_index {
     flex-wrap: wrap;
 }
 
+div#section_users {
+    flex-wrap: wrap;
+}
+
 div.card_user {
+    color: var(--red-dark);
+    text-transform: uppercase;
+    text-align: center;
     background-color: #FFF;
     margin: 4.5em 0;
     box-shadow: 0 4px 10px var(--red-dark);
     border-radius: 30px;
     position: relative;
+}
+
+div.card_user p {
+    font-size: clamp(10pt, 14pt);
+    padding: 0 2em;
+    margin: 0 0 .6em 0;
+}
+
+div.card_user i.icons_cards {
+    border-radius: 10px;
+    font-size: 18pt;
+    padding: 10px;
+    color: #FFF;
+    background-color: var(--red-light);
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+
+div.card_user i.icon_trash {
+    margin-right: .3em;
+}
+
+div.card_user i.icon_trash:hover {
+    transform: scale(1.1);
+    background-color: var(--red-dark);
+}
+
+div.card_user i.icon_edit {
+    background-color: rgb(0, 140, 255);
+    margin-left: .3em;
+}
+
+div.card_user i.icon_edit:hover {
+    transform: scale(1.1);
+    background-color: rgb(0, 85, 155);
 }
 
 .back_card {

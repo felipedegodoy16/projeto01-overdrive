@@ -2,6 +2,8 @@
 require_once "../_class/Empresa.php";
 require_once "../_class/Usuario.php";
 
+session_start();
+
 // Instanciação de um objeto usuário
 $usuarios = new Usuario();
 
@@ -19,6 +21,7 @@ $empresas = new Empresa();
 // } else {
 
     $allDados = [
+        'sessao' => $_SESSION['cargo'],
         'usuarios' => $dadosUsers
         // 'empresas' => $dadosEmps 
     ];

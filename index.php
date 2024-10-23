@@ -58,24 +58,29 @@
         
       </div>
 
-      <!-- <div class="col-10 col-sm-6 col-md-4 col-lg-3">
-        <div class="center card_user">
-          <img class="img_user_emp" src="_images/back_cadastro.jpg" alt="Imagem do Usuário ou Empresa">
-          <div class="card_user_body">
-            <p>ID</p>
-            <p>Nome</p>
-            <p>CPF</p>
-            <p>CNH</p>
-            <p>Telefone</p>
-            <details style="margin-bottom: 1em;">
-              <summary>Endereço</summary>
-            </details>
-            <p>Carro</p>
-            <p>Empresa</p>
-            <p>Data de Cadastro</p>
+      <div class="col-10 col-sm-6 col-md-4 col-lg-3">
+          <div class="center card_user">
+            <img class="img_user_emp" src="_images/back_cadastro.jpg" alt="Imagem do Usuário ou Empresa">
+            <div class="card_user_body">
+              <header>
+                <p style="position: absolute; padding: 0; left: 1em; top: 1em;">#${usuario.id}</p>
+              </header>
+              <p style="margin-top: 4.5em;">Nome: ${usuario.nome}</p>
+              <p>CPF: ${usuario.cpf}</p>
+              <p>CNH: ${usuario.cnh}</p>
+              <p>Telefone: ${usuario.telefone}</p>
+              <details style="margin-bottom: .4em;">
+                <summary>Endereço</summary>
+                <p style="margin: .4em 0;">${usuario.cep}</p>
+                <p>${usuario.rua}, ${usuario.numero}, ${usuario.bairro}</p>
+                <p>${usuario.cidade} - ${usuario.estado}</p>
+              </details>
+              <p>${usuario.carro}</p>
+              <p>${usuario.empresa}</p>
+              ${tag}
+            </div>
           </div>
         </div>
-      </div> -->
     </main>
 
     <aside id="aside_index" class="col-6 col-sm-4 col-md-3 col-lg-2">
