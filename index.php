@@ -35,7 +35,7 @@
     <title>Overdrive - Consultas</title>
   </head>
 
-  <body>
+  <body class="transition_section">
     <nav id="navbar" class="center" style="justify-content: space-between;">
       <img src="_images/overdrive_logo.png" alt="Logo na Navbar" width="100px" height="auto" style="padding: .7em;">
       <i id="menu_icon" class="fi fi-rr-menu-burger icon_menu" onclick="callMenu(event.target)"></i>

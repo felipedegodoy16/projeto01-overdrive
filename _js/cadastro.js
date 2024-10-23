@@ -11,7 +11,7 @@ function ready() {
         const strCpf = document.querySelector('input[name=cpf]').value
         const cpfAlert = document.getElementById('cpfTeste')
         const btnCadastrar = document.getElementById('btn_cadastrar_user')
-        cpf = strCpf.replace('.', '').replace('.', '').replace('-', '')
+        cpf = strCpf.replace(/[^0-9]/g, '')
 
         if(cpf.length === 11){
             cpfTestado = validaCPF(cpf)
