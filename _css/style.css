@@ -162,7 +162,7 @@ h1.h1_sections {
     background-color: var(--red-dark);
 }
 
-div.card_user {
+div.card_register {
     color: var(--red-dark);
     text-transform: uppercase;
     text-align: center;
@@ -173,13 +173,13 @@ div.card_user {
     position: relative;
 }
 
-div.card_user p {
+div.card_register p {
     font-size: clamp(10pt, 14pt);
     padding: 0 2em;
     margin: 0 0 .6em 0;
 }
 
-div.card_user i.icons_cards {
+div.card_register i.icons_cards {
     border-radius: 10px;
     font-size: 18pt;
     padding: 10px;
@@ -189,21 +189,21 @@ div.card_user i.icons_cards {
     transition: all .3s ease-in-out;
 }
 
-div.card_user i.icon_trash {
+div.card_register i.icon_trash {
     margin-right: .3em;
 }
 
-div.card_user i.icon_trash:hover {
+div.card_register i.icon_trash:hover {
     transform: scale(1.1);
     background-color: var(--red-dark);
 }
 
-div.card_user i.icon_edit {
+div.card_register i.icon_edit {
     background-color: rgb(0, 140, 255);
     margin-left: .3em;
 }
 
-div.card_user i.icon_edit:hover {
+div.card_register i.icon_edit:hover {
     transform: scale(1.1);
     background-color: rgb(0, 85, 155);
 }

@@ -14,18 +14,18 @@ $dadosUsers = $usuarios->listarUsuarios();
 $empresas = new Empresa();
 
 // Retorno de uma lista de todos os registros de empresas do banco
-// $dadosEmps->listarEmpresas();
+$dadosEmps = $empresas->listarEmpresas();
 
-// if($dadosUsers === -1 && $dadosEmps === -1){
+if($dadosUsers === -1 && $dadosEmps === -1){
 
-// } else {
+} else {
 
     $allDados = [
         'sessao' => $_SESSION['cargo'],
-        'usuarios' => $dadosUsers
-        // 'empresas' => $dadosEmps 
+        'usuarios' => $dadosUsers,
+        'empresas' => $dadosEmps
     ];
 
     // var_dump(json_encode($allDados));
     echo json_encode($allDados);
-// }
+}
