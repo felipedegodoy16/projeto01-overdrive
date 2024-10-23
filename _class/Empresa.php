@@ -3,8 +3,8 @@ require_once 'Endereco.php';
 
 class Empresa {
     // Atributos
-    private int $id, $cnpj, $telefone;
-    private string $nome, $fantasia, $responsavel;
+    private int $id;
+    private string $nome, $cnpj, $telefone, $fantasia, $responsavel, $foto;
     private Endereco $endereco;
 
     // Método construtor
@@ -21,7 +21,7 @@ class Empresa {
 
             // Conectando ao banco e preparando a query
             $stmt = ConexaoDAO::getConexao()->prepare($sql);
-            $stmt->bindValue(":cnpj", $this->cnpj, PDO::PARAM_INT);
+            $stmt->bindValue(":cnpj", $this->cnpj, PDO::PARAM_STR);
 
             // Executando query no banco
             $stmt->execute() or die(print_r($stmt->errorInfo(), true));
@@ -47,15 +47,16 @@ class Empresa {
 
             // Query SQL
             $sql = "INSERT INTO empresas VALUES 
-            (DEFAULT, :nome, :fantasia, :cnpj, :telefone, :responsavel, :id_endereco);";
+            (DEFAULT, :nome, :fantasia, :cnpj, :telefone, :responsavel, :foto, :id_endereco);";
 
             // Conectando o banco e preparando a query
             $stmt = ConexaoDAO::getConexao()->prepare($sql);
             $stmt->bindValue(":nome", $this->nome, PDO::PARAM_STR);
             $stmt->bindValue(":fantasia", $this->fantasia, PDO::PARAM_STR);
-            $stmt->bindValue(":cnpj", $this->cnpj, PDO::PARAM_INT);
-            $stmt->bindValue(":telefone", $this->telefone, PDO::PARAM_INT);
+            $stmt->bindValue(":cnpj", $this->cnpj, PDO::PARAM_STR);
+            $stmt->bindValue(":telefone", $this->telefone, PDO::PARAM_STR);
             $stmt->bindValue(":responsavel", $this->responsavel, PDO::PARAM_STR);
+            $stmt->bindValue(":foto", $this->foto, PDO::PARAM_STR);
             $stmt->bindValue(":id_endereco", $this->endereco->getId(), PDO::PARAM_INT);
 
             // Executando a query no banco
@@ -97,6 +98,10 @@ class Empresa {
         return $this->endereco;
     }
 
+    public function getFoto(){
+        return $this->foto;
+    }
+
     public function setId($id){
         $this->id = $id;
     }
@@ -123,5 +128,9 @@ class Empresa {
 
     public function setEndereco($endereco){
         $this->endereco = $endereco;
+    }
+
+    public function setFoto($foto){
+        $this->foto = $foto;
     }
 }

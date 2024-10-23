@@ -640,6 +640,25 @@ small#cpfTeste, small#cepTesteUser, small#cepTesteEmp, small#cnpjTeste {
     font-size: 10pt;
 }
 
+label.label_foto {
+    text-transform: uppercase;
+    font-size: clamp(8pt, 14pt);
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    background-color: var(--red-dark);
+    color: #FFF;
+    border-radius: 40px;
+    border: 2px solid var(--red-dark);
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+
+label.label_foto:hover {
+    background-color: #FFF;
+    color: var(--red-dark);
+}
+
 p.p_btn_cadastrar {
     width: 100%;
 }

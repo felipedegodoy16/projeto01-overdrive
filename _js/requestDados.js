@@ -33,12 +33,21 @@ function responseJson(json){
       tag = '<p class="center" style="margin-bottom: 2em;"><i class="fi fi-rr-trash icons_cards center icon_trash" onclick="removeDado()"></i><i class="fi fi-rr-edit icons_cards center icon_edit"></i></p>'
     }
 
+
+
     json.usuarios.map(function(usuario){
+
+        if(usuario.foto != null){
+          var foto = usuario.foto
+        } else {
+          var foto = 'fotoDefault.jpg'
+        }
+
         divUsers.innerHTML +=
         `
         <div class="col-10 col-sm-6 col-md-4 col-lg-3">
           <div class="center card_user">
-            <img class="img_user_emp" src="_images/back_cadastro.jpg" alt="Imagem do Usuário ou Empresa">
+            <img class="img_user_emp" src="_images/uploads/${foto}" alt="Imagem do Usuário ou Empresa">
             <div class="card_user_body">
               <header>
                 <p style="position: absolute; padding: 0; left: 1em; top: 1em;">#${usuario.id}</p>

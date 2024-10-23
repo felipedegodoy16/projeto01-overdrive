@@ -3,8 +3,8 @@ require_once 'Endereco.php';
 
 class Usuario {
     // Atributos
-    private string $nome, $carro, $cargo, $empresa, $senha;
-    private int $id, $telefone, $cpf, $cnh;
+    private string $nome, $telefone, $cpf, $cnh, $carro, $cargo, $empresa, $senha, $foto;
+    private int $id;
     private Endereco $endereco;
 
     // Método construtor
@@ -20,8 +20,8 @@ class Usuario {
 
             // Conectando ao banco e preparando a query
             $stmt = ConexaoDAO::getConexao()->prepare($sql);
-            $stmt->bindValue(":cpf", $this->cpf, PDO::PARAM_INT);
-            $stmt->bindValue(":cnh", $this->cnh, PDO::PARAM_INT);
+            $stmt->bindValue(":cpf", $this->cpf, PDO::PARAM_STR);
+            $stmt->bindValue(":cnh", $this->cnh, PDO::PARAM_STR);
 
             // Executando a query no banco
             $stmt->execute() or die(print_r($stmt->errorInfo(), true));
@@ -45,18 +45,19 @@ class Usuario {
 
             // Query SQL
             $sql = "INSERT INTO usuarios VALUES 
-            (DEFAULT, :nome, :cpf, :cnh, :telefone, :carro, :cargo, :empresa, :senha, :id_endereco);";
+            (DEFAULT, :nome, :cpf, :cnh, :telefone, :carro, :cargo, :empresa, :senha, :foto, :id_endereco);";
 
             // Conectando o banco e preparando a query
             $stmt = ConexaoDAO::getConexao()->prepare($sql);
             $stmt->bindValue(":nome", $this->nome, PDO::PARAM_STR);
-            $stmt->bindValue(":cpf", $this->cpf, PDO::PARAM_INT);
-            $stmt->bindValue(":cnh", $this->cnh, PDO::PARAM_INT);
-            $stmt->bindValue(":telefone", $this->telefone, PDO::PARAM_INT);
+            $stmt->bindValue(":cpf", $this->cpf, PDO::PARAM_STR);
+            $stmt->bindValue(":cnh", $this->cnh, PDO::PARAM_STR);
+            $stmt->bindValue(":telefone", $this->telefone, PDO::PARAM_STR);
             $stmt->bindValue(":carro", $this->carro, PDO::PARAM_STR);
             $stmt->bindValue(":cargo", $this->cargo, PDO::PARAM_STR);
             $stmt->bindValue(":empresa", $this->empresa, PDO::PARAM_STR);
             $stmt->bindValue(":senha", $this->senha, PDO::PARAM_STR);
+            $stmt->bindValue(":foto", $this->foto, PDO::PARAM_STR);
             $stmt->bindValue(":id_endereco", $this->endereco->getId(), PDO::PARAM_INT);
 
             // Executando a query no banco
@@ -77,7 +78,7 @@ class Usuario {
 
             // Conectando ao banco e preparando a query
             $stmt = ConexaoDAO::getConexao()->prepare($sql);
-            $stmt->bindValue(":cpf", $this->getCpf(), PDO::PARAM_INT);
+            $stmt->bindValue(":cpf", $this->getCpf(), PDO::PARAM_STR);
 
             $stmt->execute() or die(print_r($stmt->errorInfo(), true));
             $usuario = $stmt->fetchAll();
@@ -134,6 +135,7 @@ class Usuario {
                         'telefone' => $d['telefone'],
                         'cpf' => $d['cpf'],
                         'cnh' => $d['cnh'],
+                        'foto' => $d['foto'],
                         'cep' => $d['cep'],
                         'numero' => $d['numero'],
                         'rua' => $d['rua'],
@@ -198,6 +200,10 @@ class Usuario {
         return $this->empresa;
     }
 
+    public function getFoto(){
+        return $this->foto;
+    }
+
     public function setId($id){
         $this->id = $id;
     }
@@ -236,5 +242,9 @@ class Usuario {
 
     public function setEmpresa($empresa){
         $this->empresa = $empresa;
+    }
+
+    public function setFoto($foto){
+        $this->foto = $foto;
     }
 }

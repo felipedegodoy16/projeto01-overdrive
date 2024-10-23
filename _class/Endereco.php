@@ -3,8 +3,8 @@ require_once 'ConexaoDAO.php';
 
 class Endereco {
     // Atributos
-    private int $id, $numero, $cep;
-    private string $rua, $cidade, $estado, $bairro;
+    private int $id, $numero;
+    private string $rua, $cep, $cidade, $estado, $bairro;
 
     // Método construtor
     public function __construct(){
@@ -23,7 +23,7 @@ class Endereco {
 
             // Conectando ao banco e preparando a query
             $stmt = ConexaoDAO::getConexao()->prepare($sql);
-            $stmt->bindValue(":cep", $this->cep, PDO::PARAM_INT);
+            $stmt->bindValue(":cep", $this->cep, PDO::PARAM_STR);
             $stmt->bindValue(":numero", $this->numero, PDO::PARAM_INT);
             $stmt->bindValue(":rua", $this->rua, PDO::PARAM_STR);
             $stmt->bindValue(":cidade", $this->cidade, PDO::PARAM_STR);
@@ -46,7 +46,7 @@ class Endereco {
 
             // Verificando existência do endereço no banco
             if(count($dado) > 0){
-                $this->setId($d['id']);
+                $this->setId($d['id_end']);
                 return $dado[0];
             }
 
@@ -75,7 +75,7 @@ class Endereco {
 
                 // Conectando ao banco e preparando query
                 $stmt = ConexaoDAO::getConexao()->prepare($sql);
-                $stmt->bindValue(":cep", $this->cep, PDO::PARAM_INT);
+                $stmt->bindValue(":cep", $this->cep, PDO::PARAM_STR);
                 $stmt->bindValue(":numero", $this->numero, PDO::PARAM_INT);
                 $stmt->bindValue(":rua", $this->rua, PDO::PARAM_STR);
                 $stmt->bindValue(":cidade", $this->cidade, PDO::PARAM_STR);

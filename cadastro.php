@@ -43,7 +43,7 @@
       </div>
       <div id="cadastro_emp" class="cadastro col-12 col-md-8 center">
         <h1>Cadastrar Empresa</h1>
-        <form class="form_cadastro" action="_files/gravar_empresas.php" method="post">
+        <form class="form_cadastro" action="_files/gravar_empresas.php" method="post" enctype="multipart/form-data">
             <div class="column_left">
                 <p>
                     <label for="id_cnpj_emp">CNPJ</label>
@@ -65,6 +65,10 @@
                 <p>
                     <label for="id_responsavel_emp">Reponsável</label>
                     <input type="text" name="responsavel_emp" id="id_responsavel_emp" placeholder="Digite o Responsável" required>
+                </p>
+                <p>
+                    <label for="id_foto_emp" class="label_foto" style="margin-top: .5em;">Escolher arquivo</label>
+                    <input type="file" name="foto_emp" id="id_foto_emp" style="margin-top: 1em; border-bottom: none; display: none;">
                 </p>
             </div>
 
@@ -107,7 +111,7 @@
       </div>
       <div id="cadastro_user" class="cadastro col-12 col-md-8 center">
         <h1>Cadastrar Usuário</h1>
-        <form class="form_cadastro" action="_files/gravar_usuarios.php" method="post">
+        <form class="form_cadastro" action="_files/gravar_usuarios.php" method="post" enctype="multipart/form-data">
             <div class="column_left">
                 <p>
                     <label for="id_nome">Nome</label>
@@ -173,6 +177,10 @@
                 <p>
                     <label for="id_estado">Estado (UF)</label>
                     <input type="text" name="estado" id="id_estado"minlength="2" maxlength="2" placeholder="Exemplo: SP, RJ..." required>
+                </p>
+                <p>
+                    <label for="id_foto" class="label_foto" style="margin-top: 1em;">Escolher arquivo</label>
+                    <input type="file" name="foto" id="id_foto" style="margin-top: 1em; border-bottom: none; display: none;">
                 </p>
             </div>
             <p class="center p_btn_cadastrar" style="flex-direction: row;">
