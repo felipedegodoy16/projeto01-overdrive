@@ -7,51 +7,39 @@ if (document.readyState == "loading") {
 function ready() {
     // Funções Usuário
     const inputCpf = document.querySelector('input[name=cpf]')
-    inputCpf.addEventListener("input", () => {
-        const strCpf = document.querySelector('input[name=cpf]').value
-        const cpfAlert = document.getElementById('cpfTeste')
-        const btnCadastrar = document.getElementById('btn_cadastrar_user')
-        cpf = strCpf.replace(/[^0-9]/g, '')
+    inputCpf.addEventListener("input", validacoesCpf)
 
-        if(cpf.length === 11){
-            cpfTestado = validaCPF(cpf)
-            if(cpfTestado){
-                cpfAlert.innerText = 'CPF válido'
-                cpfAlert.style.color = '#0c6800'
-                btnCadastrar.setAttribute('type', 'submit')
-            }
-        } else {
-            cpfAlert.innerText = 'CPF inválido'
-            cpfAlert.style.color = 'var(--red-dark)'
-            btnCadastrar.setAttribute('type', 'button')
-        }
-    })
-
-    document.addEventListener("mouseup", function(event) {
-        var obj_telefone = document.getElementById('p_telefone')
-        var input_telefone = document.querySelector('input[name=telefone]')
-    
-        if (!obj_telefone.contains(event.target) && input_telefone.value === '(') {
-            input_telefone.value = ''
-        }
-    })
+    document.addEventListener("mouseup", verificaTel)
 
     const magicEye = document.getElementById('eye_cadastro')
     magicEye.addEventListener("click", revealPassword)
 
     // Funções Empresa
-    document.addEventListener("mouseup", function(event) {
-        var obj_telefone_emp = document.getElementById('p_telefone_emp')
-        var input_telefone_emp = document.querySelector('input[name=telefone_emp]')
-    
-        if (!obj_telefone_emp.contains(event.target) && input_telefone_emp.value === '(') {
-            input_telefone_emp.value = ''
-        }
-    })
+    document.addEventListener("mouseup", verificaTelEmp)
 }
 
-// Função para validação do CPF
-function validaCPF(cpf) {
+// Funções para validação do CPF
+function validacoesCpf(){
+    const strCpf = document.querySelector('input[name=cpf]').value
+    const cpfAlert = document.getElementById('cpfTeste')
+    const btnCadastrar = document.getElementById('btn_cadastrar_user')
+    cpf = strCpf.replace(/[^0-9]/g, '')
+
+    if(cpf.length === 11){
+        cpfTestado = validaCPF(cpf)
+        if(cpfTestado){
+            cpfAlert.innerText = 'CPF válido'
+            cpfAlert.style.color = '#0c6800'
+            btnCadastrar.setAttribute('type', 'submit')
+        }
+    } else {
+        cpfAlert.innerText = 'CPF inválido'
+        cpfAlert.style.color = 'var(--red-dark)'
+        btnCadastrar.setAttribute('type', 'button')
+    }
+}
+
+function validaCPF(cpf){
 
     // Verifica se foi informado todos os digitos corretamente
     if (cpf.length != 11) {
@@ -78,8 +66,18 @@ function validaCPF(cpf) {
     return true;
 }
 
+// Função para telefone
+function verificaTel(event){
+    var obj_telefone = document.getElementById('p_telefone')
+    var input_telefone = document.querySelector('input[name=telefone]')
+
+    if (!obj_telefone.contains(event.target) && input_telefone.value === '(') {
+        input_telefone.value = ''
+    }
+}
+
 // Função para alternar senha entre visível e invisível
-function revealPassword() {
+function revealPassword(){
     const inputPassword = document.getElementById('id_password')
     const iconEye = document.getElementById('eye_cadastro')
     if(inputPassword.type === 'text') {
@@ -94,7 +92,7 @@ function revealPassword() {
 }
 
 // Função para alterar entre Formulário de Usuários e Formulário de Empresas
-function changeForm() {
+function changeForm(){
     var obj_user = document.getElementById('cadastro_user')
     var obj_emp = document.getElementById('cadastro_emp')
     var obj_back_index = document.getElementById('back_index')
@@ -127,8 +125,18 @@ function changeForm() {
     }
 }
 
+// Função para telefone da empresa
+function verificaTelEmp(event){
+    var obj_telefone_emp = document.getElementById('p_telefone_emp')
+    var input_telefone_emp = document.querySelector('input[name=telefone_emp]')
+
+    if (!obj_telefone_emp.contains(event.target) && input_telefone_emp.value === '(') {
+        input_telefone_emp.value = ''
+    }
+}
+
 //Função de Busca CNPJ da Empresa
-function buscaCnpj() {
+function buscaCnpj(){
 
     const cnpjTeste = document.getElementById('cnpjTeste')
     const btnCadastrar = document.getElementById('btn_cadastrar_emp')
@@ -160,7 +168,7 @@ function buscaCnpj() {
     }
 }
 
-function preencheCamposCnpj(json) {
+function preencheCamposCnpj(json){
     const cnpjTeste = document.getElementById('cnpjTeste')
     const btnCadastrar = document.getElementById('btn_cadastrar_emp')
     const cep_teste = document.getElementById('cepTesteEmp')

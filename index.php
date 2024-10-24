@@ -35,36 +35,29 @@
     <title>Overdrive - Consultas</title>
   </head>
 
-  <body class="transition_section">
-    <nav id="navbar" class="center" style="justify-content: space-between;">
-      <img src="_images/overdrive_logo.png" alt="Logo na Navbar" width="100px" height="auto" style="padding: .7em;">
-      <i id="menu_icon" class="fi fi-rr-menu-burger icon_menu" onclick="callMenu(event.target)"></i>
-      <div id="menu_hamburguer" class="center">
-        <ul>
-          <li class="active li_navbar" onclick="both()">Todos</li>
-          <li class="li_navbar" onclick="onlyFuncs()">Funcionários</li>
-          <li class="li_navbar" onclick="onlyEmps()">Empresas</li>
-        </ul>
-        <a id="btn_logout" href="?logout=1">SAIR</a>
-      </div>
-    </nav>
+  <!-- <body class="transition_section"> -->
+  <body>
+    <header>
+      <nav id="navbar" class="center" style="justify-content: space-between;">
+        <img src="_images/overdrive_logo.png" alt="Logo na Navbar" width="100px" height="auto" style="padding: .7em;">
+        <i id="menu_icon" class="fi fi-rr-menu-burger icon_menu" onclick="callMenu(event.target)"></i>
+        <div id="menu_hamburguer" class="center">
+          <ul>
+            <li class="active li_navbar" onclick="both()">Todos</li>
+            <li class="li_navbar" onclick="onlyFuncs()">Funcionários</li>
+            <li class="li_navbar" onclick="onlyEmps()">Empresas</li>
+          </ul>
+          <a id="btn_logout" href="?logout=1">SAIR</a>
+        </div>
+      </nav>
+    </header>
 
     <main id="main_index" class="col-12 center">
-      <div id="section_users" class="col-12 center transition_section">
-        <div class="title_sections center col-12">
-          <div class="col-md-4 line"></div>
-          <h1 class="col-12 col-md-4 h1_sections">Funcionários</h1>
-          <div class="col-md-4 line"></div>
-        </div>
-      </div>
 
-      <div id="section_emps" class="col-12 center transition_section">
-        <div class="title_sections center col-12">
-          <div class="col-md-4 line"></div>
-          <h1 class="col-12 col-md-4 h1_sections">Empresas</h1>
-          <div class="col-md-4 line"></div>
-        </div>
-      </div>
+      <div id="section_users" class="col-12 center transition_section"></div>
+
+      <div id="section_emps" class="col-12 center transition_section"></div>
+      
     </main>
 
     <aside id="aside_index" class="col-6 col-sm-4 col-md-3 col-lg-2">

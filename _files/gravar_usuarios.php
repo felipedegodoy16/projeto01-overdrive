@@ -49,8 +49,13 @@ if($verificaDados === -1) {
         $usuario->setFoto('');
     }
 
-    // inserindo usuário no banco
+    // Inserindo usuário no banco
     $usuario->inserirUsuario();
+
+    echo "<script>
+        alert('Usuário cadastrado com sucesso!')
+        window.location='../cadastro.php'
+    </script>";
 
 } else {
 

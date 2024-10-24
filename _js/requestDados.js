@@ -27,15 +27,33 @@ function requestDados(){
 function responseJson(json){
     const divUsers = document.getElementById('section_users')
     const divEmps = document.getElementById('section_emps')
-    let tag = ''
+    var tag = ''
+    divUsers.innerHTML = ''
+    divEmps.innerHTML = ''
 
-    if(json.sessao === 'A') {
-      tag = '<p class="center" style="margin-top: .7em;"><i class="fi fi-rr-trash icons_cards center icon_trash" onclick="removeDado()"></i><i class="fi fi-rr-edit icons_cards center icon_edit"></i></p>'
-    }
+    divUsers.innerHTML +=
+    `
+      <div class="title_sections center col-12">
+        <div class="col-md-4 line"></div>
+          <h1 class="col-12 col-md-4 h1_sections">Funcionários</h1>
+        <div class="col-md-4 line"></div>
+      </div>
+    `
 
-
+    divEmps.innerHTML +=
+    `
+      <div class="title_sections center col-12">
+        <div class="col-md-4 line"></div>
+          <h1 class="col-12 col-md-4 h1_sections">Empresas</h1>
+        <div class="col-md-4 line"></div>
+      </div>
+    `
 
     json.usuarios.map(function(usuario){
+
+      if(json.sessao === 'A') {
+        tag = '<p class="center" style="margin-top: .7em;"><i class="fi fi-rr-trash icons_cards center icon_trash user_trash"></i><i class="fi fi-rr-edit icons_cards center icon_edit"></i></p>'
+      }
 
       if(usuario.foto != null){
         var foto = usuario.foto
@@ -71,6 +89,10 @@ function responseJson(json){
     })
 
     json.empresas.map(function(empresa){
+
+      if(json.sessao === 'A') {
+        tag = '<p class="center" style="margin-top: .7em;"><i class="fi fi-rr-trash icons_cards center icon_trash emp_trash"></i><i class="fi fi-rr-edit icons_cards center icon_edit"></i></p>'
+      }
 
       if(empresa.foto != null){
         var foto = empresa.foto
@@ -109,32 +131,72 @@ function responseJson(json){
 }
 
 function addEvents(){
+
+  // Adicionar eventos de entrada e saída de mouse do card
   var cards = document.getElementsByClassName('card_register')
-    
   for(let i = 0; i < cards.length; i++){
+    // Adicionando evento de mouse entrando no elemento
+    cards[i].addEventListener("mouseenter", transitionCard)
 
-    cards[i].addEventListener("mouseenter", () => {
+    // Adicionar evento de mouse deixando o elemento
+    cards[i].addEventListener("mouseleave", backCard)
+  }
 
-      if(cards[i].classList.contains('back_card')){
+  // Adicionando evento de remoção de dado dos usuários
+  var iconsRemoveUsers = document.getElementsByClassName('user_trash')
+  for(let i = 0; i < iconsRemoveUsers.length; i++){
+    iconsRemoveUsers[i].addEventListener("click", removeDataUsers)
+  }
 
-        cards[i].classList.add('transition_card')
-        cards[i].classList.remove('back_card')
+  // Adicionando evento de remoção de dado das empresas
+  // var iconsRemoveEmps = document.getElementsByClassName('emp_trash')
+  // for(let i = 0; i < iconsRemoveEmps.length; i++){
+  //   iconsRemoveEmps[i].addEventListener("click", removeDataEmps)
+  // }
 
-      } else {
+}
 
-        cards[i].classList.add('transition_card')
+// Função para card em destaque
+function transitionCard(event){
+  e = event.target
 
+  if(e.classList.contains('back_card')){
+    e.classList.add('transition_card')
+    e.classList.remove('back_card')
+  } else {
+    e.classList.add('transition_card')
+  }
+}
+
+// Função para voltar o card
+function backCard(event){
+  e = event.target
+
+  if(e.classList.contains('transition_card')){
+    e.classList.add('back_card')
+    e.classList.remove('transition_card')
+  }
+}
+
+// Função para remoção do registro
+function removeDataUsers(event){
+  let id = event.target.parentNode.parentNode.children[0].children[0].innerText.replace('#', '')
+  let comando = prompt("Por favor, confirme a instrução (DELETE) para excluir os registros do usuário.")
+
+  if(comando === 'DELETE'){
+    let url = 'http://localhost/projeto01-overdrive/_files/removeUser.php?id=' + id
+    let xhr = new XMLHttpRequest()
+    xhr.open('GET', url, true)
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4) {
+        if (xhr.status == 200) {
+          alert('Usuário removido com sucesso!')
+          requestDados()
+        }
       }
-    })
-
-    cards[i].addEventListener("mouseleave", () => {
-
-      if(cards[i].classList.contains('transition_card')){
-
-        cards[i].classList.add('back_card')
-        cards[i].classList.remove('transition_card')
-
-      }
-    })
+    }
+    xhr.send();
+  } else {
+    alert('Não foi possível remover o usuário!')
   }
 }

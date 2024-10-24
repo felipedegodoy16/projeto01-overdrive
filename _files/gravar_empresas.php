@@ -49,6 +49,11 @@ if($verificarCnpj === -1){
     // Inserindo a empresa no bacno
     $empresa->inserirEmpresa();
 
+    echo "<script>
+        alert('Empresa cadastrada com sucesso!')
+        window.location='../cadastro.php'
+    </script>";
+
 } else {
 
     echo "<script>

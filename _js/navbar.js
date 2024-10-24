@@ -5,22 +5,29 @@ if (document.readyState == "loading") {
 }
 
 function ready() {
+
+    // Adicionando evento de click a todos os itens da navbar
     var items_menu = document.getElementsByClassName('li_navbar')
     for(let i = 0; i < items_menu.length; i++){
-        items_menu[i].addEventListener("click", alter_active)
+        items_menu[i].addEventListener("click", alterActive)
     }
 
-    window.addEventListener("resize", function(){
-        var menu = document.getElementById('menu_hamburguer')
-        if(this.window.innerWidth > 768) {
-            menu.style.transform = 'translateX(0)'
-        } else {
-            menu.style.transform = 'translateX(200%)'
-        }
-    })
+    // Verificando redimensionamento da tela
+    window.addEventListener("resize", alterNavbar)
+    
 }
 
-function alter_active(event) {
+function alterNavbar(){
+    var menu = document.getElementById('menu_hamburguer')
+
+    if(this.window.innerWidth > 768) {
+        menu.style.transform = 'translateX(0)'
+    } else {
+        menu.style.transform = 'translateX(200%)'
+    }
+}
+
+function alterActive(event) {
     var obj_active = document.getElementsByClassName('active')[0]
     var e = event.target
     if(!e.classList.contains('active')){

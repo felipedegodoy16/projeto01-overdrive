@@ -6,27 +6,29 @@ if (document.readyState == "loading") {
 
 function ready() {
 
+    // Adicionando evento de click a todos os li's da aba de filtros
     var li_filtros = document.getElementsByClassName('li_filtros')
-    
     for(let i = 0; i < li_filtros.length; i++){
-
-        li_filtros[i].addEventListener("click", (event) => {
-
-            var obj_filtro_active = document.getElementsByClassName('active_filtro')[0]
-            var e = event.target
-
-            if(!e.classList.contains('active_filtro')){
-
-                obj_filtro_active.classList.remove('active_filtro')
-                e.classList.add('active_filtro')
-
-            }
-        })
+        li_filtros[i].addEventListener("click", verificaActive)
     }
 
 }
 
-function callFilters() {
+// Adicionando classe ativa para li clicado e removendo o atualmente ativo 
+function verificaActive(event){
+    var obj_filtro_active = document.getElementsByClassName('active_filtro')[0]
+    var e = event.target
+
+    if(!e.classList.contains('active_filtro')){
+
+        obj_filtro_active.classList.remove('active_filtro')
+        e.classList.add('active_filtro')
+
+    }
+}
+
+// Chamar aba de filtros
+function callFilters(){
 
     var obj_aside = document.getElementById('aside_index')
     var obj_filter = document.getElementById('filter_symbol')
@@ -48,6 +50,7 @@ function callFilters() {
 
 }
 
+// Função para deixar visível todos os cards
 function both(){
     var obj_visible_funcs = document.getElementById('section_users')
     var obj_visible_emps = document.getElementById('section_emps')
@@ -63,6 +66,7 @@ function both(){
     }
 }
 
+// Função para deixar visível apenas cards de funcionários
 function onlyFuncs(){
     var obj_visible = document.getElementById('section_users')
     var obj_hidden = document.getElementById('section_emps')
@@ -87,6 +91,7 @@ function onlyFuncs(){
     
 }
 
+// Função para deixar visível apenas cards de empresas
 function onlyEmps(){
     var obj_visible = document.getElementById('section_emps')
     var obj_hidden = document.getElementById('section_users')

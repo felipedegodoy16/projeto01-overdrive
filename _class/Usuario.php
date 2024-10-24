@@ -159,6 +159,29 @@ class Usuario {
         }
     }
 
+    // Método para remover usuário do banco
+    public function removerUsuario($id){
+        try {
+            
+            // Query
+            $sql = "DELETE FROM usuarios WHERE id_user = :id LIMIT 1;";
+
+            // Conectando ao banco e preparando a query
+            $stmt = ConexaoDAO::getConexao()->prepare($sql);
+            $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+
+            // Executando a query no banco
+            $stmt->execute() or die(print_r($stmt->errorInfo(), true));
+
+        } catch(Exception $e) {
+
+            echo "Exceção $e";
+
+        }
+
+        
+    }
+
     // Getters e Setters
     public function getId(){
         return $this->id;
