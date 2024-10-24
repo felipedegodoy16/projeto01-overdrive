@@ -6,6 +6,23 @@
   if($_SESSION['logged']) {
     header('Location: index.php');
   }
+
+  require_once '_class/Usuario.php';
+
+  $usuario = $_POST['user_input'] ?? '';
+  $senha = $_POST['password_input'] ?? '';
+
+  $status = 1;
+
+  if($usuario != '' && $senha != ''){
+    $userAcesso = new Usuario();
+
+    $userAcesso->setCpf($_POST['user_input']);
+    $userAcesso->setSenha($_POST['password_input']);
+    
+    $status = $userAcesso->verificarAcesso();
+  }
+
 ?>
 
 <!DOCTYPE html>
@@ -36,8 +53,7 @@
     <main id="main_login" class="center">
       <div id="form_login" class="center">
         <h1 id="title_login">LOGIN</h1>
-        <img id="img_logo" src="_images/overdrive_logo.png" alt="">
-        <form id="form" action="_files/acessar.php" method="post">
+        <form id="form" action="<?= $_SERVER['PHP_SELF']?>" method="post">
           <div id="user_field" style="margin-bottom: 0;">
             <label for="user_login">CPF</label>
             <input id="user_login" data-mask="000.000.000-00" name="user_input" type="text" oninput="transition_text(event.target)" onclick="transition_text(event.target)" minlength="14" maxlength="14" required>
@@ -52,7 +68,15 @@
               <i id="icon_password" class="fi fi-rr-lock icons" onclick="show_password(event.target)"></i>
             </div>
           </div>
-          <div class="center">
+          <?php 
+            if($status === 0){
+              echo '
+              <div id="error_status" class="center">
+                <p style="margin: 0;">Usuário e/ou senha incorreto(s)!</p>
+              </div>';
+            }
+          ?>
+          <div id="div_btn_login" class="center">
             <input id="btn_login" type="submit" value="Entrar">
           </div>
           <!-- <div class="center">
@@ -65,6 +89,7 @@
             </details>
           </div> -->
         </form>
+        <img id="img_logo" src="_images/overdrive_logo.png" alt="">
       </div>
     </main>
 

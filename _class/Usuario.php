@@ -12,6 +12,7 @@ class Usuario {
         
     }
 
+    // Método para verificar se o usuário já foi cadastrado
     public function verificaDados(){
         try {
 
@@ -40,6 +41,7 @@ class Usuario {
         }
     }
 
+    // Método para inserir usuário no banco
     public function inserirUsuario(){
         try {
 
@@ -70,6 +72,7 @@ class Usuario {
         }
     }
 
+    // Fazer login do usuário
     public function verificarAcesso(){
         try {
 
@@ -94,12 +97,11 @@ class Usuario {
                 $_SESSION['logged'] = True;
                 $_SESSION['nome'] = $u['nome'];
                 $_SESSION['cargo'] = $u['cargo'];
-                header("Location: ../index.php");
+                header("Location: index.php");
             } else {
-                echo "<script>
-                    alert('Inválido!')
-                    history.back()
-                </script>";
+
+                return 0;
+
             }
 
         } catch(Exception $e) {

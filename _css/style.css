@@ -27,14 +27,14 @@ nav#navbar {
     background-color: #fff;
 }
 
-nav#navbar ul, ul#lst_footer {
+nav#navbar ul {
     list-style: none;
     text-transform: uppercase;
     padding: 0;
     margin: 1em 0;
 }
 
-nav#navbar li, ul#lst_footer li {
+nav#navbar li {
     position: relative;
     display: inline-block;
     padding: 5px 15px;
@@ -43,11 +43,11 @@ nav#navbar li, ul#lst_footer li {
     cursor: pointer;
 }
 
-nav#navbar li:hover, ul#lst_footer li:hover {
+nav#navbar li:hover {
     color: var(--red-light);
 }
 
-nav#navbar li:after, ul#lst_footer li:after {
+nav#navbar li:after {
     content: "";
     position: absolute;
     height: 3px;
@@ -60,10 +60,6 @@ nav#navbar li:after, ul#lst_footer li:after {
 
 nav#navbar li:hover:after  {
     width: 100%;
-}
-
-ul#lst_footer li:hover:after  {
-    width: 50%;
 }
 
 nav#navbar li.active:after {
@@ -491,6 +487,17 @@ i.eye-password:hover {
     color: var(--red-light);
 }
 
+div#error_status {
+    margin-top: -2em !important;
+    margin-bottom: 1.3em !important;
+    color: var(--red-dark);
+    padding: .8em;
+    background-color: rgb(248, 135, 135);
+    border: 2px solid var(--red-light);
+    border-radius: 20px;
+    justify-content: space-between;
+}
+
 input#btn_login {
     width: 10dvw !important;
     cursor: pointer;
@@ -498,7 +505,7 @@ input#btn_login {
     background-color: var(--red-dark) !important;
     padding: 5px;
     border: none !important;
-    border-radius: 10px;
+    border-radius: 40px;
     transition: all .3s ease-in;
 }
 
@@ -518,7 +525,6 @@ img#img_logo {
     opacity: .05;
     position: absolute;
     width: 30dvw;
-    transform: rotate(-15deg);
     animation: rodaroda 20s linear infinite;
 }
 

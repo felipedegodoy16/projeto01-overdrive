@@ -57,7 +57,7 @@
       <div id="section_users" class="col-12 center transition_section"></div>
 
       <div id="section_emps" class="col-12 center transition_section"></div>
-      
+
     </main>
 
     <aside id="aside_index" class="col-6 col-sm-4 col-md-3 col-lg-2">
@@ -77,12 +77,15 @@
 
     <footer id="footer_index" class="col-12 center" style="flex-wrap: wrap; align-items: start;">
       <div class="col-12 col-lg-3 div_footer">
-        <h3>Navegar</h3>
-        <ul id="lst_footer">
-          <li style="display: block;">Todos</li>
-          <li style="display: block;">Funcionários</li>
-          <li style="display: block;">Empresas</li>
-        </ul>
+        <h3>Permissões</h3>
+        <p><?php 
+          if($_SESSION['cargo'] === 'A') {
+            echo 'Você tem total acesso às funcionalidades do nosso sistema, podendo cadastrar novos usuários e empresas, editar registros já existentes e também excluí-los.';
+          } else {
+            echo 'Você tem acesso limitado às funcionalidades do nosso sistema, podendo utilizar os filtros disponibilizados e visualizar os dados dos registros.';
+          }
+        ?>
+      </p>
       </div>
       <div id="infos" class="col-12 col-lg-6 div_footer">
         <h3>Informações</h3>

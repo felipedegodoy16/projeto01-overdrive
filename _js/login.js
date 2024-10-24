@@ -53,6 +53,10 @@ function clickPassword(event){
 // Função para fazer a transição da escrita
 function transition_text(e){
     var obj_clicked = e.parentNode.children[0]
+    if(document.contains(document.getElementById('error_status'))){
+        document.getElementById('error_status').style.display = 'none'
+    }
+
     if(obj_clicked.classList.contains('back_text')){
         obj_clicked.classList.remove('back_text')
         obj_clicked.classList.add('transition_text')
