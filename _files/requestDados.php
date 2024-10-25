@@ -18,15 +18,19 @@ $dadosEmps = $empresas->listarEmpresas();
 
 if($dadosUsers === -1 && $dadosEmps === -1){
 
+    $allDados = [
+        'error' => true
+    ];
+
 } else {
 
     $allDados = [
         'sessao' => $_SESSION['cargo'],
-        'id' => $_SESSION['id'],
         'usuarios' => $dadosUsers,
-        'empresas' => $dadosEmps
+        'empresas' => $dadosEmps,
+        'error' => false
     ];
 
-    // var_dump(json_encode($allDados));
-    echo json_encode($allDados);
 }
+
+echo json_encode($allDados);

@@ -31,106 +31,114 @@ function responseJson(json){
     divUsers.innerHTML = ''
     divEmps.innerHTML = ''
 
-    divUsers.innerHTML +=
-    `
-      <div class="title_sections center col-12">
-        <div class="col-md-4 line"></div>
-          <h1 class="col-12 col-md-4 h1_sections">Funcionários</h1>
-        <div class="col-md-4 line"></div>
-      </div>
-    `
+    if(json.error){
+      const main = document.getElementById('main_index')
 
-    divEmps.innerHTML +=
-    `
-      <div class="title_sections center col-12">
-        <div class="col-md-4 line"></div>
-          <h1 class="col-12 col-md-4 h1_sections">Empresas</h1>
-        <div class="col-md-4 line"></div>
-      </div>
-    `
+      main.innerHTML = '<p>Ainda não há dados registrados no banco!</p>'
 
-    json.usuarios.map(function(usuario){
-
-      if(json.sessao === 'A') {
-        tag = '<p class="center" style="margin-top: .7em;"><i class="fi fi-rr-trash icons_cards center icon_trash user_trash"></i><i class="fi fi-rr-edit icons_cards center icon_edit"></i></p>'
-      }
-
-      if(usuario.foto != null){
-        var foto = usuario.foto
-      } else {
-        var foto = 'fotoDefault.jpg'
-      }
+    } else {
 
       divUsers.innerHTML +=
       `
-      <div class="col-10 col-sm-6 col-md-4 col-lg-3">
-        <div class="center card_register">
-          <img class="img_user_emp" src="_images/uploads/${foto}" alt="Imagem do Usuário ou Empresa">
-          <div class="card_user_body" style="padding-bottom: 2em;">
-            <header>
-              <p style="position: absolute; padding: 0; left: 1em; top: 1em;">#${usuario.id}</p>
-            </header>
-            <p style="margin-top: 4.5em;">Nome: ${usuario.nome}</p>
-            <p>CPF: ${usuario.cpf}</p>
-            <p>CNH: ${usuario.cnh}</p>
-            <p>Telefone: ${usuario.telefone}</p>
-            <p>Carro: ${usuario.carro}</p>
-            <p>Empresa: ${usuario.empresa}</p>
-            <details style="margin-bottom: .4em; background-color: rgba(133, 133, 133, 0.08);">
-              <summary style="background-color: #FFF;">Endereço</summary>
-              <p style="margin: .4em 0;">${usuario.rua}, ${usuario.numero} - ${usuario.bairro}</p>
-              <p>${usuario.cidade} - ${usuario.estado}, ${usuario.cep}</p>
-            </details>
-            ${tag}
-          </div>
+        <div class="title_sections center col-12">
+          <div class="col-md-4 line"></div>
+            <h1 class="col-12 col-md-4 h1_sections">Funcionários</h1>
+          <div class="col-md-4 line"></div>
         </div>
-      </div>
       `
-    })
-
-    json.empresas.map(function(empresa){
-
-      if(json.sessao === 'A') {
-        tag = '<p class="center" style="margin-top: .7em;"><i class="fi fi-rr-trash icons_cards center icon_trash emp_trash"></i><i class="fi fi-rr-edit icons_cards center icon_edit"></i></p>'
-      }
-
-      if(empresa.foto != null){
-        var foto = empresa.foto
-      } else {
-        var foto = 'fotoDefault.jpg'
-      }
 
       divEmps.innerHTML +=
       `
-      <div class="col-10 col-sm-6 col-md-4 col-lg-3">
-        <div class="center card_register">
-          <img class="img_user_emp" src="_images/uploads/${foto}" alt="Imagem do Usuário ou Empresa">
-          <div class="card_user_body" style="padding-bottom: 2em;">
-            <header>
-              <p style="position: absolute; padding: 0; left: 1em; top: 1em;">#${empresa.id}</p>
-            </header>
-            <p style="margin-top: 4.5em;">Razão: ${empresa.nome}</p>
-            <p>Fantasia: ${empresa.fantasia}</p>
-            <p>CNPJ: ${empresa.cnpj}</p>
-            <p>Telefone: ${empresa.telefone}</p>
-            <p>Responsável: ${empresa.responsavel}</p>
-            <details style="margin-bottom: .4em; background-color: rgba(133, 133, 133, 0.08);">
-              <summary style="background-color: #FFF;">Endereço</summary>
-              <p style="margin: .4em 0;">${empresa.rua}, ${empresa.numero} - ${empresa.bairro}</p>
-              <p>${empresa.cidade} - ${empresa.estado}, ${empresa.cep}</p>
-            </details>
-            ${tag}
+        <div class="title_sections center col-12">
+          <div class="col-md-4 line"></div>
+            <h1 class="col-12 col-md-4 h1_sections">Empresas</h1>
+          <div class="col-md-4 line"></div>
+        </div>
+      `
+
+      json.usuarios.map(function(usuario){
+
+        if(json.sessao === 'A') {
+          tag = '<p class="center" style="margin-top: .7em;"><i class="fi fi-rr-trash icons_cards center icon_trash user_trash"></i><i class="fi fi-rr-edit icons_cards center icon_edit"></i></p>'
+        }
+
+        if(usuario.foto != null){
+          var foto = usuario.foto
+        } else {
+          var foto = 'fotoDefault.jpg'
+        }
+
+        divUsers.innerHTML +=
+        `
+        <div class="col-10 col-sm-6 col-md-4 col-lg-3">
+          <div class="center card_register">
+            <img class="img_user_emp" src="_images/uploads/${foto}" alt="Imagem do Usuário ou Empresa">
+            <div class="card_user_body" style="padding-bottom: 2em;">
+              <header>
+                <p style="position: absolute; padding: 0; left: 1em; top: 1em;">#${usuario.id}</p>
+              </header>
+              <p style="margin-top: 4.5em;">Nome: ${usuario.nome}</p>
+              <p>CPF: ${usuario.cpf}</p>
+              <p>CNH: ${usuario.cnh}</p>
+              <p>Telefone: ${usuario.telefone}</p>
+              <p>Carro: ${usuario.carro}</p>
+              <p>Empresa: ${usuario.empresa}</p>
+              <details style="margin-bottom: .4em; background-color: rgba(133, 133, 133, 0.08);">
+                <summary style="background-color: #FFF;">Endereço</summary>
+                <p style="margin: .4em 0;">${usuario.rua}, ${usuario.numero} - ${usuario.bairro}</p>
+                <p>${usuario.cidade} - ${usuario.estado}, ${usuario.cep}</p>
+              </details>
+              ${tag}
+            </div>
           </div>
         </div>
-      </div>
-      `
-    })
+        `
+      })
 
-    addEvents(json.id)
-    
+      json.empresas.map(function(empresa){
+
+        if(json.sessao === 'A') {
+          tag = '<p class="center" style="margin-top: .7em;"><i class="fi fi-rr-trash icons_cards center icon_trash emp_trash"></i><i class="fi fi-rr-edit icons_cards center icon_edit"></i></p>'
+        }
+
+        if(empresa.foto != null){
+          var foto = empresa.foto
+        } else {
+          var foto = 'fotoDefault.jpg'
+        }
+
+        divEmps.innerHTML +=
+        `
+        <div class="col-10 col-sm-6 col-md-4 col-lg-3">
+          <div class="center card_register">
+            <img class="img_user_emp" src="_images/uploads/${foto}" alt="Imagem do Usuário ou Empresa">
+            <div class="card_user_body" style="padding-bottom: 2em;">
+              <header>
+                <p style="position: absolute; padding: 0; left: 1em; top: 1em;">#${empresa.id}</p>
+              </header>
+              <p style="margin-top: 4.5em;">Razão: ${empresa.nome}</p>
+              <p>Fantasia: ${empresa.fantasia}</p>
+              <p>CNPJ: ${empresa.cnpj}</p>
+              <p>Telefone: ${empresa.telefone}</p>
+              <p>Responsável: ${empresa.responsavel}</p>
+              <details style="margin-bottom: .4em; background-color: rgba(133, 133, 133, 0.08);">
+                <summary style="background-color: #FFF;">Endereço</summary>
+                <p style="margin: .4em 0;">${empresa.rua}, ${empresa.numero} - ${empresa.bairro}</p>
+                <p>${empresa.cidade} - ${empresa.estado}, ${empresa.cep}</p>
+              </details>
+              ${tag}
+            </div>
+          </div>
+        </div>
+        `
+      })
+
+      addEvents()
+
+    }
 }
 
-function addEvents(id){
+function addEvents(){
 
   // Adicionar eventos de entrada e saída de mouse do card
   var cards = document.getElementsByClassName('card_register')
@@ -149,10 +157,10 @@ function addEvents(id){
   }
 
   // Adicionando evento de remoção de dado das empresas
-  // var iconsRemoveEmps = document.getElementsByClassName('emp_trash')
-  // for(let i = 0; i < iconsRemoveEmps.length; i++){
-  //   iconsRemoveEmps[i].addEventListener("click", removeDataEmps)
-  // }
+  var iconsRemoveEmps = document.getElementsByClassName('emp_trash')
+  for(let i = 0; i < iconsRemoveEmps.length; i++){
+    iconsRemoveEmps[i].addEventListener("click", removeDataEmps)
+  }
 
 }
 
@@ -193,7 +201,7 @@ function removeDataUsers(event){
 
     if(comando === 'DELETE'){
 
-      let url = 'http://localhost/projeto01-overdrive/_files/removeUser.php?id=' + idRemove
+      let url = 'http://localhost/projeto01-overdrive/_files/removeData.php?id=' + idRemove + '?tipo=usuario'
       let xhr = new XMLHttpRequest()
       xhr.open('GET', url, true)
       xhr.onreadystatechange = function() {
@@ -211,6 +219,33 @@ function removeDataUsers(event){
       alert('Não foi possível remover o usuário!')
 
     }
+  }
+}
+
+// Função para remoção do registro
+function removeDataEmps(event){
+  let idRemove = event.target.parentNode.parentNode.children[0].children[0].innerText.replace('#', '')
+  let comando = prompt("Por favor, confirme a instrução (DELETE) para excluir os registros do usuário.")
+
+  if(comando === 'DELETE'){
+
+    let url = 'http://localhost/projeto01-overdrive/_files/removeData.php?id=' + idRemove + '?tipo=empresa'
+    let xhr = new XMLHttpRequest()
+    xhr.open('GET', url, true)
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4) {
+        if (xhr.status == 200) {
+          xhr.responseText
+          alert('Usuário removido com sucesso!')
+          requestDados()
+        }
+      }
+    }
+    xhr.send();
+
+  } else {
+
+    alert('Não foi possível remover a empresa!')
 
   }
 }
