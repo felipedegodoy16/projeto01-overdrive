@@ -77,7 +77,7 @@ class Usuario {
         try {
 
             // Query
-            $sql = "SELECT nome, cargo, senha FROM usuarios WHERE cpf = :cpf LIMIT 1;";
+            $sql = "SELECT id_user, nome, cargo, senha FROM usuarios WHERE cpf = :cpf LIMIT 1;";
 
             // Conectando ao banco e preparando a query
             $stmt = ConexaoDAO::getConexao()->prepare($sql);
@@ -87,6 +87,7 @@ class Usuario {
             $usuario = $stmt->fetchAll();
 
             foreach($usuario as $u){
+                $u['id_user'];
                 $u['nome'];
                 $u['cargo'];
                 $u['senha'];
@@ -95,6 +96,7 @@ class Usuario {
             if(count($usuario) > 0 && password_verify($this->getSenha(), $u['senha'])){
                 session_start();
                 $_SESSION['logged'] = True;
+                $_SESSION['id'] = $u['id_user'];
                 $_SESSION['nome'] = $u['nome'];
                 $_SESSION['cargo'] = $u['cargo'];
                 header("Location: index.php");

@@ -54,6 +54,8 @@
 
     <main id="main_index" class="col-12 center">
 
+      <div id="id_session" style="display: none;"><?=$_SESSION['id']?></div>
+
       <div id="section_users" class="col-12 center transition_section"></div>
 
       <div id="section_emps" class="col-12 center transition_section"></div>

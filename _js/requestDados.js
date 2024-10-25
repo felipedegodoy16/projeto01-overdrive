@@ -126,11 +126,11 @@ function responseJson(json){
       `
     })
 
-    addEvents()
+    addEvents(json.id)
     
 }
 
-function addEvents(){
+function addEvents(id){
 
   // Adicionar eventos de entrada e saída de mouse do card
   var cards = document.getElementsByClassName('card_register')
@@ -180,23 +180,37 @@ function backCard(event){
 
 // Função para remoção do registro
 function removeDataUsers(event){
-  let id = event.target.parentNode.parentNode.children[0].children[0].innerText.replace('#', '')
-  let comando = prompt("Por favor, confirme a instrução (DELETE) para excluir os registros do usuário.")
+  const idSession = document.getElementById('id_session').innerText
+  let idRemove = event.target.parentNode.parentNode.children[0].children[0].innerText.replace('#', '')
 
-  if(comando === 'DELETE'){
-    let url = 'http://localhost/projeto01-overdrive/_files/removeUser.php?id=' + id
-    let xhr = new XMLHttpRequest()
-    xhr.open('GET', url, true)
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState == 4) {
-        if (xhr.status == 200) {
-          alert('Usuário removido com sucesso!')
-          requestDados()
+  if(idSession == idRemove){
+
+    alert('Não é possível remover o seu próprio usuário!')
+
+  } else {
+
+    let comando = prompt("Por favor, confirme a instrução (DELETE) para excluir os registros do usuário.")
+
+    if(comando === 'DELETE'){
+
+      let url = 'http://localhost/projeto01-overdrive/_files/removeUser.php?id=' + idRemove
+      let xhr = new XMLHttpRequest()
+      xhr.open('GET', url, true)
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4) {
+          if (xhr.status == 200) {
+            alert('Usuário removido com sucesso!')
+            requestDados()
+          }
         }
       }
+      xhr.send();
+
+    } else {
+
+      alert('Não foi possível remover o usuário!')
+
     }
-    xhr.send();
-  } else {
-    alert('Não foi possível remover o usuário!')
+
   }
 }
