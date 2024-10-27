@@ -17,7 +17,23 @@ if($_SESSION['cargo'] === 'A'){
     // Chamando método para remoção do usuário no banco
     $dados = $empresa->listarNomesEmps();
 
-    echo json_encode($dados);
+    // Verificando se retornou dados do banco
+    if($dados === 0){
+
+        $allDados = [
+            'status' => false
+        ];
+
+    } else {
+
+        $allDados = [
+            'status' => true,
+            'empresas' => $dados
+        ];
+
+    }
+
+    echo json_encode($allDados);
 
 } else {
 

@@ -221,12 +221,17 @@ function requireEmps(){
 }
 
 function preencherSelect(json){
-    var obj_select = document.getElementById('id_empresa')
 
-    json.map(function(empresa){
-        obj_select.innerHTML += 
-        `
-            <option value="${empresa.fantasia}">${empresa.fantasia}</option>
-        `
-    })
+    if(json.status){
+
+        var obj_select = document.getElementById('id_empresa')
+
+        json.empresas.map(function(empresa){
+            obj_select.innerHTML += 
+            `
+                <option value="${empresa.fantasia}">${empresa.fantasia}</option>
+            `
+        })
+        
+    }
 }

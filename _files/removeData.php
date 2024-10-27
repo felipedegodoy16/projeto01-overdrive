@@ -49,4 +49,4 @@ if($_SESSION['cargo'] === 'A'){
     }
 }
 
-header("Location: ../index.php");
+// header("Location: ../index.php");
