@@ -12,21 +12,34 @@ if(!$_SESSION['logged']){
 
 if($_SESSION['cargo'] === 'A'){
 
+    // Pegando id do usuário ou empresa que será excluído do banco
+    $id = (int) $_GET['id'];
+
     if($_GET['tipo'] === 'usuario'){
-        // Pegando id do usuário ou empresa que será excluído do banco
-        $id = (int) $_GET['id'];
 
         // Instanciação de um objeto usuário
-        $usuarios = new Usuario();
+        $usuario = new Usuario();
 
         // Chamando método para remoção do usuário no banco
-        $usuarios->removerUsuario($id);
+        $usuario->removerUsuario($id);
 
         echo "<script>
             alert('Usuário removido com sucesso!')
             window.location='../index.php'
         </script>";
+
     } else if($_GET['tipo'] === 'empresa'){
+
+        // Instanciação de um objeto empresa
+        $empresa = new Empresa();
+
+        // Chamando método para remoção do usuário no banco
+        $empresa->removerEmpresa($id);
+
+        // echo "<script>
+        //     alert('Empresa removida com sucesso!')
+        //     window.location='../index.php'
+        // </script>";
 
     } else{
         echo "<script>
@@ -34,8 +47,6 @@ if($_SESSION['cargo'] === 'A'){
             window.location='../index.php'
         </script>";
     }
-    
-
 }
 
 header("Location: ../index.php");

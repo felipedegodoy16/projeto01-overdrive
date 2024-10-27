@@ -69,6 +69,7 @@ class Empresa {
         }
     }
 
+    // Método para retornar todas as empresas registradas no banco
     public function listarEmpresas(){
         try {
 
@@ -108,6 +109,133 @@ class Empresa {
             }
 
             return -1;
+
+        } catch(Exception $e) {
+
+            echo "Exceção $e";
+
+        }
+    }
+
+    // Método para verificar se a empresa está vinculada a algum usuário
+    public function verificarVinculo($id){
+        try {
+
+            // Query
+            $sql = "SELECT fantasia FROM empresas WHERE id_emp = :id LIMIT 1;";
+
+            // Conectando ao banco e preparando a query
+            $stmt = ConexaoDAO::getConexao()->prepare($sql);
+            $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+
+            // Executando a query no banco
+            $stmt->execute() or die(print_r($stmt->errorInfo(), true));
+            $dados = $stmt->fetchAll();
+
+            if(count($dados) > 0){
+                foreach($dados as $d){
+                    $d['fantasia'];
+                }
+
+                // Query
+                $sql = "SELECT nome FROM usuarios WHERE empresa = :fantasia;";
+
+                // Conectando ao banco e preparando a query
+                $stmt = ConexaoDAO::getConexao()->prepare($sql);
+                $stmt->bindValue(":fantasia", $d['fantasia'], PDO::PARAM_STR);
+
+                // Executando a query no banco
+                $stmt->execute() or die(print_r($stmt->errorInfo(), true));
+                $nomes = $stmt->fetchAll();
+
+                var_dump($nomes);
+
+                if(count($nomes) > 0){
+                    return 1;
+                }
+
+                return -1;
+            }
+
+            return 0;
+
+        } catch(Exception $e) {
+
+            echo "Exceção $e";
+
+        }
+    }
+
+    // Método para retornar os nomes de todas as empresas cadastradas no banco
+    public function listarNomesEmps(){
+
+        try {
+
+            // Query
+            $sql = "SELECT fantasia FROM empresas;";
+
+            // Conectando ao banco
+            $stmt = ConexaoDAO::getConexao()->prepare($sql);
+
+            // Executando a query no banco
+            $stmt->execute() or die(print_r($stmt->errorInfo(), true));
+            $lista = $stmt->fetchAll();
+
+            if(count($lista) > 0){
+
+                foreach($lista as $ls){
+
+                    $empresas [] = array(
+                        'fantasia' => $ls['fantasia']
+                    );
+
+                }
+
+                return $empresas;
+
+            }
+
+            return 0;
+
+        } catch(Exception $e) {
+
+            echo "Exceção $e";
+            
+        }
+    }
+
+    // Método para remover empresa do banco
+    public function removerEmpresa($id){
+
+        try {
+            
+            // Verificando vínculo de empresa com algum usuário
+            $retorno = $this->verificarVinculo($id);
+
+            // Verificando status do vínculo
+            if($retorno === 0){
+
+                return 0;
+
+            } else if($retorno === 1){
+
+                return 1;
+
+            } else{
+
+                // Query
+                $sql = "DELETE FROM empresas WHERE id_emp = :id;";
+
+                // Conectando o banco e preparando a query
+                $stmt = ConexaoDAO::getConexao()->prepare($sql);
+                $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+
+                // Executando a query no banco
+                $stmt->execute() or die(print_r($stmt->erroInfo(), true));
+
+                return -1;
+
+            }
 
         } catch(Exception $e) {
 

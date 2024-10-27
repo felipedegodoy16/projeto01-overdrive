@@ -201,13 +201,13 @@ function removeDataUsers(event){
 
     if(comando === 'DELETE'){
 
-      let url = 'http://localhost/projeto01-overdrive/_files/removeData.php?id=' + idRemove + '?tipo=usuario'
+      let url = 'http://localhost/projeto01-overdrive/_files/removeData.php?id=' + idRemove + '&tipo=usuario'
       let xhr = new XMLHttpRequest()
       xhr.open('GET', url, true)
       xhr.onreadystatechange = function() {
         if (xhr.readyState == 4) {
           if (xhr.status == 200) {
-            alert('Usuário removido com sucesso!')
+            // alert('Usuário removido com sucesso!')
             requestDados()
           }
         }
@@ -225,7 +225,7 @@ function removeDataUsers(event){
 // Função para remoção do registro
 function removeDataEmps(event){
   let idRemove = event.target.parentNode.parentNode.children[0].children[0].innerText.replace('#', '')
-  let comando = prompt("Por favor, confirme a instrução (DELETE) para excluir os registros do usuário.")
+  let comando = prompt("Por favor, confirme a instrução (DELETE) para excluir os registros da empresa.")
 
   if(comando === 'DELETE'){
 
@@ -236,7 +236,6 @@ function removeDataEmps(event){
       if (xhr.readyState == 4) {
         if (xhr.status == 200) {
           xhr.responseText
-          alert('Usuário removido com sucesso!')
           requestDados()
         }
       }

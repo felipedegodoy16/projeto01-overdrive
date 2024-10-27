@@ -142,13 +142,9 @@
                 </p>
                 <p>
                     <label for="id_empresa">Empresa</label>
-                    <input type="text" name="empresa" id="id_empresa" list="empresas" maxlength="255" placeholder="Digite a Empresa" required>
-                    <datalist id="empresas">
-                        <option value="Rio de Janeiro"></option>
-                        <option value="Noova Iguaçu"></option>
-                        <option value="Niterói"></option>
-                        <option value="Inativo"></option>
-                    </datalist>
+                    <select name="empresa" id="id_empresa">
+                        <option value="Inativo" selected>Inativo</option>
+                    </select>
                 </p>
             </div>
 

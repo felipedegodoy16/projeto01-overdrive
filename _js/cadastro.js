@@ -16,6 +16,10 @@ function ready() {
 
     // Funções Empresa
     document.addEventListener("mouseup", verificaTelEmp)
+
+    // Funcão para retornar empresas do banco
+    requireEmps()
+
 }
 
 // Funções para validação do CPF
@@ -197,4 +201,32 @@ function preencheCamposCnpj(json){
         btnCadastrar.setAttribute('type', 'button')
 
     }
+}
+
+// Função para listar as empresas dentro do select
+function requireEmps(){
+
+    let url = 'http://localhost/projeto01-overdrive/_files/returnEmps.php'
+    let xhr = new XMLHttpRequest()
+    xhr.open('GET', url, true)
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4) {
+        if (xhr.status == 200) {
+          preencherSelect(JSON.parse(xhr.responseText))
+        }
+      }
+    }
+    xhr.send();
+    
+}
+
+function preencherSelect(json){
+    var obj_select = document.getElementById('id_empresa')
+
+    json.map(function(empresa){
+        obj_select.innerHTML += 
+        `
+            <option value="${empresa.fantasia}">${empresa.fantasia}</option>
+        `
+    })
 }

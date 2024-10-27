@@ -72,7 +72,7 @@ class Usuario {
         }
     }
 
-    // Fazer login do usuário
+    // Método para fazer login do usuário
     public function verificarAcesso(){
         try {
 
@@ -113,6 +113,7 @@ class Usuario {
         }
     }
 
+    // Método para retornar todos os usuários registrados no banco
     public function listarUsuarios(){
         try {
 
