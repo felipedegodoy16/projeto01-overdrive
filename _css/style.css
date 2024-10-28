@@ -15,6 +15,18 @@
     justify-content: center;
 }
 
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border-width: 0;
+    white-space: nowrap;
+}
+
 /* Navbar */
 
 nav#navbar {
@@ -109,8 +121,25 @@ body#full_content_login {
 /* Main da página Index */
 
 main#main_index {
+    padding-inline: 3em;
     margin-top: 9em;
     flex-wrap: wrap;
+}
+
+div#status_request {
+    margin-top: 1em !important;
+    width: 95%;
+    display: none;
+}
+
+.status_accept {
+    color: rgb(0, 96, 22) !important;
+    background-color: rgb(135, 248, 161) !important;
+    border-color: rgb(0, 165, 38) !important;
+}
+
+i#close_status {
+    cursor: pointer;
 }
 
 div#section_users, div#section_emps {
@@ -204,6 +233,16 @@ div.card_register i.icon_edit {
 div.card_register i.icon_edit:hover {
     background-color: #FFF;
     color: rgb(0, 140, 255);
+}
+
+.card_register details {
+    overflow: hidden;
+    max-height: 30px;
+}
+
+.card_register details[open] {
+    max-height: 250px;
+    transition: all .3s ease-in-out;
 }
 
 .back_card {
@@ -300,6 +339,23 @@ aside#aside_index ul li {
 aside#aside_index ul li:hover {
     color: var(--red-light);
     border-bottom: 1px solid var(--red-light);
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+input#search {
+    outline: 0;
+    border-radius: 10px;
+    padding: .3em;
+    border: 2px solid var(--red-dark);
+    color: var(--red-dark);
+    transition: all .2s ease-in-out;
+}
+
+input#search:focus {
+    background-color: rgba(133, 133, 133, 0.15);
 }
 
 .active_filtro {
@@ -489,7 +545,7 @@ i.eye-password:hover {
     color: var(--red-light);
 }
 
-div#error_status {
+div.error_status {
     margin-top: -2em !important;
     margin-bottom: 1.3em !important;
     color: var(--red-dark);

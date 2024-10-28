@@ -17,7 +17,7 @@ function requestDados(){
   xhr.onreadystatechange = function() {
       if (xhr.readyState == 4) {
           if (xhr.status == 200) {
-              responseJson(JSON.parse(xhr.responseText))
+            responseJson(JSON.parse(xhr.responseText))
           }
       }
   }
@@ -25,36 +25,38 @@ function requestDados(){
 }
 
 function responseJson(json){
-    const divUsers = document.getElementById('section_users')
-    const divEmps = document.getElementById('section_emps')
-    var tag = ''
-    divUsers.innerHTML = ''
-    divEmps.innerHTML = ''
+  const divUsers = document.getElementById('section_users')
+  const divEmps = document.getElementById('section_emps')
+  var tag = ''
+  divUsers.innerHTML = ''
+  divEmps.innerHTML = ''
 
-    if(json.error){
-      const main = document.getElementById('main_index')
+  if(json.error){
+    const main = document.getElementById('main_index')
 
-      main.innerHTML = '<p>Ainda não há dados registrados no banco!</p>'
+    main.innerHTML = '<p>Ainda não há dados registrados no banco!</p>'
 
-    } else {
+  } else {
 
-      divUsers.innerHTML +=
-      `
-        <div class="title_sections center col-12">
-          <div class="col-md-4 line"></div>
-            <h1 class="col-12 col-md-4 h1_sections">Funcionários</h1>
-          <div class="col-md-4 line"></div>
-        </div>
-      `
+    divUsers.innerHTML +=
+    `
+      <div class="title_sections center col-12">
+        <div class="col-md-4 line"></div>
+          <h1 class="col-12 col-md-4 h1_sections">Funcionários</h1>
+        <div class="col-md-4 line"></div>
+      </div>
+    `
 
-      divEmps.innerHTML +=
-      `
-        <div class="title_sections center col-12">
-          <div class="col-md-4 line"></div>
-            <h1 class="col-12 col-md-4 h1_sections">Empresas</h1>
-          <div class="col-md-4 line"></div>
-        </div>
-      `
+    divEmps.innerHTML +=
+    `
+      <div class="title_sections center col-12">
+        <div class="col-md-4 line"></div>
+          <h1 class="col-12 col-md-4 h1_sections">Empresas</h1>
+        <div class="col-md-4 line"></div>
+      </div>
+    `
+
+    if(json.usuarios !== -1){
 
       json.usuarios.map(function(usuario){
 
@@ -77,8 +79,8 @@ function responseJson(json){
               <header>
                 <p style="position: absolute; padding: 0; left: 1em; top: 1em;">#${usuario.id}</p>
               </header>
-              <p style="margin-top: 4.5em;">Nome: ${usuario.nome}</p>
-              <p>CPF: ${usuario.cpf}</p>
+              <p style="margin-top: 4.5em;" class="name">Nome: ${usuario.nome}</p>
+              <p class="cpf_cnpj">CPF: ${usuario.cpf}</p>
               <p>CNH: ${usuario.cnh}</p>
               <p>Telefone: ${usuario.telefone}</p>
               <p>Carro: ${usuario.carro}</p>
@@ -94,6 +96,14 @@ function responseJson(json){
         </div>
         `
       })
+
+    } else {
+
+      divEmps.innerHTML += '<p style="margin: 0; color: var(--red-dark);">Não há registros de usuários ainda.</p>'
+
+    }
+
+    if(json.empresas !== -1){
 
       json.empresas.map(function(empresa){
 
@@ -116,9 +126,9 @@ function responseJson(json){
               <header>
                 <p style="position: absolute; padding: 0; left: 1em; top: 1em;">#${empresa.id}</p>
               </header>
-              <p style="margin-top: 4.5em;">Razão: ${empresa.nome}</p>
+              <p style="margin-top: 4.5em;" class="name">Razão: ${empresa.nome}</p>
               <p>Fantasia: ${empresa.fantasia}</p>
-              <p>CNPJ: ${empresa.cnpj}</p>
+              <p class="cpf_cnpj">CNPJ: ${empresa.cnpj}</p>
               <p>Telefone: ${empresa.telefone}</p>
               <p>Responsável: ${empresa.responsavel}</p>
               <details style="margin-bottom: .4em; background-color: rgba(133, 133, 133, 0.08);">
@@ -133,9 +143,17 @@ function responseJson(json){
         `
       })
 
-      addEvents()
+    } else {
+
+      divEmps.innerHTML += '<p style="margin: 0; color: var(--red-dark); font-size: 35pt; margin-bottom: 2em;">Não há registros de empresas ainda.</p>'
 
     }
+
+    addEvents()
+
+    createFilter()
+
+  }
 }
 
 function addEvents(){
@@ -188,12 +206,16 @@ function backCard(event){
 
 // Função para remoção do registro
 function removeDataUsers(event){
+  const divStatus = document.getElementById('status_request')
+  const pStatus = document.getElementById('p_status_request')
   const idSession = document.getElementById('id_session').innerText
   let idRemove = event.target.parentNode.parentNode.children[0].children[0].innerText.replace('#', '')
 
+  divStatus.style.display = 'flex'
+
   if(idSession == idRemove){
 
-    alert('Não é possível remover o seu próprio usuário!')
+    pStatus.innerText = `Não é possível remover o seu próprio usuário.`
 
   } else {
 
@@ -207,8 +229,11 @@ function removeDataUsers(event){
       xhr.onreadystatechange = function() {
         if (xhr.readyState == 4) {
           if (xhr.status == 200) {
-            // alert('Usuário removido com sucesso!')
+
+            pStatus.innerText = `Usuário removido com sucesso.`
+            divStatus.classList.add('status_accept')
             requestDados()
+
           }
         }
       }
@@ -216,7 +241,7 @@ function removeDataUsers(event){
 
     } else {
 
-      alert('Não foi possível remover o usuário!')
+      pStatus.innerText = `Não foi possível remover o usuário.`
 
     }
   }
@@ -224,19 +249,38 @@ function removeDataUsers(event){
 
 // Função para remoção do registro
 function removeDataEmps(event){
+  const divStatus = document.getElementById('status_request')
+  const pStatus = document.getElementById('p_status_request')
   let idRemove = event.target.parentNode.parentNode.children[0].children[0].innerText.replace('#', '')
   let comando = prompt("Por favor, confirme a instrução (DELETE) para excluir os registros da empresa.")
 
+  window.scrollTo(0, 0)
+  divStatus.style.display = 'flex'
+
   if(comando === 'DELETE'){
 
-    let url = 'http://localhost/projeto01-overdrive/_files/removeData.php?id=' + idRemove + '?tipo=empresa'
+    let url = 'http://localhost/projeto01-overdrive/_files/removeData.php?id=' + idRemove + '&tipo=empresa'
     let xhr = new XMLHttpRequest()
     xhr.open('GET', url, true)
     xhr.onreadystatechange = function() {
       if (xhr.readyState == 4) {
         if (xhr.status == 200) {
-          xhr.responseText
-          requestDados()
+
+          json = JSON.parse(xhr.responseText)
+          console.log(json)
+
+          if(json.status){
+
+            pStatus.innerText = `${json.message}`
+            divStatus.classList.add('status_accept')
+            requestDados()
+
+          } else{
+
+            pStatus.innerText = `${json.message}`
+
+          }
+
         }
       }
     }
@@ -244,7 +288,52 @@ function removeDataEmps(event){
 
   } else {
 
-    alert('Não foi possível remover a empresa!')
+    pStatus.innerText = `Não foi possível remover a empresa.`
 
+  }
+}
+
+// Função para fechar status
+function closeStatus(){
+  const divStatus = document.getElementById('status_request')
+
+  divStatus.style.display = 'none'
+  divStatus.classList.remove('status_accept')
+}
+
+// Função para fazer o filtro de pesquisa
+function createFilter(){
+  const filterElement = document.getElementById('search')
+
+  filterElement.addEventListener('input', filterCards)
+}
+
+// Função para filtrar
+function filterCards(){
+  const filterElement = document.getElementById('search')
+  const cards = document.getElementsByClassName('card_register')
+
+  if(filterElement.value != ''){
+    for(let card of cards){
+      let nome = card.getElementsByClassName('name')[0]
+      nome = nome.textContent.replace('Nome: ', '').toLowerCase()
+
+      let cpfCnpj = card.getElementsByClassName('cpf_cnpj')[0]
+      cpfCnpj = cpfCnpj.textContent.replace('CPF: ', '').replace('CNPJ: ', '').replace('.', '').replace('.', '').replace('/', '').replace('-', '').toLowerCase()
+
+      let filterText = filterElement.value.replace('.', '').replace('.', '').replace('-', '').toLowerCase()
+
+      if(!nome.includes(filterText) && !cpfCnpj.includes(filterText)){
+        card.classList.remove('back_card')
+        card.classList.add('transition_section')
+        card.parentNode.style.display = 'none'
+      } else{
+        card.parentNode.style.display = 'block'
+      }
+    }
+  } else{
+    for(let card of cards){
+      card.parentNode.style.display = 'block'
+    }
   }
 }

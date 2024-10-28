@@ -34,12 +34,32 @@ if($_SESSION['cargo'] === 'A'){
         $empresa = new Empresa();
 
         // Chamando método para remoção do usuário no banco
-        $empresa->removerEmpresa($id);
+        $dadoRetornado = $empresa->removerEmpresa($id);
 
-        // echo "<script>
-        //     alert('Empresa removida com sucesso!')
-        //     window.location='../index.php'
-        // </script>";
+        if($dadoRetornado === 0){
+
+            $json = array(
+                'status' => false,
+                'message' => "A empresa selecionada já foi excluída."
+            );
+
+        } else if($dadoRetornado === 1){
+            
+            $json = array(
+                'status' => false,
+                'message' => "A empresa selecionada ainda possui vínculo com algum funcionário."
+            );
+
+        } else {
+
+            $json = array(
+                'status' => true,
+                'message' => "Empresa removida com sucesso."
+            );
+
+        }
+
+        echo json_encode($json);
 
     } else{
         echo "<script>

@@ -187,16 +187,14 @@ class Empresa {
                 $stmt->execute() or die(print_r($stmt->errorInfo(), true));
                 $empresas = $stmt->fetchAll();
 
-                var_dump($empresas);
-
                 if(count($empresas) > 0){
-                    // return 1;
+                    return 1;
                 }
 
-                // return -1;
+                return -1;
             }
 
-            // return 0;
+            return 0;
 
         } catch(Exception $e) {
 
@@ -214,29 +212,29 @@ class Empresa {
             $retorno = $this->verificarVinculo($id);
 
             // Verificando status do vínculo
-            // if($retorno === 0){
+            if($retorno === 0){
 
-            //     return 0;
+                return 0;
 
-            // } else if($retorno === 1){
+            } else if($retorno === 1){
 
-            //     return 1;
+                return 1;
 
-            // } else{
+            } else{
 
-            //     // Query
-            //     $sql = "DELETE FROM empresas WHERE id_emp = :id;";
+                // Query
+                $sql = "DELETE FROM empresas WHERE id_emp = :id;";
 
-            //     // Conectando o banco e preparando a query
-            //     $stmt = ConexaoDAO::getConexao()->prepare($sql);
-            //     $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+                // Conectando o banco e preparando a query
+                $stmt = ConexaoDAO::getConexao()->prepare($sql);
+                $stmt->bindValue(":id", $id, PDO::PARAM_INT);
 
-            //     // Executando a query no banco
-            //     $stmt->execute() or die(print_r($stmt->erroInfo(), true));
+                // Executando a query no banco
+                $stmt->execute() or die(print_r($stmt->erroInfo(), true));
 
-            //     return -1;
+                return -1;
 
-            // }
+            }
 
         } catch(Exception $e) {
 

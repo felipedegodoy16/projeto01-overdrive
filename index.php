@@ -54,11 +54,13 @@
 
     <main id="main_index" class="col-12 center">
 
+      <div id="status_request" class="center error_status"><p id="p_status_request" style="margin: 0;"></p><i id="close_status" class="fi fi-rr-x center" onclick="closeStatus()"></i></div>
+
       <div id="id_session" style="display: none;"><?=$_SESSION['id']?></div>
 
-      <div id="section_users" class="col-12 center transition_section"></div>
+      <div id="section_users" class="col-12 center transition_section" style="align-items: flex-start;"></div>
 
-      <div id="section_emps" class="col-12 center transition_section"></div>
+      <div id="section_emps" class="col-12 center transition_section" style="align-items: flex-start;"></div>
 
     </main>
 
@@ -68,7 +70,11 @@
         <i class="fi fi-rr-bars-filter icon_filtro"></i>
       </div>
       <ul id="lst_filtros">
-        <li class="#">Pesquisar</li>
+        <li class="input-wrapper center" style="cursor: auto;">
+          <label for="search" class="sr-only">Pesquisar</label>
+          <input type="text" id="search" placeholder="Filtrar">
+          <i class="fi fi-rr-search" style="margin-left: 5px;"></i>
+        </li>
         <li class="active_filtro li_filtros">Categoria</li>
         <li class="li_filtros">A - Z</li>
         <li class="li_filtros">Z - A</li>
@@ -96,9 +102,9 @@
       <div class="col-12 col-lg-3 div_footer">
         <h3>Contato</h3>
         <div id="icons_footer">
-          <a href="#" target="_blank" class="a_icons"><i class="fi fi-brands-instagram icons_rs"></i></a>
-          <a href="#" target="_blank" class="a_icons"><i class="fi fi-brands-whatsapp icons_rs"></i></a>
-          <a href="#" target="_blank" class="a_icons"><i class="fi fi-brands-facebook icons_rs"></i></a>
+          <a href="https://www.instagram.com/feliipegodoyy/profilecard/?igsh=MXA4Y3lzenNoeTd3cQ==" target="_blank" class="a_icons"><i class="fi fi-brands-instagram icons_rs"></i></a>
+          <a href="https://web.whatsapp.com/send?phone=5519998174730" target="_blank" class="a_icons"><i class="fi fi-brands-whatsapp icons_rs"></i></a>
+          <a href="https://www.facebook.com/felipe.ricardopiresdegodoy?mibextid=ZbWKwL" target="_blank" class="a_icons"><i class="fi fi-brands-facebook icons_rs"></i></a>
           <a href="https://github.com/felipedegodoy16" target="_blank" class="a_icons"><i class="fi fi-brands-github icons_rs"></i></a>
         </div>
       </div>

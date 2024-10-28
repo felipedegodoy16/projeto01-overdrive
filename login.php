@@ -71,7 +71,7 @@
           <?php 
             if($status === 0){
               echo '
-              <div id="error_status" class="center">
+              <div id="error_status" class="center error_status">
                 <p style="margin: 0;">Usuário e/ou senha incorreto(s)!</p>
               </div>';
             }
