@@ -74,7 +74,55 @@ class Empresa {
         try {
 
             // Query
-            $sql = "SELECT * FROM empresas emp INNER JOIN enderecos ende ON emp.id_endereco = ende.id_end";
+            $sql = "SELECT * FROM empresas emp INNER JOIN enderecos ende ON emp.id_endereco = ende.id_end;";
+
+            // Conectando com o banco
+            $stmt = ConexaoDAO::getConexao()->prepare($sql);
+
+            // Excutando a query no banco
+            $stmt->execute() or die(print_r($stmt->errorInfo(), true));
+            $dados = $stmt->fetchAll();
+
+            if(count($dados) > 0){
+
+                foreach($dados as $d){
+
+                    $empresas[] = array(
+                        'id' => $d['id_emp'],
+                        'nome' => $d['nome'],
+                        'cnpj' => $d['cnpj'],
+                        'telefone' => $d['telefone'],
+                        'fantasia' => $d['fantasia'],
+                        'responsavel' => $d['responsavel'],
+                        'foto' => $d['foto'],
+                        'cep' => $d['cep'],
+                        'numero' => $d['numero'],
+                        'rua' => $d['rua'],
+                        'cidade' => $d['cidade'],
+                        'estado' => $d['estado'],
+                        'bairro' => $d['bairro']
+                    );
+                }
+
+                return $empresas;
+
+            }
+
+            return -1;
+
+        } catch(Exception $e) {
+
+            echo "Exceção $e";
+
+        }
+    }
+
+    // Método para retornar todas as empresas registradas no banco em ordem alfabética
+    public function listarEmpresasAlfa($campo, $ordem){
+        try {
+
+            // Query
+            $sql = "SELECT * FROM empresas emp INNER JOIN enderecos ende ON emp.id_endereco = ende.id_end ORDER BY $campo $ordem;";
 
             // Conectando com o banco
             $stmt = ConexaoDAO::getConexao()->prepare($sql);

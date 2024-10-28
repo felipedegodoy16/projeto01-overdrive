@@ -204,13 +204,14 @@ function backCard(event){
   }
 }
 
-// Função para remoção do registro
+// Função para remoção do registro de usuários
 function removeDataUsers(event){
   const divStatus = document.getElementById('status_request')
   const pStatus = document.getElementById('p_status_request')
   const idSession = document.getElementById('id_session').innerText
   let idRemove = event.target.parentNode.parentNode.children[0].children[0].innerText.replace('#', '')
 
+  window.scrollTo(0, 0)
   divStatus.style.display = 'flex'
 
   if(idSession == idRemove){
@@ -247,7 +248,7 @@ function removeDataUsers(event){
   }
 }
 
-// Função para remoção do registro
+// Função para remoção do registro de empresas
 function removeDataEmps(event){
   const divStatus = document.getElementById('status_request')
   const pStatus = document.getElementById('p_status_request')
@@ -336,4 +337,19 @@ function filterCards(){
       card.parentNode.style.display = 'block'
     }
   }
+}
+
+// Função para fazer filtro de ordem alfabética
+function alfaAsc(campo, ordem){
+  let url = 'http://localhost/projeto01-overdrive/_files/orderFilters.php?campo=' + campo + '&ordem=' + ordem  
+  let xhr = new XMLHttpRequest()
+  xhr.open('GET', url, true)
+  xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4) {
+          if (xhr.status == 200) {
+            responseJson(JSON.parse(xhr.responseText))
+          }
+      }
+  }
+  xhr.send();
 }

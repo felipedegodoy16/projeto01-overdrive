@@ -23,11 +23,6 @@ if($_SESSION['cargo'] === 'A'){
         // Chamando método para remoção do usuário no banco
         $usuario->removerUsuario($id);
 
-        echo "<script>
-            alert('Usuário removido com sucesso!')
-            window.location='../index.php'
-        </script>";
-
     } else if($_GET['tipo'] === 'empresa'){
 
         // Instanciação de um objeto empresa
@@ -69,4 +64,4 @@ if($_SESSION['cargo'] === 'A'){
     }
 }
 
-// header("Location: ../index.php");
+header("Location: ../index.php");

@@ -164,6 +164,57 @@ class Usuario {
         }
     }
 
+    // Método para retornar todos os usuários registrados no banco em ordem alfabética
+    public function listarUsuariosAlfa($campo, $ordem){
+        try {
+
+            // Query
+            $sql = "SELECT * FROM usuarios u INNER JOIN enderecos e ON u.id_endereco = e.id_end ORDER BY $campo $ordem;";
+
+            // Conectando ao banco e preparando a query
+            $stmt = ConexaoDAO::getConexao()->prepare($sql);
+
+            // Executando a query no banco e recebendo os dados
+            $stmt->execute() or die(print_r($stmt->errorInfo(), true));
+            $dados = $stmt->fetchAll();
+
+            if(count($dados) > 0){
+
+                foreach($dados as $d){
+
+                    $users[] = array(
+                        'id' => $d['id_user'],
+                        'nome' => $d['nome'],
+                        'carro' => $d['carro'],
+                        'cargo' => $d['cargo'],
+                        'empresa' => $d['empresa'],
+                        'telefone' => $d['telefone'],
+                        'cpf' => $d['cpf'],
+                        'cnh' => $d['cnh'],
+                        'foto' => $d['foto'],
+                        'cep' => $d['cep'],
+                        'numero' => $d['numero'],
+                        'rua' => $d['rua'],
+                        'cidade' => $d['cidade'],
+                        'estado' => $d['estado'],
+                        'bairro' => $d['bairro']
+                    );
+
+                }
+
+                return $users;
+
+            }
+
+            return -1;
+
+        } catch(Exception $e) {
+
+            echo "Exceção $e";
+
+        }
+    }
+
     // Método para remover usuário do banco
     public function removerUsuario($id){
         try {
