@@ -3,7 +3,7 @@ require_once 'Endereco.php';
 
 class Usuario {
     // Atributos
-    private string $nome, $telefone, $cpf, $cnh, $carro, $cargo, $empresa, $senha, $foto;
+    private string $nome, $telefone, $cpf, $cnh, $carro, $cargo, $empresa, $senha, $foto, $registro;
     private int $id;
     private Endereco $endereco;
 
@@ -47,7 +47,7 @@ class Usuario {
 
             // Query SQL
             $sql = "INSERT INTO usuarios VALUES 
-            (DEFAULT, :nome, :cpf, :cnh, :telefone, :carro, :cargo, :empresa, :senha, :foto, :id_endereco);";
+            (DEFAULT, :nome, :cpf, :cnh, :telefone, :carro, :cargo, :empresa, :senha, :foto, :registro, :id_endereco);";
 
             // Conectando o banco e preparando a query
             $stmt = ConexaoDAO::getConexao()->prepare($sql);
@@ -60,6 +60,7 @@ class Usuario {
             $stmt->bindValue(":empresa", $this->empresa, PDO::PARAM_STR);
             $stmt->bindValue(":senha", $this->senha, PDO::PARAM_STR);
             $stmt->bindValue(":foto", $this->foto, PDO::PARAM_STR);
+            $stmt->bindValue(":registro", $this->registro, PDO::PARAM_STR);
             $stmt->bindValue(":id_endereco", $this->endereco->getId(), PDO::PARAM_INT);
 
             // Executando a query no banco
@@ -141,6 +142,7 @@ class Usuario {
                         'cpf' => $d['cpf'],
                         'cnh' => $d['cnh'],
                         'foto' => $d['foto'],
+                        'registro' => $d['registro'],
                         'cep' => $d['cep'],
                         'numero' => $d['numero'],
                         'rua' => $d['rua'],
@@ -164,8 +166,8 @@ class Usuario {
         }
     }
 
-    // Método para retornar todos os usuários registrados no banco em ordem alfabética
-    public function listarUsuariosAlfa($campo, $ordem){
+    // Método para retornar todos os usuários registrados no banco na ordem que for especificada
+    public function listarUsuariosOrdem($campo, $ordem){
         try {
 
             // Query
@@ -192,6 +194,7 @@ class Usuario {
                         'cpf' => $d['cpf'],
                         'cnh' => $d['cnh'],
                         'foto' => $d['foto'],
+                        'registro' => $d['registro'],
                         'cep' => $d['cep'],
                         'numero' => $d['numero'],
                         'rua' => $d['rua'],
@@ -283,6 +286,10 @@ class Usuario {
         return $this->foto;
     }
 
+    public function getRegistro(){
+        return $this->registro;
+    }
+
     public function setId($id){
         $this->id = $id;
     }
@@ -325,5 +332,9 @@ class Usuario {
 
     public function setFoto($foto){
         $this->foto = $foto;
+    }
+
+    public function setRegistro($registro){
+        $this->registro = $registro;
     }
 }

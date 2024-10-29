@@ -4,7 +4,7 @@ require_once 'Endereco.php';
 class Empresa {
     // Atributos
     private int $id;
-    private string $nome, $cnpj, $telefone, $fantasia, $responsavel, $foto;
+    private string $nome, $cnpj, $telefone, $fantasia, $responsavel, $foto, $registro;
     private Endereco $endereco;
 
     // Método construtor
@@ -47,7 +47,7 @@ class Empresa {
 
             // Query SQL
             $sql = "INSERT INTO empresas VALUES 
-            (DEFAULT, :nome, :fantasia, :cnpj, :telefone, :responsavel, :foto, :id_endereco);";
+            (DEFAULT, :nome, :fantasia, :cnpj, :telefone, :responsavel, :foto, :registro, :id_endereco);";
 
             // Conectando o banco e preparando a query
             $stmt = ConexaoDAO::getConexao()->prepare($sql);
@@ -57,6 +57,7 @@ class Empresa {
             $stmt->bindValue(":telefone", $this->telefone, PDO::PARAM_STR);
             $stmt->bindValue(":responsavel", $this->responsavel, PDO::PARAM_STR);
             $stmt->bindValue(":foto", $this->foto, PDO::PARAM_STR);
+            $stmt->bindValue(":registro", $this->registro, PDO::PARAM_STR);
             $stmt->bindValue(":id_endereco", $this->endereco->getId(), PDO::PARAM_INT);
 
             // Executando a query no banco
@@ -95,6 +96,7 @@ class Empresa {
                         'fantasia' => $d['fantasia'],
                         'responsavel' => $d['responsavel'],
                         'foto' => $d['foto'],
+                        'registro' => $d['registro'],
                         'cep' => $d['cep'],
                         'numero' => $d['numero'],
                         'rua' => $d['rua'],
@@ -117,8 +119,8 @@ class Empresa {
         }
     }
 
-    // Método para retornar todas as empresas registradas no banco em ordem alfabética
-    public function listarEmpresasAlfa($campo, $ordem){
+    // Método para retornar todas as empresas registradas no banco na ordem que for especificada
+    public function listarEmpresasOrdem($campo, $ordem){
         try {
 
             // Query
@@ -143,6 +145,7 @@ class Empresa {
                         'fantasia' => $d['fantasia'],
                         'responsavel' => $d['responsavel'],
                         'foto' => $d['foto'],
+                        'registro' => $d['registro'],
                         'cep' => $d['cep'],
                         'numero' => $d['numero'],
                         'rua' => $d['rua'],
@@ -324,6 +327,10 @@ class Empresa {
         return $this->foto;
     }
 
+    public function getRegistro(){
+        return $this->registro;
+    }
+
     public function setId($id){
         $this->id = $id;
     }
@@ -354,5 +361,9 @@ class Empresa {
 
     public function setFoto($foto){
         $this->foto = $foto;
+    }
+
+    public function setRegistro($registro){
+        $this->registro = $registro;
     }
 }

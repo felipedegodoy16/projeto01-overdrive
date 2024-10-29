@@ -9,6 +9,8 @@ $usuario->setCnh($_POST['cnh']);
 
 $verificaDados = $usuario->verificaDados();
 
+date_default_timezone_set("America/Sao_Paulo");
+
 if($verificaDados === -1) {
 
     // Instanciado o objeto endereço com as informações passadas
@@ -48,6 +50,7 @@ if($verificaDados === -1) {
     } else {
         $usuario->setFoto('');
     }
+    $usuario->setRegistro(date("y/m/d"));
 
     // Inserindo usuário no banco
     $usuario->inserirUsuario();

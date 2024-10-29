@@ -27,6 +27,11 @@ function requestDados(){
 function responseJson(json){
   const divUsers = document.getElementById('section_users')
   const divEmps = document.getElementById('section_emps')
+
+  const formatter = Intl.DateTimeFormat("pt-BR", {
+    dateStyle: "short"
+  })
+
   var tag = ''
   divUsers.innerHTML = ''
   divEmps.innerHTML = ''
@@ -81,15 +86,16 @@ function responseJson(json){
               </header>
               <p style="margin-top: 4.5em;" class="name">Nome: ${usuario.nome}</p>
               <p class="cpf_cnpj">CPF: ${usuario.cpf}</p>
-              <p>CNH: ${usuario.cnh}</p>
+              <p class="cnh">CNH: ${usuario.cnh}</p>
               <p>Telefone: ${usuario.telefone}</p>
               <p>Carro: ${usuario.carro}</p>
               <p>Empresa: ${usuario.empresa}</p>
-              <details style="margin-bottom: .4em; background-color: rgba(133, 133, 133, 0.08);">
-                <summary style="background-color: #FFF;">Endereço</summary>
+              <details style="margin-bottom: .4em;">
+                <summary>Endereço</summary>
                 <p style="margin: .4em 0;">${usuario.rua}, ${usuario.numero} - ${usuario.bairro}</p>
                 <p>${usuario.cidade} - ${usuario.estado}, ${usuario.cep}</p>
               </details>
+              <p>Registro: ${formatter.format(Date.parse(usuario.registro + 'UTC-3'))}</p>
               ${tag}
             </div>
           </div>
@@ -131,11 +137,12 @@ function responseJson(json){
               <p class="cpf_cnpj">CNPJ: ${empresa.cnpj}</p>
               <p>Telefone: ${empresa.telefone}</p>
               <p>Responsável: ${empresa.responsavel}</p>
-              <details style="margin-bottom: .4em; background-color: rgba(133, 133, 133, 0.08);">
-                <summary style="background-color: #FFF;">Endereço</summary>
+              <details style="margin-bottom: .4em;">
+                <summary>Endereço</summary>
                 <p style="margin: .4em 0;">${empresa.rua}, ${empresa.numero} - ${empresa.bairro}</p>
                 <p>${empresa.cidade} - ${empresa.estado}, ${empresa.cep}</p>
               </details>
+              <p>Registro: ${formatter.format(Date.parse(empresa.registro + 'UTC-3'))}</p>
               ${tag}
             </div>
           </div>
@@ -322,9 +329,12 @@ function filterCards(){
       let cpfCnpj = card.getElementsByClassName('cpf_cnpj')[0]
       cpfCnpj = cpfCnpj.textContent.replace('CPF: ', '').replace('CNPJ: ', '').replace('.', '').replace('.', '').replace('/', '').replace('-', '').toLowerCase()
 
+      let cnh = card.getElementsByClassName('cnh')[0]
+      cnh = cnh.textContent.replace('CNH: ', '').toLowerCase()
+
       let filterText = filterElement.value.replace('.', '').replace('.', '').replace('-', '').toLowerCase()
 
-      if(!nome.includes(filterText) && !cpfCnpj.includes(filterText)){
+      if(!nome.includes(filterText) && !cpfCnpj.includes(filterText) && !cnh.includes(filterText)){
         card.classList.remove('back_card')
         card.classList.add('transition_section')
         card.parentNode.style.display = 'none'
@@ -339,17 +349,17 @@ function filterCards(){
   }
 }
 
-// Função para fazer filtro de ordem alfabética
-function alfaAsc(campo, ordem){
+// Função para fazer filtro de ordem
+function listarCardsOrdem(campo, ordem){
   let url = 'http://localhost/projeto01-overdrive/_files/orderFilters.php?campo=' + campo + '&ordem=' + ordem  
   let xhr = new XMLHttpRequest()
   xhr.open('GET', url, true)
   xhr.onreadystatechange = function() {
-      if (xhr.readyState == 4) {
-          if (xhr.status == 200) {
-            responseJson(JSON.parse(xhr.responseText))
-          }
+    if (xhr.readyState == 4) {
+      if (xhr.status == 200) {
+        responseJson(JSON.parse(xhr.responseText))
       }
+    }
   }
   xhr.send();
 }

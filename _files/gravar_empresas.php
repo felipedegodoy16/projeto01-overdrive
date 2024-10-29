@@ -8,6 +8,8 @@ $empresa->setCnpj($_POST['cnpj_emp']);
 
 $verificarCnpj = $empresa->verificaCnpj();
 
+date_default_timezone_set("America/Sao_Paulo");
+
 if($verificarCnpj === -1){
 
     // Instanciado o objeto endereço com as informações passadas
@@ -45,6 +47,7 @@ if($verificarCnpj === -1){
     } else {
         $empresa->setFoto('');
     }
+    $empresa->setRegistro(date("y/m/d"));
 
     // Inserindo a empresa no bacno
     $empresa->inserirEmpresa();

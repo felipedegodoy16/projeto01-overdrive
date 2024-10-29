@@ -71,15 +71,16 @@
       </div>
       <ul id="lst_filtros">
         <li class="input-wrapper center" style="cursor: auto;">
-          <label for="search" class="sr-only">Filtrar</label>
-          <input type="text" id="search" placeholder="Filtrar Nome, CPF ou CNPJ">
+          <label for="search" class="sr-only">Filtrar Nome, CNH, CPF ou CNPJ</label>
+          <input type="text" id="search" placeholder="Nome, CNH, CPF ou CNPJ">
           <i class="fi fi-rr-search" style="margin-left: 5px;"></i>
         </li>
         <li class="active_filtro li_filtros" onclick="requestDados()">Registro</li>
-        <li id="orgAlfa" class="li_filtros" onclick="alfaAsc('nome', 'ASC')">A - Z</li>
-        <li class="li_filtros" onclick="alfaAsc('nome', 'DESC')">Z - A</li>
-        <li class="li_filtros">Gênero</li>
-        <li class="li_filtros">Empresa</li>
+        <li class="li_filtros" onclick="listarCardsOrdem('nome', 'ASC')">A - Z</li>
+        <li class="li_filtros" onclick="listarCardsOrdem('nome', 'DESC')">Z - A</li>
+        <li class="li_filtros" onclick="listarCardsOrdem('estado', 'ASC')">Estado</li>
+        <li class="li_filtros" onclick="listarCardsOrdem('cidade', 'ASC')">Cidade</li>
+        <li class="li_filtros" onclick="listarCardsOrdem('registro', 'DESC')">Recente</li>
       </ul>
     </aside>
 

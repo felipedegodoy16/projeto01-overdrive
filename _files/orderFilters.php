@@ -17,13 +17,13 @@ $ordem = $_GET['ordem'];
 $usuario = new Usuario();
 
 // Chamando método para remoção do usuário no banco
-$dadosUsers = $usuario->listarUsuariosAlfa($campo, $ordem);
+$dadosUsers = $usuario->listarUsuariosOrdem($campo, $ordem);
 
 // Instanciação de um objeto empresa
 $empresa = new Empresa();
 
 // Chamando método para remoção do usuário no banco
-$dadosEmps = $empresa->listarEmpresasAlfa($campo, $ordem);
+$dadosEmps = $empresa->listarEmpresasOrdem($campo, $ordem);
 
 if($dadosUsers === -1 && $dadosEmps === -1){
 
