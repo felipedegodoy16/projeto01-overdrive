@@ -523,6 +523,7 @@ form#form input {
     border: none;
     border-bottom: 3px solid var(--red-dark);
     outline: 0;
+    transition: all .3s ease-in-out;
 }
 
 form input::-ms-reveal, form input::-ms-clear {
@@ -719,6 +720,33 @@ form.form_cadastro input {
     outline: 0;
     border: none;
     border-bottom: 2px solid var(--red-dark);
+    transition: all .3S ease-in-out;
+}
+
+form.form_cadastro input:focus {
+    background-color: rgba(133, 133, 133, 0.15);
+}
+
+select#id_empresa {
+    border-radius: 20px;
+    padding: 5px;
+    border: 2px solid var(--red-dark);
+    color: #FFF;
+    background-color: var(--red-dark);
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+
+select option {
+    background-color: var(--red-dark);
+    color: #FFF;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+
+select option:hover {
+    background-color: #FFF;
+    color: var(--red-dark);
 }
 
 form.form_cadastro p {
