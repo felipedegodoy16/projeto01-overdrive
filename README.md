@@ -1,5 +1,5 @@
-# projeto01-overdrive
- Projeto da primeira etapa de estágio na empresa Overdrive
+# Projeto 01 - Overdrive
+### Projeto da primeira etapa de estágio na empresa Overdrive
 
  Para conseguir rodar o projeto em sua máquina siga as seguintes etapas:
 
