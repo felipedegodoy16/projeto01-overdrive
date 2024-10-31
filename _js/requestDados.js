@@ -86,7 +86,7 @@ function responseJson(json){
               </header>
               <p style="margin-top: 4.5em;" class="name">Nome: ${usuario.nome}</p>
               <p class="cpf_cnpj">CPF: ${usuario.cpf}</p>
-              <p class="cnh">CNH: ${usuario.cnh}</p>
+              <p>CNH: ${usuario.cnh}</p>
               <p>Telefone: ${usuario.telefone}</p>
               <p>Carro: ${usuario.carro}</p>
               <p>Empresa: ${usuario.empresa}</p>
@@ -329,12 +329,9 @@ function filterCards(){
       let cpfCnpj = card.getElementsByClassName('cpf_cnpj')[0]
       cpfCnpj = cpfCnpj.textContent.replace('CPF: ', '').replace('CNPJ: ', '').replace('.', '').replace('.', '').replace('/', '').replace('-', '').toLowerCase()
 
-      let cnh = card.getElementsByClassName('cnh')[0]
-      cnh = cnh.textContent.replace('CNH: ', '').toLowerCase()
-
       let filterText = filterElement.value.replace('.', '').replace('.', '').replace('-', '').toLowerCase()
 
-      if(!nome.includes(filterText) && !cpfCnpj.includes(filterText) && !cnh.includes(filterText)){
+      if(!nome.includes(filterText) && !cpfCnpj.includes(filterText)){
         card.classList.remove('back_card')
         card.classList.add('transition_section')
         card.parentNode.style.display = 'none'
