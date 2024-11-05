@@ -39,7 +39,7 @@ function responseJson(json){
   if(json.error){
     const main = document.getElementById('main_index')
 
-    main.innerHTML = '<p>Ainda não há dados registrados no banco!</p>'
+    main.innerHTML = '<p style="margin: 0; color: var(--red-dark); font-size: 35pt; margin-bottom: 2em;">Ainda não há dados registrados no banco!</p>'
 
   } else {
 
@@ -66,7 +66,7 @@ function responseJson(json){
       json.usuarios.map(function(usuario){
 
         if(json.sessao === 'A') {
-          tag = '<p class="center" style="margin-top: .7em;"><i class="fi fi-rr-trash icons_cards center icon_trash user_trash"></i><i class="fi fi-rr-edit icons_cards center icon_edit"></i></p>'
+          tag = `<p class="center" style="margin-top: .7em;"><i class="fi fi-rr-trash icons_cards center icon_trash user_trash"></i><a href="editar.php?tipo=usuario&id=${usuario.id}" style="text-decoration: none;"><i class="fi fi-rr-edit icons_cards center icon_edit"></i></a></p>`
         }
 
         if(usuario.foto != null){
@@ -105,7 +105,7 @@ function responseJson(json){
 
     } else {
 
-      divEmps.innerHTML += '<p style="margin: 0; color: var(--red-dark);">Não há registros de usuários ainda.</p>'
+      divUsers.innerHTML += '<p style="margin: 0; color: var(--red-dark); font-size: 35pt; margin-bottom: 2em;">Não há registros de usuários ainda.</p>'
 
     }
 
@@ -114,7 +114,7 @@ function responseJson(json){
       json.empresas.map(function(empresa){
 
         if(json.sessao === 'A') {
-          tag = '<p class="center" style="margin-top: .7em;"><i class="fi fi-rr-trash icons_cards center icon_trash emp_trash"></i><i class="fi fi-rr-edit icons_cards center icon_edit"></i></p>'
+          tag = `<p class="center" style="margin-top: .7em;"><i class="fi fi-rr-trash icons_cards center icon_trash emp_trash"></i><a href="editar.php?tipo=empresa&id=${empresa.id}" style="text-decoration: none;"><i class="fi fi-rr-edit icons_cards center icon_edit"></i></a></p>`
         }
 
         if(empresa.foto != null){
@@ -275,7 +275,6 @@ function removeDataEmps(event){
         if (xhr.status == 200) {
 
           json = JSON.parse(xhr.responseText)
-          console.log(json)
 
           if(json.status){
 

@@ -26,6 +26,7 @@ if($dadosUsers === -1 && $dadosEmps === -1){
 
     $allDados = [
         'sessao' => $_SESSION['cargo'],
+        'id_logged' => $_SESSION['id'],
         'usuarios' => $dadosUsers,
         'empresas' => $dadosEmps,
         'error' => false

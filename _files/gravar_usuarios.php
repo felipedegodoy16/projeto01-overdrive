@@ -4,8 +4,8 @@ require_once '../_class/Usuario.php';
 // Instanciando um objeto usuário
 $usuario = new Usuario();
 
-$usuario->setCpf($_POST['cpf']);
-$usuario->setCnh($_POST['cnh']);
+$usuario->setCpf(strtoupper($_POST['cpf']));
+$usuario->setCnh(strtoupper($_POST['cnh']));
 
 $verificaDados = $usuario->verificaDados();
 
@@ -16,24 +16,24 @@ if($verificaDados === -1) {
     // Instanciado o objeto endereço com as informações passadas
     $endereco = new Endereco();
 
-    $endereco->setCep($_POST['cep']);
-    $endereco->setRua($_POST['rua']);
-    $endereco->setBairro($_POST['bairro']);
-    $endereco->setNumero($_POST['numero']);
-    $endereco->setCidade($_POST['cidade']);
-    $endereco->setEstado($_POST['estado']);
+    $endereco->setCep(strtoupper($_POST['cep']));
+    $endereco->setRua(strtoupper($_POST['rua']));
+    $endereco->setBairro(strtoupper($_POST['bairro']));
+    $endereco->setNumero(strtoupper($_POST['numero']));
+    $endereco->setCidade(strtoupper($_POST['cidade']));
+    $endereco->setEstado(strtoupper($_POST['estado']));
 
     // Inserindo o endereço no banco ou pegando um endereço já existente
     $endereco->inserirEndereco();
 
     // Finalizando a instanciação do usuário
-    $usuario->setNome($_POST['nome']);
-    $usuario->setTelefone($_POST['telefone']);
-    $usuario->setCarro($_POST['carro']);
+    $usuario->setNome(strtoupper($_POST['nome']));
+    $usuario->setTelefone(strtoupper($_POST['telefone']));
+    $usuario->setCarro(strtoupper($_POST['carro']));
     $usuario->setCargo('C');
     $usuario->setSenha(password_hash($_POST['password'], PASSWORD_DEFAULT));
     $usuario->setEndereco($endereco);
-    $usuario->setEmpresa($_POST['empresa']);
+    $usuario->setEmpresa(strtoupper($_POST['empresa']));
     if(isset($_FILES['foto']['name']) && $_FILES['foto']['error'] == 0){
         $arquivo_tmp = $_FILES['foto']['tmp_name'];
         $nomeImagem = $_FILES['foto']['name'];
@@ -43,7 +43,7 @@ if($verificaDados === -1) {
             $novoNome = md5(microtime()) .$extensao; ;
             $destino = '../_images/uploads/' . $novoNome; 
             @move_uploaded_file($arquivo_tmp, $destino);
-            $usuario->setFoto($novoNome);
+            $usuario->setFoto(strtoupper($novoNome));
         } else {
             $usuario->setFoto('');
         }

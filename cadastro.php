@@ -11,6 +11,7 @@
   if($_SESSION['cargo'] === 'C') {
     header('Location: index.php');
   }
+  
 ?>
 
 <!DOCTYPE html>

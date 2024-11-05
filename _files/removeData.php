@@ -63,5 +63,3 @@ if($_SESSION['cargo'] === 'A'){
         </script>";
     }
 }
-
-header("Location: ../index.php");
