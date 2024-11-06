@@ -218,6 +218,52 @@ class Usuario {
         }
     }
 
+    // Método para retornar usuário do banco
+    public function retornarUsuario($id) {
+        try {
+            
+            // Query
+            $sql = "SELECT * FROM usuarios u INNER JOIN enderecos e ON u.id_endereco = e.id_end WHERE u.id_user = :id;";
+
+            // Conectando ao banco e preparando a query
+            $stmt = ConexaoDAO::getConexao()->prepare($sql);
+            $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+
+            // Executando a query no banco
+            $stmt->execute() or die(print_r($stmt->errorInfo(), true));
+            $dados = $stmt->fetchAll();
+
+            if(count($dados) > 0) {
+                foreach($dados as $d) {
+                    $d['id_user'];
+                    $d['nome'];
+                    $d['carro'];
+                    $d['cargo'];
+                    $d['empresa'];
+                    $d['telefone'];
+                    $d['cpf'];
+                    $d['cnh'];
+                    $d['cep'];
+                    $d['numero'];
+                    $d['rua'];
+                    $d['cidade'];
+                    $d['estado'];
+                    $d['bairro'];
+                }
+
+                return $dados;
+
+            }
+
+            return -1;
+
+        } catch(Exception $e) {
+
+            echo "Exceção $e";
+
+        }
+    }
+
     // Método para remover usuário do banco
     public function removerUsuario($id){
         try {
@@ -237,8 +283,6 @@ class Usuario {
             echo "Exceção $e";
 
         }
-
-        
     }
 
     // Getters e Setters

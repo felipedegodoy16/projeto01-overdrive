@@ -1,29 +1,4 @@
-<?php 
-
-  session_start();
-
-  $_SESSION['logged'] = $_SESSION['logged'] ?? false;
-  if($_SESSION['logged']) {
-    header('Location: index.php');
-  }
-
-  require_once '_class/Usuario.php';
-
-  $usuario = $_POST['user_input'] ?? '';
-  $senha = $_POST['password_input'] ?? '';
-
-  $status = 1;
-
-  if($usuario != '' && $senha != ''){
-    $userAcesso = new Usuario();
-
-    $userAcesso->setCpf($_POST['user_input']);
-    $userAcesso->setSenha($_POST['password_input']);
-    
-    $status = $userAcesso->verificarAcesso();
-  }
-
-?>
+<?php require_once '_verify/verificacaoLogin.php'; ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -53,7 +28,7 @@
     <main id="main_login" class="center">
       <div id="form_login" class="center">
         <h1 id="title_login">LOGIN</h1>
-        <form id="form" action="<?= $_SERVER['PHP_SELF']?>" method="post">
+        <form id="form" action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
           <div id="user_field" style="margin-bottom: 0;">
             <label for="user_login">CPF</label>
             <input id="user_login" data-mask="000.000.000-00" name="user_input" type="text" oninput="transition_text(event.target)" onclick="transition_text(event.target)" minlength="14" maxlength="14" required>

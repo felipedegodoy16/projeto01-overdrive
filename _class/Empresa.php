@@ -168,6 +168,51 @@ class Empresa {
         }
     }
 
+    // Método para retornar usuário do banco
+    public function retornarEmpresa($id) {
+        try {
+            
+            // Query
+            $sql = "SELECT * FROM empresas emp INNER JOIN enderecos e ON emp.id_endereco = e.id_end WHERE emp.id_emp = :id;";
+
+            // Conectando ao banco e preparando a query
+            $stmt = ConexaoDAO::getConexao()->prepare($sql);
+            $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+
+            // Executando a query no banco
+            $stmt->execute() or die(print_r($stmt->errorInfo(), true));
+            $dados = $stmt->fetchAll();
+
+            if(count($dados) > 0) {
+                foreach($dados as $d) {
+                    $d['id_emp'];
+                    $d['nome'];
+                    $d['cnpj'];
+                    $d['telefone'];
+                    $d['fantasia'];
+                    $d['responsavel'];
+                    $d['foto'];
+                    $d['cep'];
+                    $d['numero'];
+                    $d['rua'];
+                    $d['cidade'];
+                    $d['estado'];
+                    $d['bairro'];
+                }
+
+                return $dados;
+
+            }
+
+            return -1;
+
+        } catch(Exception $e) {
+
+            echo "Exceção $e";
+
+        }
+    }
+
     // Método para retornar os nomes de todas as empresas cadastradas no banco
     public function listarNomesEmps(){
 

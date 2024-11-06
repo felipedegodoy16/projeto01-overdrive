@@ -1,16 +1,4 @@
-<?php 
-
-  session_start();
-
-  $_SESSION['logged'] = $_SESSION['logged'] ?? false;
-
-  if(!$_SESSION['logged']) {
-    header('Location: login.php');
-  }
-
-  require_once '_files/logout.php';
-
-?>
+<?php require_once '_verify/verificacaoIndex.php'; require_once '_files/logout.php'; ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
