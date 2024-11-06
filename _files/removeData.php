@@ -1,16 +1,8 @@
 <?php 
-session_start();
 
-require_once "../_class/Usuario.php";
-require_once "../_class/Empresa.php";
-
-$_SESSION['logged'] = $_SESSION['logged'] ?? false;
-
-if(!$_SESSION['logged']){
-    header("Location: ../login.php");
-}
-
-if($_SESSION['cargo'] === 'A'){
+    require_once '../_verify/verificacaoFilesAdmin.php';
+    require_once "../_class/Usuario.php";
+    require_once "../_class/Empresa.php";
 
     // Pegando id do usuário ou empresa que será excluído do banco
     $id = (int) $_GET['id'];
@@ -62,4 +54,3 @@ if($_SESSION['cargo'] === 'A'){
             window.location='../index.php'
         </script>";
     }
-}

@@ -1,45 +1,40 @@
 <?php 
-session_start();
 
-require_once "../_class/Usuario.php";
-require_once "../_class/Empresa.php";
+    
+    require_once '../_verify/verificacaoFilesComum.php';
+    require_once '../_class/Usuario.php';
+    require_once '../_class/Empresa.php';
 
-$_SESSION['logged'] = $_SESSION['logged'] ?? false;
+    $campo = $_GET['campo'];
+    $ordem = $_GET['ordem'];
 
-if(!$_SESSION['logged']){
-    header("Location: ../login.php");
-}
+    // Instanciação de um objeto usuário
+    $usuario = new Usuario();
 
-$campo = $_GET['campo'];
-$ordem = $_GET['ordem'];
+    // Chamando método para remoção do usuário no banco
+    $dadosUsers = $usuario->listarUsuariosOrdem($campo, $ordem);
 
-// Instanciação de um objeto usuário
-$usuario = new Usuario();
+    // Instanciação de um objeto empresa
+    $empresa = new Empresa();
 
-// Chamando método para remoção do usuário no banco
-$dadosUsers = $usuario->listarUsuariosOrdem($campo, $ordem);
+    // Chamando método para remoção do usuário no banco
+    $dadosEmps = $empresa->listarEmpresasOrdem($campo, $ordem);
 
-// Instanciação de um objeto empresa
-$empresa = new Empresa();
+    if($dadosUsers === -1 && $dadosEmps === -1){
 
-// Chamando método para remoção do usuário no banco
-$dadosEmps = $empresa->listarEmpresasOrdem($campo, $ordem);
+        $allDados = [
+            'error' => true
+        ];
 
-if($dadosUsers === -1 && $dadosEmps === -1){
+    } else {
 
-    $allDados = [
-        'error' => true
-    ];
+        $allDados = [
+            'sessao' => $_SESSION['cargo'],
+            'usuarios' => $dadosUsers,
+            'empresas' => $dadosEmps,
+            'error' => false
+        ];
 
-} else {
+    }
 
-    $allDados = [
-        'sessao' => $_SESSION['cargo'],
-        'usuarios' => $dadosUsers,
-        'empresas' => $dadosEmps,
-        'error' => false
-    ];
-
-}
-
-echo json_encode($allDados);
+    echo json_encode($allDados);

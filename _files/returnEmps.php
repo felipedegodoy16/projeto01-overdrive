@@ -1,15 +1,7 @@
 <?php
-session_start();
 
-require_once "../_class/Empresa.php";
-
-$_SESSION['logged'] = $_SESSION['logged'] ?? false;
-
-if(!$_SESSION['logged']){
-    header("Location: ../login.php");
-}
-
-if($_SESSION['cargo'] === 'A'){
+    require_once '../_verify/verificacaoFilesAdmin.php';
+    require_once '../_class/Empresa.php';
 
     // Instanciação de um objeto empresa
     $empresa = new Empresa();
@@ -34,9 +26,3 @@ if($_SESSION['cargo'] === 'A'){
     }
 
     echo json_encode($allDados);
-
-} else {
-
-    header("Location: ../index.php");
-
-}
