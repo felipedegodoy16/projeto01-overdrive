@@ -33,7 +33,7 @@
                 <div id="cadastro_user" class="cadastro col-12 col-md-8 center" style="border-radius: 40px; box-shadow: 10px 10px 20px #000; display: flex;">
                     <a href="index.php"><i id="back_index" class="fi fi-rr-arrow-small-left center" style="left: 0;"></i></a>
                     <h1 style="z-index: 1010;">Editar Usuário</h1>
-                    <form class="form_cadastro" action="' . $_SERVER["PHP_SELF"] . '?tipo=' . $tipo . '&id=' . $id_edit . '&edit=true" method="post" enctype="multipart/form-data">
+                    <form class="form_cadastro" action="' . $_SERVER["PHP_SELF"] . '?tipo=' . $tipo . '&id=' . $id_edit . '&edit=1" method="post" enctype="multipart/form-data">
                         <div class="column_left">
                             <p>
                                 <label for="id_nome">Nome</label>
@@ -65,7 +65,7 @@
                             <p>
                                 <label for="id_empresa">Empresa</label>
                                 <select name="empresa" id="id_empresa">
-                                    <option value="Inativo" selected>Inativo</option>
+                                    <option value="Inativo" selected>INATIVO</option>
                                 </select>
                             </p>
                         </div>
@@ -114,7 +114,7 @@
                 <div id="cadastro_emp" class="cadastro col-12 col-md-8 center" style="border-radius: 40px; box-shadow: 10px 10px 20px #000; display: flex;">
                     <a href="index.php"><i id="back_index" class="fi fi-rr-arrow-small-left center" style="left: 0;"></i></a>
                     <h1 style="z-index: 1010;">Editar Empresa</h1>
-                    <form class="form_cadastro" action="' . $_SERVER["PHP_SELF"] . '?tipo=' . $tipo . '&id=' . $id_edit . '&edit=true" method="post" enctype="multipart/form-data">
+                    <form class="form_cadastro" action="' . $_SERVER["PHP_SELF"] . '?tipo=' . $tipo . '&id=' . $id_edit . '&edit=1" method="post" enctype="multipart/form-data">
                         <div class="column_left">
                             <p>
                                 <label for="id_cnpj_emp">CNPJ</label>

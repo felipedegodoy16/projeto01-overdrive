@@ -264,6 +264,36 @@ class Usuario {
         }
     }
 
+    // Método para alterar dados do usuário no banco
+    public function alterarUsuario(){
+        try {
+
+            // Query SQL
+            $this->getSenha() === '' ? $sql = "UPDATE usuarios SET nome = :nome, cpf = :cpf, cnh = :cnh, telefone = :telefone, carro = :carro, empresa = :empresa, foto = :foto, id_endereco = :id_endereco WHERE id_user = :id;" : $sql = "UPDATE usuarios SET nome = :nome, cpf = :cpf, cnh = :cnh, telefone = :telefone, carro = :carro, empresa = :empresa, senha = :senha, foto = :foto, id_endereco = :id_endereco WHERE id_user = :id;";
+
+            // Conectando o banco e preparando a query
+            $stmt = ConexaoDAO::getConexao()->prepare($sql);
+            $stmt->bindValue(":id", $this->id, PDO::PARAM_INT);
+            $stmt->bindValue(":nome", $this->nome, PDO::PARAM_STR);
+            $stmt->bindValue(":cpf", $this->cpf, PDO::PARAM_STR);
+            $stmt->bindValue(":cnh", $this->cnh, PDO::PARAM_STR);
+            $stmt->bindValue(":telefone", $this->telefone, PDO::PARAM_STR);
+            $stmt->bindValue(":carro", $this->carro, PDO::PARAM_STR);
+            $stmt->bindValue(":empresa", $this->empresa, PDO::PARAM_STR);
+            $this->getSenha() === '' ? : $stmt->bindValue(":senha", $this->senha, PDO::PARAM_STR);
+            $stmt->bindValue(":foto", $this->foto, PDO::PARAM_STR);
+            $stmt->bindValue(":id_endereco", $this->endereco->getId(), PDO::PARAM_INT);
+
+            // Executando a query no banco
+            $stmt->execute() or die(print_r($stmt->errorInfo(), true));
+
+        } catch(Exception $e) {
+            
+            echo "Exceção $e";
+        
+        }
+    }
+
     // Método para remover usuário do banco
     public function removerUsuario($id){
         try {

@@ -213,6 +213,34 @@ class Empresa {
         }
     }
 
+    // Método para alterar dados da empresa no banco
+    public function alterarEmpresa(){
+        try {
+
+            // Query SQL
+            $sql = "UPDATE empresas SET nome = :nome, fantasia = :fantasia, cnpj = :cnpj, telefone = :telefone, responsavel = :responsavel, foto = :foto, id_endereco = :id_endereco WHERE id_emp = :id;";
+
+            // Conectando o banco e preparando a query
+            $stmt = ConexaoDAO::getConexao()->prepare($sql);
+            $stmt->bindValue(":id", $this->id, PDO::PARAM_INT);
+            $stmt->bindValue(":nome", $this->nome, PDO::PARAM_STR);
+            $stmt->bindValue(":fantasia", $this->fantasia, PDO::PARAM_STR);
+            $stmt->bindValue(":cnpj", $this->cnpj, PDO::PARAM_STR);
+            $stmt->bindValue(":telefone", $this->telefone, PDO::PARAM_STR);
+            $stmt->bindValue(":responsavel", $this->responsavel, PDO::PARAM_STR);
+            $stmt->bindValue(":foto", $this->foto, PDO::PARAM_STR);
+            $stmt->bindValue(":id_endereco", $this->endereco->getId(), PDO::PARAM_INT);
+
+            // Executando a query no banco
+            $stmt->execute() or die(print_r($stmt->errorInfo(), true));
+
+        } catch(Exception $e) {
+            
+            echo "Exceção $e";
+        
+        }
+    }
+
     // Método para retornar os nomes de todas as empresas cadastradas no banco
     public function listarNomesEmps(){
 
