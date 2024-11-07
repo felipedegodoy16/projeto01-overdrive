@@ -44,6 +44,8 @@
 
       <div id="status_request" class="center error_status"><p id="p_status_request" style="margin: 0;"></p><i id="close_status" class="fi fi-rr-x center" onclick="closeStatus()"></i></div>
 
+      <div id="alter_view" class="center"><i class="icons_view fi fi-rr-table-layout center icon_table" onclick="alterView(event)"></i><i class="icons_view fi fi-rr-rectangle-vertical center icon_ret active_view" onclick="alterView(event)"></i></div>
+
       <div id="id_session" style="display: none;"><?=$_SESSION['id']?></div>
 
       <div id="section_users" class="col-12 center transition_section" style="align-items: flex-start;"></div>

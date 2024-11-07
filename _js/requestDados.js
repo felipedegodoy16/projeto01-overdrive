@@ -27,6 +27,7 @@ function requestDados(){
 function responseJson(json){
   const divUsers = document.getElementById('section_users')
   const divEmps = document.getElementById('section_emps')
+  const activeView = document.getElementsByClassName('active_view')[0]
 
   const formatter = Intl.DateTimeFormat("pt-BR", {
     dateStyle: "short"
@@ -63,45 +64,94 @@ function responseJson(json){
 
     if(json.usuarios !== -1){
 
-      json.usuarios.map(function(usuario){
-
-        if(json.sessao === 'A') {
-          tag = `<p class="center" style="margin-top: .7em;"><i class="fi fi-rr-trash icons_cards center icon_trash user_trash"></i><a href="editarUser.php?id=${usuario.id}&edit=0" style="text-decoration: none;"><i class="fi fi-rr-edit icons_cards center icon_edit"></i></a></p>`
-        }
-
-        if(usuario.foto != null){
-          var foto = usuario.foto
-        } else {
-          var foto = 'fotoDefault.jpg'
-        }
-
-        divUsers.innerHTML +=
+      if(activeView.classList.contains('icon_table')) {
+        var table = 
         `
-        <div class="col-10 col-sm-6 col-md-4 col-lg-3">
-          <div class="center card_register">
-            <img class="img_user_emp" src="_images/uploads/${foto}" alt="Imagem do Usuário ou Empresa">
-            <div class="card_user_body" style="padding-bottom: 2em;">
-              <header>
-                <p style="position: absolute; padding: 0; left: 1em; top: 1em;">#${usuario.id}</p>
-              </header>
-              <p style="margin-top: 4.5em;" class="name">Nome: ${usuario.nome}</p>
-              <p class="cpf_cnpj">CPF: ${usuario.cpf}</p>
-              <p>CNH: ${usuario.cnh}</p>
-              <p>Telefone: ${usuario.telefone}</p>
-              <p>Carro: ${usuario.carro}</p>
-              <p>Empresa: ${usuario.empresa}</p>
-              <details style="margin-bottom: .4em;">
-                <summary>Endereço</summary>
-                <p style="margin: .4em 0;">${usuario.rua}, ${usuario.numero} - ${usuario.bairro}</p>
-                <p>${usuario.cidade} - ${usuario.estado}, ${usuario.cep}</p>
-              </details>
-              <p>Registro: ${formatter.format(Date.parse(usuario.registro + 'UTC-3'))}</p>
-              ${tag}
-            </div>
-          </div>
+        <div class="table-responsive" style="text-transform: uppercase; margin-bottom: 2em;">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">CPF</th>
+                <th scope="col">CNH</th>
+                <th scope="col">Telefone</th>
+                <th scope="col">Carro</th>
+                <th scope="col">Empresa</th>
+                <th scope="col">Endereço</th>
+                <th scope="col">Registro</th>
+              </tr>
+            </thead>
+          <tbody>
+        `
+
+        json.usuarios.map(function(usuario){  
+          table +=
+          `
+          <tr class="filter_table">
+            <th scope="row">${usuario.id}</th>
+            <td class="name">${usuario.nome}</td>
+            <td class="cpf_cnpj">${usuario.cpf}</td>
+            <td>${usuario.cnh}</td>
+            <td>${usuario.telefone}</td>
+            <td>${usuario.carro}</td>
+            <td>${usuario.empresa}</td>
+            <td>${usuario.rua}, ${usuario.numero} - ${usuario.bairro}, ${usuario.cidade} - ${usuario.estado}, ${usuario.cep}</td>
+            <td>${formatter.format(Date.parse(usuario.registro + 'UTC-3'))}</td>
+          </tr>
+          `
+        })
+
+        table +=
+        `
+            </tbody>
+          </table>
         </div>
         `
-      })
+
+        divUsers.innerHTML += table
+          
+      } else {
+        json.usuarios.map(function(usuario){
+
+          if(json.sessao === 'A') {
+            tag = `<p class="center" style="margin-top: .7em;"><i class="fi fi-rr-trash icons_cards center icon_trash user_trash"></i><a href="editarUser.php?id=${usuario.id}&edit=0" style="text-decoration: none;"><i class="fi fi-rr-edit icons_cards center icon_edit"></i></a></p>`
+          }
+  
+          if(usuario.foto != null){
+            var foto = usuario.foto
+          } else {
+            var foto = 'fotoDefault.jpg'
+          }
+  
+          divUsers.innerHTML +=
+          `
+          <div class="col-10 col-sm-6 col-md-4 col-lg-3">
+            <div class="center card_register">
+              <img class="img_user_emp" src="_images/uploads/${foto}" alt="Imagem do Usuário ou Empresa">
+              <div class="card_user_body" style="padding-bottom: 2em;">
+                <header>
+                  <p style="position: absolute; padding: 0; left: 1em; top: 1em;">#${usuario.id}</p>
+                </header>
+                <p style="margin-top: 4.5em;" class="name">Nome: ${usuario.nome}</p>
+                <p class="cpf_cnpj">CPF: ${usuario.cpf}</p>
+                <p>CNH: ${usuario.cnh}</p>
+                <p>Telefone: ${usuario.telefone}</p>
+                <p>Carro: ${usuario.carro}</p>
+                <p>Empresa: ${usuario.empresa}</p>
+                <details style="margin-bottom: .4em;">
+                  <summary>Endereço</summary>
+                  <p style="margin: .4em 0;">${usuario.rua}, ${usuario.numero} - ${usuario.bairro}</p>
+                  <p>${usuario.cidade} - ${usuario.estado}, ${usuario.cep}</p>
+                </details>
+                <p>Registro: ${formatter.format(Date.parse(usuario.registro + 'UTC-3'))}</p>
+                ${tag}
+              </div>
+            </div>
+          </div>
+          `
+        })
+      }
 
     } else {
 
@@ -111,44 +161,92 @@ function responseJson(json){
 
     if(json.empresas !== -1){
 
-      json.empresas.map(function(empresa){
-
-        if(json.sessao === 'A') {
-          tag = `<p class="center" style="margin-top: .7em;"><i class="fi fi-rr-trash icons_cards center icon_trash emp_trash"></i><a href="editarEmp.php?id=${empresa.id}&edit=0" style="text-decoration: none;"><i class="fi fi-rr-edit icons_cards center icon_edit"></i></a></p>`
-        }
-
-        if(empresa.foto != null){
-          var foto = empresa.foto
-        } else {
-          var foto = 'fotoDefault.jpg'
-        }
-
-        divEmps.innerHTML +=
+      if(activeView.classList.contains('icon_table')) {
+        var table = 
         `
-        <div class="col-10 col-sm-6 col-md-4 col-lg-3">
-          <div class="center card_register">
-            <img class="img_user_emp" src="_images/uploads/${foto}" alt="Imagem do Usuário ou Empresa">
-            <div class="card_user_body" style="padding-bottom: 2em;">
-              <header>
-                <p style="position: absolute; padding: 0; left: 1em; top: 1em;">#${empresa.id}</p>
-              </header>
-              <p style="margin-top: 4.5em;" class="name">Razão: ${empresa.nome}</p>
-              <p>Fantasia: ${empresa.fantasia}</p>
-              <p class="cpf_cnpj">CNPJ: ${empresa.cnpj}</p>
-              <p>Telefone: ${empresa.telefone}</p>
-              <p>Responsável: ${empresa.responsavel}</p>
-              <details style="margin-bottom: .4em;">
-                <summary>Endereço</summary>
-                <p style="margin: .4em 0;">${empresa.rua}, ${empresa.numero} - ${empresa.bairro}</p>
-                <p>${empresa.cidade} - ${empresa.estado}, ${empresa.cep}</p>
-              </details>
-              <p>Registro: ${formatter.format(Date.parse(empresa.registro + 'UTC-3'))}</p>
-              ${tag}
-            </div>
-          </div>
+        <div class="table-responsive" style="text-transform: uppercase; margin-bottom: 2em;">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Razão Social</th>
+                <th scope="col">Fantasia</th>
+                <th scope="col">CNPJ</th>
+                <th scope="col">Telefone</th>
+                <th scope="col">Responsável</th>
+                <th scope="col">Endereço</th>
+                <th scope="col">Registro</th>
+              </tr>
+            </thead>
+          <tbody>
+        `
+
+        json.empresas.map(function(empresa){  
+          table +=
+          `
+          <tr class="filter_table">
+            <th scope="row">${empresa.id}</th>
+            <td class="name">${empresa.nome}</td>
+            <td>${empresa.fantasia}</td>
+            <td class="cpf_cnpj">${empresa.cnpj}</td>
+            <td>${empresa.telefone}</td>
+            <td>${empresa.responsavel}</td>
+            <td>${empresa.rua}, ${empresa.numero} - ${empresa.bairro}, ${empresa.cidade} - ${empresa.estado}, ${empresa.cep}</td>
+            <td>${formatter.format(Date.parse(empresa.registro + 'UTC-3'))}</td>
+          </tr>
+          `
+        })
+        table +=
+        `
+            </tbody>
+          </table>
         </div>
         `
-      })
+
+        divEmps.innerHTML += table
+          
+      } else {
+
+        json.empresas.map(function(empresa){
+
+          if(json.sessao === 'A') {
+            tag = `<p class="center" style="margin-top: .7em;"><i class="fi fi-rr-trash icons_cards center icon_trash emp_trash"></i><a href="editarEmp.php?id=${empresa.id}&edit=0" style="text-decoration: none;"><i class="fi fi-rr-edit icons_cards center icon_edit"></i></a></p>`
+          }
+  
+          if(empresa.foto != null){
+            var foto = empresa.foto
+          } else {
+            var foto = 'fotoDefault.jpg'
+          }
+  
+          divEmps.innerHTML +=
+          `
+          <div class="col-10 col-sm-6 col-md-4 col-lg-3">
+            <div class="center card_register">
+              <img class="img_user_emp" src="_images/uploads/${foto}" alt="Imagem do Usuário ou Empresa">
+              <div class="card_user_body" style="padding-bottom: 2em;">
+                <header>
+                  <p style="position: absolute; padding: 0; left: 1em; top: 1em;">#${empresa.id}</p>
+                </header>
+                <p style="margin-top: 4.5em;" class="name">Razão: ${empresa.nome}</p>
+                <p>Fantasia: ${empresa.fantasia}</p>
+                <p class="cpf_cnpj">CNPJ: ${empresa.cnpj}</p>
+                <p>Telefone: ${empresa.telefone}</p>
+                <p>Responsável: ${empresa.responsavel}</p>
+                <details style="margin-bottom: .4em;">
+                  <summary>Endereço</summary>
+                  <p style="margin: .4em 0;">${empresa.rua}, ${empresa.numero} - ${empresa.bairro}</p>
+                  <p>${empresa.cidade} - ${empresa.estado}, ${empresa.cep}</p>
+                </details>
+                <p>Registro: ${formatter.format(Date.parse(empresa.registro + 'UTC-3'))}</p>
+                ${tag}
+              </div>
+            </div>
+          </div>
+          `
+        })
+
+      }
 
     } else {
 
@@ -312,11 +410,22 @@ function closeStatus(){
 function createFilter(){
   const filterElement = document.getElementById('search')
 
-  filterElement.addEventListener('input', filterCards)
+  filterElement.addEventListener('input', filterElements)
 }
 
-// Função para filtrar
-function filterCards(){
+// Função para filtrar elementos
+function filterElements(){
+  const activeView = document.getElementsByClassName('active_view')[0]
+
+  if(activeView.classList.contains('icon_table')) {
+    filterTable()
+  } else {
+    filterCards()
+  }
+}
+
+// Função para filtrar cards
+function filterCards() {
   const filterElement = document.getElementById('search')
   const cards = document.getElementsByClassName('card_register')
 
@@ -328,7 +437,7 @@ function filterCards(){
       let cpfCnpj = card.getElementsByClassName('cpf_cnpj')[0]
       cpfCnpj = cpfCnpj.textContent.replace('CPF: ', '').replace('CNPJ: ', '').replace('.', '').replace('.', '').replace('/', '').replace('-', '').toLowerCase()
 
-      let filterText = filterElement.value.replace('.', '').replace('.', '').replace('-', '').toLowerCase()
+      let filterText = filterElement.value.replace('.', '').replace('.', '').replace('/', '').replace('-', '').toLowerCase()
 
       if(!nome.includes(filterText) && !cpfCnpj.includes(filterText)){
         card.classList.remove('back_card')
@@ -341,6 +450,35 @@ function filterCards(){
   } else{
     for(let card of cards){
       card.parentNode.style.display = 'block'
+    }
+  }
+}
+
+// Função para filtrar linhas da tabela
+function filterTable() {
+  const filterElement = document.getElementById('search')
+  const lines = document.getElementsByClassName('filter_table')
+
+  if(filterElement.value != ''){
+    for(let line of lines){
+      console.log(line)
+      let nome = line.getElementsByClassName('name')[0]
+      nome = nome.textContent.toLowerCase()
+
+      let cpfCnpj = line.getElementsByClassName('cpf_cnpj')[0]
+      cpfCnpj = cpfCnpj.textContent.replace('.', '').replace('.', '').replace('/', '').replace('-', '').toLowerCase()
+
+      let filterText = filterElement.value.replace('.', '').replace('.', '').replace('/', '').replace('-', '').toLowerCase()
+
+      if(!nome.includes(filterText) && !cpfCnpj.includes(filterText)){
+        line.style.display = 'none'
+      } else{
+        line.style.display = ''
+      }
+    }
+  } else{
+    for(let line of lines){
+      line.style.display = ''
     }
   }
 }
@@ -358,4 +496,18 @@ function listarCardsOrdem(campo, ordem){
     }
   }
   xhr.send();
+}
+
+//Função para alterar visualização dos registros
+function alterView(event) {
+
+  if(!event.target.classList.contains('active_view')) {
+
+    var obj_active = document.getElementsByClassName('active_view')[0]
+    obj_active.classList.remove('active_view')
+    event.target.classList.add('active_view')
+    requestDados()
+
+  }
+
 }

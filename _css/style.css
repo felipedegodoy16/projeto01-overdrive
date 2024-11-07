@@ -141,6 +141,44 @@ i#close_status {
     cursor: pointer;
 }
 
+div#alter_view {
+    width: 90dvw;
+    justify-content: flex-end !important;
+}
+
+.icons_view {
+    font-size: 23pt;
+    cursor: pointer;
+    padding: 10px;
+    color: var(--red-dark);
+    transition: all .3s ease-in-out;
+    border: 3px solid var(--red-dark);
+}
+
+.icon_table {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.icon_ret {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.icons_view:hover {
+    background-color: var(--red-dark);
+    color: #FFF;
+}
+
+.active_view {
+    background-color: var(--red-dark);
+    color: #FFF;
+}
+
+.table-responsive {
+    color: var(--red-dark);
+}
+
 div#section_users, div#section_emps {
     flex-wrap: wrap;
 }
