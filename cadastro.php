@@ -130,7 +130,7 @@
                 <p>
                     <label for="id_empresa">Empresa</label>
                     <select name="empresa" id="id_empresa">
-                        <option value="Inativo" selected>INATIVO</option>
+                        <option value="INATIVO" selected>INATIVO</option>
                     </select>
                 </p>
             </div>
