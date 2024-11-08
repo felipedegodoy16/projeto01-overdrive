@@ -1,5 +1,4 @@
 <?php 
-
     
     require_once '../_verify/verificacaoFilesComum.php';
     require_once '../_class/Usuario.php';

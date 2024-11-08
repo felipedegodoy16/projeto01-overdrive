@@ -1,5 +1,23 @@
 <?php 
 
+    if(strlen($_POST['password']) < 8 || strlen($_POST['cpf']) != 14 || strlen($_POST['cnh']) != 9 || strlen($_POST['cep']) != 9 || strlen($_POST['numero']) > 6) {
+        echo "<script>
+            alert('Algum dado não foi preenchido corretamente!')
+            window.location='../cadastro.php'
+        </script>";
+        return;
+    }
+
+    foreach($_POST as $data) {
+        if($data === '') {
+            echo "<script>
+                alert('Algum dado não foi preenchido corretamente!')
+                window.location='../cadastro.php'
+            </script>";
+            return;
+        }
+    }
+
     require_once '../_verify/verificacaoFilesAdmin.php';
     require_once '../_class/Usuario.php';
 
@@ -10,6 +28,7 @@
     $usuario->setCnh(strtoupper($_POST['cnh']));
 
     $verificaDados = $usuario->verificaDados();
+    // $verificaDados = -1;
 
     date_default_timezone_set("America/Sao_Paulo");
 
