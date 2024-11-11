@@ -121,7 +121,7 @@ function responseJson(json){
           if(usuario.foto != null){
             var foto = usuario.foto
           } else {
-            var foto = 'fotoDefault.jpg'
+            var foto = 'fotoUser.jpg'
           }
   
           divUsers.innerHTML +=
@@ -216,7 +216,7 @@ function responseJson(json){
           if(empresa.foto != null){
             var foto = empresa.foto
           } else {
-            var foto = 'fotoDefault.jpg'
+            var foto = 'fotoEmp.jpg'
           }
   
           divEmps.innerHTML +=

@@ -17,7 +17,7 @@
     // Validação do CPF
     if(!validaCpf($_POST['cpf'])) {
         echo "<script>
-            alert('Algum dado não foi preenchido corretamente!')
+            alert('O CPF não é válido!')
             window.location='../cadastro.php'
         </script>";
         exit();

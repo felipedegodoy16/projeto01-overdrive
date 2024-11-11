@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 05/11/2024 às 16:17
+-- Tempo de geração: 11/11/2024 às 15:12
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -20,7 +20,7 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `overdrive`
 --
-CREATE DATABASE IF NOT EXISTS `overdrive` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE IF NOT EXISTS `overdrive` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `overdrive`;
 
 -- --------------------------------------------------------
