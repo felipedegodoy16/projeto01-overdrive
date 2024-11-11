@@ -27,21 +27,21 @@
 
             $json = array(
                 'status' => false,
-                'message' => "A empresa selecionada já foi excluída."
+                'message' => 'A empresa selecionada já foi excluída.'
             );
 
         } else if($dadoRetornado === 1){
             
             $json = array(
                 'status' => false,
-                'message' => "A empresa selecionada ainda possui vínculo com algum funcionário."
+                'message' => 'A empresa selecionada ainda possui vínculo com algum funcionário.'
             );
 
         } else {
 
             $json = array(
                 'status' => true,
-                'message' => "Empresa removida com sucesso."
+                'message' => 'Empresa removida com sucesso.'
             );
 
         }

@@ -226,9 +226,6 @@ function preencherSelect(json){
     if(json.status){
 
         var obj_select = document.getElementById('id_empresa')
-        var obj_option = obj_select.getElementsByClassName('option')[0].innerText
-
-        console.log(obj_option)
 
         json.empresas.map(function(empresa){
             obj_select.innerHTML += 

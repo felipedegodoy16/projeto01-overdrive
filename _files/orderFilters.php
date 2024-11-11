@@ -10,13 +10,13 @@
     // Instanciação de um objeto usuário
     $usuario = new Usuario();
 
-    // Chamando método para remoção do usuário no banco
+    // Chamando método para listar usuário em ordem no banco
     $dadosUsers = $usuario->listarUsuariosOrdem($campo, $ordem);
 
     // Instanciação de um objeto empresa
     $empresa = new Empresa();
 
-    // Chamando método para remoção do usuário no banco
+    // Chamando método para listar empresa em ordem no banco
     $dadosEmps = $empresa->listarEmpresasOrdem($campo, $ordem);
 
     if($dadosUsers === -1 && $dadosEmps === -1){

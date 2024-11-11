@@ -6,6 +6,7 @@
   
   if($_SESSION['logged']) {
     header('Location: index.php');
+    exit();
   }
 
   require_once '_class/Usuario.php';

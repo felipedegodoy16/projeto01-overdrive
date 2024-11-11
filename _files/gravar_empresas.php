@@ -3,6 +3,24 @@
     require_once '../_verify/verificacaoFilesAdmin.php';
     require_once '../_class/Empresa.php';
 
+    if(strlen($_POST['cnpj_emp']) != 18 || strlen($_POST['cep_emp']) != 9 || strlen($_POST['numero_emp']) > 6) {
+        echo "<script>
+            alert('Algum dado não foi preenchido corretamente!')
+            window.location='../cadastro.php'
+        </script>";
+        exit();
+    }
+
+    foreach($_POST as $data) {
+        if($data === '') {
+            echo "<script>
+                alert('Algum dado não foi preenchido corretamente!')
+                window.location='../cadastro.php'
+            </script>";
+            exit();
+        }
+    }
+
     // Instanciando um novo objeto empresa
     $empresa = new Empresa();
 
@@ -33,7 +51,7 @@
         $empresa->setTelefone(strtoupper($_POST['telefone_emp']));
         $empresa->setResponsavel(strtoupper($_POST['responsavel_emp']));
         $empresa->setEndereco($endereco);
-        if(isset($_FILES['foto_emp']['name']) && $_FILES['foto_emp']['error'] == 0){
+        if(isset($_FILES['foto_emp']['name']) && $_FILES['foto_emp']['error'] == 0 && $_FILES['foto_emp']['size'] < 10000000){
             $arquivo_tmp = $_FILES['foto_emp']['tmp_name'];
             $nomeImagem = $_FILES['foto_emp']['name'];
             $extensao = strrchr($nomeImagem, '.');

@@ -1,25 +1,38 @@
 <?php 
 
+    require_once '../_verify/verificacaoFilesAdmin.php';
+    require_once '../_class/Usuario.php';
+    
+    date_default_timezone_set("America/Sao_Paulo");
+
+    // Validando se alguns dados estão conforme o especificado
     if(strlen($_POST['password']) < 8 || strlen($_POST['cpf']) != 14 || strlen($_POST['cnh']) != 9 || strlen($_POST['cep']) != 9 || strlen($_POST['numero']) > 6) {
         echo "<script>
             alert('Algum dado não foi preenchido corretamente!')
             window.location='../cadastro.php'
         </script>";
-        return;
+        exit();
     }
 
+    // Validação do CPF
+    if(!validaCpf($_POST['cpf'])) {
+        echo "<script>
+            alert('Algum dado não foi preenchido corretamente!')
+            window.location='../cadastro.php'
+        </script>";
+        exit();
+    }
+
+    // Validando se dados não estão vazios
     foreach($_POST as $data) {
         if($data === '') {
             echo "<script>
                 alert('Algum dado não foi preenchido corretamente!')
                 window.location='../cadastro.php'
             </script>";
-            return;
+            exit();
         }
     }
-
-    require_once '../_verify/verificacaoFilesAdmin.php';
-    require_once '../_class/Usuario.php';
 
     // Instanciando um objeto usuário
     $usuario = new Usuario();
@@ -28,9 +41,6 @@
     $usuario->setCnh(strtoupper($_POST['cnh']));
 
     $verificaDados = $usuario->verificaDados();
-    // $verificaDados = -1;
-
-    date_default_timezone_set("America/Sao_Paulo");
 
     if($verificaDados === -1) {
 
@@ -55,7 +65,7 @@
         $usuario->setSenha(password_hash($_POST['password'], PASSWORD_DEFAULT));
         $usuario->setEndereco($endereco);
         $usuario->setEmpresa(strtoupper($_POST['empresa']));
-        if(isset($_FILES['foto']['name']) && $_FILES['foto']['error'] == 0){
+        if(isset($_FILES['foto']['name']) && $_FILES['foto']['error'] == 0 || $_FILES['size'] > 10000000) {
             $arquivo_tmp = $_FILES['foto']['tmp_name'];
             $nomeImagem = $_FILES['foto']['name'];
             $extensao = strrchr($nomeImagem, '.');
@@ -89,3 +99,32 @@
         </script>";
         
     }
+
+    // Função para validação do CPF
+    function validaCPF($cpf) {
+        // Extrai somente os números
+        $cpf = preg_replace( '/[^0-9]/is', '', $cpf );
+         
+        // Verifica se foi informado todos os digitos corretamente
+        if (strlen($cpf) != 11) {
+            return false;
+        }
+    
+        // Verifica se foi informada uma sequência de digitos repetidos. Ex: 111.111.111-11
+        if (preg_match('/(\d)\1{10}/', $cpf)) {
+            return false;
+        }
+    
+        // Faz o calculo para validar o CPF
+        for ($t = 9; $t < 11; $t++) {
+            for ($d = 0, $c = 0; $c < $t; $c++) {
+                $d += $cpf[$c] * (($t + 1) - $c);
+            }
+            $d = ((10 * $d) % 11) % 10;
+            if ($cpf[$c] != $d) {
+                return false;
+            }
+        }
+        return true;
+    }
+    

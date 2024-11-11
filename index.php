@@ -4,7 +4,7 @@
 
       <div id="status_request" class="center error_status"><p id="p_status_request" style="margin: 0;"></p><i id="close_status" class="fi fi-rr-x center" onclick="closeStatus()"></i></div>
 
-      <div id="alter_view" class="center" style="margin-bottom: 1em;"><i class="icons_view fi fi-rr-table-tree center icon_table" onclick="alterView(event)"></i><i class="icons_view fi fi-rr-rectangle-vertical center icon_ret active_view" onclick="alterView(event)"></i></div>
+      <div id="alter_view" class="center"><div class="center"><a href="editarUser.php?id=<?=$_SESSION['id']?>&edit=0" id="btn_edit_user">Editar meu Usuário!</a></div><div class="center"><i class="icons_view fi fi-rr-table-tree center icon_table" onclick="alterView(event)"></i><i class="icons_view fi fi-rr-rectangle-vertical center icon_ret active_view" onclick="alterView(event)"></i></div></div>
 
       <div id="id_session" style="display: none;"><?=$_SESSION['id']?></div>
 

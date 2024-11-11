@@ -2,7 +2,7 @@
 
   require_once '_class/Usuario.php';
   require_once '_class/Empresa.php';
-  require_once '_verify/verificacaoUser.php';
+  require_once '_verify/verificacaoIndex.php';
 
   $edit = (bool) $_GET['edit'];
   $id_edit = $_GET['id'];
@@ -12,7 +12,7 @@
   $endereco = new Endereco();
 
   if($edit) {
-
+    
     $endereco->setCep(strtoupper($_POST['cep']));
     $endereco->setRua(strtoupper($_POST['rua']));
     $endereco->setBairro(strtoupper($_POST['bairro']));

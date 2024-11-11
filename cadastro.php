@@ -28,7 +28,7 @@
       <div id="seta_index">
         <a href="index.php"><i id="back_index" class="fi fi-rr-arrow-small-left center"></i></a>
       </div>
-      <div id="cadastro_emp" class="cadastro col-12 col-md-8 center">
+      <div id="cadastro_emp" class="cadastro col-12 col-md-8 center transition_section">
         <h1>Cadastrar Empresa</h1>
         <form class="form_cadastro" action="_files/gravar_empresas.php" method="post" enctype="multipart/form-data">
             <div class="column_left">
@@ -96,7 +96,7 @@
         <h1 id="text_change_form">Mudar para Formulário de Empresas</h1>
         <i id="seta_cadastro" class="fi fi-rr-arrow-small-right center" onclick="changeForm()"></i>
       </div>
-      <div id="cadastro_user" class="cadastro col-12 col-md-8 center">
+      <div id="cadastro_user" class="cadastro col-12 col-md-8 center transition_section">
         <h1>Cadastrar Usuário</h1>
         <form class="form_cadastro" action="_files/gravar_usuarios.php" method="post" enctype="multipart/form-data">
             <div class="column_left">
@@ -123,7 +123,7 @@
                 </p>
                 <p style="position: relative;">
                     <label for="id_password">Senha</label>
-                    <input type="password" name="password" id="id_password" placeholder="Digite a Senha" min="8" required>
+                    <input type="password" name="password" id="id_password" placeholder="DIGITE A SENHA" min="8" required style="text-transform: none;">
                     <small>Mínimo 8 caracteres</small>
                     <i id="eye_cadastro" class="fi fi-rr-eye icon-eye"></i>
                 </p>
