@@ -175,7 +175,6 @@
     </main>
 
     <!-- Meus scrips JS -->
-    <script src="_js/cep.js"></script>
     <script src="_js/cadastro.js"></script>
 
     <!-- JavaScript (Opcional) -->

@@ -54,15 +54,6 @@
           <div id="div_btn_login" class="center">
             <input id="btn_login" type="submit" value="Entrar">
           </div>
-          <!-- <div class="center">
-            <details id="details_login" style="width: 25dvw; font-size: clamp(12px, 4dvw, 28);">
-              <summary id="summary_login">Usuários para teste</summary>
-              <div class="center" style="flex-direction: column;">
-                <p>Admin: XXXXXXXXXXX - Senha: 1234</p>
-                <p>Usuário: XXXXXXXXXXX - Senha: 1234</p>
-              </div>
-            </details>
-          </div> -->
         </form>
         <img id="img_logo" src="_images/overdrive_logo.png" alt="">
       </div>

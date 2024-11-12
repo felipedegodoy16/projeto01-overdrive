@@ -122,7 +122,6 @@
     </main>
 
     <!-- Meus scrips JS -->
-    <script src="_js/editarCep.js"></script>
     <script src="_js/editar.js"></script>
 
     <!-- JavaScript (Opcional) -->
