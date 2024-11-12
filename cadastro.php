@@ -51,7 +51,7 @@
                 </p>
                 <p>
                     <label for="id_responsavel_emp">Reponsável</label>
-                    <input type="text" name="responsavel_emp" id="id_responsavel_emp" placeholder="Digite o Responsável" required>
+                    <input type="text" name="responsavel_emp" id="id_responsavel_emp" maxlength="255" placeholder="Digite o Responsável" required>
                 </p>
                 <p>
                     <label for="id_foto_emp" class="label_foto" style="margin-top: .5em;">Escolher arquivo</label>
@@ -75,7 +75,7 @@
                 </p>
                 <p>
                     <label for="id_numero_emp">Numero</label>
-                    <input type="text" data-mask="000000" name="numero_emp" id="id_numero_emp" placeholder="Digite o Número" required> 
+                    <input type="text" data-mask="000000" name="numero_emp" id="id_numero_emp" maxlength="6" placeholder="Digite o Número" required> 
                 </p>
                 <p>
                     <label for="id_cidade_emp">Cidade</label>
@@ -115,7 +115,7 @@
                 </p>
                 <p id="p_telefone">
                     <label for="id_telefone">Telefone</label>
-                    <input type="text" data-mask="(00) 00000-0000" name="telefone" id="id_telefone"minlength="15" maxlength="15" placeholder="Digite o Telefone" required> 
+                    <input type="text" data-mask="(00) 00000-0000" name="telefone" id="id_telefone" minlength="15" maxlength="15" placeholder="Digite o Telefone" required> 
                 </p>
                 <p>
                     <label for="id_carro">Carro</label>
@@ -123,7 +123,7 @@
                 </p>
                 <p style="position: relative;">
                     <label for="id_password">Senha</label>
-                    <input type="password" name="password" id="id_password" placeholder="DIGITE A SENHA" min="8" required style="text-transform: none;">
+                    <input type="password" name="password" id="id_password" placeholder="DIGITE A SENHA" minlength="8" required style="text-transform: none;">
                     <small>Mínimo 8 caracteres</small>
                     <i id="eye_cadastro" class="fi fi-rr-eye icon-eye"></i>
                 </p>
@@ -151,7 +151,7 @@
                 </p>
                 <p>
                     <label for="id_numero">Numero</label>
-                    <input type="text" data-mask="000000" name="numero" id="id_numero" placeholder="Digite o Número" required> 
+                    <input type="text" data-mask="000000" name="numero" id="id_numero" maxlength="6" placeholder="Digite o Número" required> 
                 </p>
                 <p>
                     <label for="id_cidade">Cidade</label>

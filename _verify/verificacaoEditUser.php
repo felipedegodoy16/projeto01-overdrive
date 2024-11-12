@@ -11,21 +11,15 @@
     header('Location: index.php');
     exit();
   }
-
-  // Validação do CPF
-  if(!validaCpf($_POST['cpf'])) {
-    echo "<script>
-        alert('O CPF não é válido!')
-        window.location='../cadastro.php'
-    </script>";
-    exit();
-  }
   
   $usuario = new Usuario();
   $empresa = new Empresa();
   $endereco = new Endereco();
 
   if($edit) {
+
+    // Validação dos campos que foram preenchidos
+    validacoes();
 
     $endereco->setCep(strtoupper($_POST['cep']));
     $endereco->setRua(strtoupper($_POST['rua']));
@@ -113,3 +107,53 @@
     }
     return true;
   }
+
+  // Função para fazer validações dos campos preenchidos
+  function validacoes() {
+
+    // Validando se dados não estão vazios
+    $cont = 0;
+    foreach($_POST as $data) {
+        if($cont === 5) {
+          $cont++;
+          continue;
+        }
+
+        if($data === '') {
+            echo "<script>
+                alert('Algum dado não foi preenchido corretamente!')
+                window.location=history.back()
+            </script>";
+            exit();
+        }
+
+        $cont++;
+    }
+
+    // Validação do CPF
+    if(!validaCpf($_POST['cpf'])) {
+        echo "<script>
+            alert('O CPF não é válido!')
+            window.location=history.back()
+        </script>";
+        exit();
+    }
+
+    // Validando se alguns dados estão conforme o especificado
+    if(strlen($_POST['nome']) > 255 || strlen($_POST['cnh']) != 9 || strlen($_POST['telefone']) != 15 || strlen($_POST['carro']) > 255) {
+        echo "<script>
+            alert('Algum dado não foi preenchido corretamente!')
+            window.location=history.back()
+        </script>";
+        exit();
+    }
+
+    // Verificação dos campos de endereço do usuário
+    if(strlen($_POST['cep']) != 9 || strlen($_POST['rua']) > 255 || strlen($_POST['bairro']) > 255 || strlen($_POST['numero']) > 6 || strlen($_POST['cidade']) > 255 || strlen($_POST['estado']) != 2) {
+        echo "<script>  
+            alert('Algum dado não foi preenchido corretamente!')
+            window.location=history.back()
+        </script>";
+        exit();
+    }
+}

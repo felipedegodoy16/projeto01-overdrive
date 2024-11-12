@@ -60,22 +60,25 @@
                     <p>
                         <label for="id_empresa">Empresa</label>
                         <select name="empresa" id="id_empresa">
-                            <?php foreach($empresas as $empresa => $nome):
+                            <?php if($_SESSION['cargo'] === 'A'): ?>
+                                <?php foreach($empresas as $empresa => $nome):
 
-                                if($nome['fantasia'] === $dados[0]['empresa']): ?>
-                                    <option value="<?= $nome['fantasia'] ?>" selected><?= $nome['fantasia'] ?></option>
+                                    if($nome['fantasia'] === $dados[0]['empresa']): ?>
+                                        <option value="<?= $nome['fantasia'] ?>" selected><?= $nome['fantasia'] ?></option>
+                                    <?php else: ?>
+                                        <option value="<?= $nome['fantasia'] ?>"><?= $nome['fantasia'] ?></option>
+                                    <?php endif ?>
+
+                                <?php endforeach ?>
+
+                                <?php if($dados[0]['empresa'] === 'INATIVO'): ?>
+                                    <option value="INATIVO" selected>INATIVO</option>
                                 <?php else: ?>
-                                    <option value="<?= $nome['fantasia'] ?>"><?= $nome['fantasia'] ?></option>
+                                    <option value="INATIVO">INATIVO</option>
                                 <?php endif ?>
-
-                            <?php endforeach ?>
-
-                            <?php if($dados[0]['empresa'] === 'INATIVO'): ?>
-                                <option value="INATIVO" selected>INATIVO</option>
                             <?php else: ?>
-                                <option value="INATIVO">INATIVO</option>
+                                <option value="<?= $dados[0]['empresa'] ?>" selected><?= $dados[0]['empresa'] ?></option>
                             <?php endif ?>
-
                         </select>
                     </p>
                 </div>

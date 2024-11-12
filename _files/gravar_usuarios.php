@@ -5,34 +5,8 @@
     
     date_default_timezone_set("America/Sao_Paulo");
 
-    // Validando se alguns dados estão conforme o especificado
-    if(strlen($_POST['password']) < 8 || strlen($_POST['cpf']) != 14 || strlen($_POST['cnh']) != 9 || strlen($_POST['cep']) != 9 || strlen($_POST['numero']) > 6) {
-        echo "<script>
-            alert('Algum dado não foi preenchido corretamente!')
-            window.location='../cadastro.php'
-        </script>";
-        exit();
-    }
-
-    // Validação do CPF
-    if(!validaCpf($_POST['cpf'])) {
-        echo "<script>
-            alert('O CPF não é válido!')
-            window.location='../cadastro.php'
-        </script>";
-        exit();
-    }
-
-    // Validando se dados não estão vazios
-    foreach($_POST as $data) {
-        if($data === '') {
-            echo "<script>
-                alert('Algum dado não foi preenchido corretamente!')
-                window.location='../cadastro.php'
-            </script>";
-            exit();
-        }
-    }
+    // Chamando função para fazer validação dos campos preenchidos
+    validacoes();
 
     // Instanciando um objeto usuário
     $usuario = new Usuario();
@@ -126,5 +100,47 @@
             }
         }
         return true;
+    }
+
+    // Função para fazer validações dos campos preenchidos
+    function validacoes() {
+
+        // Validando se dados não estão vazios
+        foreach($_POST as $data) {
+            if($data === '') {
+                echo "<script>
+                    alert('Algum dado não foi preenchido corretamente!')
+                    window.location=history.back()
+                </script>";
+                exit();
+            }
+        }
+
+        // Validação do CPF
+        if(!validaCpf($_POST['cpf'])) {
+            echo "<script>
+                alert('O CPF não é válido!')
+                window.location=history.back()
+            </script>";
+            exit();
+        }
+
+        // Validando se alguns dados estão conforme o especificado
+        if(strlen($_POST['nome']) > 255 || strlen($_POST['cnh']) != 9 || strlen($_POST['telefone']) != 15 || strlen($_POST['carro']) > 255 || strlen($_POST['password']) < 8) {
+            echo "<script>
+                alert('Algum dado não foi preenchido corretamente!')
+                window.location=history.back()
+            </script>";
+            exit();
+        }
+
+        // Verificação dos campos de endereço do usuário
+        if(strlen($_POST['cep']) != 9 || strlen($_POST['rua']) > 255 || strlen($_POST['bairro']) > 255 || strlen($_POST['numero']) > 6 || strlen($_POST['cidade']) > 255 || strlen($_POST['estado']) != 2) {
+            echo "<script>  
+                alert('Algum dado não foi preenchido corretamente!')
+                window.location=history.back()
+            </script>";
+            exit();
+        }
     }
     
