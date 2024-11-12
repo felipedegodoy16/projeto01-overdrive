@@ -5,6 +5,7 @@ if (document.readyState == "loading") {
 }
 
 function ready() {
+
     // Funções Usuário
     const inputCpf = document.querySelector('input[name=cpf]')
     inputCpf.addEventListener("input", validacoesCpf)
@@ -15,6 +16,9 @@ function ready() {
     magicEye.addEventListener("click", revealPassword)
 
     // Funções Empresa
+    const inputCnpj = document.querySelector('input[name=cnpj_emp]')
+    inputCnpj.addEventListener("input", validacoesCnpj)
+
     document.addEventListener("mouseup", verificaTelEmp)
 
     // Funcão para retornar empresas do banco
@@ -45,11 +49,6 @@ function validacoesCpf(){
 
 function validaCPF(cpf){
 
-    // Verifica se foi informado todos os digitos corretamente
-    if (cpf.length != 11) {
-        return false
-    }
-
     // Verifica se foi informada uma sequência de digitos repetidos. Ex: 111.111.111-11
     var regex = /([0-9]{2,3})\1/g
     if (regex.test(cpf)) {
@@ -67,6 +66,61 @@ function validaCPF(cpf){
             return false;
         }
     }
+    return true;
+}
+
+// Funções para validação do CPF
+function validacoesCnpj(){
+    const strCnpj = document.querySelector('input[name=cnpj_emp]').value
+    const cnpjAlert = document.getElementById('cnpjTeste')
+    const btnCadastrar = document.getElementById('btn_cadastrar_emp')
+    cnpj = strCnpj.replace(/[^0-9]/g, '')
+
+    if(cnpj.length === 14){
+        cnpjTestado = validaCnpj(cnpj)
+        if(cnpjTestado){
+            cnpjAlert.innerText = 'CNPJ válido'
+            cnpjAlert.style.color = '#0c6800'
+            btnCadastrar.setAttribute('type', 'submit')
+            buscaCnpj(cnpj)
+        }
+    } else {
+        cnpjAlert.innerText = 'CNPJ inválido'
+        cnpjAlert.style.color = 'var(--red-dark)'
+        btnCadastrar.setAttribute('type', 'button')
+    }
+}
+
+function validaCnpj(cnpj) {
+
+    var tamanhoTotal = cnpj.length - 2
+    var cnpjSemDigitos = cnpj.substring(0, tamanhoTotal);
+    var digitosVerificadores = cnpj.substring(tamanhoTotal);
+    var soma = 0;
+    var pos = tamanhoTotal - 7;
+    for (i = tamanhoTotal; i >= 1; i--) {
+        soma += cnpjSemDigitos.charAt(tamanhoTotal - i) * pos--;
+        if (pos < 2)
+            pos = 9;
+    }
+    resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+    if (resultado != digitosVerificadores.charAt(0))
+        return false;
+
+    tamanhoTotal = tamanhoTotal + 1;
+    cnpjSemDigitos = cnpj.substring(0, tamanhoTotal);
+    soma = 0;
+    pos = tamanhoTotal - 7;
+    for (i = tamanhoTotal; i >= 1; i--) {
+        soma += cnpjSemDigitos.charAt(tamanhoTotal - i) * pos--;
+        if (pos < 2)
+            pos = 9;
+    }
+
+    resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+    if (resultado != digitosVerificadores.charAt(1))
+        return false;
+
     return true;
 }
 
@@ -140,12 +194,7 @@ function verificaTelEmp(event){
 }
 
 //Função de Busca CNPJ da Empresa
-function buscaCnpj(){
-
-    const cnpjTeste = document.getElementById('cnpjTeste')
-    const btnCadastrar = document.getElementById('btn_cadastrar_emp')
-    let inputCnpj = document.querySelector('input[name=cnpj_emp]')
-    let cnpj = inputCnpj.value.replace(/[^0-9]/g, '')
+function buscaCnpj(cnpj){
 
     if(cnpj.length === 14){
 
@@ -163,28 +212,12 @@ function buscaCnpj(){
 
         xhr.send();
 
-    } else {
-        
-        cnpjTeste.innerText = 'CNPJ inválido'
-        cnpjTeste.style.color = 'var(--red-dark)'
-        btnCadastrar.setAttribute('type', 'button')
-
     }
 }
 
 //Função para preencher os campos com o CNPJ
 function preencheCamposCnpj(json){
-    const cnpjTeste = document.getElementById('cnpjTeste')
-    const btnCadastrar = document.getElementById('btn_cadastrar_emp')
-    const cep_teste = document.getElementById('cepTesteEmp')
-
     if(json.nome != undefined){
-
-        cnpjTeste.innerText = 'CNPJ válido'
-        cnpjTeste.style.color = '#0c6800'
-        btnCadastrar.setAttribute('type', 'submit')
-        cep_teste.innerText = 'CEP válido'
-        cep_teste.style.color = '#0c6800'
 
         document.querySelector('input[name=nome_emp]').value = json.nome
         document.querySelector('input[name=fantasia_emp]').value = json.fantasia
@@ -194,12 +227,6 @@ function preencheCamposCnpj(json){
         document.querySelector('input[name=numero_emp]').value = json.numero
         document.querySelector('input[name=cidade_emp]').value = json.municipio
         document.querySelector('input[name=estado_emp]').value = json.uf
-
-    } else {
-
-        cnpjTeste.innerText = 'CNPJ inválido'
-        cnpjTeste.style.color = 'var(--red-dark)'
-        btnCadastrar.setAttribute('type', 'button')
 
     }
 }

@@ -34,7 +34,7 @@
             <div class="column_left">
                 <p>
                     <label for="id_cnpj_emp">CNPJ</label>
-                    <input type="text" data-mask="00.000.000/0000-00" name="cnpj_emp" id="id_cnpj_emp" minlength="18" maxlength="18" placeholder="Digite o CNPJ" oninput="buscaCnpj(this.value)" required>
+                    <input type="text" data-mask="00.000.000/0000-00" name="cnpj_emp" id="id_cnpj_emp" minlength="18" maxlength="18" placeholder="Digite o CNPJ" required>
                     <small id="cnpjTeste"></small>
                 </p>
                 <p>

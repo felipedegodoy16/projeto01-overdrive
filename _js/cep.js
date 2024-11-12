@@ -7,11 +7,11 @@ if (document.readyState == "loading") {
 function ready(){
     // Função de CEP para Usuário
     let eventoCep = document.querySelector('input[name=cep]')
-    eventoCep.addEventListener("keyup", buscaCep)
+    eventoCep.addEventListener("input", buscaCep)
 
     // Função de CEP para Empresa
     let eventoCepEmp = document.querySelector('input[name=cep_emp]')
-    eventoCepEmp.addEventListener("keyup", buscaCepEmp)
+    eventoCepEmp.addEventListener("input", buscaCepEmp)
 }
 
 //Função de Busca CEP para Usuário
