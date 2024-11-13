@@ -182,19 +182,21 @@ function responseJson(json){
         `
 
         json.empresas.map(function(empresa){  
-          table +=
-          `
-          <tr class="filter_table">
-            <th scope="row">${empresa.id}</th>
-            <td class="name">${empresa.nome}</td>
-            <td>${empresa.fantasia}</td>
-            <td class="cpf_cnpj">${empresa.cnpj}</td>
-            <td>${empresa.telefone}</td>
-            <td>${empresa.responsavel}</td>
-            <td>${empresa.rua}, ${empresa.numero} - ${empresa.bairro}, ${empresa.cidade} - ${empresa.estado}, ${empresa.cep}</td>
-            <td>${formatter.format(Date.parse(empresa.registro + 'UTC-3'))}</td>
-          </tr>
-          `
+          if(empresa.fantasia !== "INATIVO") {
+            table +=
+            `
+            <tr class="filter_table">
+              <th scope="row">${empresa.id}</th>
+              <td class="name">${empresa.nome}</td>
+              <td>${empresa.fantasia}</td>
+              <td class="cpf_cnpj">${empresa.cnpj}</td>
+              <td>${empresa.telefone}</td>
+              <td>${empresa.responsavel}</td>
+              <td>${empresa.rua}, ${empresa.numero} - ${empresa.bairro}, ${empresa.cidade} - ${empresa.estado}, ${empresa.cep}</td>
+              <td>${formatter.format(Date.parse(empresa.registro + 'UTC-3'))}</td>
+            </tr>
+            `
+          }
         })
         table +=
         `
@@ -209,41 +211,44 @@ function responseJson(json){
 
         json.empresas.map(function(empresa){
 
-          if(json.sessao === 'A') {
-            tag = `<p class="center" style="margin-top: .7em;"><i class="fi fi-rr-trash icons_cards center icon_trash emp_trash"></i><a href="editarEmp.php?id=${empresa.id}&edit=0" style="text-decoration: none;"><i class="fi fi-rr-edit icons_cards center icon_edit"></i></a></p>`
-          }
-  
-          if(empresa.foto != null){
-            var foto = empresa.foto
-          } else {
-            var foto = 'fotoEmp.jpg'
-          }
-  
-          divEmps.innerHTML +=
-          `
-          <div class="col-10 col-sm-6 col-md-4 col-lg-3">
-            <div class="center card_register">
-              <img class="img_user_emp" src="_images/uploads/${foto}" alt="Imagem do Usuário ou Empresa">
-              <div class="card_user_body" style="padding-bottom: 2em;">
-                <header>
-                  <p style="position: absolute; padding: 0; left: 1em; top: 1em;">#${empresa.id}</p>
-                </header>
-                <p style="margin-top: 4.5em;" class="name">Razão: ${empresa.nome}</p>
-                <p>Fantasia: ${empresa.fantasia}</p>
-                <p class="cpf_cnpj">CNPJ: ${empresa.cnpj}</p>
-                <p>Telefone: ${empresa.telefone}</p>
-                <p>Responsável: ${empresa.responsavel}</p>
-                <details style="margin-bottom: .4em;">
-                  <summary>Endereço</summary>
-                  <p style="margin: .4em 0;">${empresa.rua}, ${empresa.numero} - ${empresa.bairro}</p>
-                  <p>${empresa.cidade} - ${empresa.estado}, ${empresa.cep}</p>
-                </details>
-                <p>Registro: ${formatter.format(Date.parse(empresa.registro + 'UTC-3'))}</p>
-                ${tag}
+          if(empresa.fantasia !== "INATIVO") {
+            if(json.sessao === 'A') {
+              tag = `<p class="center" style="margin-top: .7em;"><i class="fi fi-rr-trash icons_cards center icon_trash emp_trash"></i><a href="editarEmp.php?id=${empresa.id}&edit=0" style="text-decoration: none;"><i class="fi fi-rr-edit icons_cards center icon_edit"></i></a></p>`
+            }
+    
+            if(empresa.foto != null){
+              var foto = empresa.foto
+            } else {
+              var foto = 'fotoEmp.jpg'
+            }
+    
+            divEmps.innerHTML +=
+            `
+            <div class="col-10 col-sm-6 col-md-4 col-lg-3">
+              <div class="center card_register">
+                <img class="img_user_emp" src="_images/uploads/${foto}" alt="Imagem do Usuário ou Empresa">
+                <div class="card_user_body" style="padding-bottom: 2em;">
+                  <header>
+                    <p style="position: absolute; padding: 0; left: 1em; top: 1em;">#${empresa.id}</p>
+                  </header>
+                  <p style="margin-top: 4.5em;" class="name">Razão: ${empresa.nome}</p>
+                  <p>Fantasia: ${empresa.fantasia}</p>
+                  <p class="cpf_cnpj">CNPJ: ${empresa.cnpj}</p>
+                  <p>Telefone: ${empresa.telefone}</p>
+                  <p>Responsável: ${empresa.responsavel}</p>
+                  <details style="margin-bottom: .4em;">
+                    <summary>Endereço</summary>
+                    <p style="margin: .4em 0;">${empresa.rua}, ${empresa.numero} - ${empresa.bairro}</p>
+                    <p>${empresa.cidade} - ${empresa.estado}, ${empresa.cep}</p>
+                  </details>
+                  <p>Registro: ${formatter.format(Date.parse(empresa.registro + 'UTC-3'))}</p>
+                  ${tag}
+                </div>
               </div>
             </div>
-          </div>
-          `
+            `
+          }
+
         })
 
       }

@@ -70,12 +70,6 @@
                                     <?php endif ?>
 
                                 <?php endforeach ?>
-
-                                <?php if($dados[0]['fantasia'] === 'INATIVO'): ?>
-                                    <option value="INATIVO" selected>INATIVO</option>
-                                <?php else: ?>
-                                    <option value="INATIVO">INATIVO</option>
-                                <?php endif ?>
                             <?php else: ?>
                                 <option value="<?= $dados[0]['fantasia'] ?>" selected><?= $dados[0]['fantasia'] ?></option>
                             <?php endif ?>

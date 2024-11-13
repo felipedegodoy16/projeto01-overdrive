@@ -16,7 +16,7 @@ function ready(){
 
     // Função de CEP para Usuário
     let eventoCep = document.querySelector('input[name=cep]')
-    eventoCep.addEventListener("keyup", buscaCep)
+    eventoCep.addEventListener("input", buscaCep)
 }
 
 // Funções para validação do CPF
