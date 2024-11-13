@@ -14,10 +14,12 @@
         // Validando dados preenchidos no formulário
         validacoes();
 
+        // Pegando dados para verificar se o registro não irá se repetir no banco
+        $empresa->setId($id_edit);
         $empresa->setCnpj(strtoupper($_POST['cnpj_emp']));
 
         // Verificando se o CNPJ não é duplicado
-        $verificarCnpj = $empresa->verificaCnpj();
+        $verificarCnpj = $empresa->verificaEdicao();
 
         if($verificarCnpj === -1) {
 
@@ -31,7 +33,6 @@
             // Inserindo o endereço no banco ou pegando um endereço já existente
             $endereco->inserirEndereco();
 
-            $empresa->setId($id_edit);
             $empresa->setNome(strtoupper($_POST['nome_emp']));
             $empresa->setFantasia(strtoupper($_POST['fantasia_emp']));
             $empresa->setTelefone(strtoupper($_POST['telefone']));
@@ -66,7 +67,7 @@
 
             echo "<script>
                 alert('O CNPJ digitado já foi registrado no Banco')
-                window.location=history.back()
+                window.location='editarEmp.php?id=$id_edit&edit=0'
             </script>";
 
         }

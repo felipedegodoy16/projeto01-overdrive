@@ -5,6 +5,15 @@ if (document.readyState == "loading") {
 }
 
 function ready(){
+    
+    let body = document.getElementsByTagName('body')[0]
+    if(body.querySelector('input[name=cnpj_emp]') != undefined) {
+        validacoesCnpj()
+    } else if(body.querySelector('input[name=cpf]') != undefined) {
+        validacoesCpf()
+        buscaCep()
+    }
+
     // Função de CEP para Usuário
     let eventoCep = document.querySelector('input[name=cep]')
     eventoCep.addEventListener("keyup", buscaCep)
@@ -23,6 +32,10 @@ function validacoesCpf(){
             cpfAlert.innerText = 'CPF válido'
             cpfAlert.style.color = '#0c6800'
             btnCadastrar.setAttribute('type', 'submit')
+        } else {
+            cpfAlert.innerText = 'CPF inválido'
+            cpfAlert.style.color = 'var(--red-dark)'
+            btnCadastrar.setAttribute('type', 'button')
         }
     } else {
         cpfAlert.innerText = 'CPF inválido'
@@ -72,6 +85,13 @@ function validacoesCnpj(){
             cnpjAlert.style.color = '#0c6800'
             btnCadastrar.setAttribute('type', 'submit')
             buscaCnpj(cnpj)
+        } else {
+            cnpjAlert.innerText = 'CNPJ inválido'
+            cnpjAlert.style.color = 'var(--red-dark)'
+            btnCadastrar.setAttribute('type', 'button')
+            document.querySelector('input[name=nome_emp]').value = ''
+            document.querySelector('input[name=fantasia_emp]').value = ''
+            document.querySelector('input[name=numero]').value = ''
         }
     } else {
         cnpjAlert.innerText = 'CNPJ inválido'

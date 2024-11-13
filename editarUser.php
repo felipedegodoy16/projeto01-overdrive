@@ -99,7 +99,7 @@
                     </p>
                     <p>
                         <label for="id_numero">Numero</label>
-                        <input type="text" data-mask="000000" name="numero" id="id_numero" placeholder="Digite o Número" value="<?= $dados[0]['numero'] ?>" required> 
+                        <input type="text" name="numero" id="id_numero" placeholder="Digite o Número" value="<?= $dados[0]['numero'] ?>" required> 
                     </p>
                     <p>
                         <label for="id_cidade">Cidade</label>

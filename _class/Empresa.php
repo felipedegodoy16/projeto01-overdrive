@@ -250,6 +250,36 @@ class Empresa {
         }
     }
 
+    // Verificando se a empresa já está registrada no banco
+    public function verificaEdicao(){
+        try {
+
+            // Query
+            $sql = "SELECT * FROM empresas WHERE cnpj = :cnpj AND id_emp != :id;";
+
+            // Conectando ao banco e preparando a query
+            $stmt = ConexaoDAO::getConexao()->prepare($sql);
+            $stmt->bindValue(":cnpj", $this->cnpj, PDO::PARAM_STR);
+            $stmt->bindValue(":id", $this->id, PDO::PARAM_INT);
+
+            // Executando query no banco
+            $stmt->execute() or die(print_r($stmt->errorInfo(), true));
+            $dados = $stmt->fetchAll();
+
+            // Testando se houve retorno do banco
+            if(count($dados) > 0){
+                return 1;
+            }
+
+            return -1;
+ 
+        } catch(Exception $e) {
+
+            echo "Exceção $e";
+
+        }
+    }
+
     // Método para alterar dados da empresa no banco
     public function alterarEmpresa(){
         try {

@@ -270,7 +270,7 @@ class Usuario {
         try {
 
             // Query SQL
-            $sql = "SELECT * FROM usuarios WHERE cpf = :cpf OR cnh = :cnh AND id_user != :id;";
+            $sql = "SELECT * FROM usuarios WHERE (cpf = :cpf OR cnh = :cnh) AND id_user != :id;";
 
             // Conectando ao banco e preparando a query
             $stmt = ConexaoDAO::getConexao()->prepare($sql);

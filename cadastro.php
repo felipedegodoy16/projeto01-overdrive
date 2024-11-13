@@ -75,7 +75,7 @@
                 </p>
                 <p>
                     <label for="id_numero_emp">Numero</label>
-                    <input type="text" data-mask="000000" name="numero_emp" id="id_numero_emp" maxlength="6" placeholder="Digite o Número" required> 
+                    <input type="text" name="numero_emp" id="id_numero_emp" maxlength="6" placeholder="Digite o Número" required> 
                 </p>
                 <p>
                     <label for="id_cidade_emp">Cidade</label>
@@ -151,7 +151,7 @@
                 </p>
                 <p>
                     <label for="id_numero">Numero</label>
-                    <input type="text" data-mask="000000" name="numero" id="id_numero" maxlength="6" placeholder="Digite o Número" required> 
+                    <input type="text" name="numero" id="id_numero" maxlength="6" placeholder="Digite o Número" required> 
                 </p>
                 <p>
                     <label for="id_cidade">Cidade</label>
