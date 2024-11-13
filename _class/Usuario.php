@@ -1,11 +1,12 @@
 <?php 
-require_once 'Endereco.php';
+require_once 'Empresa.php';
 
 class Usuario {
     // Atributos
-    private string $nome, $telefone, $cpf, $cnh, $carro, $cargo, $empresa, $senha, $foto, $registro;
+    private string $nome, $telefone, $cpf, $cnh, $carro, $cargo, $senha, $foto, $registro;
     private int $id;
     private Endereco $endereco;
+    private Empresa $empresa;
 
     // Método construtor
     public function __construct(){
@@ -47,7 +48,7 @@ class Usuario {
 
             // Query SQL
             $sql = "INSERT INTO usuarios VALUES 
-            (DEFAULT, :nome, :cpf, :cnh, :telefone, :carro, :cargo, :empresa, :senha, :foto, :registro, :id_endereco);";
+            (DEFAULT, :nome, :cpf, :cnh, :telefone, :carro, :cargo, :id_empresa, :senha, :foto, :registro, :id_endereco);";
 
             // Conectando o banco e preparando a query
             $stmt = ConexaoDAO::getConexao()->prepare($sql);
@@ -57,7 +58,7 @@ class Usuario {
             $stmt->bindValue(":telefone", $this->telefone, PDO::PARAM_STR);
             $stmt->bindValue(":carro", $this->carro, PDO::PARAM_STR);
             $stmt->bindValue(":cargo", $this->cargo, PDO::PARAM_STR);
-            $stmt->bindValue(":empresa", $this->empresa, PDO::PARAM_STR);
+            $stmt->bindValue(":id_empresa", $this->empresa->getId(), PDO::PARAM_INT);
             $stmt->bindValue(":senha", $this->senha, PDO::PARAM_STR);
             $stmt->bindValue(":foto", $this->foto, PDO::PARAM_STR);
             $stmt->bindValue(":registro", $this->registro, PDO::PARAM_STR);
@@ -119,7 +120,7 @@ class Usuario {
         try {
 
             // Query
-            $sql = "SELECT * FROM usuarios u INNER JOIN enderecos e ON u.id_endereco = e.id_end;";
+            $sql = "SELECT u.id_user, u.nome, u.carro, u.cargo, u.telefone, u.cpf, u.cnh, u.foto, u.registro, e.cep, e.numero, e.rua, e.cidade, e.estado, e.bairro, emp.fantasia FROM usuarios u INNER JOIN enderecos e ON u.id_endereco = e.id_end INNER JOIN empresas emp ON u.id_empresa = emp.id_emp;";
 
             // Conectando ao banco
             $stmt = ConexaoDAO::getConexao()->prepare($sql);
@@ -137,7 +138,7 @@ class Usuario {
                         'nome' => $d['nome'],
                         'carro' => $d['carro'],
                         'cargo' => $d['cargo'],
-                        'empresa' => $d['empresa'],
+                        'empresa' => $d['fantasia'],
                         'telefone' => $d['telefone'],
                         'cpf' => $d['cpf'],
                         'cnh' => $d['cnh'],
@@ -171,7 +172,7 @@ class Usuario {
         try {
 
             // Query
-            $sql = "SELECT * FROM usuarios u INNER JOIN enderecos e ON u.id_endereco = e.id_end ORDER BY $campo $ordem;";
+            $sql = "SELECT u.id_user, u.nome, u.carro, u.cargo, u.telefone, u.cpf, u.cnh, u.foto, u.registro, e.cep, e.numero, e.rua, e.cidade, e.estado, e.bairro, emp.fantasia FROM usuarios u INNER JOIN enderecos e ON u.id_endereco = e.id_end INNER JOIN empresas emp ON u.id_empresa = emp.id_emp ORDER BY u.$campo $ordem;";
 
             // Conectando ao banco e preparando a query
             $stmt = ConexaoDAO::getConexao()->prepare($sql);
@@ -189,7 +190,7 @@ class Usuario {
                         'nome' => $d['nome'],
                         'carro' => $d['carro'],
                         'cargo' => $d['cargo'],
-                        'empresa' => $d['empresa'],
+                        'empresa' => $d['fantasia'],
                         'telefone' => $d['telefone'],
                         'cpf' => $d['cpf'],
                         'cnh' => $d['cnh'],
@@ -223,7 +224,7 @@ class Usuario {
         try {
             
             // Query
-            $sql = "SELECT * FROM usuarios u INNER JOIN enderecos e ON u.id_endereco = e.id_end WHERE u.id_user = :id;";
+            $sql = "SELECT u.id_user, u.nome, u.carro, u.cargo, emp.fantasia, u.telefone, u.cpf, u.cnh, e.cep, e.numero, e.rua, e.cidade, e.estado, e.bairro FROM usuarios u INNER JOIN enderecos e ON u.id_endereco = e.id_end INNER JOIN empresas emp ON u.id_empresa = emp.id_emp WHERE u.id_user = :id;";
 
             // Conectando ao banco e preparando a query
             $stmt = ConexaoDAO::getConexao()->prepare($sql);
@@ -239,7 +240,7 @@ class Usuario {
                     $d['nome'];
                     $d['carro'];
                     $d['cargo'];
-                    $d['empresa'];
+                    $d['fantasia'];
                     $d['telefone'];
                     $d['cpf'];
                     $d['cnh'];
@@ -264,12 +265,42 @@ class Usuario {
         }
     }
 
+    // Método para verificar se o usuário já foi cadastrado
+    public function verificaEdicao(){
+        try {
+
+            // Query SQL
+            $sql = "SELECT * FROM usuarios WHERE cpf = :cpf OR cnh = :cnh AND id_user != :id;";
+
+            // Conectando ao banco e preparando a query
+            $stmt = ConexaoDAO::getConexao()->prepare($sql);
+            $stmt->bindValue(":cpf", $this->cpf, PDO::PARAM_STR);
+            $stmt->bindValue(":cnh", $this->cnh, PDO::PARAM_STR);
+            $stmt->bindValue(":id", $this->id, PDO::PARAM_INT);
+
+            // Executando a query no banco
+            $stmt->execute() or die(print_r($stmt->errorInfo(), true));
+            $dado = $stmt->fetchAll();
+
+            if(count($dado) > 0){
+                return 1;
+            }
+
+            return -1;
+
+        } catch(Exception $e) {
+
+            echo "Exceção $e";
+
+        }
+    }
+
     // Método para alterar dados do usuário no banco
     public function alterarUsuario(){
         try {
 
             // Query SQL
-            $this->getSenha() === '' ? $sql = "UPDATE usuarios SET nome = :nome, cpf = :cpf, cnh = :cnh, telefone = :telefone, carro = :carro, empresa = :empresa, foto = :foto, id_endereco = :id_endereco WHERE id_user = :id;" : $sql = "UPDATE usuarios SET nome = :nome, cpf = :cpf, cnh = :cnh, telefone = :telefone, carro = :carro, empresa = :empresa, senha = :senha, foto = :foto, id_endereco = :id_endereco WHERE id_user = :id;";
+            $this->getSenha() === '' ? $sql = "UPDATE usuarios SET nome = :nome, cpf = :cpf, cnh = :cnh, telefone = :telefone, carro = :carro, id_empresa = :id_empresa, foto = :foto, id_endereco = :id_endereco WHERE id_user = :id;" : $sql = "UPDATE usuarios SET nome = :nome, cpf = :cpf, cnh = :cnh, telefone = :telefone, carro = :carro, id_empresa = :id_empresa, senha = :senha, foto = :foto, id_endereco = :id_endereco WHERE id_user = :id;";
 
             // Conectando o banco e preparando a query
             $stmt = ConexaoDAO::getConexao()->prepare($sql);
@@ -279,7 +310,7 @@ class Usuario {
             $stmt->bindValue(":cnh", $this->cnh, PDO::PARAM_STR);
             $stmt->bindValue(":telefone", $this->telefone, PDO::PARAM_STR);
             $stmt->bindValue(":carro", $this->carro, PDO::PARAM_STR);
-            $stmt->bindValue(":empresa", $this->empresa, PDO::PARAM_STR);
+            $stmt->bindValue(":id_empresa", $this->empresa->getId(), PDO::PARAM_INT);
             $this->getSenha() === '' ? : $stmt->bindValue(":senha", $this->senha, PDO::PARAM_STR);
             $stmt->bindValue(":foto", $this->foto, PDO::PARAM_STR);
             $stmt->bindValue(":id_endereco", $this->endereco->getId(), PDO::PARAM_INT);

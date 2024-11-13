@@ -31,6 +31,12 @@
         // Inserindo o endereço no banco ou pegando um endereço já existente
         $endereco->inserirEndereco();
 
+        // Instanciando o objeto de empresa
+        $empresa = new Empresa();
+
+        $empresa->setFantasia(strtoupper($_POST['empresa']));
+        $empresa->empresaUsuario();
+
         // Finalizando a instanciação do usuário
         $usuario->setNome(strtoupper($_POST['nome']));
         $usuario->setTelefone(strtoupper($_POST['telefone']));
@@ -38,8 +44,8 @@
         $usuario->setCargo('C');
         $usuario->setSenha(password_hash($_POST['password'], PASSWORD_DEFAULT));
         $usuario->setEndereco($endereco);
-        $usuario->setEmpresa(strtoupper($_POST['empresa']));
-        if(isset($_FILES['foto']['name']) && $_FILES['foto']['error'] == 0 || $_FILES['size'] > 10000000) {
+        $usuario->setEmpresa($empresa);
+        if(isset($_FILES['foto']['name']) && $_FILES['foto']['error'] == 0 || $_FILES['foto']['size'] > 10000000) {
             $arquivo_tmp = $_FILES['foto']['tmp_name'];
             $nomeImagem = $_FILES['foto']['name'];
             $extensao = strrchr($nomeImagem, '.');

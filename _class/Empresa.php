@@ -124,7 +124,7 @@ class Empresa {
         try {
 
             // Query
-            $sql = "SELECT * FROM empresas emp INNER JOIN enderecos ende ON emp.id_endereco = ende.id_end ORDER BY $campo $ordem;";
+            $sql = "SELECT * FROM empresas emp INNER JOIN enderecos ende ON emp.id_endereco = ende.id_end ORDER BY emp.$campo $ordem;";
 
             // Conectando com o banco
             $stmt = ConexaoDAO::getConexao()->prepare($sql);
@@ -168,7 +168,7 @@ class Empresa {
         }
     }
 
-    // Método para retornar usuário do banco
+    // Método para retornar empresa do banco
     public function retornarEmpresa($id) {
         try {
             
@@ -205,6 +205,43 @@ class Empresa {
             }
 
             return -1;
+
+        } catch(Exception $e) {
+
+            echo "Exceção $e";
+
+        }
+    }
+
+    // Método para retornar usuário do banco
+    public function empresaUsuario() {
+        try {
+            
+            // Query
+            $sql = "SELECT * FROM empresas WHERE fantasia = :fantasia LIMIT 1;";
+
+            // Conectando ao banco e preparando a query
+            $stmt = ConexaoDAO::getConexao()->prepare($sql);
+            $stmt->bindValue(":fantasia", $this->getFantasia(), PDO::PARAM_STR);
+
+            // Executando a query no banco
+            $stmt->execute() or die(print_r($stmt->errorInfo(), true));
+            $dados = $stmt->fetchAll();
+
+            if(count($dados) > 0) {
+                foreach($dados as $d) {
+                    $d['id_emp'];
+                    $d['nome'];
+                    $d['cnpj'];
+                    $d['telefone'];
+                    $d['fantasia'];
+                    $d['responsavel'];
+                    $d['foto'];
+                }
+
+                $this->setId($d['id_emp']);
+
+            }
 
         } catch(Exception $e) {
 

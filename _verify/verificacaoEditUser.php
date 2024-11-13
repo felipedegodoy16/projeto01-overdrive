@@ -22,9 +22,11 @@
     validacoes();
 
     // Pegando dados para verificar possibilidade de ser repetido
+    $usuario->setId($id_edit);
     $usuario->setCpf(strtoupper($_POST['cpf']));
     $usuario->setCnh(strtoupper($_POST['cnh']));
-    $verificaDados = $usuario->verificaDados();
+    $verificaDados = $usuario->verificaEdicao();
+    // $verificaDados = -1;
 
     if($verificaDados === -1) {
         $endereco->setCep(strtoupper($_POST['cep']));
@@ -37,7 +39,13 @@
         // Inserindo o endereço no banco ou pegando um endereço já existente
         $endereco->inserirEndereco();
 
-        $usuario->setId($id_edit);
+        // Instanciando o objeto de empresa
+        $empresaUser = new Empresa();
+
+        $empresaUser->setFantasia(strtoupper($_POST['empresa']));
+        $empresaUser->empresaUsuario();
+
+        // Terminando instanciação do objeto usuário
         $usuario->setNome(strtoupper($_POST['nome']));
         $usuario->setTelefone(strtoupper($_POST['telefone']));
         $usuario->setCarro(strtoupper($_POST['carro']));
@@ -47,7 +55,7 @@
         $usuario->setSenha(password_hash($_POST['password'], PASSWORD_DEFAULT));
         }
         $usuario->setEndereco($endereco);
-        $usuario->setEmpresa(strtoupper($_POST['empresa']));
+        $usuario->setEmpresa($empresaUser);
         if(isset($_FILES['foto']['name']) && $_FILES['foto']['error'] == 0){
             $arquivo_tmp = $_FILES['foto']['tmp_name'];
             $nomeImagem = $_FILES['foto']['name'];
@@ -145,13 +153,13 @@
     }
 
     // Validação do CPF
-    if(!validaCpf($_POST['cpf'])) {
-        echo "<script>
-            alert('O CPF não é válido!')
-            window.location=history.back()
-        </script>";
-        exit();
-    }
+    // if(!validaCpf($_POST['cpf'])) {
+    //     echo "<script>
+    //         alert('O CPF não é válido!')
+    //         window.location=history.back()
+    //     </script>";
+    //     exit();
+    // }
 
     // Validando se alguns dados estão conforme o especificado
     if(strlen($_POST['nome']) > 255 || strlen($_POST['cnh']) != 9 || strlen($_POST['telefone']) != 15 || strlen($_POST['carro']) > 255) {

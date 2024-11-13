@@ -63,7 +63,7 @@
                             <?php if($_SESSION['cargo'] === 'A'): ?>
                                 <?php foreach($empresas as $empresa => $nome):
 
-                                    if($nome['fantasia'] === $dados[0]['empresa']): ?>
+                                    if($nome['fantasia'] === $dados[0]['fantasia']): ?>
                                         <option value="<?= $nome['fantasia'] ?>" selected><?= $nome['fantasia'] ?></option>
                                     <?php else: ?>
                                         <option value="<?= $nome['fantasia'] ?>"><?= $nome['fantasia'] ?></option>
@@ -71,13 +71,13 @@
 
                                 <?php endforeach ?>
 
-                                <?php if($dados[0]['empresa'] === 'INATIVO'): ?>
+                                <?php if($dados[0]['fantasia'] === 'INATIVO'): ?>
                                     <option value="INATIVO" selected>INATIVO</option>
                                 <?php else: ?>
                                     <option value="INATIVO">INATIVO</option>
                                 <?php endif ?>
                             <?php else: ?>
-                                <option value="<?= $dados[0]['empresa'] ?>" selected><?= $dados[0]['empresa'] ?></option>
+                                <option value="<?= $dados[0]['fantasia'] ?>" selected><?= $dados[0]['fantasia'] ?></option>
                             <?php endif ?>
                         </select>
                     </p>
