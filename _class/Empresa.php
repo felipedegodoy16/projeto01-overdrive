@@ -347,12 +347,12 @@ class Empresa {
     }
 
     // Método para verificar se a empresa está vinculada a algum usuário
-    public function verificarVinculo($id){
+    public function retirarVinculo($id){
 
         try {
 
             // Query
-            $sql = "SELECT fantasia FROM empresas WHERE id_emp = :id LIMIT 1;";
+            $sql = "SELECT id_user FROM usuarios WHERE id_empresa = :id;";
 
             // Conectando ao banco e preparando a query
             $stmt = ConexaoDAO::getConexao()->prepare($sql);
@@ -360,32 +360,21 @@ class Empresa {
 
             // Executando a query no banco
             $stmt->execute() or die(print_r($stmt->errorInfo(), true));
-            $dados = $stmt->fetchAll();
+            $usuarios = $stmt->fetchAll();
 
-            if(count($dados) > 0){
-                foreach($dados as $d){
-                    $d['fantasia'];
+            if(count($usuarios) > 0){
+                foreach($usuarios as $usuario) {
+                    // Query
+                    $sql = "UPDATE usuarios SET id_empresa = 0 WHERE id_user = :id;";
+
+                    // Conectando ao banco e preparando a query
+                    $stmt = ConexaoDAO::getConexao()->prepare($sql);
+                    $stmt->bindValue(":id", $usuario['id_user'], PDO::PARAM_INT);
+
+                    // Executando a query no banco
+                    $stmt->execute() or die(print_r($stmt->errorInfo(), true));
                 }
-
-                // Query
-                $sql = "SELECT empresa FROM usuarios WHERE empresa = :fantasia;";
-
-                // Conectando ao banco e preparando a query
-                $stmt = ConexaoDAO::getConexao()->prepare($sql);
-                $stmt->bindValue(":fantasia", $d['fantasia'], PDO::PARAM_STR);
-
-                // Executando a query no banco
-                $stmt->execute() or die(print_r($stmt->errorInfo(), true));
-                $empresas = $stmt->fetchAll();
-
-                if(count($empresas) > 0){
-                    return 1;
-                }
-
-                return -1;
             }
-
-            return 0;
 
         } catch(Exception $e) {
 
@@ -398,20 +387,18 @@ class Empresa {
     public function removerEmpresa($id){
 
         try {
-            
-            // Verificando vínculo de empresa com algum usuário
-            $retorno = $this->verificarVinculo($id);
+
+            $retorno = $this->retornarEmpresa($id);
 
             // Verificando status do vínculo
-            if($retorno === 0){
+            if($retorno === -1) {
 
                 return 0;
 
-            } else if($retorno === 1){
+            } else {
 
-                return 1;
-
-            } else{
+                // Verificando vínculo de empresa com algum usuário
+                $this->retirarVinculo($id);
 
                 // Query
                 $sql = "DELETE FROM empresas WHERE id_emp = :id;";
@@ -423,7 +410,7 @@ class Empresa {
                 // Executando a query no banco
                 $stmt->execute() or die(print_r($stmt->erroInfo(), true));
 
-                return -1;
+                return 1;
 
             }
 

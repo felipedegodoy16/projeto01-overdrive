@@ -30,13 +30,6 @@
                 'message' => 'A empresa selecionada já foi excluída.'
             );
 
-        } else if($dadoRetornado === 1){
-            
-            $json = array(
-                'status' => false,
-                'message' => 'A empresa selecionada ainda possui vínculo com algum funcionário.'
-            );
-
         } else {
 
             $json = array(

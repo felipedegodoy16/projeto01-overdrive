@@ -61,6 +61,7 @@
             alert('Empresa cadastrada com sucesso!')
             window.location='../cadastro.php'
         </script>";
+        exit();
 
     } else {
 
@@ -68,6 +69,7 @@
             alert('O CNPJ digitado já foi registrado no Banco')
             window.location=history.back()
         </script>";
+        exit();
 
     }
 

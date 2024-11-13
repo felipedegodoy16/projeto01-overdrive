@@ -70,6 +70,7 @@
             alert('Usuário cadastrado com sucesso!')
             window.location='../cadastro.php'
         </script>";
+        exit();
 
     } else {
 
@@ -77,6 +78,7 @@
             alert('O CPF ou a CNH digitados já foram registrados no Banco')
             history.back()
         </script>";
+        exit();
         
     }
 
