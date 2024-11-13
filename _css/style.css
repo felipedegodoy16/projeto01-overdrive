@@ -801,11 +801,6 @@ select option {
     transition: all .3s ease-in-out;
 }
 
-select option:hover {
-    background-color: #FFF;
-    color: var(--red-dark);
-}
-
 form.form_cadastro p {
     display: flex;
     flex-direction: column;
@@ -824,6 +819,26 @@ form.form_cadastro p {
 
 .icon-eye:hover {
     color: var(--red-light);
+}
+
+div#passwordTips {
+    margin-top: 1em;
+}
+
+div#passwordTips ul {
+    list-style: none;
+}
+
+div#passwordTips ul li {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: .3em;
+}
+
+.icon-tip {
+    font-weight: 900;
+    margin-right: 15px;
 }
 
 small#cpfTeste, small#cepTesteUser, small#cepTesteEmp, small#cnpjTeste {

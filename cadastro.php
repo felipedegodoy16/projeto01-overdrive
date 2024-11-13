@@ -121,17 +121,24 @@
                     <label for="id_carro">Carro</label>
                     <input type="text" name="carro" id="id_carro" maxlength="255" placeholder="Digite o Carro" required>
                 </p>
-                <p style="position: relative;">
-                    <label for="id_password">Senha</label>
-                    <input type="password" name="password" id="id_password" placeholder="DIGITE A SENHA" minlength="8" required style="text-transform: none;">
-                    <small>Mínimo 8 caracteres</small>
-                    <i id="eye_cadastro" class="fi fi-rr-eye icon-eye"></i>
-                </p>
                 <p>
                     <label for="id_empresa">Empresa</label>
                     <select name="empresa" id="id_empresa">
                         <option value="INATIVO" selected>INATIVO</option>
                     </select>
+                </p>
+                <p style="position: relative;">
+                    <label for="id_password">Senha</label>
+                    <input type="password" name="password" id="id_password" placeholder="DIGITE A SENHA" minlength="8" required style="text-transform: none;">
+                    <i id="eye_cadastro" class="fi fi-rr-eye icon-eye"></i>
+                    <div id="passwordTips" style="display: none;">
+                        <ul>
+                            <li class="tip"><i class="fi fi-rr-x icon-tip center"></i> Mínimo 8 caracteres</li>
+                            <li class="tip"><i class="fi fi-rr-x icon-tip center"></i> Letras Maiúsculas e Minúsculas</li>
+                            <li class="tip"><i class="fi fi-rr-x icon-tip center"></i> Números</li>
+                            <li class="tip"><i class="fi fi-rr-x icon-tip center"></i> Caractere especial</li>
+                        </ul>
+                    </div>
                 </p>
             </div>
 

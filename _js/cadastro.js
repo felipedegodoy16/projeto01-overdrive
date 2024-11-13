@@ -12,6 +12,9 @@ function ready() {
 
     document.addEventListener("mouseup", verificaTel)
 
+    const inputPassword = document.getElementById('id_password')
+    inputPassword.addEventListener("input", passwordTips)
+
     const magicEye = document.getElementById('eye_cadastro')
     magicEye.addEventListener("click", revealPassword)
 
@@ -166,6 +169,115 @@ function revealPassword(){
         inputPassword.type = 'text'
         iconEye.classList.add('fi-rr-eye-crossed')
         iconEye.classList.remove('fi-rr-eye')
+    }
+}
+
+// Função de dicas de senha para o usuário
+function passwordTips() {
+    const divTips = document.getElementById('passwordTips')
+    const inputPassword = document.getElementById('id_password').value
+    const li = document.getElementsByClassName('tip')
+
+    if(divTips.style.display === 'none') {
+        divTips.style.display = 'flex'
+    }
+
+    passwordSize(inputPassword, li)
+    passwordLetters(inputPassword, li)
+    passwordNumber(inputPassword, li)
+    passwordSpecial(inputPassword, li)
+
+}
+
+// Função verifica tamanho da senha
+function passwordSize(inputPassword, li) {
+    var element = li[0]
+    var icon = element.getElementsByClassName('icon-tip')[0]
+
+    if(inputPassword.length >= 8) {
+        element.style.color = 'green'
+
+        if(icon.classList.contains('fi-rr-x')) {
+            icon.classList.remove('fi-rr-x')
+            icon.classList.add('fi-rr-check')
+        }
+    } else {
+        element.style.color = 'rgb(90, 0, 0)'
+
+        if(icon.classList.contains('fi-rr-check')) {
+            icon.classList.remove('fi-rr-check')
+            icon.classList.add('fi-rr-x')
+        }
+    }
+}
+
+// Função para verificar se há números na senha
+function passwordLetters(inputPassword, li) {
+    var element = li[1]
+    var icon = element.getElementsByClassName('icon-tip')[0]
+    const regexLower = /[a-z]/gm
+    const regexUpper = /[A-Z]/gm
+
+    if(regexLower.test(inputPassword) && regexUpper.test(inputPassword)) {
+        element.style.color = 'green'
+
+        if(icon.classList.contains('fi-rr-x')) {
+            icon.classList.remove('fi-rr-x')
+            icon.classList.add('fi-rr-check')
+        }
+    } else {
+        element.style.color = 'rgb(90, 0, 0)'
+
+        if(icon.classList.contains('fi-rr-check')) {
+            icon.classList.remove('fi-rr-check')
+            icon.classList.add('fi-rr-x')
+        }
+    }
+}
+
+// Função para verificar se há números na senha
+function passwordNumber(inputPassword, li) {
+    var element = li[2]
+    var icon = element.getElementsByClassName('icon-tip')[0]
+    const regex = /\d/
+
+    if(regex.test(inputPassword)) {
+        element.style.color = 'green'
+
+        if(icon.classList.contains('fi-rr-x')) {
+            icon.classList.remove('fi-rr-x')
+            icon.classList.add('fi-rr-check')
+        }
+    } else {
+        element.style.color = 'rgb(90, 0, 0)'
+
+        if(icon.classList.contains('fi-rr-check')) {
+            icon.classList.remove('fi-rr-check')
+            icon.classList.add('fi-rr-x')
+        }
+    }
+}
+
+// Função para verificar se há números na senha
+function passwordSpecial(inputPassword, li) {
+    var element = li[3]
+    var icon = element.getElementsByClassName('icon-tip')[0]
+    const regex = /[!@#$%*()_+^&{}}:;?.]/gm
+
+    if(regex.test(inputPassword)) {
+        element.style.color = 'green'
+
+        if(icon.classList.contains('fi-rr-x')) {
+            icon.classList.remove('fi-rr-x')
+            icon.classList.add('fi-rr-check')
+        }
+    } else {
+        element.style.color = 'rgb(90, 0, 0)'
+
+        if(icon.classList.contains('fi-rr-check')) {
+            icon.classList.remove('fi-rr-check')
+            icon.classList.add('fi-rr-x')
+        }
     }
 }
 
