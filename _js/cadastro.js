@@ -20,6 +20,12 @@ function ready() {
 
     let eventoCep = document.querySelector('input[name=cep]')
     eventoCep.addEventListener("input", buscaCep)
+
+    let divUser = document.getElementById('cadastro_user')
+    let inputsUser = divUser.getElementsByTagName('input')
+    for(let i = 0; i < inputsUser.length-1; i++) {
+        inputsUser[i].addEventListener("input", validaCamposUser)
+    }
     
     // Funções Empresa
     const inputCnpj = document.querySelector('input[name=cnpj_emp]')
@@ -30,6 +36,12 @@ function ready() {
     let eventoCepEmp = document.querySelector('input[name=cep_emp]')
     eventoCepEmp.addEventListener("input", buscaCepEmp)
 
+    let divEmp = document.getElementById('cadastro_emp')
+    let inputsEmp = divEmp.getElementsByTagName('input')
+    for(let i = 0; i < inputsEmp.length-1; i++) {
+        inputsEmp[i].addEventListener("input", validaCamposEmp)
+    }
+
     // Funcão para retornar empresas do banco
     requireEmps()
 
@@ -39,7 +51,6 @@ function ready() {
 function validacoesCpf(){
     const strCpf = document.querySelector('input[name=cpf]').value
     const cpfAlert = document.getElementById('cpfTeste')
-    const btnCadastrar = document.getElementById('btn_cadastrar_user')
     cpf = strCpf.replace(/[^0-9]/g, '')
 
     if(cpf.length === 11){
@@ -47,16 +58,19 @@ function validacoesCpf(){
         if(cpfTestado){
             cpfAlert.innerText = 'CPF válido'
             cpfAlert.style.color = '#0c6800'
-            btnCadastrar.setAttribute('type', 'submit')
+
+            return true
         } else {
             cpfAlert.innerText = 'CPF inválido'
             cpfAlert.style.color = 'var(--red-dark)'
-            btnCadastrar.setAttribute('type', 'button')
+
+            return false
         }
     } else {
         cpfAlert.innerText = 'CPF inválido'
         cpfAlert.style.color = 'var(--red-dark)'
-        btnCadastrar.setAttribute('type', 'button')
+        
+        return false
     }
 }
 
@@ -86,31 +100,39 @@ function validaCPF(cpf){
 function validacoesCnpj(){
     const strCnpj = document.querySelector('input[name=cnpj_emp]').value
     const cnpjAlert = document.getElementById('cnpjTeste')
-    const btnCadastrar = document.getElementById('btn_cadastrar_emp')
     cnpj = strCnpj.replace(/[^0-9]/g, '')
+    const smallCnpj = document.getElementById('cnpjTeste')
 
     if(cnpj.length === 14){
         cnpjTestado = validaCnpj(cnpj)
         if(cnpjTestado){
+            if(smallCnpj.innerText != 'CNPJ válido') {
+                console.log('buscou')
+                buscaCnpj(cnpj)
+            }
             cnpjAlert.innerText = 'CNPJ válido'
             cnpjAlert.style.color = '#0c6800'
-            btnCadastrar.setAttribute('type', 'submit')
-            buscaCnpj(cnpj)
+
+            return true
         } else {
             cnpjAlert.innerText = 'CNPJ inválido'
             cnpjAlert.style.color = 'var(--red-dark)'
-            btnCadastrar.setAttribute('type', 'button')
+
             document.querySelector('input[name=nome_emp]').value = ''
             document.querySelector('input[name=fantasia_emp]').value = ''
             document.querySelector('input[name=numero]').value = ''
+
+            return false
         }
     } else {
         cnpjAlert.innerText = 'CNPJ inválido'
         cnpjAlert.style.color = 'var(--red-dark)'
-        btnCadastrar.setAttribute('type', 'button')
+
         document.querySelector('input[name=nome_emp]').value = ''
         document.querySelector('input[name=fantasia_emp]').value = ''
         document.querySelector('input[name=numero_emp]').value = ''
+
+        return false
     }
 }
 
@@ -149,6 +171,7 @@ function validaCnpj(cnpj) {
 
 // Função para telefone
 function verificaTel(event){
+    verificaPass(event)
     var obj_telefone = document.getElementById('p_telefone')
     var input_telefone = document.querySelector('input[name=telefone]')
 
@@ -172,21 +195,43 @@ function revealPassword(){
     }
 }
 
+// Função para telefone
+function verificaPass(event){
+    var input_password = document.querySelector('input[name=password]')
+
+    if (input_password !== event.target && input_password.value === '') {
+        const divTips = document.getElementById('passwordTips')
+        if(divTips.style.display === 'flex') {
+            divTips.style.display = 'none'
+        }
+    }
+}
+
 // Função de dicas de senha para o usuário
 function passwordTips() {
     const divTips = document.getElementById('passwordTips')
     const inputPassword = document.getElementById('id_password').value
     const li = document.getElementsByClassName('tip')
+    var btn = document.getElementById('btn_cadastrar_user')
 
     if(divTips.style.display === 'none') {
         divTips.style.display = 'flex'
     }
 
-    passwordSize(inputPassword, li)
-    passwordLetters(inputPassword, li)
-    passwordNumber(inputPassword, li)
-    passwordSpecial(inputPassword, li)
+    if(inputPassword === '') {
+        divTips.style.display = 'none'
+    }
 
+    let size = passwordSize(inputPassword, li)
+    let letters = passwordLetters(inputPassword, li) 
+    let number = passwordNumber(inputPassword, li)
+    let special = passwordSpecial(inputPassword, li)
+
+    if(size && letters && number && special) {
+        return true
+    }
+
+    return false
 }
 
 // Função verifica tamanho da senha
@@ -195,12 +240,14 @@ function passwordSize(inputPassword, li) {
     var icon = element.getElementsByClassName('icon-tip')[0]
 
     if(inputPassword.length >= 8) {
-        element.style.color = 'green'
+        element.style.color = '#0c6800'
 
         if(icon.classList.contains('fi-rr-x')) {
             icon.classList.remove('fi-rr-x')
             icon.classList.add('fi-rr-check')
         }
+
+        return true
     } else {
         element.style.color = 'rgb(90, 0, 0)'
 
@@ -208,6 +255,8 @@ function passwordSize(inputPassword, li) {
             icon.classList.remove('fi-rr-check')
             icon.classList.add('fi-rr-x')
         }
+
+        return false
     }
 }
 
@@ -219,12 +268,14 @@ function passwordLetters(inputPassword, li) {
     const regexUpper = /[A-Z]/gm
 
     if(regexLower.test(inputPassword) && regexUpper.test(inputPassword)) {
-        element.style.color = 'green'
+        element.style.color = '#0c6800'
 
         if(icon.classList.contains('fi-rr-x')) {
             icon.classList.remove('fi-rr-x')
             icon.classList.add('fi-rr-check')
         }
+
+        return true
     } else {
         element.style.color = 'rgb(90, 0, 0)'
 
@@ -232,6 +283,8 @@ function passwordLetters(inputPassword, li) {
             icon.classList.remove('fi-rr-check')
             icon.classList.add('fi-rr-x')
         }
+
+        return false
     }
 }
 
@@ -242,12 +295,14 @@ function passwordNumber(inputPassword, li) {
     const regex = /\d/
 
     if(regex.test(inputPassword)) {
-        element.style.color = 'green'
+        element.style.color = '#0c6800'
 
         if(icon.classList.contains('fi-rr-x')) {
             icon.classList.remove('fi-rr-x')
             icon.classList.add('fi-rr-check')
         }
+
+        return true
     } else {
         element.style.color = 'rgb(90, 0, 0)'
 
@@ -255,6 +310,8 @@ function passwordNumber(inputPassword, li) {
             icon.classList.remove('fi-rr-check')
             icon.classList.add('fi-rr-x')
         }
+
+        return false
     }
 }
 
@@ -265,12 +322,14 @@ function passwordSpecial(inputPassword, li) {
     const regex = /[!@#$%*()_+^&{}}:;?.]/gm
 
     if(regex.test(inputPassword)) {
-        element.style.color = 'green'
+        element.style.color = '#0c6800'
 
         if(icon.classList.contains('fi-rr-x')) {
             icon.classList.remove('fi-rr-x')
             icon.classList.add('fi-rr-check')
         }
+
+        return true
     } else {
         element.style.color = 'rgb(90, 0, 0)'
 
@@ -278,11 +337,13 @@ function passwordSpecial(inputPassword, li) {
             icon.classList.remove('fi-rr-check')
             icon.classList.add('fi-rr-x')
         }
+
+        return false
     }
 }
 
 // Função para alterar entre Formulário de Usuários e Formulário de Empresas
-function changeForm(){
+function changeForm() {
     var obj_user = document.getElementById('cadastro_user')
     var obj_emp = document.getElementById('cadastro_emp')
     var obj_back_index = document.getElementById('back_index')
@@ -405,7 +466,6 @@ function buscaCep() {
     let inputCep = document.querySelector('input[name=cep]')
     let cep = inputCep.value.replace(/[^0-9]/g, '')
     const cep_teste = document.getElementById('cepTesteUser')
-    const btnCadastrar = document.getElementById('btn_cadastrar_user')
 
     if(cep.length == 8) {
         let url = 'http://viacep.com.br/ws/' + cep + '/json'
@@ -421,7 +481,7 @@ function buscaCep() {
     } else {
         cep_teste.innerText = 'CEP inválido'
         cep_teste.style.color = 'var(--red-dark)'
-        btnCadastrar.setAttribute('type', 'button')
+
         document.querySelector('input[name=rua]').value = ''
         document.querySelector('input[name=bairro]').value = ''
         document.querySelector('input[name=cidade]').value = ''
@@ -431,20 +491,20 @@ function buscaCep() {
 
 function preencheCampos(json) {
     const cep_teste = document.getElementById('cepTesteUser')
-    const btnCadastrar = document.getElementById('btn_cadastrar_user')
 
     if(json.localidade !== undefined){
         cep_teste.innerText = 'CEP válido'
         cep_teste.style.color = '#0c6800'
-        btnCadastrar.setAttribute('type', 'submit')
+
         document.querySelector('input[name=rua]').value = json.logradouro
         document.querySelector('input[name=bairro]').value = json.bairro
         document.querySelector('input[name=cidade]').value = json.localidade
         document.querySelector('input[name=estado]').value = json.uf
+
+        validaCamposUser()
     } else {
         cep_teste.innerText = 'CEP inválido'
         cep_teste.style.color = 'var(--red-dark)'
-        btnCadastrar.setAttribute('type', 'button')
     }
 }
 
@@ -453,7 +513,6 @@ function buscaCepEmp() {
     let inputCep = document.querySelector('input[name=cep_emp]')
     let cep = inputCep.value.replace(/[^0-9]/g, '')
     const cep_teste = document.getElementById('cepTesteEmp')
-    const btnCadastrar = document.getElementById('btn_cadastrar_emp')
 
     if(cep.length == 8) {
         let url = 'http://viacep.com.br/ws/' + cep + '/json'
@@ -469,7 +528,7 @@ function buscaCepEmp() {
     } else {
         cep_teste.innerText = 'CEP inválido'
         cep_teste.style.color = 'var(--red-dark)'
-        btnCadastrar.setAttribute('type', 'button')
+
         document.querySelector('input[name=rua_emp]').value = ''
         document.querySelector('input[name=bairro_emp]').value = ''
         document.querySelector('input[name=cidade_emp]').value = ''
@@ -479,19 +538,99 @@ function buscaCepEmp() {
 
 function preencheCamposEmp(json) {
     const cep_teste = document.getElementById('cepTesteEmp')
-    const btnCadastrar = document.getElementById('btn_cadastrar_emp')
 
     if(json.localidade !== undefined){
         cep_teste.innerText = 'CEP válido'
         cep_teste.style.color = '#0c6800'
-        btnCadastrar.setAttribute('type', 'submit')
+
         document.querySelector('input[name=rua_emp]').value = json.logradouro
         document.querySelector('input[name=bairro_emp]').value = json.bairro
         document.querySelector('input[name=cidade_emp]').value = json.localidade
         document.querySelector('input[name=estado_emp]').value = json.uf
+
+        validaCamposEmp()
     } else {
         cep_teste.innerText = 'CEP inválido'
         cep_teste.style.color = 'var(--red-dark)'
-        btnCadastrar.setAttribute('type', 'button')
     }
+}
+
+// Função para habilitar o botão
+function habilitarBtn(btn) {
+    btn.setAttribute('type', 'submit')
+    if(btn.classList.contains('btn_desabilitado')) {
+        btn.classList.add('btn_habilitado')
+        btn.classList.remove('btn_desabilitado')
+    }
+}
+
+// Função para desabilitar o botão
+function desabilitarBtn(btn) {
+    btn.setAttribute('type', 'button')
+    if(btn.classList.contains('btn_habilitado')) {
+        btn.classList.add('btn_desabilitado')
+        btn.classList.remove('btn_habilitado')
+    }
+}
+
+// Função para validar todos os campos do usuário
+function validaCamposUser() {
+    let divUser = document.getElementById('cadastro_user')
+    let inputs = divUser.getElementsByTagName('input')
+    let btn = document.getElementById('btn_cadastrar_user')
+    let smallCep = document.getElementById('cepTesteUser').innerText
+
+    if(!passwordTips()) {
+        desabilitarBtn(btn)
+        return
+    }
+
+    if(!validacoesCpf()) {
+        desabilitarBtn(btn)
+        return
+    }
+
+    if(smallCep !== 'CEP válido') {
+        desabilitarBtn(btn)
+        return
+    }
+
+    for(let i = 0; i < inputs.length-2; i++) {
+        if(inputs[i].value === '') {
+            desabilitarBtn(btn)
+            return
+        }
+    }
+
+    habilitarBtn(btn)
+}
+
+// Função para validar todos os campos da empresa
+function validaCamposEmp() {
+    let divEmps = document.getElementById('cadastro_emp')
+    let inputs = divEmps.getElementsByTagName('input')
+    let btn = document.getElementById('btn_cadastrar_emp')
+    let smallCep = document.getElementById('cepTesteEmp').innerText
+
+    if(!validacoesCnpj()) {
+        console.log('cnpj')
+        desabilitarBtn(btn)
+        return
+    }
+
+    if(smallCep !== 'CEP válido') {
+        console.log('cep')
+        desabilitarBtn(btn)
+        return
+    }
+
+    for(let i = 0; i < inputs.length-2; i++) {
+        if(inputs[i].value === '' && i != 5) {
+            console.log('vazio')
+            desabilitarBtn(btn)
+            return
+        }
+    }
+
+    habilitarBtn(btn)
 }

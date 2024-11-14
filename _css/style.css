@@ -873,13 +873,20 @@ p input.btn_form, button {
     padding: 10px 20px;
     border: none;
     border-radius: 30px;
-    background-color: var(--red-dark);
     color: #FFF;
     cursor: pointer;
+}
+
+.btn_habilitado {
+    background-color: var(--red-dark);
     transition: all .3s ease-in-out;
 }
 
-p input.btn_form:hover, button:hover {
+.btn_desabilitado {
+    background-color: #EEE;
+}
+
+.btn_habilitado:hover, button:hover {
     background-color: var(--red-light);
     transform: scale(1.1);
     box-shadow: 1px 6px 8px var(--red-dark);

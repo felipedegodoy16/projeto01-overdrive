@@ -153,13 +153,13 @@
     }
 
     // Validação do CPF
-    // if(!validaCpf($_POST['cpf'])) {
-    //     echo "<script>
-    //         alert('O CPF não é válido!')
-    //         window.location=history.back()
-    //     </script>";
-    //     exit();
-    // }
+    if(!validaCpf($_POST['cpf'])) {
+        echo "<script>
+            alert('O CPF não é válido!')
+            window.location=history.back()
+        </script>";
+        exit();
+    }
 
     // Validando se alguns dados estão conforme o especificado
     if(strlen($_POST['nome']) > 255 || strlen($_POST['cnh']) != 9 || strlen($_POST['telefone']) != 15 || strlen($_POST['carro']) > 255) {

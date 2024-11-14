@@ -1,6 +1,6 @@
 <?php 
 
-    require_once '../_verify/verificacaoFilesAdmin.php';
+    require_once '../_verify/verificacaoFilesAdmin.php'; 
     require_once '../_class/Usuario.php';
     
     date_default_timezone_set("America/Sao_Paulo");
