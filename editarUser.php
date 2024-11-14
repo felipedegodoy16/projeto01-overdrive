@@ -109,7 +109,7 @@
                     </p>
                 </div>
                 <p class="center p_btn_cadastrar" style="flex-direction: row;">
-                    <input id="btn_cadastrar" type="submit" class="btn_form" value="Editar">
+                    <input id="btn_cadastrar" type="submit" class="btn_form btn_habilitado" value="Editar">
                 </p>
             </form>
         </div> 

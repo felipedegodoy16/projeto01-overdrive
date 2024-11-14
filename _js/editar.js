@@ -9,7 +9,18 @@ function ready(){
     let body = document.getElementsByTagName('body')[0]
     if(body.querySelector('input[name=cnpj_emp]') != undefined) {
         validacoesCnpj()
+        let divEmp = document.getElementById('cadastro_emp')
+        let inputsEmp = divEmp.getElementsByTagName('input')
+        for(let i = 0; i < inputsEmp.length; i++) {
+            inputsEmp[i].addEventListener("input", validaCamposEmp)
+        }
     } else if(body.querySelector('input[name=cpf]') != undefined) {
+        let divUser = document.getElementById('cadastro_user')
+        let inputsUser = divUser.getElementsByTagName('input')
+        for(let i = 0; i < inputsUser.length; i++) {
+            inputsUser[i].addEventListener("input", validaCamposUser)
+        }
+
         validacoesCpf()
         buscaCep()
     }
@@ -17,13 +28,13 @@ function ready(){
     // Função de CEP para Usuário
     let eventoCep = document.querySelector('input[name=cep]')
     eventoCep.addEventListener("input", buscaCep)
+
 }
 
 // Funções para validação do CPF
 function validacoesCpf(){
     const strCpf = document.querySelector('input[name=cpf]').value
     const cpfAlert = document.getElementById('cpfTeste')
-    const btnCadastrar = document.getElementById('btn_cadastrar')
     cpf = strCpf.replace(/[^0-9]/g, '')
 
     if(cpf.length === 11){
@@ -31,16 +42,19 @@ function validacoesCpf(){
         if(cpfTestado){
             cpfAlert.innerText = 'CPF válido'
             cpfAlert.style.color = '#0c6800'
-            btnCadastrar.setAttribute('type', 'submit')
+            
+            return true
         } else {
             cpfAlert.innerText = 'CPF inválido'
             cpfAlert.style.color = 'var(--red-dark)'
-            btnCadastrar.setAttribute('type', 'button')
+            
+            return false
         }
     } else {
         cpfAlert.innerText = 'CPF inválido'
         cpfAlert.style.color = 'var(--red-dark)'
-        btnCadastrar.setAttribute('type', 'button')
+        
+        return false
     }
 }
 
@@ -75,31 +89,37 @@ function validaCPF(cpf){
 function validacoesCnpj(){
     const strCnpj = document.querySelector('input[name=cnpj_emp]').value
     const cnpjAlert = document.getElementById('cnpjTeste')
-    const btnCadastrar = document.getElementById('btn_cadastrar')
     cnpj = strCnpj.replace(/[^0-9]/g, '')
 
     if(cnpj.length === 14){
         cnpjTestado = validaCnpj(cnpj)
         if(cnpjTestado){
+            if(cnpjAlert.innerText != 'CNPJ válido') {
+                buscaCnpj(cnpj)
+            }
             cnpjAlert.innerText = 'CNPJ válido'
             cnpjAlert.style.color = '#0c6800'
-            btnCadastrar.setAttribute('type', 'submit')
-            buscaCnpj(cnpj)
+
+            return true
         } else {
             cnpjAlert.innerText = 'CNPJ inválido'
             cnpjAlert.style.color = 'var(--red-dark)'
-            btnCadastrar.setAttribute('type', 'button')
+            
             document.querySelector('input[name=nome_emp]').value = ''
             document.querySelector('input[name=fantasia_emp]').value = ''
             document.querySelector('input[name=numero]').value = ''
+
+            return false
         }
     } else {
         cnpjAlert.innerText = 'CNPJ inválido'
         cnpjAlert.style.color = 'var(--red-dark)'
-        btnCadastrar.setAttribute('type', 'button')
+        
         document.querySelector('input[name=nome_emp]').value = ''
         document.querySelector('input[name=fantasia_emp]').value = ''
         document.querySelector('input[name=numero]').value = ''
+
+        return false
     }
 }
 
@@ -206,7 +226,6 @@ function buscaCep() {
     let inputCep = document.querySelector('input[name=cep]')
     let cep = inputCep.value.replace(/[^0-9]/g, '')
     const cep_teste = document.getElementById('cepTeste')
-    const btnCadastrar = document.getElementById('btn_cadastrar')
 
     if(cep.length == 8) {
         let url = 'http://viacep.com.br/ws/' + cep + '/json'
@@ -222,22 +241,27 @@ function buscaCep() {
     } else {
         cep_teste.innerText = 'CEP inválido'
         cep_teste.style.color = 'var(--red-dark)'
-        btnCadastrar.setAttribute('type', 'button')
+        
         document.querySelector('input[name=rua]').value = ''
         document.querySelector('input[name=bairro]').value = ''
         document.querySelector('input[name=cidade]').value = ''
         document.querySelector('input[name=estado]').value = ''
+
+        if(document.getElementById('cadastro_user') != undefined) {
+            validaCamposUser()
+        } else if(document.getElementById('cadastro_emp') != undefined) {
+            validaCamposEmp()
+        }
     }
 }
 
 function preencheCampos(json) {
     const cep_teste = document.getElementById('cepTeste')
-    const btnCadastrar = document.getElementById('btn_cadastrar')
 
     if(json.localidade !== undefined){
         cep_teste.innerText = 'CEP válido'
         cep_teste.style.color = '#0c6800'
-        btnCadastrar.setAttribute('type', 'submit')
+
         document.querySelector('input[name=rua]').value = json.logradouro
         document.querySelector('input[name=bairro]').value = json.bairro
         document.querySelector('input[name=cidade]').value = json.localidade
@@ -245,6 +269,88 @@ function preencheCampos(json) {
     } else {
         cep_teste.innerText = 'CEP inválido'
         cep_teste.style.color = 'var(--red-dark)'
-        btnCadastrar.setAttribute('type', 'button')
     }
+
+    if(document.getElementById('cadastro_user') != undefined) {
+        validaCamposUser()
+    } else if(document.getElementById('cadastro_emp') != undefined) {
+        validaCamposEmp()
+    }
+}
+
+// Função para habilitar o botão
+function habilitarBtn(btn) {
+    btn.setAttribute('type', 'submit')
+    if(btn.classList.contains('btn_desabilitado')) {
+        btn.classList.add('btn_habilitado')
+        btn.classList.remove('btn_desabilitado')
+    }
+}
+
+// Função para desabilitar o botão
+function desabilitarBtn(btn) {
+    btn.setAttribute('type', 'button')
+    if(btn.classList.contains('btn_habilitado')) {
+        btn.classList.add('btn_desabilitado')
+        btn.classList.remove('btn_habilitado')
+    }
+}
+
+// Função para validar todos os campos do usuário
+function validaCamposUser() {
+    let divUser = document.getElementById('cadastro_user')
+    let inputs = divUser.getElementsByTagName('input')
+    let btn = document.getElementById('btn_cadastrar')
+    let smallCep = document.getElementById('cepTeste').innerText
+
+    // if(!passwordTips()) {
+    //     desabilitarBtn(btn)
+    //     return
+    // }
+
+    if(!validacoesCpf()) {
+        desabilitarBtn(btn)
+        return
+    }
+
+    if(smallCep !== 'CEP válido') {
+        desabilitarBtn(btn)
+        return
+    }
+
+    for(let i = 0; i < inputs.length-2; i++) {
+        if(inputs[i].value === '' && i !== 5) {
+            desabilitarBtn(btn)
+            return
+        }
+    }
+
+    habilitarBtn(btn)
+}
+
+// Função para validar todos os campos da empresa
+function validaCamposEmp() {
+    let divEmps = document.getElementById('cadastro_emp')
+    let inputs = divEmps.getElementsByTagName('input')
+    let btn = document.getElementById('btn_cadastrar')
+    let smallCep = document.getElementById('cepTeste').innerText
+
+    if(!validacoesCnpj()) {
+        desabilitarBtn(btn)
+        return
+    }
+
+    if(smallCep !== 'CEP válido') {
+        desabilitarBtn(btn)
+        return
+    }
+
+    for(let i = 0; i < inputs.length; i++) {
+        if(inputs[i].value === '' && i !== 5) {
+            desabilitarBtn(btn)
+            return
+        }
+    }
+
+    habilitarBtn(btn)
 }

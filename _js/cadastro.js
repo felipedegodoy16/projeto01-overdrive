@@ -23,7 +23,7 @@ function ready() {
 
     let divUser = document.getElementById('cadastro_user')
     let inputsUser = divUser.getElementsByTagName('input')
-    for(let i = 0; i < inputsUser.length-1; i++) {
+    for(let i = 0; i < inputsUser.length; i++) {
         inputsUser[i].addEventListener("input", validaCamposUser)
     }
     
@@ -38,7 +38,7 @@ function ready() {
 
     let divEmp = document.getElementById('cadastro_emp')
     let inputsEmp = divEmp.getElementsByTagName('input')
-    for(let i = 0; i < inputsEmp.length-1; i++) {
+    for(let i = 0; i < inputsEmp.length; i++) {
         inputsEmp[i].addEventListener("input", validaCamposEmp)
     }
 
@@ -101,13 +101,11 @@ function validacoesCnpj(){
     const strCnpj = document.querySelector('input[name=cnpj_emp]').value
     const cnpjAlert = document.getElementById('cnpjTeste')
     cnpj = strCnpj.replace(/[^0-9]/g, '')
-    const smallCnpj = document.getElementById('cnpjTeste')
 
     if(cnpj.length === 14){
         cnpjTestado = validaCnpj(cnpj)
         if(cnpjTestado){
-            if(smallCnpj.innerText != 'CNPJ válido') {
-                console.log('buscou')
+            if(cnpjAlert.innerText != 'CNPJ válido') {
                 buscaCnpj(cnpj)
             }
             cnpjAlert.innerText = 'CNPJ válido'
@@ -178,6 +176,8 @@ function verificaTel(event){
     if (!obj_telefone.contains(event.target) && input_telefone.value === '(') {
         input_telefone.value = ''
     }
+
+    validaCamposUser()
 }
 
 // Função para alternar senha entre visível e invisível
@@ -384,6 +384,8 @@ function verificaTelEmp(event){
     if (!obj_telefone_emp.contains(event.target) && input_telefone_emp.value === '(') {
         input_telefone_emp.value = ''
     }
+
+    validaCamposEmp()
 }
 
 //Função de Busca CNPJ da Empresa
@@ -613,19 +615,17 @@ function validaCamposEmp() {
     let smallCep = document.getElementById('cepTesteEmp').innerText
 
     if(!validacoesCnpj()) {
-        console.log('cnpj')
         desabilitarBtn(btn)
         return
     }
 
     if(smallCep !== 'CEP válido') {
-        console.log('cep')
         desabilitarBtn(btn)
         return
     }
 
-    for(let i = 0; i < inputs.length-2; i++) {
-        if(inputs[i].value === '' && i != 5) {
+    for(let i = 0; i < inputs.length; i++) {
+        if(inputs[i].value === '' && i !== 5) {
             console.log('vazio')
             desabilitarBtn(btn)
             return

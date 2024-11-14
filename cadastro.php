@@ -87,7 +87,7 @@
                 </p>
             </div>
             <p class="center p_btn_cadastrar" style="flex-direction: row;">
-                <button onclick="changeForm()">Trocar Formulário</button>
+                <button onclick="changeForm()" class="btn_habilitado" style="text-transform: uppercase;">Trocar Formulário</button>
                 <input type="submit" class="btn_form btn_habilitado" id="btn_cadastrar_emp" value="Cadastrar">
             </p>
         </form>
@@ -174,7 +174,7 @@
                 </p>
             </div>
             <p class="center p_btn_cadastrar" style="flex-direction: row;">
-                <button onclick="changeForm()">Trocar Formulário</button>
+                <button onclick="changeForm()" class="btn_habilitado" style="text-transform: uppercase;">Trocar Formulário</button>
                 <input id="btn_cadastrar_user" type="submit" class="btn_form btn_habilitado" value="Cadastrar">
             </p>
         </form>
