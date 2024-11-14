@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 11/11/2024 às 15:12
+-- Tempo de geração: 14/11/2024 às 12:13
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -64,14 +64,14 @@ CREATE TABLE `enderecos` (
 --
 
 CREATE TABLE `usuarios` (
-  `id_user` bigint(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
   `nome` varchar(255) NOT NULL,
   `cpf` varchar(14) NOT NULL,
   `cnh` varchar(9) NOT NULL,
   `telefone` varchar(15) NOT NULL,
   `carro` varchar(255) NOT NULL,
   `cargo` char(1) NOT NULL,
-  `empresa` varchar(255) NOT NULL,
+  `id_empresa` int(11) NOT NULL,
   `senha` varchar(255) NOT NULL,
   `foto` varchar(50) NOT NULL,
   `registro` date DEFAULT NULL,
@@ -105,7 +105,8 @@ ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id_user`),
   ADD UNIQUE KEY `id` (`id_user`),
   ADD UNIQUE KEY `cpf` (`cpf`,`cnh`),
-  ADD KEY `id_endereco` (`id_endereco`);
+  ADD KEY `id_endereco` (`id_endereco`),
+  ADD KEY `id_empresa` (`id_empresa`);
 
 --
 -- AUTO_INCREMENT para tabelas despejadas
@@ -127,7 +128,7 @@ ALTER TABLE `enderecos`
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_user` bigint(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restrições para tabelas despejadas
@@ -143,7 +144,8 @@ ALTER TABLE `empresas`
 -- Restrições para tabelas `usuarios`
 --
 ALTER TABLE `usuarios`
-  ADD CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`id_endereco`) REFERENCES `enderecos` (`id_end`);
+  ADD CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`id_endereco`) REFERENCES `enderecos` (`id_end`),
+  ADD CONSTRAINT `usuarios_ibfk_2` FOREIGN KEY (`id_empresa`) REFERENCES `empresas` (`id_emp`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
