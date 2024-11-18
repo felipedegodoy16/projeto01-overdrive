@@ -328,16 +328,30 @@ class Usuario {
     // Método para remover usuário do banco
     public function removerUsuario($id){
         try {
+
+            $retorno = $this->retornarUsuario($id);
+
+            if($retorno === -1) {
+                
+                return 0;
+
+            } else {
+
+                // Query
+                $sql = "DELETE FROM usuarios WHERE id_user = :id LIMIT 1;";
+
+                // Conectando ao banco e preparando a query
+                $stmt = ConexaoDAO::getConexao()->prepare($sql);
+                $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+
+                // Executando a query no banco
+                $stmt->execute() or die(print_r($stmt->errorInfo(), true));
+
+                return 1;
+                
+            }
             
-            // Query
-            $sql = "DELETE FROM usuarios WHERE id_user = :id LIMIT 1;";
-
-            // Conectando ao banco e preparando a query
-            $stmt = ConexaoDAO::getConexao()->prepare($sql);
-            $stmt->bindValue(":id", $id, PDO::PARAM_INT);
-
-            // Executando a query no banco
-            $stmt->execute() or die(print_r($stmt->errorInfo(), true));
+            
 
         } catch(Exception $e) {
 

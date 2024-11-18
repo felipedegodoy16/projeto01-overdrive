@@ -13,7 +13,23 @@
         $usuario = new Usuario();
 
         // Chamando método para remoção do usuário no banco
-        $usuario->removerUsuario($id);
+        $dadoRetornado = $usuario->removerUsuario($id);
+
+        if($dadoRetornado === 0){
+
+            $json = array(
+                'status' => false,
+                'message' => 'O usuário selecionado já foi excluído.'
+            );
+
+        } else {
+
+            $json = array(
+                'status' => true,
+                'message' => 'Usuário removido com sucesso.'
+            );
+
+        }
 
     } else if($_GET['tipo'] === 'empresa'){
 
@@ -39,11 +55,14 @@
 
         }
 
-        echo json_encode($json);
-
     } else{
+
         echo "<script>
             alert('O tipo de registro não é válido!')
             window.location='../index.php'
         </script>";
+        exit();
+        
     }
+
+    echo json_encode($json);

@@ -344,10 +344,19 @@ function removeDataUsers(event){
         if (xhr.readyState == 4) {
           if (xhr.status == 200) {
 
-            pStatus.innerText = `Usuário removido com sucesso.`
-            divStatus.classList.add('status_accept')
-            requestDados()
+            json = JSON.parse(xhr.responseText)
 
+            if(json.status){
+
+              pStatus.innerText = `${json.message}`
+              divStatus.classList.add('status_accept')
+              requestDados()
+
+            } else {
+
+              pStatus.innerText = `${json.message}`
+
+            }
           }
         }
       }
@@ -396,7 +405,6 @@ function removeDataEmps(event){
             pStatus.innerText = `${json.message}`
 
           }
-
         }
       }
     }
