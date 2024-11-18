@@ -321,18 +321,21 @@ function removeDataUsers(event){
   const idSession = document.getElementById('id_session').innerText
   let idRemove = event.target.parentNode.parentNode.children[0].children[0].innerText.replace('#', '')
 
-  window.scrollTo(0, 0)
-  divStatus.style.display = 'flex'
-
   if(idSession == idRemove){
 
     pStatus.innerText = `Não é possível remover o seu próprio usuário.`
+
+    window.scrollTo(0, 0)
+    divStatus.style.display = 'flex'
 
   } else {
 
     let comando = prompt("Por favor, confirme a instrução (DELETE) para excluir os registros do usuário.")
 
     if(comando === 'DELETE'){
+
+      window.scrollTo(0, 0)
+      divStatus.style.display = 'flex'
 
       let url = 'http://localhost/projeto01-overdrive/_files/removeData.php?id=' + idRemove + '&tipo=usuario'
       let xhr = new XMLHttpRequest()
@@ -350,7 +353,10 @@ function removeDataUsers(event){
       }
       xhr.send();
 
-    } else {
+    } else if(comando !== null && comando !== 'DELETE') {
+
+      window.scrollTo(0, 0)
+      divStatus.style.display = 'flex'
 
       pStatus.innerText = `Não foi possível remover o usuário.`
 
@@ -365,10 +371,10 @@ function removeDataEmps(event){
   let idRemove = event.target.parentNode.parentNode.children[0].children[0].innerText.replace('#', '')
   let comando = prompt("Por favor, confirme a instrução (DELETE) para excluir os registros da empresa.")
 
-  window.scrollTo(0, 0)
-  divStatus.style.display = 'flex'
+  if(comando === 'DELETE') {
 
-  if(comando === 'DELETE'){
+    window.scrollTo(0, 0)
+    divStatus.style.display = 'flex'
 
     let url = 'http://localhost/projeto01-overdrive/_files/removeData.php?id=' + idRemove + '&tipo=empresa'
     let xhr = new XMLHttpRequest()
@@ -385,7 +391,7 @@ function removeDataEmps(event){
             divStatus.classList.add('status_accept')
             requestDados()
 
-          } else{
+          } else {
 
             pStatus.innerText = `${json.message}`
 
@@ -396,7 +402,10 @@ function removeDataEmps(event){
     }
     xhr.send();
 
-  } else {
+  } else if(comando !== null && comando !== 'DELETE') {
+
+    window.scrollTo(0, 0)
+    divStatus.style.display = 'flex'
 
     pStatus.innerText = `Não foi possível remover a empresa.`
 
