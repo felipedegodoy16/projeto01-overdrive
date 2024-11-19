@@ -662,6 +662,31 @@ body#full_content_cadastro input {
     text-transform: uppercase;
 }
 
+div#request_cadastro {
+    margin-top: 1em !important;
+    width: 80%;
+    display: none;
+}
+
+div.status_cadastro {
+    margin-top: -2em !important;
+    margin-bottom: 1.3em !important;
+    padding: .8em;
+    border-radius: 20px;
+}
+
+.status_error {
+    color: var(--red-dark);
+    background-color: rgb(248, 135, 135);
+    border: 2px solid var(--red-light);
+}
+
+.status_success {
+    color: rgb(0, 96, 22);
+    background-color: rgb(135, 248, 161);
+    border-color: rgb(0, 165, 38);
+}
+
 main#main_cadastro {
     position: relative;
     color: var(--red-dark);

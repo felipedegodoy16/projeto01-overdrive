@@ -1,4 +1,4 @@
-<?php require_once '_verify/verificacaoUser.php'; ?>
+<?php require_once '_files/gravar_registro.php'; ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -23,14 +23,20 @@
     <title>Overdrive - Cadastro</title>
   </head>
 
-  <body id="full_content_cadastro" class="center">
+  <?php if(!empty($message)): ?>
+    <div id="request_cadastro" class="center status_cadastro <?= $message['class'] ?>" style="display: flex;">
+      <p id="p_status_request" style="margin: 0; text-align: center;"><?= $message['message'] ?></p>
+    </div>
+  <?php endif; ?>
+
+  <body id="full_content_cadastro" class="center" style="flex-direction: column;">
     <main id="main_cadastro" class="col-10 center">
       <div id="seta_index">
         <a href="index.php"><i id="back_index" class="fi fi-rr-arrow-small-left center"></i></a>
       </div>
       <div id="cadastro_emp" class="cadastro col-12 col-md-8 center transition_section">
         <h1>Cadastrar Empresa</h1>
-        <form class="form_cadastro" action="_files/gravar_empresas.php" method="post" enctype="multipart/form-data">
+        <form class="form_cadastro" action="<?= $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data">
             <div class="column_left">
                 <p>
                     <label for="id_cnpj_emp">CNPJ</label>
@@ -98,28 +104,28 @@
       </div>
       <div id="cadastro_user" class="cadastro col-12 col-md-8 center transition_section">
         <h1>Cadastrar Usuário</h1>
-        <form class="form_cadastro" action="_files/gravar_usuarios.php" method="post" enctype="multipart/form-data">
+        <form class="form_cadastro" action="<?= $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data">
             <div class="column_left">
                 <p>
                     <label for="id_nome">Nome</label>
-                    <input type="text" name="nome" id="id_nome" maxlength="255" placeholder="Digite o Nome" required>
+                    <input type="text" name="nome" id="id_nome" maxlength="255" placeholder="Digite o Nome" value="<?= $nome ?>" required>
                 </p>
                 <p>
                     <label for="id_cpf">CPF</label>
-                    <input type="text" data-mask="000.000.000-00" name="cpf" id="id_cpf" minlength="14" maxlength="14" placeholder="Digite o CPF" required>
+                    <input type="text" data-mask="000.000.000-00" name="cpf" id="id_cpf" minlength="14" maxlength="14" placeholder="Digite o CPF" value="<?= $cpf ?>" required>
                     <small id="cpfTeste"></small>
                 </p>
                 <p>
                     <label for="id_cnh">CNH</label>
-                    <input type="text" data-mask="000000000" name="cnh" id="id_cnh" minlength="9" maxlength="9" placeholder="Digite a CNH" required>
+                    <input type="text" data-mask="000000000" name="cnh" id="id_cnh" minlength="9" maxlength="9" placeholder="Digite a CNH" value="<?= $cnh ?>" required>
                 </p>
                 <p id="p_telefone">
                     <label for="id_telefone">Telefone</label>
-                    <input type="text" data-mask="(00) 00000-0000" name="telefone" id="id_telefone" minlength="15" maxlength="15" placeholder="Digite o Telefone" required> 
+                    <input type="text" data-mask="(00) 00000-0000" name="telefone" id="id_telefone" minlength="15" maxlength="15" placeholder="Digite o Telefone" value="<?= $telefone ?>" required> 
                 </p>
                 <p>
                     <label for="id_carro">Carro</label>
-                    <input type="text" name="carro" id="id_carro" maxlength="255" placeholder="Digite o Carro" required>
+                    <input type="text" name="carro" id="id_carro" maxlength="255" placeholder="Digite o Carro" value="<?= $carro ?>" required>
                 </p>
                 <p>
                     <label for="id_empresa">Empresa</label>
@@ -145,28 +151,28 @@
             <div class="address_data">
                 <p>
                     <label for="id_cep">CEP</label>
-                    <input type="text" data-mask="00000-000" name="cep" id="id_cep" minlength="9" maxlength="9" placeholder="Digite o CEP" required>
+                    <input type="text" data-mask="00000-000" name="cep" id="id_cep" minlength="9" maxlength="9" placeholder="Digite o CEP" value="<?= $cep ?>" required>
                     <small id="cepTesteUser"></small>
                 </p>
                 <p>
                     <label for="id_rua">Rua</label>
-                    <input type="text" name="rua" id="id_rua" maxlength="255" placeholder="Digite a Rua" required>
+                    <input type="text" name="rua" id="id_rua" maxlength="255" placeholder="Digite a Rua" value="<?= $rua ?>" required>
                 </p>
                 <p>
                     <label for="id_bairro">Bairro</label>
-                    <input type="text" name="bairro" id="id_bairro" maxlength="255" placeholder="Digite o Bairro" required>
+                    <input type="text" name="bairro" id="id_bairro" maxlength="255" placeholder="Digite o Bairro" value="<?= $bairro ?>" required>
                 </p>
                 <p>
                     <label for="id_numero">Numero</label>
-                    <input type="text" name="numero" id="id_numero" maxlength="6" placeholder="Digite o Número" required> 
+                    <input type="text" name="numero" id="id_numero" maxlength="6" placeholder="Digite o Número" value="<?= $numero ?>" required> 
                 </p>
                 <p>
                     <label for="id_cidade">Cidade</label>
-                    <input type="text" name="cidade" id="id_cidade" maxlength="255" placeholder="Digite a Cidade" required>
+                    <input type="text" name="cidade" id="id_cidade" maxlength="255" placeholder="Digite a Cidade" value="<?= $cidade ?>" required>
                 </p>
                 <p>
                     <label for="id_estado">Estado (UF)</label>
-                    <input type="text" name="estado" id="id_estado"minlength="2" maxlength="2" placeholder="Exemplo: SP, RJ..." required>
+                    <input type="text" name="estado" id="id_estado"minlength="2" maxlength="2" placeholder="Exemplo: SP, RJ..." value="<?= $estado ?>" required>
                 </p>
                 <p>
                     <label for="id_foto" class="label_foto" style="margin-top: 1em;">Escolher arquivo</label>

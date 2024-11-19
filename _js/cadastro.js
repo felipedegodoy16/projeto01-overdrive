@@ -10,7 +10,12 @@ function ready() {
     const inputCpf = document.querySelector('input[name=cpf]')
     inputCpf.addEventListener("input", validacoesCpf)
 
-    document.addEventListener("mouseup", verificaTel)
+    if(inputCpf.value !== '') {
+        validacoesCpf()
+    }
+
+    let inputTel = document.querySelector('input[name=telefone]')
+    inputTel.addEventListener("blur", verificaTel)
 
     const inputPassword = document.getElementById('id_password')
     inputPassword.addEventListener("input", passwordTips)
@@ -20,6 +25,10 @@ function ready() {
 
     let eventoCep = document.querySelector('input[name=cep]')
     eventoCep.addEventListener("input", buscaCep)
+
+    if(eventoCep.value !== '') {
+        buscaCep()
+    }
 
     let divUser = document.getElementById('cadastro_user')
     let inputsUser = divUser.getElementsByTagName('input')
@@ -31,7 +40,12 @@ function ready() {
     const inputCnpj = document.querySelector('input[name=cnpj_emp]')
     inputCnpj.addEventListener("input", validacoesCnpj)
 
-    document.addEventListener("mouseup", verificaTelEmp)
+    if(inputCnpj.value !== '') {
+        validacoesCnpj()
+    }
+
+    let inputTelEmp = document.querySelector('input[name=telefone_emp]')
+    inputTelEmp.addEventListener("blur", verificaTelEmp)
 
     let eventoCepEmp = document.querySelector('input[name=cep_emp]')
     eventoCepEmp.addEventListener("input", buscaCepEmp)
@@ -168,12 +182,10 @@ function validaCnpj(cnpj) {
 }
 
 // Função para telefone
-function verificaTel(event){
-    verificaPass(event)
-    var obj_telefone = document.getElementById('p_telefone')
+function verificaTel(){
     var input_telefone = document.querySelector('input[name=telefone]')
 
-    if (!obj_telefone.contains(event.target) && input_telefone.value === '(') {
+    if(input_telefone.value === '(') {
         input_telefone.value = ''
     }
 
@@ -212,7 +224,6 @@ function passwordTips() {
     const divTips = document.getElementById('passwordTips')
     const inputPassword = document.getElementById('id_password').value
     const li = document.getElementsByClassName('tip')
-    var btn = document.getElementById('btn_cadastrar_user')
 
     if(divTips.style.display === 'none') {
         divTips.style.display = 'flex'
@@ -377,11 +388,10 @@ function changeForm() {
 }
 
 // Função para telefone da empresa
-function verificaTelEmp(event){
-    var obj_telefone_emp = document.getElementById('p_telefone_emp')
+function verificaTelEmp(){
     var input_telefone_emp = document.querySelector('input[name=telefone_emp]')
 
-    if (!obj_telefone_emp.contains(event.target) && input_telefone_emp.value === '(') {
+    if (input_telefone_emp.value === '(') {
         input_telefone_emp.value = ''
     }
 
@@ -582,6 +592,13 @@ function validaCamposUser() {
     let btn = document.getElementById('btn_cadastrar_user')
     let smallCep = document.getElementById('cepTesteUser').innerText
 
+    for(let i = 0; i < inputs.length-2; i++) {
+        if(inputs[i].value === '') {
+            desabilitarBtn(btn)
+            return
+        }
+    }
+
     if(!passwordTips()) {
         desabilitarBtn(btn)
         return
@@ -597,13 +614,6 @@ function validaCamposUser() {
         return
     }
 
-    for(let i = 0; i < inputs.length-2; i++) {
-        if(inputs[i].value === '') {
-            desabilitarBtn(btn)
-            return
-        }
-    }
-
     habilitarBtn(btn)
 }
 
@@ -614,6 +624,13 @@ function validaCamposEmp() {
     let btn = document.getElementById('btn_cadastrar_emp')
     let smallCep = document.getElementById('cepTesteEmp').innerText
 
+    for(let i = 0; i < inputs.length; i++) {
+        if(inputs[i].value === '' && i !== 5) {
+            desabilitarBtn(btn)
+            return
+        }
+    }
+
     if(!validacoesCnpj()) {
         desabilitarBtn(btn)
         return
@@ -622,14 +639,6 @@ function validaCamposEmp() {
     if(smallCep !== 'CEP válido') {
         desabilitarBtn(btn)
         return
-    }
-
-    for(let i = 0; i < inputs.length; i++) {
-        if(inputs[i].value === '' && i !== 5) {
-            console.log('vazio')
-            desabilitarBtn(btn)
-            return
-        }
     }
 
     habilitarBtn(btn)

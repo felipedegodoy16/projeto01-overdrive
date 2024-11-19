@@ -1,85 +1,117 @@
 <?php 
 
-    require_once '../_verify/verificacaoFilesAdmin.php'; 
-    require_once '../_class/Usuario.php';
+    require_once '_class/Usuario.php';
+
+    function gravarUser($message) {
     
-    date_default_timezone_set("America/Sao_Paulo");
+        date_default_timezone_set("America/Sao_Paulo");
 
-    // Chamando função para fazer validação dos campos preenchidos
-    validacoes();
+        // Chamando função para fazer validação dos campos preenchidos
+        $message = validacoesUser($message);
 
-    // Instanciando um objeto usuário
-    $usuario = new Usuario();
+        if(!empty($message)) {
+            return $message;
+        }
 
-    $usuario->setCpf(strtoupper($_POST['cpf']));
-    $usuario->setCnh(strtoupper($_POST['cnh']));
+        $cpf = strtoupper($_POST['cpf']);
+        $cnh = strtoupper($_POST['cnh']);
+        $cep = strtoupper($_POST['cep']);
+        $rua = strtoupper($_POST['rua']);
+        $bairro = strtoupper($_POST['bairro']);
+        $numero = strtoupper($_POST['numero']);
+        $cidade = strtoupper($_POST['cidade']);
+        $estado = strtoupper($_POST['estado']);
+        $nome = strtoupper($_POST['nome']);
+        $telefone = strtoupper($_POST['telefone']);
+        $carro = strtoupper($_POST['carro']);
 
-    $verificaDados = $usuario->verificaDados();
+        // Instanciando um objeto usuário
+        $usuario = new Usuario();
 
-    if($verificaDados === -1) {
+        $usuario->setCpf($cpf);
+        $usuario->setCnh($cnh);
 
-        // Instanciado o objeto endereço com as informações passadas
-        $endereco = new Endereco();
+        $verificaDados = $usuario->verificaDados();
 
-        $endereco->setCep(strtoupper($_POST['cep']));
-        $endereco->setRua(strtoupper($_POST['rua']));
-        $endereco->setBairro(strtoupper($_POST['bairro']));
-        $endereco->setNumero(strtoupper($_POST['numero']));
-        $endereco->setCidade(strtoupper($_POST['cidade']));
-        $endereco->setEstado(strtoupper($_POST['estado']));
+        if($verificaDados === -1) {
 
-        // Inserindo o endereço no banco ou pegando um endereço já existente
-        $endereco->inserirEndereco();
+            // Instanciado o objeto endereço com as informações passadas
+            $endereco = new Endereco();
 
-        // Instanciando o objeto de empresa
-        $empresa = new Empresa();
+            $endereco->setCep($cep);
+            $endereco->setRua($rua);
+            $endereco->setBairro($bairro);
+            $endereco->setNumero($numero);
+            $endereco->setCidade($cidade);
+            $endereco->setEstado($estado);
 
-        $empresa->setFantasia(strtoupper($_POST['empresa']));
-        $empresa->empresaUsuario();
+            // Inserindo o endereço no banco ou pegando um endereço já existente
+            $endereco->inserirEndereco();
 
-        // Finalizando a instanciação do usuário
-        $usuario->setNome(strtoupper($_POST['nome']));
-        $usuario->setTelefone(strtoupper($_POST['telefone']));
-        $usuario->setCarro(strtoupper($_POST['carro']));
-        $usuario->setCargo('C');
-        $usuario->setSenha(password_hash($_POST['password'], PASSWORD_DEFAULT));
-        $usuario->setEndereco($endereco);
-        $usuario->setEmpresa($empresa);
-        if(isset($_FILES['foto']['name']) && $_FILES['foto']['error'] == 0 || $_FILES['foto']['size'] > 10000000) {
-            $arquivo_tmp = $_FILES['foto']['tmp_name'];
-            $nomeImagem = $_FILES['foto']['name'];
-            $extensao = strrchr($nomeImagem, '.');
-            $extensao = strtolower($extensao);
-            if(strstr('.jpg;.jpeg;.png', $extensao)){
-                $novoNome = md5(microtime()) .$extensao; ;
-                $destino = '../_images/uploads/' . $novoNome; 
-                @move_uploaded_file($arquivo_tmp, $destino);
-                $usuario->setFoto(strtoupper($novoNome));
+            // Instanciando o objeto de empresa
+            $empresa = new Empresa();
+
+            $empresa->setFantasia(strtoupper($_POST['empresa']));
+            $empresa->empresaUsuario();
+
+            // Finalizando a instanciação do usuário
+            $usuario->setNome($nome);
+            $usuario->setTelefone($telefone);
+            $usuario->setCarro($carro);
+            $usuario->setCargo('C');
+            $usuario->setSenha(password_hash($_POST['password'], PASSWORD_DEFAULT));
+            $usuario->setEndereco($endereco);
+            $usuario->setEmpresa($empresa);
+            if(isset($_FILES['foto']['name']) && $_FILES['foto']['error'] == 0 || $_FILES['foto']['size'] > 10000000) {
+                $arquivo_tmp = $_FILES['foto']['tmp_name'];
+                $nomeImagem = $_FILES['foto']['name'];
+                $extensao = strrchr($nomeImagem, '.');
+                $extensao = strtolower($extensao);
+                if(strstr('.jpg;.jpeg;.png', $extensao)){
+                    $novoNome = md5(microtime()) .$extensao; ;
+                    $destino = '../_images/uploads/' . $novoNome; 
+                    @move_uploaded_file($arquivo_tmp, $destino);
+                    $usuario->setFoto(strtoupper($novoNome));
+                } else {
+                    $usuario->setFoto('');
+                }
             } else {
                 $usuario->setFoto('');
             }
+            $usuario->setRegistro(date("y/m/d"));
+
+            // Inserindo usuário no banco
+            $usuario->inserirUsuario();
+
+            $_POST['cpf'] = null;
+            $_POST['cnh'] = null;
+            $_POST['cep'] = null;
+            $_POST['rua'] = null;
+            $_POST['bairro'] = null;
+            $_POST['numero'] = null;
+            $_POST['cidade'] = null;
+            $_POST['estado'] = null;
+            $_POST['nome'] = null;
+            $_POST['telefone'] = null;
+            $_POST['carro'] = null;
+
+            $message = [
+                'message' => 'Usuário cadastrado com sucesso!',
+                'class' => 'status_success'
+            ];
+
+            return $message;
+
         } else {
-            $usuario->setFoto('');
+
+            $message = [
+                'message' => 'O CPF ou a CNH digitados já foram registrados no Banco!',
+                'class' => 'status_error'
+            ];
+
+            return $message;
+            
         }
-        $usuario->setRegistro(date("y/m/d"));
-
-        // Inserindo usuário no banco
-        $usuario->inserirUsuario();
-
-        echo "<script>
-            alert('Usuário cadastrado com sucesso!')
-            window.location='../cadastro.php'
-        </script>";
-        exit();
-
-    } else {
-
-        echo "<script>
-            alert('O CPF ou a CNH digitados já foram registrados no Banco')
-            history.back()
-        </script>";
-        exit();
-        
     }
 
     // Função para validação do CPF
@@ -111,44 +143,50 @@
     }
 
     // Função para fazer validações dos campos preenchidos
-    function validacoes() {
+    function validacoesUser($message) {
 
         // Validando se dados não estão vazios
         foreach($_POST as $data) {
             if($data === '') {
-                echo "<script>
-                    alert('Algum dado não foi preenchido corretamente!')
-                    window.location=history.back()
-                </script>";
-                exit();
+                $message = [
+                    'message' => 'Algum dado não foi preenchido corretamente!',
+                    'class' => 'status_error'
+                ];
+    
+                return $message;
             }
         }
 
         // Validação do CPF
         if(!validaCpf($_POST['cpf'])) {
-            echo "<script>
-                alert('O CPF não é válido!')
-                window.location=history.back()
-            </script>";
-            exit();
+            $message = [
+                'message' => 'O CPF não é válido!',
+                'class' => 'status_error'
+            ];
+
+            return $message;
         }
 
         // Validando se alguns dados estão conforme o especificado
         if(strlen($_POST['nome']) > 255 || strlen($_POST['cnh']) != 9 || strlen($_POST['telefone']) != 15 || strlen($_POST['carro']) > 255 || strlen($_POST['password']) < 8) {
-            echo "<script>
-                alert('Algum dado não foi preenchido corretamente!')
-                window.location=history.back()
-            </script>";
-            exit();
+            $message = [
+                'message' => 'Algum dado não foi preenchido corretamente!',
+                'class' => 'status_error'
+            ];
+
+            return $message;
         }
 
         // Verificação dos campos de endereço do usuário
         if(strlen($_POST['cep']) != 9 || strlen($_POST['rua']) > 255 || strlen($_POST['bairro']) > 255 || strlen($_POST['numero']) > 6 || strlen($_POST['cidade']) > 255 || strlen($_POST['estado']) != 2) {
-            echo "<script>  
-                alert('Algum dado não foi preenchido corretamente!')
-                window.location=history.back()
-            </script>";
-            exit();
+            $message = [
+                'message' => 'Algum dado não foi preenchido corretamente!',
+                'class' => 'status_error'
+            ];
+
+            return $message;
         }
+
+        return $message;
     }
     
