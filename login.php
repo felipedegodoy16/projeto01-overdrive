@@ -31,14 +31,14 @@
         <form id="form" action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
           <div id="user_field" style="margin-bottom: 0;">
             <label for="user_login">CPF</label>
-            <input id="user_login" data-mask="000.000.000-00" name="user_input" type="text" oninput="transition_text(event.target)" onclick="transition_text(event.target)" minlength="14" maxlength="14" required>
+            <input id="user_login" data-mask="000.000.000-00" name="user_input" type="text" onfocus="transition_text(event.target)" onclick="transition_text(event.target)" minlength="14" maxlength="14" required>
             <div style="z-index: 1002; height: 0">
               <i class="fi fi-rr-circle-user icons"></i>
             </div>
           </div>
           <div id="password_field" style="margin-top: 0;">
             <label for="password_login">Senha</label>
-            <input id="password_login" name="password_input" type="password" oninput="transition_text(event.target), change_icon()" onclick="transition_text(event.target), change_icon()" minlength="8" required>
+            <input id="password_login" name="password_input" type="password" onfocus="transition_text(event.target), change_icon()" onclick="transition_text(event.target), change_icon()" minlength="8" required>
             <div style="z-index: 1002;">
               <i id="icon_password" class="fi fi-rr-lock icons" onclick="show_password(event.target)"></i>
             </div>

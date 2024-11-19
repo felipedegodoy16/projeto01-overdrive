@@ -611,7 +611,6 @@ div.error_status {
     background-color: rgb(248, 135, 135);
     border: 2px solid var(--red-light);
     border-radius: 20px;
-    justify-content: space-between;
 }
 
 input#btn_login {
