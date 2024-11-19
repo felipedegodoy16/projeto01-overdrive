@@ -2,12 +2,12 @@
 
     require_once '_class/Usuario.php';
 
-    function gravarUser($message) {
+    function gravarUser() {
     
         date_default_timezone_set("America/Sao_Paulo");
 
         // Chamando função para fazer validação dos campos preenchidos
-        $message = validacoesUser($message);
+        $message = validacoesUser();
 
         if(!empty($message)) {
             return $message;
@@ -143,7 +143,9 @@
     }
 
     // Função para fazer validações dos campos preenchidos
-    function validacoesUser($message) {
+    function validacoesUser() {
+
+        $message = [];
 
         // Validando se dados não estão vazios
         foreach($_POST as $data) {

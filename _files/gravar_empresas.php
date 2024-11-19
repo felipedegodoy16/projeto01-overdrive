@@ -2,15 +2,31 @@
 
     require_once '_class/Empresa.php';
 
-    function gravarEmp($message) {
+    function gravarEmp() {
 
         // Chamando função para fazer algumas validações dos campos do formulário
-        validacoesEmp();
+        $message = validacoesEmp();
+
+        if(!empty($message)) {
+            return $message;
+        }
+
+        $cnpjEmp = strtoupper($_POST['cnpj_emp']);
+        $cepEmp = strtoupper($_POST['cep_emp']);
+        $ruaEmp = strtoupper($_POST['rua_emp']);
+        $bairroEmp = strtoupper($_POST['bairro_emp']);
+        $numeroEmp = strtoupper($_POST['numero_emp']);
+        $cidadeEmp = strtoupper($_POST['cidade_emp']);
+        $estadoEmp = strtoupper($_POST['estado_emp']);
+        $nomeEmp = strtoupper($_POST['nome_emp']);
+        $fantasiaEmp = strtoupper($_POST['fantasia_emp']);
+        $telefoneEmp = strtoupper($_POST['telefone_emp']);
+        $responsavelEmp = strtoupper($_POST['responsavel_emp']);
 
         // Instanciando um novo objeto empresa
         $empresa = new Empresa();
 
-        $empresa->setCnpj(strtoupper($_POST['cnpj_emp']));
+        $empresa->setCnpj($cnpjEmp);
 
         $verificarCnpj = $empresa->verificaCnpj();
 
@@ -21,21 +37,21 @@
             // Instanciado o objeto endereço com as informações passadas
             $endereco = new Endereco();
 
-            $endereco->setCep(strtoupper($_POST['cep_emp']));
-            $endereco->setRua(strtoupper($_POST['rua_emp']));
-            $endereco->setBairro(strtoupper($_POST['bairro_emp']));
-            $endereco->setNumero(strtoupper($_POST['numero_emp']));
-            $endereco->setCidade(strtoupper($_POST['cidade_emp']));
-            $endereco->setEstado(strtoupper($_POST['estado_emp']));
+            $endereco->setCep($cepEmp);
+            $endereco->setRua($ruaEmp);
+            $endereco->setBairro($bairroEmp);
+            $endereco->setNumero($numeroEmp);
+            $endereco->setCidade($cidadeEmp);
+            $endereco->setEstado($estadoEmp);
 
             // Inserindo o endereço no banco ou pegando um endereço já existente
             $endereco->inserirEndereco();
 
             // Finalizando a instanciação do objeto empresa
-            $empresa->setNome(strtoupper($_POST['nome_emp']));
-            $empresa->setFantasia(strtoupper($_POST['fantasia_emp']));
-            $empresa->setTelefone(strtoupper($_POST['telefone_emp']));
-            $empresa->setResponsavel(strtoupper($_POST['responsavel_emp']));
+            $empresa->setNome($nomeEmp);
+            $empresa->setFantasia($fantasiaEmp);
+            $empresa->setTelefone($telefoneEmp);
+            $empresa->setResponsavel($responsavelEmp);
             $empresa->setEndereco($endereco);
             if(isset($_FILES['foto_emp']['name']) && $_FILES['foto_emp']['error'] == 0 && $_FILES['foto_emp']['size'] < 10000000){
                 $arquivo_tmp = $_FILES['foto_emp']['tmp_name'];
@@ -57,6 +73,18 @@
 
             // Inserindo a empresa no bacno
             $empresa->inserirEmpresa();
+
+            $_POST['cnpj_emp'] = null;
+            $_POST['cep_emp'] = null;
+            $_POST['rua_emp'] = null;
+            $_POST['bairro_emp'] = null;
+            $_POST['numero_emp'] = null;
+            $_POST['cidade_emp'] = null;
+            $_POST['estado_emp'] = null;
+            $_POST['nome_emp'] = null;
+            $_POST['fantasia_emp'] = null;
+            $_POST['telefone_emp'] = null;
+            $_POST['responsavel_emp'] = null;
 
             $message = [
                 'message' => 'Empresa cadastrada com sucesso!',
@@ -116,41 +144,49 @@
     // Função para fazer validações dos campos preenchidos
     function validacoesEmp() {
 
+        $message = [];
+
         // Verificando se nenhum campo foi deixado em branco
         foreach($_POST as $data) {
             if($data === '') {
-                echo "<script>
-                    alert('Algum dado não foi preenchido corretamente!')
-                    window.location=history.back()
-                </script>";
-                exit();
+                $message = [
+                    'message' => 'Algum dado não foi preenchido corretamente!',
+                    'class' => 'status_error'
+                ];
+    
+                return $message;
             }
         }
 
         // Validação do CNPJ
         if(!validaCnpj($_POST['cnpj_emp'])) {
-            echo "<script>
-                alert('O CNPJ não é válido!')
-                window.location=history.back()
-            </script>";
-            exit();
+            $message = [
+                'message' => 'O CNPJ não é válido!',
+                'class' => 'status_error'
+            ];
+
+            return $message;
         }
 
         // Verificação dos campos da empresa
         if(strlen($_POST['nome_emp']) > 255 || strlen($_POST['fantasia_emp']) > 255 || strlen($_POST['telefone_emp']) != 15 || strlen($_POST['responsavel_emp']) > 255) {
-            echo "<script>  
-                alert('Algum dado não foi preenchido corretamente!')
-                window.location=history.back()
-            </script>";
-            exit();
+            $message = [
+                'message' => 'Algum dado não foi preenchido corretamente!',
+                'class' => 'status_error'
+            ];
+
+            return $message;
         }
 
         // Verificação dos campos de endereço da empresa
         if(strlen($_POST['cep_emp']) != 9 || strlen($_POST['rua_emp']) > 255 || strlen($_POST['bairro_emp']) > 255 || strlen($_POST['numero_emp']) > 6 || strlen($_POST['cidade_emp']) > 255 || strlen($_POST['estado_emp']) != 2) {
-            echo "<script>  
-                alert('Algum dado não foi preenchido corretamente!')
-                window.location=history.back()
-            </script>";
-            exit();
+            $message = [
+                'message' => 'Algum dado não foi preenchido corretamente!',
+                'class' => 'status_error'
+            ];
+
+            return $message;
         }
+
+        return $message;
     }
