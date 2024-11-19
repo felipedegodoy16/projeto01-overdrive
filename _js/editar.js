@@ -157,11 +157,10 @@ function validaCnpj(cnpj) {
 }
 
 // Função para telefone
-function verificaTel(event){
-    var obj_telefone = document.getElementById('p_telefone')
+function verificaTel(){
     var input_telefone = document.querySelector('input[name=telefone]')
 
-    if (!obj_telefone.contains(event) && input_telefone.value === '(') {
+    if (input_telefone.value === '(') {
         input_telefone.value = ''
     }
 }

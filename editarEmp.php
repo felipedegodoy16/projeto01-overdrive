@@ -1,7 +1,7 @@
 <?php require_once '_verify/verificacaoEditEmp.php'; ?>
 
 <!DOCTYPE html>
-<html lang="pt-br" onmouseup="verificaTel(this.target)">
+<html lang="pt-br">
   <head>
     <!-- Meta tags Obrigatórias -->
     <meta charset="utf-8">
@@ -45,7 +45,7 @@
                     </p>
                     <p id="p_telefone">
                         <label for="id_telefone">Telefone</label>
-                        <input type="text" data-mask="(00) 00000-0000" name="telefone" id="id_telefone" minlength="15" maxlength="15" placeholder="Digite o Telefone" value="<?= $dados[0]['telefone'] ?>" required> 
+                        <input type="text" data-mask="(00) 00000-0000" name="telefone" id="id_telefone" minlength="15" maxlength="15" placeholder="Digite o Telefone" value="<?= $dados[0]['telefone'] ?>" onblur="verificaTel()" required> 
                     </p>
                     <p>
                         <label for="id_responsavel_emp">Reponsável</label>
