@@ -21,6 +21,9 @@ function ready(){
             inputsUser[i].addEventListener("input", validaCamposUser)
         }
 
+        const inputPassword = document.getElementById('id_password')
+        inputPassword.addEventListener("input", passwordTips)
+
         validacoesCpf()
         buscaCep()
     }
@@ -159,9 +162,16 @@ function validaCnpj(cnpj) {
 // Função para telefone
 function verificaTel(){
     var input_telefone = document.querySelector('input[name=telefone]')
+    var body = document.getElementsByTagName('body')[0]
 
     if (input_telefone.value === '(') {
         input_telefone.value = ''
+    }
+
+    if(body.querySelector('input[name=cnpj_emp]') != undefined) {
+        validaCamposEmp()
+    } else {
+        validaCamposUser()
     }
 }
 
@@ -177,6 +187,140 @@ function revealPassword(){
         inputPassword.type = 'text'
         iconEye.classList.add('fi-rr-eye-crossed')
         iconEye.classList.remove('fi-rr-eye')
+    }
+}
+
+// Função de dicas de senha para o usuário
+function passwordTips() {
+    const divTips = document.getElementById('passwordTips')
+    const inputPassword = document.getElementById('id_password').value
+    const li = document.getElementsByClassName('tip')
+
+    if(divTips.style.display === 'none') {
+        divTips.style.display = 'flex'
+    }
+
+    if(inputPassword === '') {
+        divTips.style.display = 'none'
+    }
+
+    let size = passwordSize(inputPassword, li)
+    let letters = passwordLetters(inputPassword, li) 
+    let number = passwordNumber(inputPassword, li)
+    let special = passwordSpecial(inputPassword, li)
+
+    if(size && letters && number && special) {
+        return true
+    }
+
+    return false
+}
+
+// Função verifica tamanho da senha
+function passwordSize(inputPassword, li) {
+    var element = li[0]
+    var icon = element.getElementsByClassName('icon-tip')[0]
+
+    if(inputPassword.length >= 8) {
+        element.style.color = '#0c6800'
+
+        if(icon.classList.contains('fi-rr-x')) {
+            icon.classList.remove('fi-rr-x')
+            icon.classList.add('fi-rr-check')
+        }
+
+        return true
+    } else {
+        element.style.color = 'rgb(90, 0, 0)'
+
+        if(icon.classList.contains('fi-rr-check')) {
+            icon.classList.remove('fi-rr-check')
+            icon.classList.add('fi-rr-x')
+        }
+
+        return false
+    }
+}
+
+// Função para verificar se há letras maiúsculas e minúsculas na senha
+function passwordLetters(inputPassword, li) {
+    var element = li[1]
+    var icon = element.getElementsByClassName('icon-tip')[0]
+    const regexLower = /[a-z]/gm
+    const regexUpper = /[A-Z]/gm
+
+    if(regexLower.test(inputPassword) && regexUpper.test(inputPassword)) {
+        element.style.color = '#0c6800'
+
+        if(icon.classList.contains('fi-rr-x')) {
+            icon.classList.remove('fi-rr-x')
+            icon.classList.add('fi-rr-check')
+        }
+
+        return true
+    } else {
+        element.style.color = 'rgb(90, 0, 0)'
+
+        if(icon.classList.contains('fi-rr-check')) {
+            icon.classList.remove('fi-rr-check')
+            icon.classList.add('fi-rr-x')
+        }
+
+        return false
+    }
+}
+
+// Função para verificar se há números na senha
+function passwordNumber(inputPassword, li) {
+    var element = li[2]
+    var icon = element.getElementsByClassName('icon-tip')[0]
+    const regex = /\d/
+
+    if(regex.test(inputPassword)) {
+        element.style.color = '#0c6800'
+
+        if(icon.classList.contains('fi-rr-x')) {
+            icon.classList.remove('fi-rr-x')
+            icon.classList.add('fi-rr-check')
+        }
+
+        return true
+    } else {
+        element.style.color = 'rgb(90, 0, 0)'
+
+        if(icon.classList.contains('fi-rr-check')) {
+            icon.classList.remove('fi-rr-check')
+            icon.classList.add('fi-rr-x')
+        }
+
+        return false
+    }
+}
+
+// Função para verificar se há caracteres especiais na senha
+function passwordSpecial(inputPassword, li) {
+    var element = li[3]
+    var icon = element.getElementsByClassName('icon-tip')[0]
+    const regex = /[!@#$%*()_+^&{}}:;?.]/gm
+
+    if(regex.test(inputPassword)) {
+        element.style.color = '#0c6800'
+
+        if(icon.classList.contains('fi-rr-x')) {
+            icon.classList.remove('fi-rr-x')
+            icon.classList.add('fi-rr-check')
+        }
+
+        return true
+    } else {
+        element.style.color = 'rgb(90, 0, 0)'
+
+        if(icon.classList.contains('fi-rr-check')) {
+            icon.classList.remove('fi-rr-check')
+            icon.classList.add('fi-rr-x')
+        }
+
+        return false
     }
 }
 
@@ -301,11 +445,14 @@ function validaCamposUser() {
     let inputs = divUser.getElementsByTagName('input')
     let btn = document.getElementById('btn_cadastrar')
     let smallCep = document.getElementById('cepTeste').innerText
+    let inputPassword = document.getElementById('id_password')
 
-    // if(!passwordTips()) {
-    //     desabilitarBtn(btn)
-    //     return
-    // }
+    if(inputPassword.value !== '') {
+        if(!passwordTips()) {
+            desabilitarBtn(btn)
+            return
+        }
+    }
 
     if(!validacoesCpf()) {
         desabilitarBtn(btn)

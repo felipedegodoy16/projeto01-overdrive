@@ -23,12 +23,18 @@
     <title>Overdrive - Cadastro</title>
   </head>
 
-  <body id="full_content_cadastro" class="center">
+  <?php if(!empty($message)): ?>
+    <div id="request_cadastro" class="center status_cadastro <?= $message['class'] ?>" style="display: flex;">
+      <p id="p_status_request" style="margin: 0; text-align: center;"><?= $message['message'] ?></p>
+    </div>
+  <?php endif; ?>
+
+  <body id="full_content_cadastro" class="center" style="flex-direction: column;">
     <main class="col-10 center" style="justify-content: center; color: var(--red-dark);">
-        <div id="cadastro_user" class="cadastro col-12 col-md-8 center" style="border-radius: 40px; box-shadow: 10px 10px 20px #000; display: flex;">
+        <div id="cadastro_user" class="cadastro col-12 col-md-8 center" style="border-radius: 40px; box-shadow: 10px 10px 20px #000; display: flex; margin: 1em 0 2em 0;">
             <a href="index.php"><i id="back_index" class="fi fi-rr-arrow-small-left center" style="left: 0;"></i></a>
             <h1 style="z-index: 1010;">Editar Usuário</h1>
-            <form class="form_cadastro" action="<?= $_SERVER["PHP_SELF"] . '?&id=' . $id_edit . '&edit=1' ?>" method="post" enctype="multipart/form-data">
+            <form class="form_cadastro" action="<?= $_SERVER["PHP_SELF"] . '?&id=' . $id_edit ?>" method="post" enctype="multipart/form-data">
                 <div class="column_left">
                     <p>
                         <label for="id_nome">Nome</label>
@@ -54,8 +60,15 @@
                     <p style="position: relative;">
                         <label for="id_password">Senha</label>
                         <input type="password" name="password" id="id_password" placeholder="Digite a Senha" min="8" style="text-transform: none;">
-                        <small>Mínimo 8 caracteres</small>
                         <i id="eye_cadastro" class="fi fi-rr-eye icon-eye" onclick="revealPassword()"></i>
+                        <div id="passwordTips" style="display: none;">
+                            <ul>
+                                <li class="tip"><i class="fi fi-rr-x icon-tip center"></i> Mínimo 8 caracteres</li>
+                                <li class="tip"><i class="fi fi-rr-x icon-tip center"></i> Letras Maiúsculas e Minúsculas</li>
+                                <li class="tip"><i class="fi fi-rr-x icon-tip center"></i> Números</li>
+                                <li class="tip"><i class="fi fi-rr-x icon-tip center"></i> Caractere especial</li>
+                            </ul>
+                        </div>
                     </p>
                     <p>
                         <label for="id_empresa">Empresa</label>

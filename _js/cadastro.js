@@ -207,18 +207,6 @@ function revealPassword(){
     }
 }
 
-// Função para telefone
-function verificaPass(event){
-    var input_password = document.querySelector('input[name=password]')
-
-    if (input_password !== event.target && input_password.value === '') {
-        const divTips = document.getElementById('passwordTips')
-        if(divTips.style.display === 'flex') {
-            divTips.style.display = 'none'
-        }
-    }
-}
-
 // Função de dicas de senha para o usuário
 function passwordTips() {
     const divTips = document.getElementById('passwordTips')
@@ -271,7 +259,7 @@ function passwordSize(inputPassword, li) {
     }
 }
 
-// Função para verificar se há números na senha
+// Função para verificar se há letras maiúsculas e minúsculas na senha
 function passwordLetters(inputPassword, li) {
     var element = li[1]
     var icon = element.getElementsByClassName('icon-tip')[0]
@@ -326,7 +314,7 @@ function passwordNumber(inputPassword, li) {
     }
 }
 
-// Função para verificar se há números na senha
+// Função para verificar se há caracteres especiais na senha
 function passwordSpecial(inputPassword, li) {
     var element = li[3]
     var icon = element.getElementsByClassName('icon-tip')[0]

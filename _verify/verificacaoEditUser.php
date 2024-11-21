@@ -4,22 +4,29 @@
   require_once '_class/Empresa.php';
   require_once '_verify/verificacaoIndex.php';
 
-  $edit = (bool) $_GET['edit'];
   $id_edit = $_GET['id'];
 
   if($_SESSION['cargo'] === 'C' && $_SESSION['id'] != $id_edit) {
     header('Location: index.php');
     exit();
   }
+
+  $message = [];
   
   $usuario = new Usuario();
   $empresa = new Empresa();
   $endereco = new Endereco();
 
-  if($edit) {
+  if(isset($_POST['cpf'])) {
 
     // Validação dos campos que foram preenchidos
-    validacoes();
+    $message = validacoes();
+
+    if(!empty($message)) {
+        $dados = $usuario->retornarUsuario($id_edit);
+        $empresas = $empresa->listarNomesEmps();
+        return $message;
+    }
 
     // Pegando dados para verificar possibilidade de ser repetido
     $usuario->setId($id_edit);
@@ -50,9 +57,21 @@
         $usuario->setTelefone(strtoupper($_POST['telefone']));
         $usuario->setCarro(strtoupper($_POST['carro']));
         if($_POST['password'] == '') {
-        $usuario->setSenha($_POST['password']);
+            $usuario->setSenha($_POST['password']);
         } else {
-        $usuario->setSenha(password_hash($_POST['password'], PASSWORD_DEFAULT));
+            $usuario->setSenha(password_hash($_POST['password'], PASSWORD_DEFAULT));
+            $retorno = verificaSenha($_POST['password']);
+            if(!$retorno) {
+                $dados = $usuario->retornarUsuario($id_edit);
+                $empresas = $empresa->listarNomesEmps();
+
+                $message = [
+                    'message' => 'A senha não segue os padrões de segurança!',
+                    'class' => 'status_error'
+                ];
+
+                return $message;
+            }
         }
         $usuario->setEndereco($endereco);
         $usuario->setEmpresa($empresaUser);
@@ -76,20 +95,19 @@
         // Alterando usuário existente no banco
         $usuario->alterarUsuario();
 
-        echo "<script>
-            alert('Usuário alterado com sucesso!')
-            window.location='index.php'
-        </script>";
+        $message = [
+            'message' => 'Usuário alterado com sucesso!',
+            'class' => 'status_success'
+        ];
 
     } else {
 
-        echo "<script>
-            alert('O CPF ou a CNH digitados já foram registrados no Banco')
-            history.back()
-        </script>";
-        
+        $message = [
+            'message' => 'O CPF ou CNH digitados já foram registrados no Banco!',
+            'class' => 'status_error'
+        ];
+
     }
-    
   }
 
   $dados = $usuario->retornarUsuario($id_edit);
@@ -132,6 +150,7 @@
 
   // Função para fazer validações dos campos preenchidos
   function validacoes() {
+    $message = [];
 
     // Validando se dados não estão vazios
     $cont = 0;
@@ -142,11 +161,12 @@
         }
 
         if($data === '') {
-            echo "<script>
-                alert('Algum dado não foi preenchido corretamente!')
-                window.location=history.back()
-            </script>";
-            exit();
+            $message = [
+                'message' => 'Algum dado não foi preenchido corretamente!',
+                'class' => 'status_error'
+            ];
+
+            return $message;
         }
 
         $cont++;
@@ -154,28 +174,58 @@
 
     // Validação do CPF
     if(!validaCpf($_POST['cpf'])) {
-        echo "<script>
-            alert('O CPF não é válido!')
-            window.location=history.back()
-        </script>";
-        exit();
+        $message = [
+            'message' => 'O CPF não é válido!',
+            'class' => 'status_error'
+        ];
+
+        return $message;
     }
 
     // Validando se alguns dados estão conforme o especificado
     if(strlen($_POST['nome']) > 255 || strlen($_POST['cnh']) != 9 || strlen($_POST['telefone']) != 15 || strlen($_POST['carro']) > 255) {
-        echo "<script>
-            alert('Algum dado não foi preenchido corretamente!')
-            window.location=history.back()
-        </script>";
-        exit();
+        $message = [
+            'message' => 'Algum dado não foi preenchido corretamente!',
+            'class' => 'status_error'
+        ];
+
+        return $message;
     }
 
     // Verificação dos campos de endereço do usuário
     if(strlen($_POST['cep']) != 9 || strlen($_POST['rua']) > 255 || strlen($_POST['bairro']) > 255 || strlen($_POST['numero']) > 6 || strlen($_POST['cidade']) > 255 || strlen($_POST['estado']) != 2) {
-        echo "<script>  
-            alert('Algum dado não foi preenchido corretamente!')
-            window.location=history.back()
-        </script>";
-        exit();
+        $message = [
+            'message' => 'Algum dado não foi preenchido corretamente!',
+            'class' => 'status_error'
+        ];
+
+        return $message;
     }
-}
+
+    return $message;
+
+  }
+
+  function verificaSenha($password) {
+    if(strlen($password) < 8) {
+        return false;
+    }
+
+    if(!preg_match('/\d+/', $password)) {
+        return false;
+    }
+
+    if(!preg_match('/[a-z]+/', $password)) {
+        return false;
+    }
+
+    if(!preg_match('/[A-Z]+/', $password)) {
+        return false;
+    }
+
+    if(!preg_match('/[\'"\^~;:°?&*+@#$%!\(|\)=.,\/\\\\]/', $password)) {
+        return false;
+    }
+
+    return true;
+  }

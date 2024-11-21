@@ -115,7 +115,7 @@ function responseJson(json){
         json.usuarios.map(function(usuario){
 
           if(json.sessao === 'A') {
-            tag = `<p class="center" style="margin-top: .7em;"><i class="fi fi-rr-trash icons_cards center icon_trash user_trash"></i><a href="editarUser.php?id=${usuario.id}&edit=0" style="text-decoration: none;"><i class="fi fi-rr-edit icons_cards center icon_edit"></i></a></p>`
+            tag = `<p class="center" style="margin-top: .7em;"><i class="fi fi-rr-trash icons_cards center icon_trash user_trash"></i><a href="editarUser.php?id=${usuario.id}" style="text-decoration: none;"><i class="fi fi-rr-edit icons_cards center icon_edit"></i></a></p>`
           }
   
           if(usuario.foto != null){
