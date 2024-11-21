@@ -3,16 +3,22 @@
   require_once '_class/Empresa.php';
   require_once '_verify/verificacaoUser.php';
 
-  $edit = (bool) $_GET['edit'];
   $id_edit = $_GET['id'];
+
+  $message = [];
 
   $empresa = new Empresa();
   $endereco = new Endereco();
 
-    if($edit) {
+    if(isset($_POST['cnpj_emp'])) {
 
         // Validando dados preenchidos no formulário
-        validacoes();
+        $message = validacoes();
+
+        if(!empty($message)) {
+            $dados = $empresa->retornarEmpresa($id_edit);
+            return $message;
+        }
 
         // Pegando dados para verificar se o registro não irá se repetir no banco
         $empresa->setId($id_edit);
@@ -58,17 +64,17 @@
             // Alterando usuário existente no banco
             $empresa->alterarEmpresa();
 
-            echo "<script>
-                alert('Empresa alterada com sucesso!')
-                window.location='index.php'
-            </script>";
+            $message = [
+                'message' => 'Empresa alterada com sucesso!',
+                'class' => 'status_success'
+            ];
 
         } else {
 
-            echo "<script>
-                alert('O CNPJ digitado já foi registrado no Banco')
-                window.location='editarEmp.php?id=$id_edit&edit=0'
-            </script>";
+            $message = [
+                'message' => 'O CNPJ digitado já foi registrado no Banco!',
+                'class' => 'status_error'
+            ];
 
         }
         
@@ -124,38 +130,42 @@
         // Verificando se nenhum campo foi deixado em branco
         foreach($_POST as $data) {
             if($data === '') {
-                echo "<script>
-                    alert('Algum dado não foi preenchido corretamente!')
-                    window.location=history.back()
-                </script>";
-                exit();
+                $message = [
+                    'message' => 'Algum dado não foi preenchido corretamente!',
+                    'class' => 'status_error'
+                ];
+    
+                return $message;
             }
         }
 
         // Validação do CNPJ
         if(!validaCnpj($_POST['cnpj_emp'])) {
-            echo "<script>
-                alert('O CNPJ não é válido!')
-                window.location=history.back()
-            </script>";
-            exit();
+            $message = [
+                'message' => 'O CNPJ digitado não é válido!',
+                'class' => 'status_error'
+            ];
+
+            return $message;
         }
 
         // Verificação dos campos da empresa
         if(strlen($_POST['nome_emp']) > 255 || strlen($_POST['fantasia_emp']) > 255 || strlen($_POST['telefone']) != 15 || strlen($_POST['responsavel_emp']) > 255) {
-            echo "<script>  
-                alert('Algum dado não foi preenchido corretamente!')
-                window.location=history.back()
-            </script>";
-            exit();
+            $message = [
+                'message' => 'Algum dado não foi preenchido corretamente!',
+                'class' => 'status_error'
+            ];
+
+            return $message;
         }
 
         // Verificação dos campos de endereço da empresa
         if(strlen($_POST['cep']) != 9 || strlen($_POST['rua']) > 255 || strlen($_POST['bairro']) > 255 || strlen($_POST['numero']) > 6 || strlen($_POST['cidade']) > 255 || strlen($_POST['estado']) != 2) {
-            echo "<script>  
-                alert('Algum dado não foi preenchido corretamente!')
-                window.location=history.back()
-            </script>";
-            exit();
+            $message = [
+                'message' => 'Algum dado não foi preenchido corretamente!',
+                'class' => 'status_error'
+            ];
+
+            return $message;
         }
     }

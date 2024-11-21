@@ -23,9 +23,15 @@
     <title>Overdrive - Cadastro</title>
   </head>
 
-  <body id="full_content_cadastro" class="center">
+  <?php if(!empty($message)): ?>
+    <div id="request_cadastro" class="center status_cadastro <?= $message['class'] ?>" style="display: flex;">
+      <p id="p_status_request" style="margin: 0; text-align: center;"><?= $message['message'] ?></p>
+    </div>
+  <?php endif; ?>
+
+  <body id="full_content_cadastro" class="center" style="flex-direction: column;">
     <main class="col-10 center" style="justify-content: center; color: var(--red-dark);">
-        <div id="cadastro_emp" class="cadastro col-12 col-md-8 center" style="border-radius: 40px; box-shadow: 10px 10px 20px #000; display: flex;">
+        <div id="cadastro_emp" class="cadastro col-12 col-md-8 center" style="border-radius: 40px; box-shadow: 10px 10px 20px #000; display: flex; margin: 1em 0 2em 0;">
             <a href="index.php"><i id="back_index" class="fi fi-rr-arrow-small-left center" style="left: 0;"></i></a>
             <h1 style="z-index: 1010;">Editar Empresa</h1>
             <form class="form_cadastro" action="<?= $_SERVER["PHP_SELF"] . '?&id=' . $id_edit . '&edit=1' ?>" method="post" enctype="multipart/form-data">
