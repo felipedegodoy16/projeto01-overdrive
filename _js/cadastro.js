@@ -360,9 +360,9 @@ function changeForm() {
     var obj_back_index = document.getElementById('back_index')
     var h1_text = document.getElementById('text_change_form')
     var obj_seta_cadastro = document.getElementById('seta_cadastro')
-
     var div_seta_index = document.getElementById('seta_index')
-    if(this.window.innerWidth < 768) {
+
+    if(this.window.innerWidth < 768) { 
         if(obj_user.classList.contains('cadastro_user_hidden')){
             div_seta_index.style.right = 0
         } else {

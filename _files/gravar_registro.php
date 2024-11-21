@@ -5,6 +5,20 @@
     require_once '_files/gravar_empresas.php';
 
     $message = [];
+
+    if($_GET['tipo'] === 'empresa') {
+        $empStyle = 'cadastro_emp_active';
+        $userStyle = 'cadastro_user_hidden';
+        $backIndex = 'back_index_right';
+        $setaCadastro = 'fi-rr-arrow-small-left';
+        $h1Text = 'Mudar para Formulário de Usuários';
+    } else if($_GET['tipo'] === 'usuario') {
+        $userStyle = '';
+        $empStyle = '';
+        $backIndex = '';
+        $setaCadastro = 'fi-rr-arrow-small-right';
+        $h1Text = 'Mudar para Formulário de Empresas';
+    } 
     
     if(isset($_POST['cpf'])) {
 
@@ -15,7 +29,7 @@
 
         $message = [];
         $message = gravarEmp();
-
+        
     }
 
     // Variáveis de auto preenchimento do formulário de usuários

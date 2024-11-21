@@ -31,7 +31,7 @@
     <p id="btn_filtros" class="center" onclick="callFilters()"><i id="filter_symbol" class="fi fi-rr-bars-filter center"></i></p>
     <?php 
       if($_SESSION['cargo'] === 'A') {
-        echo '<a href="cadastro.php" id="btn_adicionar" class="center"><i id="add_symbol" class="fi fi-rr-plus center"></i></a>';
+        echo '<a href="cadastro.php?tipo=usuario" id="btn_adicionar" class="center"><i id="add_symbol" class="fi fi-rr-plus center"></i></a>';
       }
     ?>
 

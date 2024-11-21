@@ -32,11 +32,11 @@
   <body id="full_content_cadastro" class="center" style="flex-direction: column;">
     <main id="main_cadastro" class="col-10 center">
       <div id="seta_index">
-        <a href="index.php"><i id="back_index" class="fi fi-rr-arrow-small-left center"></i></a>
+        <a href="index.php"><i id="back_index" class="fi fi-rr-arrow-small-left center <?= $backIndex ?>"></i></a>
       </div>
-      <div id="cadastro_emp" class="cadastro col-12 col-md-8 center transition_section">
+      <div id="cadastro_emp" class="cadastro col-12 col-md-8 center transition_section <?= $empStyle ?>">
         <h1>Cadastrar Empresa</h1>
-        <form class="form_cadastro" action="<?= $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data">
+        <form class="form_cadastro" action="<?= $_SERVER['PHP_SELF'] . "?tipo=empresa" ?>" method="post" enctype="multipart/form-data">
             <div class="column_left">
                 <p>
                     <label for="id_cnpj_emp">CNPJ</label>
@@ -99,12 +99,12 @@
         </form>
       </div>
       <div id="call_another_form" class="col-12 col-md-4 center">
-        <h1 id="text_change_form">Mudar para Formulário de Empresas</h1>
-        <i id="seta_cadastro" class="fi fi-rr-arrow-small-right center" onclick="changeForm()"></i>
+        <h1 id="text_change_form"><?= $h1Text ?></h1>
+        <i id="seta_cadastro" class="fi center <?= $setaCadastro ?>" onclick="changeForm()"></i>
       </div>
-      <div id="cadastro_user" class="cadastro col-12 col-md-8 center transition_section">
+      <div id="cadastro_user" class="cadastro col-12 col-md-8 center transition_section <?= $userStyle ?>">
         <h1>Cadastrar Usuário</h1>
-        <form class="form_cadastro" action="<?= $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data">
+        <form class="form_cadastro" action="<?= $_SERVER['PHP_SELF'] . "?tipo=usuario" ?>" method="post" enctype="multipart/form-data">
             <div class="column_left">
                 <p>
                     <label for="id_nome">Nome</label>

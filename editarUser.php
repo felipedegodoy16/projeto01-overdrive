@@ -53,7 +53,7 @@
                     </p>
                     <p style="position: relative;">
                         <label for="id_password">Senha</label>
-                        <input type="password" name="password" id="id_password" placeholder="Digite a Senha" min="8">
+                        <input type="password" name="password" id="id_password" placeholder="Digite a Senha" min="8" style="text-transform: none;">
                         <small>Mínimo 8 caracteres</small>
                         <i id="eye_cadastro" class="fi fi-rr-eye icon-eye" onclick="revealPassword()"></i>
                     </p>
@@ -67,12 +67,12 @@
                                         <option value="<?= $nome['fantasia'] ?>" selected><?= $nome['fantasia'] ?></option>
                                     <?php else: ?>
                                         <option value="<?= $nome['fantasia'] ?>"><?= $nome['fantasia'] ?></option>
-                                    <?php endif ?>
+                                    <?php endif; ?>
 
-                                <?php endforeach ?>
+                                <?php endforeach; ?>
                             <?php else: ?>
                                 <option value="<?= $dados[0]['fantasia'] ?>" selected><?= $dados[0]['fantasia'] ?></option>
-                            <?php endif ?>
+                            <?php endif; ?>
                         </select>
                     </p>
                 </div>
