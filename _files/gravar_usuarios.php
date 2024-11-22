@@ -62,14 +62,14 @@
             $usuario->setSenha(password_hash($_POST['password'], PASSWORD_DEFAULT));
             $usuario->setEndereco($endereco);
             $usuario->setEmpresa($empresa);
-            if(isset($_FILES['foto']['name']) && $_FILES['foto']['error'] == 0 || $_FILES['foto']['size'] > 10000000) {
+            if(isset($_FILES['foto']['name']) && $_FILES['foto']['error'] == 0 && $_FILES['foto']['size'] <= 10000000) {
                 $arquivo_tmp = $_FILES['foto']['tmp_name'];
                 $nomeImagem = $_FILES['foto']['name'];
                 $extensao = strrchr($nomeImagem, '.');
                 $extensao = strtolower($extensao);
                 if(strstr('.jpg;.jpeg;.png', $extensao)){
                     $novoNome = md5(microtime()) .$extensao; ;
-                    $destino = '../_images/uploads/' . $novoNome; 
+                    $destino = '_images/uploads/' . $novoNome; 
                     @move_uploaded_file($arquivo_tmp, $destino);
                     $usuario->setFoto(strtoupper($novoNome));
                 } else {

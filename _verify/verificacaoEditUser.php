@@ -25,13 +25,19 @@
     if(!empty($message)) {
         $dados = $usuario->retornarUsuario($id_edit);
         $empresas = $empresa->listarNomesEmps();
-        return $message;
+        return;
     }
 
     // Pegando dados para verificar possibilidade de ser repetido
     $usuario->setId($id_edit);
     $usuario->setCpf(strtoupper($_POST['cpf']));
     $usuario->setCnh(strtoupper($_POST['cnh']));
+
+    $foto = 0;
+
+    if(isset($_POST['action'])){
+        $foto = 1;
+    }
 
     $verificaDados = $usuario->verificaEdicao();
 
@@ -70,19 +76,19 @@
                     'class' => 'status_error'
                 ];
 
-                return $message;
+                return;
             }
         }
         $usuario->setEndereco($endereco);
         $usuario->setEmpresa($empresaUser);
-        if(isset($_FILES['foto']['name']) && $_FILES['foto']['error'] == 0){
+        if(isset($_FILES['foto']['name']) && $_FILES['foto']['error'] == 0 && $foto === 0 && $_FILES['foto']['size'] <= 10000000){
             $arquivo_tmp = $_FILES['foto']['tmp_name'];
             $nomeImagem = $_FILES['foto']['name'];
             $extensao = strrchr($nomeImagem, '.');
             $extensao = strtolower($extensao);
             if(strstr('.jpg;.jpeg;.png', $extensao)){
                 $novoNome = md5(microtime()) .$extensao; ;
-                $destino = '../_images/uploads/' . $novoNome; 
+                $destino = '_images/uploads/' . $novoNome; 
                 @move_uploaded_file($arquivo_tmp, $destino);
                 $usuario->setFoto(strtoupper($novoNome));
             } else {
@@ -92,8 +98,18 @@
             $usuario->setFoto('');
         }
 
+        // Verificando se algum dado foi alterado
+        if($usuario->getFoto() === '' && $usuario->getSenha() === '' && $foto === 0) {
+            $message = $usuario->verificaDadoAlterado();
+            if(!empty($message)) {
+                $dados = $usuario->retornarUsuario($id_edit);
+                $empresas = $empresa->listarNomesEmps();
+                return;
+            }
+        }
+
         // Alterando usuário existente no banco
-        $usuario->alterarUsuario();
+        $usuario->alterarUsuario($foto);
 
         $message = [
             'message' => 'Usuário alterado com sucesso!',
@@ -155,7 +171,7 @@
     // Validando se dados não estão vazios
     $cont = 0;
     foreach($_POST as $data) {
-        if($cont === 5) {
+        if($cont === 5 || $cont === 14) {
           $cont++;
           continue;
         }
@@ -183,7 +199,7 @@
     }
 
     // Validando se alguns dados estão conforme o especificado
-    if(strlen($_POST['nome']) > 255 || strlen($_POST['cnh']) != 9 || strlen($_POST['telefone']) != 15 || strlen($_POST['carro']) > 255) {
+    if(strlen($_POST['nome']) > 255 || strlen($_POST['cnh']) > 11 || strlen($_POST['cnh']) < 9 || strlen($_POST['telefone']) != 15 || strlen($_POST['carro']) > 255) {
         $message = [
             'message' => 'Algum dado não foi preenchido corretamente!',
             'class' => 'status_error'

@@ -47,7 +47,7 @@
                     </p>
                     <p>
                         <label for="id_cnh">CNH</label>
-                        <input type="text" data-mask="000000000" name="cnh" id="id_cnh" minlength="9" maxlength="9" placeholder="Digite a CNH" value="<?= $dados[0]['cnh'] ?>" required>
+                        <input type="text" name="cnh" id="id_cnh" minlength="9" maxlength="10" placeholder="Digite a CNH" value="<?= $dados[0]['cnh'] ?>" required>
                     </p>
                     <p id="p_telefone">
                         <label for="id_telefone">Telefone</label>
@@ -119,6 +119,14 @@
                     <p>
                         <label for="id_foto" class="label_foto" style="margin-top: 1em;">Escolher arquivo</label>
                         <input type="file" name="foto" id="id_foto" style="margin-top: 1em; border-bottom: none; display: none;">
+                    </p>
+                    <p class="action_foto">
+                    <?php if($dados[0]['foto'] != ''): ?>
+                        <input type="checkbox" name="action" id="id_action">
+                        <label for="id_action">Remover Foto</label>
+                    <?php else: ?>
+                        <input type="hidden">
+                    <?php endif; ?>
                     </p>
                 </div>
                 <p class="center p_btn_cadastrar" style="flex-direction: row;">

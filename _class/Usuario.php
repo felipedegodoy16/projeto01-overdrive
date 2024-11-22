@@ -224,7 +224,7 @@ class Usuario {
         try {
             
             // Query
-            $sql = "SELECT u.id_user, u.nome, u.carro, u.cargo, emp.fantasia, u.telefone, u.cpf, u.cnh, e.cep, e.numero, e.rua, e.cidade, e.estado, e.bairro FROM usuarios u INNER JOIN enderecos e ON u.id_endereco = e.id_end INNER JOIN empresas emp ON u.id_empresa = emp.id_emp WHERE u.id_user = :id;";
+            $sql = "SELECT u.id_user, u.nome, u.carro, u.cargo, emp.fantasia, u.telefone, u.cpf, u.cnh, u.foto, e.cep, e.numero, e.rua, e.cidade, e.estado, e.bairro FROM usuarios u INNER JOIN enderecos e ON u.id_endereco = e.id_end INNER JOIN empresas emp ON u.id_empresa = emp.id_emp WHERE u.id_user = :id;";
 
             // Conectando ao banco e preparando a query
             $stmt = ConexaoDAO::getConexao()->prepare($sql);
@@ -244,6 +244,7 @@ class Usuario {
                     $d['telefone'];
                     $d['cpf'];
                     $d['cnh'];
+                    $d['foto'];
                     $d['cep'];
                     $d['numero'];
                     $d['rua'];
@@ -295,12 +296,67 @@ class Usuario {
         }
     }
 
-    // Método para alterar dados do usuário no banco
-    public function alterarUsuario(){
+    // Método para verificar se algum dado foi alterado
+    public function verificaDadoAlterado() {
         try {
 
+            $message = [];
+
+            // Query
+            $sql = "SELECT * FROM usuarios
+            WHERE id_user = :idUser AND nome = :nome
+            AND cpf = :cpf AND cnh = :cnh
+            AND telefone = :telefone AND carro = :carro
+            AND id_empresa = :idEmp AND id_endereco = :idEnd LIMIT 1;";
+
+            // Conectando o banco e preparando a query
+            $stmt = ConexaoDAO::getConexao()->prepare($sql);
+            $stmt->bindValue(":idUser", $this->id, PDO::PARAM_INT);
+            $stmt->bindValue(":nome", $this->nome, PDO::PARAM_STR);
+            $stmt->bindValue(":cpf", $this->cpf, PDO::PARAM_STR);
+            $stmt->bindValue(":cnh", $this->cnh, PDO::PARAM_STR);
+            $stmt->bindValue(":telefone", $this->telefone, PDO::PARAM_STR);
+            $stmt->bindValue(":carro", $this->carro, PDO::PARAM_STR);
+            $stmt->bindValue(":idEmp", $this->empresa->getId(), PDO::PARAM_INT);
+            $stmt->bindValue(":idEnd", $this->endereco->getId(), PDO::PARAM_INT);
+
+            // Executando a query no banco
+            $stmt->execute() or die(print_r($stmt->errorInfo(), true));
+            $dados = $stmt->fetchAll();
+
+            if(count($dados) > 0) {
+                $message = [
+                    'message' => 'Nenhum dado foi alterado!',
+                    'class' => 'status_error'
+                ];
+            }
+
+            return $message;
+
+        } catch(Exception $e) {
+
+            echo "Exceção $e";
+
+        }
+    }
+
+    // Método para alterar dados do usuário no banco
+    public function alterarUsuario($foto){
+        try {
+
+            $stmtFoto = 0;
+
+            $this->getSenha() === '' ? $alterSenha = '' : $alterSenha = 'senha = :senha,';
+
+            if(($this->getFoto() !== '' && $foto === 0) || ($foto === 1)) {
+                $alterFoto = 'foto = :foto,';
+                $stmtFoto = 1;
+            } else {
+                $alterFoto = '';
+            }
+
             // Query SQL
-            $this->getSenha() === '' ? $sql = "UPDATE usuarios SET nome = :nome, cpf = :cpf, cnh = :cnh, telefone = :telefone, carro = :carro, id_empresa = :id_empresa, foto = :foto, id_endereco = :id_endereco WHERE id_user = :id;" : $sql = "UPDATE usuarios SET nome = :nome, cpf = :cpf, cnh = :cnh, telefone = :telefone, carro = :carro, id_empresa = :id_empresa, senha = :senha, foto = :foto, id_endereco = :id_endereco WHERE id_user = :id;";
+            $sql = "UPDATE usuarios SET nome = :nome, cpf = :cpf, cnh = :cnh, telefone = :telefone, carro = :carro, id_empresa = :id_empresa, $alterSenha $alterFoto id_endereco = :id_endereco WHERE id_user = :id;";
 
             // Conectando o banco e preparando a query
             $stmt = ConexaoDAO::getConexao()->prepare($sql);
@@ -312,7 +368,7 @@ class Usuario {
             $stmt->bindValue(":carro", $this->carro, PDO::PARAM_STR);
             $stmt->bindValue(":id_empresa", $this->empresa->getId(), PDO::PARAM_INT);
             $this->getSenha() === '' ? : $stmt->bindValue(":senha", $this->senha, PDO::PARAM_STR);
-            $stmt->bindValue(":foto", $this->foto, PDO::PARAM_STR);
+            $stmtFoto === 0 ? : $stmt->bindValue(":foto", $this->foto, PDO::PARAM_STR);
             $stmt->bindValue(":id_endereco", $this->endereco->getId(), PDO::PARAM_INT);
 
             // Executando a query no banco

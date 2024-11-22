@@ -464,7 +464,7 @@ function validaCamposUser() {
         return
     }
 
-    for(let i = 0; i < inputs.length-2; i++) {
+    for(let i = 0; i < inputs.length-3; i++) {
         if(inputs[i].value === '' && i !== 5) {
             desabilitarBtn(btn)
             return

@@ -630,12 +630,6 @@ input#btn_login:hover {
     box-shadow: 1px 6px 8px var(--red-dark);
 }
 
-/* details#details_login {
-    margin-top: 1em;
-    display: flex;
-    color: var(--red-dark);
-} */
-
 img#img_logo {
     opacity: .05;
     position: absolute;
@@ -889,7 +883,16 @@ label.label_foto:hover {
     color: var(--red-dark);
 }
 
+.action_foto {
+    flex-direction: row !important;
+}
+
+.action_foto input {
+    margin-right: .4em;
+}
+
 p.p_btn_cadastrar {
+    display: flex;
     width: 100%;
 }
 
