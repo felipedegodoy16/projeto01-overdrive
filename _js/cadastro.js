@@ -4,6 +4,8 @@ if (document.readyState == "loading") {
     ready()
 }
 
+var cnpjAtual
+
 function ready() {
 
     // Funções Usuário
@@ -43,6 +45,8 @@ function ready() {
     if(inputCnpj.value !== '') {
         validacoesCnpj()
     }
+
+    cnpjAtual = inputCnpj.value
 
     let inputTelEmp = document.querySelector('input[name=telefone_emp]')
     inputTelEmp.addEventListener("blur", verificaTelEmp)
@@ -119,7 +123,8 @@ function validacoesCnpj(){
     if(cnpj.length === 14){
         cnpjTestado = validaCnpj(cnpj)
         if(cnpjTestado){
-            if(cnpjAlert.innerText != 'CNPJ válido') {
+            if(cnpjAlert.innerText != 'CNPJ válido' || cnpjAtual !== strCnpj) {
+                cnpjAtual = strCnpj
                 buscaCnpj(cnpj)
             }
             cnpjAlert.innerText = 'CNPJ válido'

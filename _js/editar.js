@@ -4,11 +4,14 @@ if (document.readyState == "loading") {
     ready()
 }
 
+var cnpjAtual
+
 function ready(){
     
     let body = document.getElementsByTagName('body')[0]
     if(body.querySelector('input[name=cnpj_emp]') != undefined) {
         validacoesCnpj()
+        cnpjAtual = body.querySelector('input[name=cnpj_emp]').value
         let divEmp = document.getElementById('cadastro_emp')
         let inputsEmp = divEmp.getElementsByTagName('input')
         for(let i = 0; i < inputsEmp.length; i++) {
@@ -97,7 +100,10 @@ function validacoesCnpj(){
     if(cnpj.length === 14){
         cnpjTestado = validaCnpj(cnpj)
         if(cnpjTestado){
-            buscaCnpj(cnpj)
+            if(cnpjAlert.innerText != 'CNPJ válido' || cnpjAtual !== strCnpj) {
+                cnpjAtual = strCnpj
+                buscaCnpj(cnpj)
+            }
             cnpjAlert.innerText = 'CNPJ válido'
             cnpjAlert.style.color = '#0c6800'
 
@@ -107,7 +113,6 @@ function validacoesCnpj(){
             cnpjAlert.style.color = 'var(--red-dark)'
             
             document.querySelector('input[name=nome_emp]').value = ''
-            document.querySelector('input[name=fantasia_emp]').value = ''
             document.querySelector('input[name=numero]').value = ''
 
             return false
@@ -117,7 +122,6 @@ function validacoesCnpj(){
         cnpjAlert.style.color = 'var(--red-dark)'
         
         document.querySelector('input[name=nome_emp]').value = ''
-        document.querySelector('input[name=fantasia_emp]').value = ''
         document.querySelector('input[name=numero]').value = ''
 
         return false
@@ -370,7 +374,6 @@ function preencheCamposCnpj(json){
     if(json.nome != undefined){
 
         document.querySelector('input[name=nome_emp]').value = json.nome
-        document.querySelector('input[name=fantasia_emp]').value = json.fantasia
         document.querySelector('input[name=cep]').value = json.cep.replace('.', '')
         document.querySelector('input[name=rua]').value = json.logradouro
         document.querySelector('input[name=bairro]').value = json.bairro
@@ -499,6 +502,13 @@ function validaCamposEmp() {
     let btn = document.getElementById('btn_cadastrar')
     let smallCep = document.getElementById('cepTeste').innerText
 
+    for(let i = 0; i < inputs.length; i++) {
+        if(inputs[i].value === '' && i !== 5) {
+            desabilitarBtn(btn)
+            return
+        }
+    }
+
     if(!validacoesCnpj()) {
         desabilitarBtn(btn)
         return
@@ -507,13 +517,6 @@ function validaCamposEmp() {
     if(smallCep !== 'CEP válido') {
         desabilitarBtn(btn)
         return
-    }
-
-    for(let i = 0; i < inputs.length; i++) {
-        if(inputs[i].value === '' && i !== 5) {
-            desabilitarBtn(btn)
-            return
-        }
     }
 
     habilitarBtn(btn)
