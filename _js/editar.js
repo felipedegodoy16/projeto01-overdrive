@@ -97,9 +97,7 @@ function validacoesCnpj(){
     if(cnpj.length === 14){
         cnpjTestado = validaCnpj(cnpj)
         if(cnpjTestado){
-            if(cnpjAlert.innerText != 'CNPJ válido') {
-                buscaCnpj(cnpj)
-            }
+            buscaCnpj(cnpj)
             cnpjAlert.innerText = 'CNPJ válido'
             cnpjAlert.style.color = '#0c6800'
 
@@ -172,6 +170,26 @@ function verificaTel(){
         validaCamposEmp()
     } else {
         validaCamposUser()
+    }
+
+    changeFormat()
+}
+
+function changeFormat() {
+    var input_telefone = document.querySelector('input[name=telefone]')
+    var inputValue = input_telefone.value
+
+    if(inputValue.length === 15) {
+
+        input_telefone.setAttribute('data-mask', '(00) 00000-0000')
+        inputValue = inputValue.replace('-', inputValue[10])
+
+        inputValue = inputValue.substring(0, 10) + '-' + inputValue.substring(11, inputValue.length)
+    } else {
+        input_telefone.setAttribute('data-mask', '(00) 0000-00000')
+        inputValue = inputValue.replace('-', inputValue[9])
+
+        inputValue = inputValue.substring(0, 9) + '-' + inputValue.substring(11, inputValue.length)
     }
 }
 

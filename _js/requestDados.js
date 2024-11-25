@@ -114,8 +114,12 @@ function responseJson(json){
       } else {
         json.usuarios.map(function(usuario){
 
+          var heightAdmin = `min-height: 420px;`
+
           if(json.sessao === 'A') {
-            tag = `<p class="center" style="margin-top: .7em;"><i class="fi fi-rr-trash icons_cards center icon_trash user_trash"></i><a href="editarUser.php?id=${usuario.id}" style="text-decoration: none;"><i class="fi fi-rr-edit icons_cards center icon_edit"></i></a></p>`
+            tag = `<p class="center" style="margin-top: .7em; margin-bottom: 1.5em;"><i class="fi fi-rr-trash icons_cards center icon_trash user_trash"></i><a href="editarUser.php?id=${usuario.id}" style="text-decoration: none;"><i class="fi fi-rr-edit icons_cards center icon_edit"></i></a></p>`
+
+            heightAdmin = `min-height: 500px;`
           }
   
           if(usuario.foto != null){
@@ -127,7 +131,7 @@ function responseJson(json){
           divUsers.innerHTML +=
           `
           <div class="col-10 col-sm-6 col-md-4 col-lg-3">
-            <div class="center card_register">
+            <div class="center card_register" style="justify-content: space-between; flex-direction: column; ${heightAdmin}">
               <img class="img_user_emp" src="_images/uploads/${foto}" alt="Imagem do Usuário ou Empresa">
               <div class="card_user_body" style="padding-bottom: 2em;">
                 <header>
@@ -145,8 +149,8 @@ function responseJson(json){
                   <p>${usuario.cidade} - ${usuario.estado}, ${usuario.cep}</p>
                 </details>
                 <p>Registro: ${formatter.format(Date.parse(usuario.registro + 'UTC-3'))}</p>
-                ${tag}
               </div>
+              ${tag}
             </div>
           </div>
           `
@@ -211,9 +215,13 @@ function responseJson(json){
 
         json.empresas.map(function(empresa){
 
+          var heightAdmin = `min-height: 420px;`
+
           if(empresa.fantasia !== "INATIVO") {
             if(json.sessao === 'A') {
-              tag = `<p class="center" style="margin-top: .7em;"><i class="fi fi-rr-trash icons_cards center icon_trash emp_trash"></i><a href="editarEmp.php?id=${empresa.id}&edit=0" style="text-decoration: none;"><i class="fi fi-rr-edit icons_cards center icon_edit"></i></a></p>`
+              tag = `<p class="center" style="margin-top: .7em; margin-bottom: 1.5em;"><i class="fi fi-rr-trash icons_cards center icon_trash emp_trash"></i><a href="editarEmp.php?id=${empresa.id}&edit=0" style="text-decoration: none;"><i class="fi fi-rr-edit icons_cards center icon_edit"></i></a></p>`
+
+              heightAdmin = `min-height: 500px;`
             }
     
             if(empresa.foto != null){
@@ -225,7 +233,7 @@ function responseJson(json){
             divEmps.innerHTML +=
             `
             <div class="col-10 col-sm-6 col-md-4 col-lg-3">
-              <div class="center card_register">
+              <div class="center card_register" style="justify-content: space-between; flex-direction: column; ${heightAdmin}">
                 <img class="img_user_emp" src="_images/uploads/${foto}" alt="Imagem do Usuário ou Empresa">
                 <div class="card_user_body" style="padding-bottom: 2em;">
                   <header>
@@ -242,8 +250,8 @@ function responseJson(json){
                     <p>${empresa.cidade} - ${empresa.estado}, ${empresa.cep}</p>
                   </details>
                   <p>Registro: ${formatter.format(Date.parse(empresa.registro + 'UTC-3'))}</p>
-                  ${tag}
                 </div>
+                ${tag}
               </div>
             </div>
             `
@@ -451,8 +459,8 @@ function filterCards() {
   const filterElement = document.getElementById('search')
   const cards = document.getElementsByClassName('card_register')
 
-  if(filterElement.value != ''){
-    for(let card of cards){
+  if(filterElement.value != '') {
+    for(let card of cards) {
       let nome = card.getElementsByClassName('name')[0]
       nome = nome.textContent.replace('Nome: ', '').toLowerCase()
 
@@ -461,16 +469,16 @@ function filterCards() {
 
       let filterText = filterElement.value.replace('.', '').replace('.', '').replace('/', '').replace('-', '').toLowerCase()
 
-      if(!nome.includes(filterText) && !cpfCnpj.includes(filterText)){
+      if(!nome.includes(filterText) && !cpfCnpj.includes(filterText)) {
         card.classList.remove('back_card')
         card.classList.add('transition_section')
         card.parentNode.style.display = 'none'
-      } else{
+      } else {
         card.parentNode.style.display = 'block'
       }
     }
-  } else{
-    for(let card of cards){
+  } else {
+    for(let card of cards) {
       card.parentNode.style.display = 'block'
     }
   }
