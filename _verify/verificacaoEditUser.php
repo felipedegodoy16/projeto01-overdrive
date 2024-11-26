@@ -35,7 +35,7 @@
 
     $foto = 0;
 
-    if(isset($_POST['action'])){
+    if(isset($_POST['action'])) {
         $foto = 1;
     }
 

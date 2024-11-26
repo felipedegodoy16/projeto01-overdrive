@@ -136,7 +136,6 @@ function validacoesCnpj(){
             cnpjAlert.style.color = 'var(--red-dark)'
 
             document.querySelector('input[name=nome_emp]').value = ''
-            document.querySelector('input[name=fantasia_emp]').value = ''
             document.querySelector('input[name=numero]').value = ''
 
             return false
@@ -146,7 +145,6 @@ function validacoesCnpj(){
         cnpjAlert.style.color = 'var(--red-dark)'
 
         document.querySelector('input[name=nome_emp]').value = ''
-        document.querySelector('input[name=fantasia_emp]').value = ''
         document.querySelector('input[name=numero_emp]').value = ''
 
         return false
@@ -419,7 +417,6 @@ function preencheCamposCnpj(json){
     if(json.nome != undefined){
 
         document.querySelector('input[name=nome_emp]').value = json.nome
-        document.querySelector('input[name=fantasia_emp]').value = json.fantasia
         document.querySelector('input[name=cep_emp]').value = json.cep.replace('.', '')
         document.querySelector('input[name=rua_emp]').value = json.logradouro
         document.querySelector('input[name=bairro_emp]').value = json.bairro

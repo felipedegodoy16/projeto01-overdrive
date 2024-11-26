@@ -176,25 +176,13 @@ function verificaTel(){
         validaCamposUser()
     }
 
-    changeFormat()
+    // changeFormat()
 }
 
-function changeFormat() {
-    var input_telefone = document.querySelector('input[name=telefone]')
-    var inputValue = input_telefone.value
-
-    if(inputValue.length === 15) {
-
-        input_telefone.setAttribute('data-mask', '(00) 00000-0000')
-        inputValue = inputValue.replace('-', inputValue[10])
-
-        inputValue = inputValue.substring(0, 10) + '-' + inputValue.substring(11, inputValue.length)
-    } else {
-        input_telefone.setAttribute('data-mask', '(00) 0000-00000')
-        inputValue = inputValue.replace('-', inputValue[9])
-
-        inputValue = inputValue.substring(0, 9) + '-' + inputValue.substring(11, inputValue.length)
-    }
+function changeFormat(e) {
+//     console.log(e)
+//     let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/)
+//     e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '')
 }
 
 // Função para alternar senha entre visível e invisível
@@ -503,7 +491,7 @@ function validaCamposEmp() {
     let smallCep = document.getElementById('cepTeste').innerText
 
     for(let i = 0; i < inputs.length; i++) {
-        if(inputs[i].value === '' && i !== 5) {
+        if(inputs[i].value === '' && (i < 5 || i > 6)) {
             desabilitarBtn(btn)
             return
         }

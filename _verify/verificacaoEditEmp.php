@@ -1,14 +1,14 @@
 <?php 
 
-  require_once '_class/Empresa.php';
-  require_once '_verify/verificacaoUser.php';
+    require_once '_class/Empresa.php';
+    require_once '_verify/verificacaoUser.php';
 
-  $id_edit = $_GET['id'];
+    $id_edit = $_GET['id'];
 
-  $message = [];
+    $message = [];
 
-  $empresa = new Empresa();
-  $endereco = new Endereco();
+    $empresa = new Empresa();
+    $endereco = new Endereco();
 
     if(isset($_POST['cnpj_emp'])) {
 
@@ -23,6 +23,12 @@
         // Pegando dados para verificar se o registro não irá se repetir no banco
         $empresa->setId($id_edit);
         $empresa->setCnpj(strtoupper($_POST['cnpj_emp']));
+
+        $foto = 0;
+
+        if(isset($_POST['action'])) {
+            $foto = 1;
+        }
 
         // Verificando se o CNPJ não é duplicado
         $verificarCnpj = $empresa->verificaEdicao();
@@ -44,14 +50,14 @@
             $empresa->setTelefone(strtoupper($_POST['telefone']));
             $empresa->setResponsavel(strtoupper($_POST['responsavel_emp']));
             $empresa->setEndereco($endereco);
-            if(isset($_FILES['foto_emp']['name']) && $_FILES['foto_emp']['error'] == 0){
+            if(isset($_FILES['foto_emp']['name']) && $_FILES['foto_emp']['error'] == 0 && $foto === 0 && $_FILES['foto_emp']['size'] <= 10000000){
                 $arquivo_tmp = $_FILES['foto_emp']['tmp_name'];
                 $nomeImagem = $_FILES['foto_emp']['name'];
                 $extensao = strrchr($nomeImagem, '.');
                 $extensao = strtolower($extensao);
                 if(strstr('.jpg;.jpeg;.png', $extensao)){
                     $novoNome = md5(microtime()) .$extensao; ;
-                    $destino = '../_images/uploads/' . $novoNome; 
+                    $destino = '_images/uploads/' . $novoNome; 
                     @move_uploaded_file($arquivo_tmp, $destino);
                     $empresa->setFoto(strtoupper($novoNome));
                 } else {
@@ -61,8 +67,17 @@
                 $empresa->setFoto('');
             }
 
+            // Verificando se algum dado foi alterado
+            if($empresa->getFoto() === '' && $foto === 0) {
+                $message = $empresa->verificaDadoAlterado();
+                if(!empty($message)) {
+                    $dados = $empresa->retornarEmpresa($id_edit);
+                    return;
+                }
+            }
+
             // Alterando usuário existente no banco
-            $empresa->alterarEmpresa();
+            $empresa->alterarEmpresa($foto);
 
             $message = [
                 'message' => 'Empresa alterada com sucesso!',

@@ -250,6 +250,49 @@ class Empresa {
         }
     }
 
+    // Método para verificar se algum dado foi alterado
+    public function verificaDadoAlterado() {
+        try {
+
+            $message = [];
+
+            // Query
+            $sql = "SELECT * FROM empresas
+            WHERE id_emp = :idEmp AND nome = :nome
+            AND fantasia = :fantasia AND cnpj = :cnpj
+            AND telefone = :telefone AND responsavel = :responsavel
+            AND id_endereco = :idEnd LIMIT 1;";
+
+            // Conectando o banco e preparando a query
+            $stmt = ConexaoDAO::getConexao()->prepare($sql);
+            $stmt->bindValue(":idEmp", $this->id, PDO::PARAM_INT);
+            $stmt->bindValue(":nome", $this->nome, PDO::PARAM_STR);
+            $stmt->bindValue(":fantasia", $this->fantasia, PDO::PARAM_STR);
+            $stmt->bindValue(":cnpj", $this->cnpj, PDO::PARAM_STR);
+            $stmt->bindValue(":telefone", $this->telefone, PDO::PARAM_STR);
+            $stmt->bindValue(":responsavel", $this->responsavel, PDO::PARAM_STR);
+            $stmt->bindValue(":idEnd", $this->endereco->getId(), PDO::PARAM_INT);
+
+            // Executando a query no banco
+            $stmt->execute() or die(print_r($stmt->errorInfo(), true));
+            $dados = $stmt->fetchAll();
+
+            if(count($dados) > 0) {
+                $message = [
+                    'message' => 'Nenhum dado foi alterado!',
+                    'class' => 'status_error'
+                ];
+            }
+
+            return $message;
+
+        } catch(Exception $e) {
+
+            echo "Exceção $e";
+
+        }
+    }
+
     // Verificando se a empresa já está registrada no banco
     public function verificaEdicao(){
         try {
@@ -281,11 +324,20 @@ class Empresa {
     }
 
     // Método para alterar dados da empresa no banco
-    public function alterarEmpresa(){
+    public function alterarEmpresa($foto){
         try {
 
+            $stmtFoto = 0;
+
+            if(($this->getFoto() !== '' && $foto === 0) || ($foto === 1)) {
+                $alterFoto = 'foto = :foto,';
+                $stmtFoto = 1;
+            } else {
+                $alterFoto = '';
+            }
+
             // Query SQL
-            $sql = "UPDATE empresas SET nome = :nome, fantasia = :fantasia, cnpj = :cnpj, telefone = :telefone, responsavel = :responsavel, foto = :foto, id_endereco = :id_endereco WHERE id_emp = :id;";
+            $sql = "UPDATE empresas SET nome = :nome, fantasia = :fantasia, cnpj = :cnpj, telefone = :telefone, responsavel = :responsavel, $alterFoto id_endereco = :id_endereco WHERE id_emp = :id;";
 
             // Conectando o banco e preparando a query
             $stmt = ConexaoDAO::getConexao()->prepare($sql);
@@ -295,7 +347,7 @@ class Empresa {
             $stmt->bindValue(":cnpj", $this->cnpj, PDO::PARAM_STR);
             $stmt->bindValue(":telefone", $this->telefone, PDO::PARAM_STR);
             $stmt->bindValue(":responsavel", $this->responsavel, PDO::PARAM_STR);
-            $stmt->bindValue(":foto", $this->foto, PDO::PARAM_STR);
+            $stmtFoto === 0 ? : $stmt->bindValue(":foto", $this->foto, PDO::PARAM_STR);
             $stmt->bindValue(":id_endereco", $this->endereco->getId(), PDO::PARAM_INT);
 
             // Executando a query no banco

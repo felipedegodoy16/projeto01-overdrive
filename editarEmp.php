@@ -61,6 +61,14 @@
                         <label for="id_foto_emp" class="label_foto" style="margin-top: .5em;">Escolher arquivo</label>
                         <input type="file" name="foto_emp" id="id_foto_emp" style="margin-top: 1em; border-bottom: none; display: none;">
                     </p>
+                    <p class="action_foto">
+                    <?php if($dados[0]['foto'] != ''): ?>
+                        <input type="checkbox" name="action" id="id_action">
+                        <label for="id_action">Remover Foto</label>
+                    <?php else: ?>
+                        <input type="hidden">
+                    <?php endif; ?>
+                    </p>
                 </div>
 
                 <div class="address_data">
