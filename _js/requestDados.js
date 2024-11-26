@@ -327,7 +327,8 @@ function removeDataUsers(event){
   const divStatus = document.getElementById('status_request')
   const pStatus = document.getElementById('p_status_request')
   const idSession = document.getElementById('id_session').innerText
-  let idRemove = event.target.parentNode.parentNode.children[0].children[0].innerText.replace('#', '')
+  console.log(event)
+  let idRemove = event.target.parentNode.parentNode.children[1].children[0].children[0].innerText.replace('#', '')
 
   if(idSession == idRemove){
 

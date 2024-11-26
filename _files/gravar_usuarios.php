@@ -13,6 +13,17 @@
             return $message;
         }
 
+        // Verificando se a senha segue os padrões de segurança
+        $retorno = verificaSenha($_POST['password']);
+        if(!$retorno) {
+            $message = [
+                'message' => 'A senha não segue os padrões de segurança!',
+                'class' => 'status_error'
+            ];
+
+            return $message;
+        }
+
         $cpf = strtoupper($_POST['cpf']);
         $cnh = strtoupper($_POST['cnh']);
         $cep = strtoupper($_POST['cep']);
@@ -170,7 +181,7 @@
         }
 
         // Validando se alguns dados estão conforme o especificado
-        if(strlen($_POST['nome']) > 255 || strlen($_POST['cnh']) != 9 || strlen($_POST['telefone']) != 15 || strlen($_POST['carro']) > 255 || strlen($_POST['password']) < 8) {
+        if(strlen($_POST['nome']) > 255 || strlen($_POST['cnh']) != 9 || strlen($_POST['telefone']) != 15 || strlen($_POST['carro']) > 255) {
             $message = [
                 'message' => 'Algum dado não foi preenchido corretamente!',
                 'class' => 'status_error'
@@ -192,3 +203,26 @@
         return $message;
     }
     
+    function verificaSenha($password) {
+        if(strlen($password) < 8) {
+            return false;
+        }
+    
+        if(!preg_match('/\d+/', $password)) {
+            return false;
+        }
+    
+        if(!preg_match('/[a-z]+/', $password)) {
+            return false;
+        }
+    
+        if(!preg_match('/[A-Z]+/', $password)) {
+            return false;
+        }
+    
+        if(!preg_match('/[\'"\^~;:°?&*+@#$%!\(|\)=.,\/\\\\]/', $password)) {
+            return false;
+        }
+    
+        return true;
+    }
