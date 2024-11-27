@@ -417,7 +417,7 @@ class Empresa {
             if(count($usuarios) > 0){
                 foreach($usuarios as $usuario) {
                     // Query
-                    $sql = "UPDATE usuarios SET id_empresa = 0 WHERE id_user = :id;";
+                    $sql = "UPDATE usuarios SET id_empresa = 1 WHERE id_user = :id;";
 
                     // Conectando ao banco e preparando a query
                     $stmt = ConexaoDAO::getConexao()->prepare($sql);
@@ -442,7 +442,7 @@ class Empresa {
 
             $retorno = $this->retornarEmpresa($id);
 
-            // Verificando status do vínculo
+            // Verificando se a empresa existe no banco
             if($retorno === -1) {
 
                 return 0;

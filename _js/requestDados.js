@@ -386,7 +386,7 @@ function removeDataUsers(event){
 function removeDataEmps(event){
   const divStatus = document.getElementById('status_request')
   const pStatus = document.getElementById('p_status_request')
-  let idRemove = event.target.parentNode.parentNode.children[0].children[0].innerText.replace('#', '')
+  let idRemove = event.target.parentNode.parentNode.children[1].children[0].children[0].innerText.replace('#', '')
   let comando = prompt("Por favor, confirme a instrução (DELETE) para excluir os registros da empresa.")
 
   if(comando === 'DELETE') {
