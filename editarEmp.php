@@ -51,7 +51,7 @@
                     </p>
                     <p id="p_telefone">
                         <label for="id_telefone">Telefone</label>
-                        <input type="text" data-mask="(00) 00000-0000" name="telefone" id="id_telefone" minlength="15" maxlength="15" placeholder="Digite o Telefone" value="<?= $dados[0]['telefone'] ?>" onblur="verificaTel()" required> 
+                        <input type="text" name="telefone" id="id_telefone" minlength="14" maxlength="15" placeholder="Digite o Telefone" value="<?= $dados[0]['telefone'] ?>" onblur="verificaTel(this)" onfocus="tirarFormat(this)" oninput="removeChar(this)" required>
                     </p>
                     <p>
                         <label for="id_responsavel_emp">Reponsável</label>

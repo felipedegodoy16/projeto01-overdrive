@@ -185,12 +185,14 @@ function validaCnpj(cnpj) {
 }
 
 // Função para telefone
-function verificaTel(){
+function verificaTel(e){
     var input_telefone = document.querySelector('input[name=telefone]')
 
     if(input_telefone.value === '(') {
         input_telefone.value = ''
     }
+
+    changeFormat(e)
 
     validaCamposUser()
 }
@@ -379,14 +381,62 @@ function changeForm() {
 }
 
 // Função para telefone da empresa
-function verificaTelEmp(){
+function verificaTelEmp(e){
+    console.log(e)
     var input_telefone_emp = document.querySelector('input[name=telefone_emp]')
 
     if (input_telefone_emp.value === '(') {
         input_telefone_emp.value = ''
     }
 
+    changeFormat(e)
+
     validaCamposEmp()
+}
+
+// Remover qualquer caractere que não for número
+function removeChar(e) {
+    e.value = e.value.replace(/\D/g, '')
+}
+
+// Tirar hífen do input
+function tirarFormat(e) {
+    const textoAtual = e.value
+    const textoAjustado = textoAtual.replace(/\D/g, '')
+
+    e.value = textoAjustado;
+}
+
+// Arrumando o formato do telefone
+function changeFormat(e) {
+
+    const textoAtual = e.target.value.length
+    let textoAjustado = e.target.value
+
+    if(textoAtual === 11) {
+
+        const parte1 = e.target.value.slice(0, 2)
+        console.log(parte1)
+        const parte2 = e.target.value.slice(2, 7)
+        console.log(parte2)
+        const parte3 = e.target.value.slice(7, 11)
+        console.log(parte3)
+        textoAjustado = `(${parte1}) ${parte2}-${parte3}`
+
+    } else if(textoAtual === 10) {
+
+        const parte1 = e.target.value.slice(0, 2)
+        console.log(parte1)
+        const parte2 = e.target.value.slice(2, 6)
+        console.log(parte2)
+        const parte3 = e.target.value.slice(6, 10)
+        console.log(parte3)
+        textoAjustado = `(${parte1}) ${parte2}-${parte3}`
+
+    }
+
+    e.target.value = textoAjustado
+    
 }
 
 //Função de Busca CNPJ da Empresa

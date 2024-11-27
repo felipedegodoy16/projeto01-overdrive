@@ -169,7 +169,7 @@
         }
 
         // Verificação dos campos da empresa
-        if(strlen($_POST['nome_emp']) > 255 || strlen($_POST['fantasia_emp']) > 255 || strlen($_POST['telefone_emp']) != 15 || strlen($_POST['responsavel_emp']) > 255) {
+        if(strlen($_POST['nome_emp']) > 255 || strlen($_POST['fantasia_emp']) > 255 || strlen($_POST['telefone_emp']) < 14 || strlen($_POST['telefone_emp']) > 15 || strlen($_POST['responsavel_emp']) > 255) {
             $message = [
                 'message' => 'Algum dado não foi preenchido corretamente!',
                 'class' => 'status_error'

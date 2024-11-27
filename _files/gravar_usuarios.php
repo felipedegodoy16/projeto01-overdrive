@@ -181,7 +181,7 @@
         }
 
         // Validando se alguns dados estão conforme o especificado
-        if(strlen($_POST['nome']) > 255 || strlen($_POST['cnh']) != 9 || strlen($_POST['telefone']) != 15 || strlen($_POST['carro']) > 255) {
+        if(strlen($_POST['nome']) > 255 || strlen($_POST['cnh']) != 9 || strlen($_POST['telefone']) < 14 || strlen($_POST['telefone']) > 15 || strlen($_POST['carro']) > 255) {
             $message = [
                 'message' => 'Algum dado não foi preenchido corretamente!',
                 'class' => 'status_error'

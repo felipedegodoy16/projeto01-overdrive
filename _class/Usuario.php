@@ -3,7 +3,7 @@ require_once 'Empresa.php';
 
 class Usuario {
     // Atributos
-    private string $nome, $telefone, $cpf, $cnh, $carro, $cargo, $senha, $foto, $registro, $status;
+    private string $nome, $telefone, $cpf, $cnh, $carro, $cargo, $senha, $foto, $registro;
     private int $id;
     private Endereco $endereco;
     private Empresa $empresa;

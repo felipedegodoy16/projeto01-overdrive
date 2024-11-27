@@ -162,7 +162,7 @@ function validaCnpj(cnpj) {
 }
 
 // Função para telefone
-function verificaTel(){
+function verificaTel(e){
     var input_telefone = document.querySelector('input[name=telefone]')
     var body = document.getElementsByTagName('body')[0]
 
@@ -170,19 +170,58 @@ function verificaTel(){
         input_telefone.value = ''
     }
 
+    changeFormat(e)
+
     if(body.querySelector('input[name=cnpj_emp]') != undefined) {
         validaCamposEmp()
     } else {
         validaCamposUser()
     }
-
-    // changeFormat()
 }
 
+// Remover qualquer caractere que não for número
+function removeChar(e) {
+    e.value = e.value.replace(/\D/g, '')
+}
+
+// Tirar hífen do input
+function tirarFormat(e) {
+    const textoAtual = e.value
+    const textoAjustado = textoAtual.replace(/\D/g, '')
+
+    e.value = textoAjustado;
+}
+
+// Arrumando o formato do telefone
 function changeFormat(e) {
-//     console.log(e)
-//     let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/)
-//     e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '')
+
+    const textoAtual = e.value.length
+    let textoAjustado = e.value
+
+    if(textoAtual === 11) {
+
+        const parte1 = e.value.slice(0, 2)
+        console.log(parte1)
+        const parte2 = e.value.slice(2, 7)
+        console.log(parte2)
+        const parte3 = e.value.slice(7, 11)
+        console.log(parte3)
+        textoAjustado = `(${parte1}) ${parte2}-${parte3}`
+
+    } else if(textoAtual === 10) {
+
+        const parte1 = e.value.slice(0, 2)
+        console.log(parte1)
+        const parte2 = e.value.slice(2, 6)
+        console.log(parte2)
+        const parte3 = e.value.slice(6, 10)
+        console.log(parte3)
+        textoAjustado = `(${parte1}) ${parte2}-${parte3}`
+
+    }
+
+    e.value = textoAjustado
+    
 }
 
 // Função para alternar senha entre visível e invisível
