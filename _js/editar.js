@@ -182,6 +182,9 @@ function verificaTel(e){
 // Remover qualquer caractere que não for número
 function removeChar(e) {
     e.value = e.value.replace(/\D/g, '')
+    if(e.value.length > 11) {
+        
+    }
 }
 
 // Tirar hífen do input
@@ -201,21 +204,15 @@ function changeFormat(e) {
     if(textoAtual === 11) {
 
         const parte1 = e.value.slice(0, 2)
-        console.log(parte1)
         const parte2 = e.value.slice(2, 7)
-        console.log(parte2)
         const parte3 = e.value.slice(7, 11)
-        console.log(parte3)
         textoAjustado = `(${parte1}) ${parte2}-${parte3}`
 
     } else if(textoAtual === 10) {
 
         const parte1 = e.value.slice(0, 2)
-        console.log(parte1)
         const parte2 = e.value.slice(2, 6)
-        console.log(parte2)
         const parte3 = e.value.slice(6, 10)
-        console.log(parte3)
         textoAjustado = `(${parte1}) ${parte2}-${parte3}`
 
     }
@@ -400,6 +397,16 @@ function buscaCnpj(cnpj){
 function preencheCamposCnpj(json){
     if(json.nome != undefined){
 
+        const cep_teste = document.getElementById('cepTeste')
+
+        if(json.cep === '' || json.cep === undefined){
+            cep_teste.innerText = 'CEP inválido'
+            cep_teste.style.color = 'var(--red-dark)'
+        } else {
+            cep_teste.innerText = 'CEP válido'
+            cep_teste.style.color = '#0c6800'
+        }
+
         document.querySelector('input[name=nome_emp]').value = json.nome
         document.querySelector('input[name=cep]').value = json.cep.replace('.', '')
         document.querySelector('input[name=rua]').value = json.logradouro
@@ -407,7 +414,7 @@ function preencheCamposCnpj(json){
         document.querySelector('input[name=numero]').value = json.numero
         document.querySelector('input[name=cidade]').value = json.municipio
         document.querySelector('input[name=estado]').value = json.uf
-        buscaCep()
+        validaCamposEmp()
 
     }
 }

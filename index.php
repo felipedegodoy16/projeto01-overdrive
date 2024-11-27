@@ -8,9 +8,9 @@
 
       <div id="id_session" style="display: none;"><?=$_SESSION['id']?></div>
 
-      <div id="section_users" class="col-12 center transition_section" style="align-items: flex-start;"></div>
+      <div id="section_users" class="col-12 center transition_section" style="justify-content: flex-start;"></div>
 
-      <div id="section_emps" class="col-12 center transition_section" style="align-items: flex-start;"></div>
+      <div id="section_emps" class="col-12 center transition_section" style="justify-content: flex-start;"></div>
 
     </main>
 

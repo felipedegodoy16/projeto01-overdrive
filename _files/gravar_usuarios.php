@@ -190,6 +190,19 @@
             return $message;
         }
 
+        // Validando telefone
+        $regexCell = '/^[(]\d{2}[)]\s\d{5}-\d{4}/';
+        $regexTel = '/^[(]\d{2}[)]\s\d{4}-\d{4}/';
+
+        if(strlen($_POST['telefone']) < 14 || strlen($_POST['telefone']) > 15 || (!preg_match($regexCell, $_POST['telefone']) && !preg_match($regexTel, $_POST['telefone']))) {
+            $message = [
+                'message' => 'Algum dado não foi preenchido corretamente!',
+                'class' => 'status_error'
+            ];
+
+            return $message;
+        }
+
         // Verificação dos campos de endereço do usuário
         if(strlen($_POST['cep']) != 9 || strlen($_POST['rua']) > 255 || strlen($_POST['bairro']) > 255 || strlen($_POST['numero']) > 6 || strlen($_POST['cidade']) > 255 || strlen($_POST['estado']) != 2) {
             $message = [

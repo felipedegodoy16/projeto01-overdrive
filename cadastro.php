@@ -53,7 +53,7 @@
                 </p>
                 <p id="p_telefone_emp">
                     <label for="id_telefone_emp">Telefone</label>
-                    <input type="text" name="telefone_emp" id="id_telefone_emp" minlength="14" maxlength="15" placeholder="Digite o Telefone" value="<?= $telefoneEmp ?>" onfocus="tirarFormat(this)" oninput="removeChar(this)" required>
+                    <input type="text" name="telefone_emp" id="id_telefone_emp" minlength="10" maxlength="11" placeholder="Digite o Telefone" value="<?= $telefoneEmp ?>" onfocus="tirarFormat(this)" oninput="removeChar(this)" required>
                 </p>
                 <p>
                     <label for="id_responsavel_emp">Reponsável</label>
@@ -121,7 +121,7 @@
                 </p>
                 <p id="p_telefone">
                     <label for="id_telefone">Telefone</label>
-                    <input type="text" name="telefone" id="id_telefone" minlength="14" maxlength="15" placeholder="Digite o Telefone" value="<?= $telefoneEmp ?>" onfocus="tirarFormat(this)" oninput="removeChar(this)" required>
+                    <input type="text" name="telefone" id="id_telefone" minlength="10" maxlength="11" placeholder="Digite o Telefone" value="<?= $telefoneEmp ?>" onfocus="tirarFormat(this)" oninput="removeChar(this)" required>
                 </p>
                 <p>
                     <label for="id_carro">Carro</label>

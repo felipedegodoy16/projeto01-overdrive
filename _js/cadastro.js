@@ -466,6 +466,16 @@ function buscaCnpj(cnpj){
 function preencheCamposCnpj(json){
     if(json.nome != undefined){
 
+        const cep_teste = document.getElementById('cepTesteEmp')
+
+        if(json.cep === '' || json.cep === undefined){
+            cep_teste.innerText = 'CEP inválido'
+            cep_teste.style.color = 'var(--red-dark)'
+        } else {
+            cep_teste.innerText = 'CEP válido'
+            cep_teste.style.color = '#0c6800'
+        }
+
         document.querySelector('input[name=nome_emp]').value = json.nome
         document.querySelector('input[name=cep_emp]').value = json.cep.replace('.', '')
         document.querySelector('input[name=rua_emp]').value = json.logradouro
@@ -473,7 +483,6 @@ function preencheCamposCnpj(json){
         document.querySelector('input[name=numero_emp]').value = json.numero
         document.querySelector('input[name=cidade_emp]').value = json.municipio
         document.querySelector('input[name=estado_emp]').value = json.uf
-        buscaCepEmp()
 
     }
 }

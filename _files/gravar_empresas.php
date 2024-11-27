@@ -169,7 +169,20 @@
         }
 
         // Verificação dos campos da empresa
-        if(strlen($_POST['nome_emp']) > 255 || strlen($_POST['fantasia_emp']) > 255 || strlen($_POST['telefone_emp']) < 14 || strlen($_POST['telefone_emp']) > 15 || strlen($_POST['responsavel_emp']) > 255) {
+        if(strlen($_POST['nome_emp']) > 255 || strlen($_POST['fantasia_emp']) > 255 || strlen($_POST['responsavel_emp']) > 255) {
+            $message = [
+                'message' => 'Algum dado não foi preenchido corretamente!',
+                'class' => 'status_error'
+            ];
+
+            return $message;
+        }
+
+        // Validando telefone
+        $regexCell = '/^[(]\d{2}[)]\s\d{5}-\d{4}/';
+        $regexTel = '/^[(]\d{2}[)]\s\d{4}-\d{4}/';
+
+        if(strlen($_POST['telefone_emp']) < 14 || strlen($_POST['telefone_emp']) > 15 || (!preg_match($regexCell, $_POST['telefone_emp']) && !preg_match($regexTel, $_POST['telefone_emp']))) {
             $message = [
                 'message' => 'Algum dado não foi preenchido corretamente!',
                 'class' => 'status_error'
