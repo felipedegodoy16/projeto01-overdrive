@@ -1,7 +1,7 @@
 <?php 
 
     require_once '../_verify/verificacaoFilesAdmin.php';
-    require_once "../_class/Usuario.php";
+    require_once "../_class/UsuarioDAO.php";
     require_once "../_class/Empresa.php";
 
     // Pegando id do usuário ou empresa que será excluído do banco
@@ -9,11 +9,12 @@
 
     if($_GET['tipo'] === 'usuario'){
 
-        // Instanciação de um objeto usuário
+        // Instanciação de um objeto usuário e um objeto de usuárioDAO
         $usuario = new Usuario();
+        $usuarioDAO = new UsuarioDAO($usuario);
 
         // Chamando método para remoção do usuário no banco
-        $dadoRetornado = $usuario->removerUsuario($id);
+        $dadoRetornado = $usuarioDAO->removerUsuario($id);
 
         if($dadoRetornado === 0){
 

@@ -1,6 +1,6 @@
 <?php 
 
-    require_once '_class/Usuario.php';
+    require_once '_class/UsuarioDAO.php';
 
     function gravarUser() {
     
@@ -36,13 +36,14 @@
         $telefone = strtoupper($_POST['telefone']);
         $carro = strtoupper($_POST['carro']);
 
-        // Instanciando um objeto usuário
+        // Instanciando um objeto usuário e objeto usuárioDAO
         $usuario = new Usuario();
+        $usuarioDAO = new UsuarioDAO($usuario);
 
         $usuario->setCpf($cpf);
         $usuario->setCnh($cnh);
 
-        $verificaDados = $usuario->verificaDados();
+        $verificaDados = $usuarioDAO->verificaDados();
 
         if($verificaDados === -1) {
 
@@ -92,7 +93,7 @@
             $usuario->setRegistro(date("y/m/d"));
 
             // Inserindo usuário no banco
-            $usuario->inserirUsuario();
+            $usuarioDAO->inserirUsuario();
 
             $_POST['cpf'] = null;
             $_POST['cnh'] = null;

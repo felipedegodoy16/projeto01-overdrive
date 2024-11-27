@@ -1,6 +1,6 @@
 <?php 
 
-  require_once '_class/Usuario.php';
+  require_once '_class/UsuarioDAO.php';
   require_once '_class/Empresa.php';
   require_once '_verify/verificacaoIndex.php';
 
@@ -14,6 +14,8 @@
   $message = [];
   
   $usuario = new Usuario();
+  $usuarioDAO= new UsuarioDAO($usuario);
+
   $empresa = new Empresa();
   $endereco = new Endereco();
 
@@ -23,7 +25,7 @@
     $message = validacoes();
 
     if(!empty($message)) {
-        $dados = $usuario->retornarUsuario($id_edit);
+        $dados = $usuarioDAO->retornarUsuario($id_edit);
         $empresas = $empresa->listarNomesEmps();
         return;
     }
@@ -39,7 +41,7 @@
         $foto = 1;
     }
 
-    $verificaDados = $usuario->verificaEdicao();
+    $verificaDados = $usuarioDAO->verificaEdicao();
 
     if($verificaDados === -1) {
         $endereco->setCep(strtoupper($_POST['cep']));
@@ -68,7 +70,7 @@
             $usuario->setSenha(password_hash($_POST['password'], PASSWORD_DEFAULT));
             $retorno = verificaSenha($_POST['password']);
             if(!$retorno) {
-                $dados = $usuario->retornarUsuario($id_edit);
+                $dados = $usuarioDAO->retornarUsuario($id_edit);
                 $empresas = $empresa->listarNomesEmps();
 
                 $message = [
@@ -100,16 +102,16 @@
 
         // Verificando se algum dado foi alterado
         if($usuario->getFoto() === '' && $usuario->getSenha() === '' && $foto === 0) {
-            $message = $usuario->verificaDadoAlterado();
+            $message = $usuarioDAO->verificaDadoAlterado();
             if(!empty($message)) {
-                $dados = $usuario->retornarUsuario($id_edit);
+                $dados = $usuarioDAO->retornarUsuario($id_edit);
                 $empresas = $empresa->listarNomesEmps();
                 return;
             }
         }
 
         // Alterando usuário existente no banco
-        $usuario->alterarUsuario($foto);
+        $usuarioDAO->alterarUsuario($foto);
 
         $message = [
             'message' => 'Usuário alterado com sucesso!',
@@ -126,7 +128,7 @@
     }
   }
 
-  $dados = $usuario->retornarUsuario($id_edit);
+  $dados = $usuarioDAO->retornarUsuario($id_edit);
   $empresas = $empresa->listarNomesEmps();
 
   if($dados === -1) {

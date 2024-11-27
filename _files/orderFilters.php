@@ -1,17 +1,18 @@
 <?php 
     
     require_once '../_verify/verificacaoFilesComum.php';
-    require_once '../_class/Usuario.php';
+    require_once '../_class/UsuarioDAO.php';
     require_once '../_class/Empresa.php';
 
     $campo = $_GET['campo'];
     $ordem = $_GET['ordem'];
 
-    // Instanciação de um objeto usuário
+    // Instanciação de um objeto usuário e objeto de usuárioDAO
     $usuario = new Usuario();
+    $usuarioDAO = new UsuarioDAO($usuario);
 
     // Chamando método para listar usuário em ordem no banco
-    $dadosUsers = $usuario->listarUsuariosOrdem($campo, $ordem);
+    $dadosUsers = $usuarioDAO->listarUsuariosOrdem($campo, $ordem);
 
     // Instanciação de um objeto empresa
     $empresa = new Empresa();

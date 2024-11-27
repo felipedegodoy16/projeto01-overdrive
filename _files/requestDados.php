@@ -2,13 +2,14 @@
 
     require_once '../_verify/verificacaoFilesComum.php';
     require_once '../_class/Empresa.php';
-    require_once '../_class/Usuario.php';
+    require_once '../_class/UsuarioDAO.php';
 
-    // Instanciação de um objeto usuário
+    // Instanciação de um objeto usuário e objeto de usuárioDAO
     $usuarios = new Usuario();
+    $usuariosDAO = new UsuarioDAO($usuarios);
 
     // Retorno de uma lista de todos os registros de usuários do banco
-    $dadosUsers = $usuarios->listarUsuarios();
+    $dadosUsers = $usuariosDAO->listarUsuarios();
 
     // Instanciação de um objeto empresa
     $empresas = new Empresa();

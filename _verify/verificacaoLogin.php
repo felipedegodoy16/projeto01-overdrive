@@ -9,7 +9,7 @@
     exit();
   }
 
-  require_once '_class/Usuario.php';
+  require_once '_class/UsuarioDAO.php';
 
   $usuario = $_POST['user_input'] ?? '';
   $senha = $_POST['password_input'] ?? '';
@@ -18,9 +18,10 @@
 
   if($usuario != '' && $senha != ''){
     $userAcesso = new Usuario();
+    $userAcessoDAO = new UsuarioDAO($userAcesso);
 
     $userAcesso->setCpf($_POST['user_input']);
     $userAcesso->setSenha($_POST['password_input']);
     
-    $status = $userAcesso->verificarAcesso();
+    $status = $userAcessoDAO->verificarAcesso();
   }
