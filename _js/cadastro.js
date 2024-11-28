@@ -416,11 +416,8 @@ function changeFormat(e) {
     if(textoAtual === 11) {
 
         const parte1 = e.target.value.slice(0, 2)
-        console.log(parte1)
         const parte2 = e.target.value.slice(2, 7)
-        console.log(parte2)
         const parte3 = e.target.value.slice(7, 11)
-        console.log(parte3)
         textoAjustado = `(${parte1}) ${parte2}-${parte3}`
 
     } else if(textoAtual === 10) {
