@@ -95,7 +95,7 @@ function responseJson(json){
             <td>${usuario.cnh}</td>
             <td>${usuario.telefone}</td>
             <td>${usuario.carro}</td>
-            <td>${usuario.empresa}</td>
+            <td class="empresa">${usuario.empresa}</td>
             <td>${usuario.rua}, ${usuario.numero} - ${usuario.bairro}, ${usuario.cidade} - ${usuario.estado}, ${usuario.cep}</td>
             <td>${formatter.format(Date.parse(usuario.registro + 'UTC-3'))}</td>
           </tr>
@@ -142,7 +142,7 @@ function responseJson(json){
                 <p>CNH: ${usuario.cnh}</p>
                 <p>Telefone: ${usuario.telefone}</p>
                 <p>Carro: ${usuario.carro}</p>
-                <p>Empresa: ${usuario.empresa}</p>
+                <p class="empresa">Empresa: ${usuario.empresa}</p>
                 <details style="margin-bottom: .4em;">
                   <summary>Endereço</summary>
                   <p style="margin: .4em 0;">${usuario.rua}, ${usuario.numero} - ${usuario.bairro}</p>
@@ -192,7 +192,7 @@ function responseJson(json){
             <tr class="filter_table">
               <th scope="row">${empresa.id}</th>
               <td class="name">${empresa.nome}</td>
-              <td>${empresa.fantasia}</td>
+              <td class="empresa">${empresa.fantasia}</td>
               <td class="cpf_cnpj">${empresa.cnpj}</td>
               <td>${empresa.telefone}</td>
               <td>${empresa.responsavel}</td>
@@ -240,7 +240,7 @@ function responseJson(json){
                     <p style="position: absolute; padding: 0; left: 1em; top: 1em;">#${empresa.id}</p>
                   </header>
                   <p style="margin-top: 4.5em;" class="name">Razão: ${empresa.nome}</p>
-                  <p>Fantasia: ${empresa.fantasia}</p>
+                  <p class="empresa">Fantasia: ${empresa.fantasia}</p>
                   <p class="cpf_cnpj">CNPJ: ${empresa.cnpj}</p>
                   <p>Telefone: ${empresa.telefone}</p>
                   <p>Responsável: ${empresa.responsavel}</p>
@@ -468,9 +468,12 @@ function filterCards() {
       let cpfCnpj = card.getElementsByClassName('cpf_cnpj')[0]
       cpfCnpj = cpfCnpj.textContent.replace('CPF: ', '').replace('CNPJ: ', '').replace('.', '').replace('.', '').replace('/', '').replace('-', '').toLowerCase()
 
+      let empresa = card.getElementsByClassName('empresa')[0]
+      empresa = empresa.textContent.replace('Empresa: ', '').replace('Fantasia: ', '').toLowerCase()
+
       let filterText = filterElement.value.replace('.', '').replace('.', '').replace('/', '').replace('-', '').toLowerCase()
 
-      if(!nome.includes(filterText) && !cpfCnpj.includes(filterText)) {
+      if(!nome.includes(filterText) && !cpfCnpj.includes(filterText) && !empresa.includes(filterText)) {
         card.classList.remove('back_card')
         card.classList.add('transition_section')
         card.parentNode.style.display = 'none'
