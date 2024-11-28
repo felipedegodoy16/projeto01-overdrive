@@ -170,8 +170,17 @@
         public function listarUsuariosOrdem($campo, $ordem){
             try {
 
-                // Query
-                $sql = "SELECT u.id_user, u.nome, u.carro, u.cargo, u.telefone, u.cpf, u.cnh, u.foto, u.registro, e.cep, e.numero, e.rua, e.cidade, e.estado, e.bairro, emp.fantasia FROM usuarios u INNER JOIN enderecos e ON u.id_endereco = e.id_end INNER JOIN empresas emp ON u.id_empresa = emp.id_emp ORDER BY u.$campo $ordem;";
+                if($campo !== 'cidade' && $campo !== 'estado') {
+                    
+                    // Query
+                    $sql = "SELECT u.id_user, u.nome, u.carro, u.cargo, u.telefone, u.cpf, u.cnh, u.foto, u.registro, e.cep, e.numero, e.rua, e.cidade, e.estado, e.bairro, emp.fantasia FROM usuarios u INNER JOIN enderecos e ON u.id_endereco = e.id_end INNER JOIN empresas emp ON u.id_empresa = emp.id_emp ORDER BY u.$campo $ordem;";
+
+                } else {
+
+                    // Query
+                    $sql = "SELECT u.id_user, u.nome, u.carro, u.cargo, u.telefone, u.cpf, u.cnh, u.foto, u.registro, e.cep, e.numero, e.rua, e.cidade, e.estado, e.bairro, emp.fantasia FROM usuarios u INNER JOIN enderecos e ON u.id_endereco = e.id_end INNER JOIN empresas emp ON u.id_empresa = emp.id_emp ORDER BY e.$campo $ordem;";
+
+                }
 
                 // Conectando ao banco e preparando a query
                 $stmt = ConnectionFactory::getConexao()->prepare($sql);

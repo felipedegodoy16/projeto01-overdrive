@@ -121,8 +121,17 @@
         public function listarEmpresasOrdem($campo, $ordem){
             try {
 
-                // Query
-                $sql = "SELECT * FROM empresas emp INNER JOIN enderecos ende ON emp.id_endereco = ende.id_end ORDER BY emp.$campo $ordem;";
+                if($campo !== 'cidade' && $campo !== 'estado') {
+                    
+                    // Query
+                    $sql = "SELECT * FROM empresas emp INNER JOIN enderecos ende ON emp.id_endereco = ende.id_end ORDER BY emp.$campo $ordem;";
+
+                } else {
+
+                    // Query
+                    $sql = "SELECT * FROM empresas emp INNER JOIN enderecos ende ON emp.id_endereco = ende.id_end ORDER BY ende.$campo $ordem;";
+
+                }
 
                 // Conectando com o banco
                 $stmt = ConnectionFactory::getConexao()->prepare($sql);
