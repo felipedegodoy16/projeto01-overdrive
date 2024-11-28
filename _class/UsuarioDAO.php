@@ -18,7 +18,7 @@
                 $sql = "SELECT * FROM usuarios WHERE cpf = :cpf OR cnh = :cnh;";
 
                 // Conectando ao banco e preparando a query
-                $stmt = ConexaoDAO::getConexao()->prepare($sql);
+                $stmt = ConnectionFactory::getConexao()->prepare($sql);
                 $stmt->bindValue(":cpf", $this->getUsuario()->getCpf(), PDO::PARAM_STR);
                 $stmt->bindValue(":cnh", $this->getUsuario()->getCnh(), PDO::PARAM_STR);
 
@@ -48,7 +48,7 @@
                 (DEFAULT, :nome, :cpf, :cnh, :telefone, :carro, :cargo, :id_empresa, :senha, :foto, :registro, :id_endereco);";
 
                 // Conectando o banco e preparando a query
-                $stmt = ConexaoDAO::getConexao()->prepare($sql);
+                $stmt = ConnectionFactory::getConexao()->prepare($sql);
                 $stmt->bindValue(":nome", $this->getUsuario()->getNome(), PDO::PARAM_STR);
                 $stmt->bindValue(":cpf", $this->getUsuario()->getCpf(), PDO::PARAM_STR);
                 $stmt->bindValue(":cnh", $this->getUsuario()->getCnh(), PDO::PARAM_STR);
@@ -79,7 +79,7 @@
                 $sql = "SELECT id_user, nome, cargo, senha FROM usuarios WHERE cpf = :cpf LIMIT 1;";
 
                 // Conectando ao banco e preparando a query
-                $stmt = ConexaoDAO::getConexao()->prepare($sql);
+                $stmt = ConnectionFactory::getConexao()->prepare($sql);
                 $stmt->bindValue(":cpf", $this->getUsuario()->getCpf(), PDO::PARAM_STR);
 
                 $stmt->execute() or die(print_r($stmt->errorInfo(), true));
@@ -122,7 +122,7 @@
                 $sql = "SELECT u.id_user, u.nome, u.carro, u.cargo, u.telefone, u.cpf, u.cnh, u.foto, u.registro, e.cep, e.numero, e.rua, e.cidade, e.estado, e.bairro, emp.fantasia FROM usuarios u INNER JOIN enderecos e ON u.id_endereco = e.id_end INNER JOIN empresas emp ON u.id_empresa = emp.id_emp ORDER BY u.id_user;";
 
                 // Conectando ao banco
-                $stmt = ConexaoDAO::getConexao()->prepare($sql);
+                $stmt = ConnectionFactory::getConexao()->prepare($sql);
 
                 // Executando a query no banco e recebendo os dados
                 $stmt->execute() or die(print_r($stmt->errorInfo(), true));
@@ -174,7 +174,7 @@
                 $sql = "SELECT u.id_user, u.nome, u.carro, u.cargo, u.telefone, u.cpf, u.cnh, u.foto, u.registro, e.cep, e.numero, e.rua, e.cidade, e.estado, e.bairro, emp.fantasia FROM usuarios u INNER JOIN enderecos e ON u.id_endereco = e.id_end INNER JOIN empresas emp ON u.id_empresa = emp.id_emp ORDER BY u.$campo $ordem;";
 
                 // Conectando ao banco e preparando a query
-                $stmt = ConexaoDAO::getConexao()->prepare($sql);
+                $stmt = ConnectionFactory::getConexao()->prepare($sql);
 
                 // Executando a query no banco e recebendo os dados
                 $stmt->execute() or die(print_r($stmt->errorInfo(), true));
@@ -226,7 +226,7 @@
                 $sql = "SELECT * FROM usuarios WHERE (cpf = :cpf OR cnh = :cnh) AND id_user != :id;";
 
                 // Conectando ao banco e preparando a query
-                $stmt = ConexaoDAO::getConexao()->prepare($sql);
+                $stmt = ConnectionFactory::getConexao()->prepare($sql);
                 $stmt->bindValue(":cpf", $this->getUsuario()->getCpf(), PDO::PARAM_STR);
                 $stmt->bindValue(":cnh", $this->getUsuario()->getCnh(), PDO::PARAM_STR);
                 $stmt->bindValue(":id", $this->getUsuario()->getId(), PDO::PARAM_INT);
@@ -262,7 +262,7 @@
                 AND id_empresa = :idEmp AND id_endereco = :idEnd LIMIT 1;";
 
                 // Conectando o banco e preparando a query
-                $stmt = ConexaoDAO::getConexao()->prepare($sql);
+                $stmt = ConnectionFactory::getConexao()->prepare($sql);
                 $stmt->bindValue(":idUser", $this->getUsuario()->getId(), PDO::PARAM_INT);
                 $stmt->bindValue(":nome", $this->getUsuario()->getNome(), PDO::PARAM_STR);
                 $stmt->bindValue(":cpf", $this->getUsuario()->getCpf(), PDO::PARAM_STR);
@@ -311,7 +311,7 @@
                 $sql = "UPDATE usuarios SET nome = :nome, cpf = :cpf, cnh = :cnh, telefone = :telefone, carro = :carro, id_empresa = :id_empresa, $alterSenha $alterFoto id_endereco = :id_endereco WHERE id_user = :id;";
 
                 // Conectando o banco e preparando a query
-                $stmt = ConexaoDAO::getConexao()->prepare($sql);
+                $stmt = ConnectionFactory::getConexao()->prepare($sql);
                 $stmt->bindValue(":id", $this->getUsuario()->getId(), PDO::PARAM_INT);
                 $stmt->bindValue(":nome", $this->getUsuario()->getNome(), PDO::PARAM_STR);
                 $stmt->bindValue(":cpf", $this->getUsuario()->getCpf(), PDO::PARAM_STR);
@@ -341,7 +341,7 @@
                 $sql = "SELECT u.id_user, u.nome, u.carro, u.cargo, emp.fantasia, u.telefone, u.cpf, u.cnh, u.foto, e.cep, e.numero, e.rua, e.cidade, e.estado, e.bairro FROM usuarios u INNER JOIN enderecos e ON u.id_endereco = e.id_end INNER JOIN empresas emp ON u.id_empresa = emp.id_emp WHERE u.id_user = :id;";
 
                 // Conectando ao banco e preparando a query
-                $stmt = ConexaoDAO::getConexao()->prepare($sql);
+                $stmt = ConnectionFactory::getConexao()->prepare($sql);
                 $stmt->bindValue(":id", $id, PDO::PARAM_INT);
 
                 // Executando a query no banco
@@ -396,7 +396,7 @@
                     $sql = "DELETE FROM usuarios WHERE id_user = :id LIMIT 1;";
 
                     // Conectando ao banco e preparando a query
-                    $stmt = ConexaoDAO::getConexao()->prepare($sql);
+                    $stmt = ConnectionFactory::getConexao()->prepare($sql);
                     $stmt->bindValue(":id", $id, PDO::PARAM_INT);
 
                     // Executando a query no banco

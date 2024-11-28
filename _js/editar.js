@@ -4,19 +4,29 @@ if (document.readyState == "loading") {
     ready()
 }
 
-var cnpjAtual
-
 function ready(){
     
     let body = document.getElementsByTagName('body')[0]
     if(body.querySelector('input[name=cnpj_emp]') != undefined) {
-        validacoesCnpj()
-        cnpjAtual = body.querySelector('input[name=cnpj_emp]').value
+
+        const strCnpj = document.querySelector('input[name=cnpj_emp]').value
+        const cnpjAlert = document.getElementById('cnpjTeste')
+        cnpj = strCnpj.replace(/[^0-9]/g, '')
+
+        cnpjTestado = validaCnpj(cnpj)
+        if(cnpjTestado){
+            cnpjAlert.innerText = 'CNPJ válido'
+            cnpjAlert.style.color = '#0c6800'
+        }
+
         let divEmp = document.getElementById('cadastro_emp')
         let inputsEmp = divEmp.getElementsByTagName('input')
         for(let i = 0; i < inputsEmp.length; i++) {
             inputsEmp[i].addEventListener("input", validaCamposEmp)
         }
+
+        validaCamposEmp()
+        
     } else if(body.querySelector('input[name=cpf]') != undefined) {
         let divUser = document.getElementById('cadastro_user')
         let inputsUser = divUser.getElementsByTagName('input')
@@ -28,7 +38,7 @@ function ready(){
         inputPassword.addEventListener("input", passwordTips)
 
         validacoesCpf()
-        buscaCep()
+        validaCamposUser()
     }
 
     // Função de CEP para Usuário
@@ -100,10 +110,6 @@ function validacoesCnpj(){
     if(cnpj.length === 14){
         cnpjTestado = validaCnpj(cnpj)
         if(cnpjTestado){
-            if(cnpjAlert.innerText != 'CNPJ válido' || cnpjAtual !== strCnpj) {
-                cnpjAtual = strCnpj
-                buscaCnpj(cnpj)
-            }
             cnpjAlert.innerText = 'CNPJ válido'
             cnpjAlert.style.color = '#0c6800'
 

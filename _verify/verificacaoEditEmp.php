@@ -1,6 +1,7 @@
 <?php 
 
-    require_once '_class/Empresa.php';
+    require_once '_class/EmpresaDAO.php';
+    require_once '_class/EnderecoDAO.php';
     require_once '_verify/verificacaoUser.php';
 
     $id_edit = $_GET['id'];
@@ -8,7 +9,10 @@
     $message = [];
 
     $empresa = new Empresa();
+    $empresaDAO = new EmpresaDAO($empresa);
+
     $endereco = new Endereco();
+    $enderecoDAO = new EnderecoDAO($endereco);
 
     if(isset($_POST['cnpj_emp'])) {
 
@@ -16,7 +20,7 @@
         $message = validacoes();
 
         if(!empty($message)) {
-            $dados = $empresa->retornarEmpresa($id_edit);
+            $dados = $empresaDAO->retornarEmpresa($id_edit);
             return $message;
         }
 
@@ -31,7 +35,7 @@
         }
 
         // Verificando se o CNPJ não é duplicado
-        $verificarCnpj = $empresa->verificaEdicao();
+        $verificarCnpj = $empresaDAO->verificaEdicao();
 
         if($verificarCnpj === -1) {
 
@@ -43,7 +47,7 @@
             $endereco->setEstado(strtoupper($_POST['estado']));
 
             // Inserindo o endereço no banco ou pegando um endereço já existente
-            $endereco->inserirEndereco();
+            $enderecoDAO->inserirEndereco();
 
             $empresa->setNome(strtoupper($_POST['nome_emp']));
             $empresa->setFantasia(strtoupper($_POST['fantasia_emp']));
@@ -69,15 +73,15 @@
 
             // Verificando se algum dado foi alterado
             if($empresa->getFoto() === '' && $foto === 0) {
-                $message = $empresa->verificaDadoAlterado();
+                $message = $empresaDAO->verificaDadoAlterado();
                 if(!empty($message)) {
-                    $dados = $empresa->retornarEmpresa($id_edit);
+                    $dados = $empresaDAO->retornarEmpresa($id_edit);
                     return;
                 }
             }
 
             // Alterando usuário existente no banco
-            $empresa->alterarEmpresa($foto);
+            $empresaDAO->alterarEmpresa($foto);
 
             $message = [
                 'message' => 'Empresa alterada com sucesso!',
@@ -95,7 +99,7 @@
         
     }
 
-    $dados = $empresa->retornarEmpresa($id_edit);
+    $dados = $empresaDAO->retornarEmpresa($id_edit);
 
     if($dados === -1) {
         echo "<script>

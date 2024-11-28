@@ -75,7 +75,7 @@
                     <p>
                         <label for="id_cep">CEP</label>
                         <input type="text" data-mask="00000-000" name="cep" id="id_cep" minlength="9" maxlength="9" placeholder="Digite o CEP" value="<?= $dados[0]['cep'] ?>" required>
-                        <small id="cepTeste"></small>
+                        <small id="cepTeste" style="color: #0c6800;">CEP válido</small>
                     </p>
                     <p>
                         <label for="id_rua">Rua</label>

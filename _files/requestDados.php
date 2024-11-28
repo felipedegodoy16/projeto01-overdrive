@@ -1,7 +1,7 @@
 <?php 
 
     require_once '../_verify/verificacaoFilesComum.php';
-    require_once '../_class/Empresa.php';
+    require_once '../_class/EmpresaDAO.php';
     require_once '../_class/UsuarioDAO.php';
 
     // Instanciação de um objeto usuário e objeto de usuárioDAO
@@ -11,11 +11,12 @@
     // Retorno de uma lista de todos os registros de usuários do banco
     $dadosUsers = $usuariosDAO->listarUsuarios();
 
-    // Instanciação de um objeto empresa
+    // Instanciação de um objeto empresa e objeto empresaDAO
     $empresas = new Empresa();
+    $empresasDAO = new EmpresaDAO($empresas);
 
     // Retorno de uma lista de todos os registros de empresas do banco
-    $dadosEmps = $empresas->listarEmpresas();
+    $dadosEmps = $empresasDAO->listarEmpresas();
 
     if($dadosUsers === -1 && $dadosEmps === -1){
 

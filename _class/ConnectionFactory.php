@@ -1,5 +1,5 @@
 <?php  
-class ConexaoDAO {
+class ConnectionFactory {
     public static $instance;
 
     // Método Construtor

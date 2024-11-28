@@ -1,6 +1,7 @@
 <?php 
 
-    require_once '_class/Empresa.php';
+    require_once '_class/EmpresaDAO.php';
+    require_once '_class/EnderecoDAO.php';
 
     function gravarEmp() {
 
@@ -25,10 +26,11 @@
 
         // Instanciando um novo objeto empresa
         $empresa = new Empresa();
+        $empresaDAO = new EmpresaDAO($empresa);
 
         $empresa->setCnpj($cnpjEmp);
 
-        $verificarCnpj = $empresa->verificaCnpj();
+        $verificarCnpj = $empresaDAO->verificaCnpj();
 
         date_default_timezone_set("America/Sao_Paulo");
 
@@ -36,6 +38,7 @@
 
             // Instanciado o objeto endereço com as informações passadas
             $endereco = new Endereco();
+            $enderecoDAO = new EnderecoDAO($endereco);
 
             $endereco->setCep($cepEmp);
             $endereco->setRua($ruaEmp);
@@ -45,7 +48,7 @@
             $endereco->setEstado($estadoEmp);
 
             // Inserindo o endereço no banco ou pegando um endereço já existente
-            $endereco->inserirEndereco();
+            $enderecoDAO->inserirEndereco();
 
             // Finalizando a instanciação do objeto empresa
             $empresa->setNome($nomeEmp);
@@ -72,7 +75,7 @@
             $empresa->setRegistro(date("y/m/d"));
 
             // Inserindo a empresa no bacno
-            $empresa->inserirEmpresa();
+            $empresaDAO->inserirEmpresa();
 
             $_POST['cnpj_emp'] = null;
             $_POST['cep_emp'] = null;

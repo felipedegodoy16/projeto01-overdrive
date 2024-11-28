@@ -1,6 +1,8 @@
 <?php 
 
     require_once '_class/UsuarioDAO.php';
+    require_once '_class/EnderecoDAO.php';
+    require_once '_class/EmpresaDAO.php';
 
     function gravarUser() {
     
@@ -15,6 +17,7 @@
 
         // Verificando se a senha segue os padrões de segurança
         $retorno = verificaSenha($_POST['password']);
+        
         if(!$retorno) {
             $message = [
                 'message' => 'A senha não segue os padrões de segurança!',
@@ -49,6 +52,7 @@
 
             // Instanciado o objeto endereço com as informações passadas
             $endereco = new Endereco();
+            $enderecoDAO = new EnderecoDAO($endereco);
 
             $endereco->setCep($cep);
             $endereco->setRua($rua);
@@ -58,13 +62,14 @@
             $endereco->setEstado($estado);
 
             // Inserindo o endereço no banco ou pegando um endereço já existente
-            $endereco->inserirEndereco();
+            $enderecoDAO->inserirEndereco();
 
-            // Instanciando o objeto de empresa
+            // Instanciando o objeto de empresa e objeto empresaDAO
             $empresa = new Empresa();
+            $empresaDAO = new EmpresaDAO($empresa);
 
             $empresa->setFantasia(strtoupper($_POST['empresa']));
-            $empresa->empresaUsuario();
+            $empresaDAO->empresaUsuario();
 
             // Finalizando a instanciação do usuário
             $usuario->setNome($nome);

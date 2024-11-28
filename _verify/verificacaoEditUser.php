@@ -1,7 +1,8 @@
 <?php 
 
   require_once '_class/UsuarioDAO.php';
-  require_once '_class/Empresa.php';
+  require_once '_class/EmpresaDAO.php';
+  require_once '_class/EnderecoDAO.php';
   require_once '_verify/verificacaoIndex.php';
 
   $id_edit = $_GET['id'];
@@ -17,7 +18,10 @@
   $usuarioDAO= new UsuarioDAO($usuario);
 
   $empresa = new Empresa();
+  $empresaDAO = new EmpresaDAO($empresa);
+
   $endereco = new Endereco();
+  $enderecoDAO = new EnderecoDAO($endereco);
 
   if(isset($_POST['cpf'])) {
 
@@ -26,7 +30,7 @@
 
     if(!empty($message)) {
         $dados = $usuarioDAO->retornarUsuario($id_edit);
-        $empresas = $empresa->listarNomesEmps();
+        $empresas = $empresaDAO->listarNomesEmps();
         return;
     }
 
@@ -52,13 +56,14 @@
         $endereco->setEstado(strtoupper($_POST['estado']));
 
         // Inserindo o endereço no banco ou pegando um endereço já existente
-        $endereco->inserirEndereco();
+        $enderecoDAO->inserirEndereco();
 
         // Instanciando o objeto de empresa
         $empresaUser = new Empresa();
+        $empresaUserDAO = new EmpresaDAO($empresaUser);
 
         $empresaUser->setFantasia(strtoupper($_POST['empresa']));
-        $empresaUser->empresaUsuario();
+        $empresaUserDAO->empresaUsuario();
 
         // Terminando instanciação do objeto usuário
         $usuario->setNome(strtoupper($_POST['nome']));
@@ -71,7 +76,7 @@
             $retorno = verificaSenha($_POST['password']);
             if(!$retorno) {
                 $dados = $usuarioDAO->retornarUsuario($id_edit);
-                $empresas = $empresa->listarNomesEmps();
+                $empresas = $empresaDAO->listarNomesEmps();
 
                 $message = [
                     'message' => 'A senha não segue os padrões de segurança!',
@@ -105,7 +110,7 @@
             $message = $usuarioDAO->verificaDadoAlterado();
             if(!empty($message)) {
                 $dados = $usuarioDAO->retornarUsuario($id_edit);
-                $empresas = $empresa->listarNomesEmps();
+                $empresas = $empresaDAO->listarNomesEmps();
                 return;
             }
         }
@@ -129,7 +134,7 @@
   }
 
   $dados = $usuarioDAO->retornarUsuario($id_edit);
-  $empresas = $empresa->listarNomesEmps();
+  $empresas = $empresaDAO->listarNomesEmps();
 
   if($dados === -1) {
       echo "<script>
