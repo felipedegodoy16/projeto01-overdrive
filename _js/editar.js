@@ -4,6 +4,8 @@ if (document.readyState == "loading") {
     ready()
 }
 
+var cnpjAtual
+
 function ready(){
     
     let body = document.getElementsByTagName('body')[0]
@@ -18,6 +20,8 @@ function ready(){
             cnpjAlert.innerText = 'CNPJ válido'
             cnpjAlert.style.color = '#0c6800'
         }
+
+        cnpjAtual = strCnpj
 
         let divEmp = document.getElementById('cadastro_emp')
         let inputsEmp = divEmp.getElementsByTagName('input')
@@ -110,6 +114,11 @@ function validacoesCnpj(){
     if(cnpj.length === 14){
         cnpjTestado = validaCnpj(cnpj)
         if(cnpjTestado){
+            if(cnpjAlert.innerText != 'CNPJ válido' || cnpjAtual !== strCnpj) {
+                cnpjAtual = strCnpj
+                buscaCnpj(cnpj)
+            }
+
             cnpjAlert.innerText = 'CNPJ válido'
             cnpjAlert.style.color = '#0c6800'
 

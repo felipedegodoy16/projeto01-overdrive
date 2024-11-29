@@ -56,14 +56,14 @@
             $empresa->setTelefone($telefoneEmp);
             $empresa->setResponsavel($responsavelEmp);
             $empresa->setEndereco($endereco);
-            if(isset($_FILES['foto_emp']['name']) && $_FILES['foto_emp']['error'] == 0 && $_FILES['foto_emp']['size'] < 10000000){
+            if(isset($_FILES['foto_emp']['name']) && $_FILES['foto_emp']['error'] == 0 && $_FILES['foto_emp']['size'] <= 10000000){
                 $arquivo_tmp = $_FILES['foto_emp']['tmp_name'];
                 $nomeImagem = $_FILES['foto_emp']['name'];
                 $extensao = strrchr($nomeImagem, '.');
                 $extensao = strtolower($extensao);
                 if(strstr('.jpg;.jpeg;.png', $extensao)){
                     $novoNome = md5(microtime()) .$extensao; ;
-                    $destino = '../_images/uploads/' . $novoNome; 
+                    $destino = '_images/uploads/' . $novoNome; 
                     @move_uploaded_file($arquivo_tmp, $destino);
                     $empresa->setFoto(strtoupper($novoNome));
                 } else {
