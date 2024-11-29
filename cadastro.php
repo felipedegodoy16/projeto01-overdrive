@@ -40,7 +40,7 @@
             <div class="column_left">
                 <p>
                     <label for="id_cnpj_emp">CNPJ</label>
-                    <input type="text" data-mask="00.000.000/0000-00" name="cnpj_emp" id="id_cnpj_emp" minlength="18" maxlength="18" placeholder="Digite o CNPJ" value="<?= $cnpjEmp ?>" required>
+                    <input type="text" name="cnpj_emp" id="id_cnpj_emp" minlength="18" maxlength="18" placeholder="Digite o CNPJ" value="<?= $cnpjEmp ?>" required>
                     <small id="cnpjTeste"></small>
                 </p>
                 <p>
@@ -145,6 +145,12 @@
                             <li class="tip"><i class="fi fi-rr-x icon-tip center"></i> Caractere especial</li>
                         </ul>
                     </div>
+                </p>
+                <p style="position: relative;">
+                    <label for="id_password_confirm">Confirmar Senha</label>
+                    <input type="password" name="password_confirm" id="id_password_confirm" placeholder="CONFIRME A SENHA" minlength="8" required style="text-transform: none;">
+                    <i id="eye_cadastro_confirm" class="fi fi-rr-eye icon-eye"></i>
+                    <small id="smallConfirm"></small>
                 </p>
             </div>
 

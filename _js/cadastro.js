@@ -25,6 +25,12 @@ function ready() {
     const magicEye = document.getElementById('eye_cadastro')
     magicEye.addEventListener("click", revealPassword)
 
+    const inputPasswordConfirm = document.getElementById('id_password_confirm')
+    inputPasswordConfirm.addEventListener("input", comparePassword)
+
+    const magicEyeConfirm = document.getElementById('eye_cadastro_confirm')
+    magicEyeConfirm.addEventListener("click", revealPassword)
+
     let eventoCep = document.querySelector('input[name=cep]')
     eventoCep.addEventListener("input", buscaCep)
 
@@ -197,18 +203,33 @@ function verificaTel(e){
     validaCamposUser()
 }
 
+// Função de verificação se a mesma senha foi digitada
+function comparePassword() {
+    const inputPassword = document.getElementById('id_password').value
+    const inputPasswordConfirm = document.getElementById('id_password_confirm').value
+    const smallConfirm = document.getElementById('smallConfirm')
+
+    if(inputPassword === inputPasswordConfirm && inputPasswordConfirm !== '') {
+        smallConfirm.innerText = 'As senhas estão iguais'
+        smallConfirm.style.color = '#0c6800'
+    } else {
+        smallConfirm.innerText = 'As senhas estão diferentes'
+        smallConfirm.style.color = 'var(--red-dark)'
+    }
+}
+
 // Função para alternar senha entre visível e invisível
-function revealPassword(){
-    const inputPassword = document.getElementById('id_password')
-    const iconEye = document.getElementById('eye_cadastro')
+function revealPassword(event){
+    const inputPassword = event.target.parentNode.children[1]
+
     if(inputPassword.type === 'text') {
         inputPassword.type = 'password'
-        iconEye.classList.remove('fi-rr-eye-crossed')
-        iconEye.classList.add('fi-rr-eye')
+        event.target.classList.remove('fi-rr-eye-crossed')
+        event.target.classList.add('fi-rr-eye')
     } else {
         inputPassword.type = 'text'
-        iconEye.classList.add('fi-rr-eye-crossed')
-        iconEye.classList.remove('fi-rr-eye')
+        event.target.classList.add('fi-rr-eye-crossed')
+        event.target.classList.remove('fi-rr-eye')
     }
 }
 
@@ -382,7 +403,6 @@ function changeForm() {
 
 // Função para telefone da empresa
 function verificaTelEmp(e){
-    console.log(e)
     var input_telefone_emp = document.querySelector('input[name=telefone_emp]')
 
     if (input_telefone_emp.value === '(') {
@@ -423,11 +443,8 @@ function changeFormat(e) {
     } else if(textoAtual === 10) {
 
         const parte1 = e.target.value.slice(0, 2)
-        console.log(parte1)
         const parte2 = e.target.value.slice(2, 6)
-        console.log(parte2)
         const parte3 = e.target.value.slice(6, 10)
-        console.log(parte3)
         textoAjustado = `(${parte1}) ${parte2}-${parte3}`
 
     }
@@ -637,12 +654,18 @@ function validaCamposUser() {
     let inputs = divUser.getElementsByTagName('input')
     let btn = document.getElementById('btn_cadastrar_user')
     let smallCep = document.getElementById('cepTesteUser').innerText
+    const smallConfirm = document.getElementById('smallConfirm').innerText
 
     for(let i = 0; i < inputs.length-2; i++) {
         if(inputs[i].value === '') {
             desabilitarBtn(btn)
             return
         }
+    }
+
+    if(smallConfirm === 'As senhas estão diferentes') {
+        desabilitarBtn(btn)
+        return
     }
 
     if(!passwordTips()) {

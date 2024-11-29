@@ -161,6 +161,18 @@
             }
         }
 
+        // Validando formatação do CNPJ
+        $regexCnpj = '/^[0-9]{2}\.[0-9]{3}\.[0-9]{3}\/[0-9]{4}\-[0-9]{2}/';
+
+        if(!preg_match($regexCnpj, $_POST['cnpj_emp'])) {
+            $message = [
+                'message' => 'O CPF não está formatado corretamente!',
+                'class' => 'status_error'
+            ];
+
+            return $message;
+        }
+
         // Validação do CNPJ
         if(!validaCnpj($_POST['cnpj_emp'])) {
             $message = [

@@ -860,7 +860,7 @@ div#passwordTips ul li {
     margin-right: 15px;
 }
 
-small#cpfTeste, small#cepTesteUser, small#cepTesteEmp, small#cnpjTeste {
+small#cpfTeste, small#cepTesteUser, small#cepTesteEmp, small#cnpjTeste, small#smallConfirm {
     font-size: 10pt;
 }
 

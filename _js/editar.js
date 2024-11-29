@@ -236,18 +236,33 @@ function changeFormat(e) {
     
 }
 
+// Função de verificação se a mesma senha foi digitada
+function comparePassword() {
+    const inputPassword = document.getElementById('id_password').value
+    const inputPasswordConfirm = document.getElementById('id_password_confirm').value
+    const smallConfirm = document.getElementById('smallConfirm')
+
+    if(inputPassword === inputPasswordConfirm && inputPasswordConfirm !== '') {
+        smallConfirm.innerText = 'As senhas estão iguais'
+        smallConfirm.style.color = '#0c6800'
+    } else {
+        smallConfirm.innerText = 'As senhas estão diferentes'
+        smallConfirm.style.color = 'var(--red-dark)'
+    }
+}
+
 // Função para alternar senha entre visível e invisível
-function revealPassword(){
-    const inputPassword = document.getElementById('id_password')
-    const iconEye = document.getElementById('eye_cadastro')
+function revealPassword(event){
+    const inputPassword = event.parentNode.children[1]
+
     if(inputPassword.type === 'text') {
         inputPassword.type = 'password'
-        iconEye.classList.remove('fi-rr-eye-crossed')
-        iconEye.classList.add('fi-rr-eye')
+        event.classList.remove('fi-rr-eye-crossed')
+        event.classList.add('fi-rr-eye')
     } else {
         inputPassword.type = 'text'
-        iconEye.classList.add('fi-rr-eye-crossed')
-        iconEye.classList.remove('fi-rr-eye')
+        event.classList.add('fi-rr-eye-crossed')
+        event.classList.remove('fi-rr-eye')
     }
 }
 
@@ -516,9 +531,10 @@ function validaCamposUser() {
     let btn = document.getElementById('btn_cadastrar')
     let smallCep = document.getElementById('cepTeste').innerText
     let inputPassword = document.getElementById('id_password')
+    const smallConfirm = document.getElementById('smallConfirm').innerText
 
     if(inputPassword.value !== '') {
-        if(!passwordTips()) {
+        if(!passwordTips() || smallConfirm === 'As senhas estão diferentes') {
             desabilitarBtn(btn)
             return
         }
@@ -535,7 +551,7 @@ function validaCamposUser() {
     }
 
     for(let i = 0; i < inputs.length-3; i++) {
-        if(inputs[i].value === '' && i !== 5) {
+        if(inputs[i].value === '' && (i < 5 || i > 6)) {
             desabilitarBtn(btn)
             return
         }

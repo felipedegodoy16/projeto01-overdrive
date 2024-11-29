@@ -60,7 +60,7 @@
                     <p style="position: relative;">
                         <label for="id_password">Senha</label>
                         <input type="password" name="password" id="id_password" placeholder="Digite a Senha" min="8" style="text-transform: none;">
-                        <i id="eye_cadastro" class="fi fi-rr-eye icon-eye" onclick="revealPassword()"></i>
+                        <i id="eye_cadastro" class="fi fi-rr-eye icon-eye" onclick="revealPassword(this)"></i>
                         <div id="passwordTips" style="display: none;">
                             <ul>
                                 <li class="tip"><i class="fi fi-rr-x icon-tip center"></i> Mínimo 8 caracteres</li>
@@ -69,6 +69,12 @@
                                 <li class="tip"><i class="fi fi-rr-x icon-tip center"></i> Caractere especial</li>
                             </ul>
                         </div>
+                    </p>
+                    <p style="position: relative;">
+                        <label for="id_password_confirm">Confirmar Senha</label>
+                        <input type="password" name="password_confirm" id="id_password_confirm" placeholder="CONFIRME A SENHA" minlength="8" required style="text-transform: none;" oninput="comparePassword()">
+                        <i id="eye_cadastro_confirm" class="fi fi-rr-eye icon-eye" onclick="revealPassword(this)"></i>
+                        <small id="smallConfirm"></small>
                     </p>
                     <p>
                         <label for="id_empresa">Empresa</label>

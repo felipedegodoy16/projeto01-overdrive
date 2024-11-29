@@ -327,7 +327,6 @@ function removeDataUsers(event){
   const divStatus = document.getElementById('status_request')
   const pStatus = document.getElementById('p_status_request')
   const idSession = document.getElementById('id_session').innerText
-  console.log(event)
   let idRemove = event.target.parentNode.parentNode.children[1].children[0].children[0].innerText.replace('#', '')
 
   if(idSession == idRemove){
@@ -495,7 +494,6 @@ function filterTable() {
 
   if(filterElement.value != ''){
     for(let line of lines){
-      console.log(line)
       let nome = line.getElementsByClassName('name')[0]
       nome = nome.textContent.toLowerCase()
 

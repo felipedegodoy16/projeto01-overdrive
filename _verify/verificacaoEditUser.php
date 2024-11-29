@@ -195,6 +195,18 @@
         $cont++;
     }
 
+    // Validando formatação do CPF
+    $regexCpf = '/^[0-9]{3}\.[0-9]{3}\.[0-9]{3}\-[0-9]{2}/';
+
+    if(!preg_match($regexCpf, $_POST['cpf'])) {
+        $message = [
+            'message' => 'O CPF não está formatado corretamente!',
+            'class' => 'status_error'
+        ];
+
+        return $message;
+    }
+
     // Validação do CPF
     if(!validaCpf($_POST['cpf'])) {
         $message = [
@@ -243,6 +255,10 @@
   }
 
   function verificaSenha($password) {
+    if($_POST['password'] !== $_POST['password_confirm']) {
+        return false;
+    }
+    
     if(strlen($password) < 8) {
         return false;
     }
