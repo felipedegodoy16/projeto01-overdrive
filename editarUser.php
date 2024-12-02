@@ -51,7 +51,7 @@
                     </p>
                     <p id="p_telefone">
                         <label for="id_telefone">Telefone</label>
-                        <input type="text" name="telefone" id="id_telefone" minlength="10'" maxlength="11" placeholder="Digite o Telefone" value="<?= $dados[0]['telefone'] ?>" onblur="verificaTel(this)" onfocus="tirarFormat(this)" oninput="removeChar(this)" required>
+                        <input type="text" name="telefone" id="id_telefone" minlength="10'" maxlength="15" placeholder="Digite o Telefone" value="<?= $dados[0]['telefone'] ?>" onblur="verificaTel(this)" onfocus="tirarFormat(this)" oninput="removeChar(this)" required>
                     </p>
                     <p>
                         <label for="id_carro">Carro</label>
@@ -72,7 +72,7 @@
                     </p>
                     <p style="position: relative;">
                         <label for="id_password_confirm">Confirmar Senha</label>
-                        <input type="password" name="password_confirm" id="id_password_confirm" placeholder="CONFIRME A SENHA" minlength="8" required style="text-transform: none;" oninput="comparePassword()">
+                        <input type="password" name="password_confirm" id="id_password_confirm" placeholder="CONFIRME A SENHA" minlength="8" style="text-transform: none;" oninput="comparePassword()">
                         <i id="eye_cadastro_confirm" class="fi fi-rr-eye icon-eye" onclick="revealPassword(this)"></i>
                         <small id="smallConfirm"></small>
                     </p>

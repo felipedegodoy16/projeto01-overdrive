@@ -534,7 +534,7 @@ function validaCamposUser() {
     const smallConfirm = document.getElementById('smallConfirm').innerText
 
     if(inputPassword.value !== '') {
-        if(!passwordTips() || smallConfirm === 'As senhas estão diferentes') {
+        if(!passwordTips() || smallConfirm === 'As senhas estão diferentes' || smallConfirm == '') {
             desabilitarBtn(btn)
             return
         }

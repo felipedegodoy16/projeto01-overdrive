@@ -178,7 +178,7 @@
     // Validando se dados não estão vazios
     $cont = 0;
     foreach($_POST as $data) {
-        if($cont === 5 || $cont === 14) {
+        if($cont === 5 || $cont === 6 || $cont === 14) {
           $cont++;
           continue;
         }

@@ -22,14 +22,12 @@
     
     if(isset($_POST['cpf'])) {
 
-        $message = [];
         $message = gravarUser();
 
     } else if(isset($_POST['cnpj_emp'])) {
 
-        $message = [];
         $message = gravarEmp();
-        
+
     }
 
     // Variáveis de auto preenchimento do formulário de usuários
