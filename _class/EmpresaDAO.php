@@ -75,7 +75,7 @@
                 // Query
                 $sql = "SELECT * FROM empresas emp INNER JOIN enderecos ende ON emp.id_endereco = ende.id_end;";
 
-                // Conectando com o banco
+                // Conectando com o banco e preparando a query
                 $stmt = ConnectionFactory::getConexao()->prepare($sql);
 
                 // Excutando a query no banco

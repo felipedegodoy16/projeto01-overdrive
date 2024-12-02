@@ -166,7 +166,7 @@
 
         if(!preg_match($regexCnpj, $_POST['cnpj_emp'])) {
             $message = [
-                'message' => 'O CPF não está formatado corretamente!',
+                'message' => 'O CNPJ não está formatado corretamente!',
                 'class' => 'status_error'
             ];
 
