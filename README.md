@@ -5,9 +5,9 @@
 
  - Faça o download do projeto em sua máquina;
  - Tenha o XAMPP instalado ou algum outro software que permita que sua máquina se torne um servidor Apache com suporte a MySQL;
- - Copie a pasta para o 'htdocs' de sua máquina que provavelmente se encontrará em 'C:\xampp\htdocs';
+ - Copie a pasta para para a pasta na qual você possa acessar através do servidor Apache instalado;
  - Abra o servidor de banco de dados do seu servidor local e importe o banco de dados que se encontra na pasta '_sql';
- - Se sua máquina possuir algum outro software ou algo do tipo utilizando a porta '8000' você precisará configurar uma nova porta para o servidor local, caso não, basta colocar a seguinte url 'localhost/projeto01-overdrive' em seu navegador e estará feito;
+ - Se sua máquina possuir algum outro software ou algo do tipo utilizando a porta que é padrão do seu servidor local você precisará configurar uma nova porta para o servidor local, caso não, basta acessar a pasta de arquivos do projeto no navegador e o projeto irá funcionar em sua máquina normalmente;
  - Tire bons proveitos de meu software.
  - Usuários teste para usar na aplicação
     - Admin: 11111111111 - Senha: 12345678
