@@ -219,7 +219,7 @@ function responseJson(json){
 
           if(empresa.fantasia !== "INATIVO") {
             if(json.sessao === 'A') {
-              tag = `<p class="center" style="margin-top: .7em; margin-bottom: 1.5em;"><i class="fi fi-rr-trash icons_cards center icon_trash emp_trash"></i><a href="editarEmp.php?id=${empresa.id}&edit=0" style="text-decoration: none;"><i class="fi fi-rr-edit icons_cards center icon_edit"></i></a></p>`
+              tag = `<p class="center" style="margin-top: .7em; margin-bottom: 1.5em;"><i class="fi fi-rr-trash icons_cards center icon_trash emp_trash"></i><a href="editarEmp.php?id=${empresa.id}" style="text-decoration: none;"><i class="fi fi-rr-edit icons_cards center icon_edit"></i></a></p>`
 
               heightAdmin = `min-height: 500px;`
             }
