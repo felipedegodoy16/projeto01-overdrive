@@ -96,9 +96,10 @@
                         <label for="id_empresa">Empresa</label>
                         <select name="empresa" id="id_empresa">
                             <?php if($_SESSION['cargo'] === 'A'): ?>
-                            <?php foreach($empresas as $empresa => $nome):
-
-                                        if($nome['fantasia'] === $dados[0]['fantasia']): ?>
+                            <?php
+                                foreach($empresas as $empresa => $nome):
+                                if($nome['fantasia'] === $dados[0]['fantasia']):
+                            ?>
                             <option value="<?= $nome['fantasia'] ?>" selected><?= $nome['fantasia'] ?></option>
                             <?php else: ?>
                             <option value="<?= $nome['fantasia'] ?>"><?= $nome['fantasia'] ?></option>
@@ -148,6 +149,7 @@
                         <label for="id_foto" class="label_foto" style="margin-top: 1em;">Escolher arquivo</label>
                         <input type="file" name="foto" id="id_foto"
                             style="margin-top: 1em; border-bottom: none; display: none;">
+                        <small style="text-align: center;">O tamanho máximo do arquivo permitido é 10 MB</small>
                     </p>
                     <p class="action_foto">
                         <?php if($dados[0]['foto'] != ''): ?>
