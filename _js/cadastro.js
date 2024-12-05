@@ -12,7 +12,7 @@ function ready() {
     const inputCpf = document.querySelector('input[name=cpf]')
     inputCpf.addEventListener("input", validacoesCpf)
 
-    if(inputCpf.value !== '') {
+    if(inputCpf.value) {
         validacoesCpf()
     }
 
@@ -34,7 +34,7 @@ function ready() {
     let eventoCep = document.querySelector('input[name=cep]')
     eventoCep.addEventListener("input", buscaCep)
 
-    if(eventoCep.value !== '') {
+    if(eventoCep.value) {
         buscaCep()
     }
 
@@ -48,7 +48,7 @@ function ready() {
     const inputCnpj = document.querySelector('input[name=cnpj_emp]')
     inputCnpj.addEventListener("input", validacoesCnpj)
 
-    if(inputCnpj.value !== '') {
+    if(inputCnpj.value) {
         validacoesCnpj()
     }
 
@@ -243,7 +243,7 @@ function passwordTips() {
         divTips.style.display = 'flex'
     }
 
-    if(inputPassword === '') {
+    if(!inputPassword) {
         divTips.style.display = 'none'
     }
 
@@ -454,7 +454,7 @@ function changeFormat(e) {
 }
 
 //Função de Busca CNPJ da Empresa
-function buscaCnpj(cnpj){
+function buscaCnpj(cnpj) {
 
     if(cnpj.length === 14){
 
@@ -478,11 +478,11 @@ function buscaCnpj(cnpj){
 
 //Função para preencher os campos com o CNPJ
 function preencheCamposCnpj(json){
-    if(json.nome != undefined){
+    if(json.nome){
 
         const cep_teste = document.getElementById('cepTesteEmp')
 
-        if(json.cep === '' || json.cep === undefined){
+        if(!json.cep){
             cep_teste.innerText = 'CEP inválido'
             cep_teste.style.color = 'var(--red-dark)'
         } else {
@@ -567,7 +567,7 @@ function buscaCep() {
 function preencheCampos(json) {
     const cep_teste = document.getElementById('cepTesteUser')
 
-    if(json.localidade !== undefined){
+    if(json.localidade){
         cep_teste.innerText = 'CEP válido'
         cep_teste.style.color = '#0c6800'
 
@@ -614,7 +614,7 @@ function buscaCepEmp() {
 function preencheCamposEmp(json) {
     const cep_teste = document.getElementById('cepTesteEmp')
 
-    if(json.localidade !== undefined){
+    if(json.localidade){
         cep_teste.innerText = 'CEP válido'
         cep_teste.style.color = '#0c6800'
 
@@ -657,7 +657,7 @@ function validaCamposUser() {
     const smallConfirm = document.getElementById('smallConfirm').innerText
 
     for(let i = 0; i < inputs.length-2; i++) {
-        if(inputs[i].value === '') {
+        if(!inputs[i].value) {
             desabilitarBtn(btn)
             return
         }
@@ -694,7 +694,7 @@ function validaCamposEmp() {
     let smallCep = document.getElementById('cepTesteEmp').innerText
 
     for(let i = 0; i < inputs.length; i++) {
-        if(inputs[i].value === '' && i !== 5) {
+        if(!inputs[i].value && i !== 5) {
             desabilitarBtn(btn)
             return
         }
