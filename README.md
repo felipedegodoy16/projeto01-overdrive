@@ -25,4 +25,4 @@ O projeto se trata de um CRUD de um sistema para gerenciar empresas e funcionár
 
 Quero deixar aqui um agradecimento aos parceiros [Rodrigo](https://github.com/Martins2802) e [Kaike](https://github.com/kaikem) que estão junto comigo nessa etapa e somaram muito para o desenvolvimento do projeto.
 
-E agradecer ao Chefe [Diego](https://github.com/diegonegretto) que sempre da todo o suporte para o andamento do projeto e para todas as dúvidas que surgem no meio do caminho.
+E agradecer ao Grande [Diego](https://github.com/diegonegretto) que sempre da todo o suporte para o andamento do projeto e para todas as dúvidas que surgem no meio do caminho.
