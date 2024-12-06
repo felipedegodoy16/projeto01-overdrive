@@ -1,6 +1,12 @@
 # Projeto 01 - Overdrive
 ### Projeto da primeira etapa de estágio na empresa Overdrive
 
+O projeto se trata de um CRUD de um sistema para gerenciar empresas e funcionários, os usuários são dividos em usuários Comuns e usuários Administradores com diferentes permissões para cada tipo dos usuários, podendo um usuário Administrador alterar os dados e visualizá-los e para usuários Comuns cabe apenas a visualização.
+
+---
+
+### Instruções para uso do sistema
+
  Para conseguir rodar o projeto em sua máquina siga as seguintes etapas:
 
  - Faça o download do projeto em sua máquina;
@@ -12,3 +18,11 @@
  - Usuários teste para usar na aplicação
     - Admin: 11111111111 - Senha: 12345678
     - Comum: 22222222222 - Senha: 12345678
+
+---
+
+### Considerações
+
+Quero deixar aqui um agradecimento aos parceiros [Rodrigo](https://github.com/Martins2802) e [Kaike](https://github.com/kaikem) que estão junto comigo nessa etapa e somaram muito para o desenvolvimento do projeto.
+
+E agradecer ao Chefe [Diego](https://github.com/diegonegretto) que sempre da todo o suporte para o andamento do projeto e para todas as dúvidas que surgem no meio do caminho.
