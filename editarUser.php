@@ -71,7 +71,7 @@
                     </p>
                     <p style="position: relative;">
                         <label for="id_password">Senha</label>
-                        <input type="password" name="password" id="id_password" placeholder="Digite a Senha" min="8"
+                        <input type="password" name="password" id="id_password" placeholder="DIGITE A SENHA" min="8"
                             style="text-transform: none;">
                         <i id="eye_cadastro" class="fi fi-rr-eye icon-eye" onclick="revealPassword(this)"></i>
                     <div id="passwordTips" style="display: none;">
@@ -148,8 +148,8 @@
                     <p>
                         <label for="id_foto" class="label_foto" style="margin-top: 1em;">Escolher arquivo</label>
                         <input type="file" name="foto" id="id_foto"
-                            style="margin-top: 1em; border-bottom: none; display: none;">
-                        <small style="text-align: center;">O tamanho máximo do arquivo permitido é 10 MB</small>
+                            style="margin-top: 1em; border-bottom: none; display: none;" onchange="fileSize(this)">
+                        <small></small>
                     </p>
                     <p class="action_foto">
                         <?php if($dados[0]['foto'] != ''): ?>

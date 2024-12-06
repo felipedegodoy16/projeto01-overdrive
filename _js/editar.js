@@ -506,6 +506,19 @@ function preencheCampos(json) {
     }
 }
 
+// Função para pegar o tamanho do arquivo
+function fileSize(event) {
+    const size = event.files[0].size
+    const small = event.parentNode.getElementsByTagName('small')[0]
+
+    if(size && size > 10000000) {
+        small.innerText = 'O tamanho máximo do arquivo permitido é 10MB'
+        small.style.color = 'var(--red-dark)'
+    } else if(size <= 10000000) {
+        small.innerText = ''
+    }
+}
+
 // Função para habilitar o botão
 function habilitarBtn(btn) {
     btn.setAttribute('type', 'submit')

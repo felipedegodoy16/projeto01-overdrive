@@ -72,8 +72,8 @@
                     <p>
                         <label for="id_foto_emp" class="label_foto" style="margin-top: .5em;">Escolher arquivo</label>
                         <input type="file" name="foto_emp" id="id_foto_emp"
-                            style="margin-top: 1em; border-bottom: none; display: none;">
-                        <small style="text-align: center;">O tamanho máximo do arquivo permitido é 10 MB</small>
+                            style="margin-top: 1em; border-bottom: none; display: none;" onchange="fileSize(this)">
+                        <small></small>
                     </p>
                 </div>
 
@@ -218,8 +218,8 @@
                     <p>
                         <label for="id_foto" class="label_foto" style="margin-top: 1em;">Escolher arquivo</label>
                         <input type="file" name="foto" id="id_foto"
-                            style="margin-top: 1em; border-bottom: none; display: none;">
-                        <small style="text-align: center;">O tamanho máximo do arquivo permitido é 10 MB</small>
+                            style="margin-top: 1em; border-bottom: none; display: none;" onchange="fileSize(this)">
+                            <small></small>
                     </p>
                 </div>
                 <p class="center p_btn_cadastrar" style="flex-direction: row;">

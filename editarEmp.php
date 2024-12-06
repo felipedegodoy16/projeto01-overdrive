@@ -72,8 +72,8 @@
                     <p>
                         <label for="id_foto_emp" class="label_foto" style="margin-top: .5em;">Escolher arquivo</label>
                         <input type="file" name="foto_emp" id="id_foto_emp"
-                            style="margin-top: 1em; border-bottom: none; display: none;">
-                        <small style="text-align: center;">O tamanho máximo do arquivo permitido é 10 MB</small>
+                            style="margin-top: 1em; border-bottom: none; display: none;" onchange="fileSize(this)">
+                        <small></small>
                     </p>
                     <p class="action_foto">
                         <?php if ($dados[0]['foto'] != ''): ?>
