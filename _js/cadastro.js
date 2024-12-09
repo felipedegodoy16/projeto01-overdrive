@@ -708,17 +708,20 @@ function validaCamposEmp() {
 
     for(let i = 0; i < inputs.length; i++) {
         if(!inputs[i].value && i !== 5) {
+            console.log('teste1')
             desabilitarBtn(btn)
             return
         }
     }
 
     if(!validacoesCnpj()) {
+        console.log('teste2')
         desabilitarBtn(btn)
         return
     }
 
     if(smallCep !== 'CEP válido') {
+        console.log('teste3')
         desabilitarBtn(btn)
         return
     }

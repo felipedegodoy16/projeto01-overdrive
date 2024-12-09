@@ -10,6 +10,10 @@ function ready() {
     // Verifica se o campo de user está sem foco
     const inputUser = document.querySelector('input[name=user_input]')
     inputUser.addEventListener("blur", backLabelUser)
+
+    if(inputUser.value) {
+        transition_text(inputUser)
+    }
     
     // Verifica se o campo de senha está sem foco
     const inputPassword = document.querySelector('input[name=password_input]')

@@ -327,6 +327,7 @@ function removeDataUsers(event){
   const divStatus = document.getElementById('status_request')
   const pStatus = document.getElementById('p_status_request')
   const idSession = document.getElementById('id_session').innerText
+  const search = document.getElementById('search')
   let idRemove = event.target.parentNode.parentNode.children[1].children[0].children[0].innerText.replace('#', '')
 
   if(idSession == idRemove){
@@ -358,6 +359,7 @@ function removeDataUsers(event){
 
               pStatus.innerText = `${json.message}`
               divStatus.classList.add('status_accept')
+              search.value = ''
               requestDados()
 
             } else {
@@ -385,6 +387,7 @@ function removeDataUsers(event){
 function removeDataEmps(event){
   const divStatus = document.getElementById('status_request')
   const pStatus = document.getElementById('p_status_request')
+  const search = document.getElementById('search')
   let idRemove = event.target.parentNode.parentNode.children[1].children[0].children[0].innerText.replace('#', '')
   let comando = prompt("Por favor, confirme a instrução (DELETE) para excluir os registros da empresa.")
 
@@ -406,6 +409,7 @@ function removeDataEmps(event){
 
             pStatus.innerText = `${json.message}`
             divStatus.classList.add('status_accept')
+            search.value = ''
             requestDados()
 
           } else {
@@ -516,13 +520,15 @@ function filterTable() {
 }
 
 // Função para fazer filtro de ordem
-function listarCardsOrdem(campo, ordem){
+function listarCardsOrdem(campo, ordem) {
+  const search = document.getElementById('search')
   let url = 'http://localhost/projeto01-overdrive/_files/orderFilters.php?campo=' + campo + '&ordem=' + ordem  
   let xhr = new XMLHttpRequest()
   xhr.open('GET', url, true)
   xhr.onreadystatechange = function() {
     if (xhr.readyState == 4) {
       if (xhr.status == 200) {
+        search.value = ''
         responseJson(JSON.parse(xhr.responseText))
       }
     }

@@ -31,7 +31,7 @@
         <form id="form" action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
           <div id="user_field" style="margin-bottom: 0;">
             <label for="user_login">CPF</label>
-            <input id="user_login" data-mask="000.000.000-00" name="user_input" type="text" onfocus="transition_text(event.target)" onclick="transition_text(event.target)" minlength="14" maxlength="14" required>
+            <input id="user_login" data-mask="000.000.000-00" name="user_input" type="text" onfocus="transition_text(event.target)" onclick="transition_text(event.target)" minlength="14" maxlength="14" value="<?=$usuario?>" required>
             <div style="z-index: 1002; height: 0">
               <i class="fi fi-rr-circle-user icons"></i>
             </div>
@@ -47,7 +47,7 @@
             if($status === 0){
               echo '
               <div id="error_status" class="center error_status">
-                <p style="margin: 0;">Usuário e/ou senha incorreto(s)!</p>
+                <p style="margin: 0;">CPF e/ou senha incorreto(s)!</p>
               </div>';
             }
           ?>
