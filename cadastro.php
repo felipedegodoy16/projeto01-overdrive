@@ -162,7 +162,7 @@
                     <p style="position: relative;">
                         <label for="id_password">Senha</label>
                         <input type="password" name="password" id="id_password" placeholder="DIGITE A SENHA"
-                            minlength="8" required style="text-transform: none;">
+                            minlength="8" maxlength="255" required style="text-transform: none;">
                         <i id="eye_cadastro" class="fi fi-rr-eye icon-eye"></i>
                     <div id="passwordTips" style="display: none;">
                         <ul>
@@ -177,7 +177,7 @@
                     <p style="position: relative;">
                         <label for="id_password_confirm">Confirmar Senha</label>
                         <input type="password" name="password_confirm" id="id_password_confirm"
-                            placeholder="CONFIRME A SENHA" minlength="8" required style="text-transform: none;">
+                            placeholder="CONFIRME A SENHA" minlength="8" maxlength="255" required style="text-transform: none;">
                         <i id="eye_cadastro_confirm" class="fi fi-rr-eye icon-eye"></i>
                         <small id="smallConfirm"></small>
                     </p>

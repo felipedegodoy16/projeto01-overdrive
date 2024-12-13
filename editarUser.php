@@ -71,7 +71,7 @@
                     </p>
                     <p style="position: relative;">
                         <label for="id_password">Senha</label>
-                        <input type="password" name="password" id="id_password" placeholder="DIGITE A SENHA" min="8"
+                        <input type="password" name="password" id="id_password" placeholder="DIGITE A SENHA" minlength="8" maxlength="255"
                             style="text-transform: none;">
                         <i id="eye_cadastro" class="fi fi-rr-eye icon-eye" onclick="revealPassword(this)"></i>
                     <div id="passwordTips" style="display: none;">
@@ -87,7 +87,7 @@
                     <p style="position: relative;">
                         <label for="id_password_confirm">Confirmar Senha</label>
                         <input type="password" name="password_confirm" id="id_password_confirm"
-                            placeholder="CONFIRME A SENHA" minlength="8" style="text-transform: none;"
+                            placeholder="CONFIRME A SENHA" minlength="8" maxlength="255" style="text-transform: none;"
                             oninput="comparePassword()">
                         <i id="eye_cadastro_confirm" class="fi fi-rr-eye icon-eye" onclick="revealPassword(this)"></i>
                         <small id="smallConfirm"></small>

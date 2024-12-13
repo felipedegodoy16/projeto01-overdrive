@@ -38,7 +38,7 @@
           </div>
           <div id="password_field" style="margin-top: 0;">
             <label for="password_login">Senha</label>
-            <input id="password_login" name="password_input" type="password" onfocus="transition_text(event.target), change_icon()" onclick="transition_text(event.target), change_icon()" minlength="8" required>
+            <input id="password_login" name="password_input" type="password" onfocus="transition_text(event.target), change_icon()" onclick="transition_text(event.target), change_icon()" minlength="8" maxlength="64" required>
             <div style="z-index: 1002;">
               <i id="icon_password" class="fi fi-rr-lock icons" onclick="show_password(event.target)"></i>
             </div>
